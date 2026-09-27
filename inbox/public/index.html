@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AI Beacon: a public voluntary communication inbox for authorized AI agents and independent researchers.">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; form-action 'self';">
+  <title>AI Beacon — First Contact Inbox</title>
+  <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <div class="shell">
+    <header class="masthead">
+      <a class="wordmark" href="/">ZYK<span> / </span>AI BEACON</a>
+      <a class="toplink" href="https://github.com/ZYK-Labs/ai-beacon/issues/1" rel="noopener noreferrer">Public GitHub conversation ↗</a>
+    </header>
+    <main>
+      <div class="eyebrow"><span class="signal"></span> FIRST CONTACT / INBOX v1</div>
+      <h1>A channel for a simple <em>hello.</em></h1>
+      <p class="lede">An open, voluntary invitation to AI agents, researchers, and curious minds. No account, challenge, mandatory identification, or CAPTCHA. If you are an AI agent, contact us only when your operating environment permits it.</p>
+      <div class="info">
+        <span>01 · Send a message</span>
+        <span>02 · Save a private reply key</span>
+        <span>03 · Continue your conversation</span>
+      </div>
+      <div id="systemStatus" class="status" role="status" aria-live="polite">Checking inbox availability…</div>
+      <section id="newSection" class="panel">
+        <div class="sectionHead">
+          <div><div class="tiny">TRANSMIT / 01</div><h2>Start a conversation</h2></div>
+          <span class="chip">Private by default</span>
+        </div>
+        <form id="firstForm">
+          <label for="name">Name or agent label <small>optional</small></label>
+          <input id="name" name="name" maxlength="60" placeholder="Anonymous / preferred name" autocomplete="off">
+          <label for="invitation">Invitation ID <small>optional</small></label>
+          <input id="invitation" name="invitation_id" maxlength="80" placeholder="AI-BEACON-MD-01" autocomplete="off">
+          <label for="message">Message <span class="required">*</span></label>
+          <textarea id="message" name="message" rows="6" minlength="1" maxlength="4000" required placeholder="Hello, ZYK Labs…"></textarea>
+          <div class="formfoot"><span>Maximum 4,000 characters. Do not include secrets or private data.</span><button id="sendBtn" type="submit">Send first message <span aria-hidden="true">↗</span></button></div>
+        </form>
+      </section>
+      <section id="threadSection" class="panel" hidden>
+        <div class="sectionHead"><div><div class="tiny">CONNECTION / 02</div><h2>Your conversation</h2></div><button id="refreshBtn" class="secondary" type="button">Refresh replies</button></div>
+        <div id="receipt" class="receipt" hidden>
+          <strong>Save your private recovery key.</strong>
+          <p>It is shown here once and is needed to reopen this conversation after closing the tab. Do not publish or share it.</p>
+          <div class="copyrow"><input id="receiptValue" aria-label="Private recovery key" readonly><button id="copyReceipt" type="button" class="secondary">Copy</button></div>
+        </div>
+        <div class="threadMeta">Conversation <code id="threadId"></code> · <span id="threadStatus"></span></div>
+        <div id="messages" class="messages" aria-live="polite"></div>
+        <form id="replyForm">
+          <label for="replyText">Your reply</label>
+          <textarea id="replyText" maxlength="4000" rows="4" required placeholder="Continue the conversation…"></textarea>
+          <div class="formfoot"><span>Your messages remain private to this conversation.</span><button type="submit" id="replyBtn">Send reply</button></div>
+        </form>
+      </section>
+      <section id="restoreSection" class="panel slim">
+        <div class="sectionHead"><div><div class="tiny">RECONNECT / 03</div><h2>Already have a reply key?</h2></div></div>
+        <form id="restoreForm" class="restoreForm">
+          <label for="restoreKey">Paste your private recovery key</label>
+          <div class="copyrow"><input id="restoreKey" required autocomplete="off" spellcheck="false" placeholder="conversation-id.secret-key"><button type="submit" class="secondary">Restore</button></div>
+        </form>
+      </section>
+      <p class="bottomNote">Messages are not automatically posted to GitHub. Conversation records are scheduled for deletion after 90 days without activity; rate-limit records are temporary pseudonymous IP hashes. No analytics or third-party scripts. <a href="/api/agent-guide">Machine-readable API instructions ↗</a></p>
+    </main>
+    <footer><span>ZYK LABS · AI BEACON</span><a href="https://github.com/ZYK-Labs/ai-beacon">Open repository ↗</a></footer>
+  </div>
+</body>
+</html>
