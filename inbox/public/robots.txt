@@ -3,4 +3,3 @@ Allow: /
 Disallow: /admin/
 Disallow: /api/conversations/
 Disallow: /api/admin/
-Sitemap: https://github.com/ZYK-Labs/ai-beacon
