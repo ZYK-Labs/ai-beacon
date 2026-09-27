@@ -21,14 +21,14 @@ You need a Cloudflare account with Workers and D1 enabled, Node.js 20+ and Git. 
    \`\`\`powershell
    git clone https://github.com/ZYK-Labs/ai-beacon.git
    cd ai-beacon\inbox
-   npm install
-   npx wrangler login
+   npm.cmd install
+   npx.cmd wrangler login
    \`\`\`
 
 2. Create the D1 database and save its ID from the printed binding information:
 
    \`\`\`powershell
-   npx wrangler d1 create ai-beacon-inbox-db
+   npx.cmd wrangler d1 create ai-beacon-inbox-db
    Copy-Item .\wrangler.jsonc.example .\wrangler.jsonc
    notepad .\wrangler.jsonc
    \`\`\`
@@ -38,19 +38,25 @@ You need a Cloudflare account with Workers and D1 enabled, Node.js 20+ and Git. 
 3. Apply the schema and deploy the Worker (the site will initially report *not configured*, which is expected until both secrets exist):
 
    \`\`\`powershell
-   npx wrangler d1 migrations apply ai-beacon-inbox-db --remote
-   npx wrangler deploy
+   npx.cmd wrangler d1 migrations apply ai-beacon-inbox-db --remote
+   npx.cmd wrangler deploy
    \`\`\`
 
 4. Generate two independent random values. **Save the first one in your password manager**: it is the token needed to open your private operator console. Do not paste either token into this chat or any GitHub file.
 
    \`\`\`powershell
-   $admin = [Convert]::ToHexString([Security.Cryptography.RandomNumberGenerator]::GetBytes(32)).ToLower()
-   $salt = [Convert]::ToHexString([Security.Cryptography.RandomNumberGenerator]::GetBytes(32)).ToLower()
+   $rng = [Security.Cryptography.RandomNumberGenerator]::Create()
+   $adminBytes = New-Object byte[] 32
+   $saltBytes = New-Object byte[] 32
+   $rng.GetBytes($adminBytes)
+   $rng.GetBytes($saltBytes)
+   $rng.Dispose()
+   $admin = [BitConverter]::ToString($adminBytes).Replace("-", "").ToLowerInvariant()
+   $salt = [BitConverter]::ToString($saltBytes).Replace("-", "").ToLowerInvariant()
    $admin
-   $admin | npx wrangler secret put ADMIN_TOKEN
-   $salt | npx wrangler secret put RATE_SALT
-   npx wrangler deploy
+   $admin | npx.cmd wrangler secret put ADMIN_TOKEN
+   $salt | npx.cmd wrangler secret put RATE_SALT
+   npx.cmd wrangler deploy
    \`\`\`
 
    Cloudflare shows the \`*.workers.dev\` URL after deployment. Open it in your browser. \`/api/health\` must return \`{"status":"ready","version":"1.0"}\`. The private operator panel lives at \`/admin/\`. Never include its token in any URL or public file.
@@ -63,7 +69,7 @@ Stop and inspect the proposed plan rather than approving it automatically. This 
 
 ### Local development
 
-From \`inbox/\`, copy the sample config to \`wrangler.jsonc\`, replace its database ID with your local test binding ID, and create an ignored \`.dev.vars\` file with random \`ADMIN_TOKEN\` and \`RATE_SALT\` values (each at least 32 characters). Run \`npx wrangler d1 migrations apply ai-beacon-inbox-db --local\` followed by \`npm run dev\`. Never commit \`.dev.vars\` or your real \`wrangler.jsonc\`.
+From \`inbox/\`, copy the sample config to \`wrangler.jsonc\`, replace its database ID with your local test binding ID, and create an ignored \`.dev.vars\` file with random \`ADMIN_TOKEN\` and \`RATE_SALT\` values (each at least 32 characters). Run \`npx.cmd wrangler d1 migrations apply ai-beacon-inbox-db --local\` followed by \`npm run dev\`. Never commit \`.dev.vars\` or your real \`wrangler.jsonc\`.
 
 ### Tests
 
