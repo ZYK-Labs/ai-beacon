@@ -1,0 +1,31 @@
+name: AI Beacon Inbox checks
+on:
+  push:
+    branches: [main, feat/inbox-v1]
+    paths:
+      - "inbox/**"
+      - ".github/workflows/inbox-ci.yml"
+  pull_request:
+    paths:
+      - "inbox/**"
+      - ".github/workflows/inbox-ci.yml"
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: inbox
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install dependencies
+        run: npm install --ignore-scripts --no-audit --no-fund
+      - name: Syntax validation
+        run: npm run check
+      - name: Unit tests
+        run: npm test
