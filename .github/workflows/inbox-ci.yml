@@ -29,3 +29,15 @@ jobs:
         run: npm run check
       - name: Unit tests
         run: npm test
+      - name: Prepare local D1 and throwaway test secrets
+        run: |
+          cp wrangler.jsonc.example wrangler.jsonc
+          sed -i 's/REPLACE_WITH_YOUR_D1_DATABASE_ID/00000000-0000-0000-0000-000000000001/' wrangler.jsonc
+          printf 'ADMIN_TOKEN=%s\nRATE_SALT=%s\n' "$(printf 'a%.0s' {1..64})" "$(printf 'b%.0s' {1..64})" > .dev.vars
+          npx wrangler d1 migrations apply ai-beacon-inbox-db --local
+      - name: Start local Worker and run end-to-end smoke test
+        run: |
+          npx wrangler dev --port 8787 > /tmp/ai-beacon-inbox.log 2>&1 &
+          worker_pid=$!
+          trap 'kill "$worker_pid" 2>/dev/null || true' EXIT
+          node tests/integration-runner.mjs
