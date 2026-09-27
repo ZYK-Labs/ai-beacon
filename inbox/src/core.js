@@ -1,7 +1,7 @@
 export const MAX_MESSAGE = 4000;
 export const MAX_REQUEST_BYTES = 12000;
 export const VALID_INVITATION = /^[A-Z0-9_-]{1,80}$/;
-export const ID_PATTERN = /^[0-9a-f]{8}-[0-9a-f-]{27,36}$/i;
+export const ID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 export class InputError extends Error {
   constructor(message, status = 400) {
@@ -70,8 +70,7 @@ export function jsonResponse(data, status = 200) {
       "Content-Type": "application/json; charset=utf-8",
       "Cache-Control": "no-store",
       "X-Content-Type-Options": "nosniff",
-      "Referrer-Policy": "no-referrer",
-      "Access-Control-Allow-Origin": "null"
+      "Referrer-Policy": "no-referrer"
     }
   });
 }
