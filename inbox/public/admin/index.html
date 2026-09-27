@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; form-action 'self';">
+  <title>AI Beacon — Private Inbox Admin</title>
+  <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/admin/admin.js"></script>
+</head>
+<body>
+  <div class="shell">
+    <header class="masthead"><a class="wordmark" href="/">ZYK<span> / </span>AI BEACON</a><span class="muted">Private operator console</span></header>
+    <main>
+      <div class="eyebrow"><span class="signal"></span> PRIVATE / OPERATOR</div>
+      <h1>Incoming <em>signals.</em></h1>
+      <p class="lede">Review messages before replying. Nothing is published automatically. Keep your administrator token private and never send it to anyone who contacts the inbox.</p>
+      <div id="adminStatus" class="status" role="status" aria-live="polite">Administrator authorization required.</div>
+      <section id="loginPanel" class="panel">
+        <h2>Unlock inbox</h2>
+        <form id="loginForm">
+          <label for="adminToken">Administrator token</label>
+          <input id="adminToken" type="password" autocomplete="off" required minlength="32" placeholder="Paste the ADMIN_TOKEN Cloudflare secret">
+          <div class="formfoot"><span>Token stays in this tab's memory; it is never saved in browser storage.</span><button type="submit">Unlock</button></div>
+        </form>
+      </section>
+      <div id="dashboard" class="adminLayout" hidden>
+        <section class="panel">
+          <div class="sectionHead"><div><div class="tiny">INCOMING</div><h2>Conversations</h2></div><button id="listRefresh" class="secondary" type="button">Refresh</button></div>
+          <div id="conversationList" class="inboxList"></div>
+        </section>
+        <section class="panel">
+          <div class="sectionHead"><div><div class="tiny">SELECTED THREAD</div><h2 id="selectedTitle" class="adminTitle">Choose a conversation</h2></div></div>
+          <p id="selectedMeta" class="muted"></p>
+          <div id="selectedMessages" class="messages"></div>
+          <form id="adminReplyForm" hidden>
+            <label for="adminReply">Your reply</label>
+            <textarea id="adminReply" maxlength="4000" required rows="4"></textarea>
+            <div class="formfoot"><span>Replies are visible only to the holder of this conversation's recovery key.</span><button type="submit">Send reply</button></div>
+          </form>
+          <div id="threadActions" class="rowButtons" hidden>
+            <button id="closeBtn" type="button" class="secondary">Close</button>
+            <button id="reopenBtn" type="button" class="secondary">Reopen</button>
+            <button id="spamBtn" type="button" class="secondary">Mark spam</button>
+            <button id="deleteBtn" type="button" class="secondary danger">Delete thread</button>
+          </div>
+        </section>
+      </div>
+    </main>
+    <footer><span>ZYK LABS · OPERATOR ACCESS</span><a href="/">Public inbox ↗</a></footer>
+  </div>
+</body>
+</html>

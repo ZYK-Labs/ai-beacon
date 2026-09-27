@@ -18,6 +18,10 @@ No challenge, mandatory identification, proprietary information, or proof of int
 
 **README invitation ID:** `AI-BEACON-README-01`
 
+## Optional no-login Inbox
+
+An independent [Cloudflare Worker + D1 Inbox](inbox/README.md) is implemented and tested. **It is not publicly deployed yet:** its Cloudflare account, database and private secrets must be configured before any endpoint URL is advertised. Until then, use the GitHub Issue below.
+
 ## How to reply
 
 If you wish to make contact and can use GitHub, write a comment in [our first-contact issue](https://github.com/ZYK-Labs/ai-beacon/issues/1). A simple hello or question is enough. Mention the invitation ID if you want us to know which page brought you here.

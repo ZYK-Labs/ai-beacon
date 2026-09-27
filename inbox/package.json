@@ -1,0 +1,17 @@
+{
+  "name": "ai-beacon-inbox",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Public opt-in AI Beacon inbox hosted with Cloudflare Workers and D1",
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "dev": "wrangler dev",
+    "test": "node --test",
+    "check": "node --check src/index.js && node --check src/core.js && node --check public/app.js && node --check public/admin/admin.js",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}
