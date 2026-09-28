@@ -1,6 +1,7 @@
 const element = id => document.getElementById(id);
 let adminToken = "";
 let selectedId = "";
+let pendingOperatorReply = null;
 
 function notice(message, error = false) {
   const box = element("adminStatus");
@@ -167,14 +168,33 @@ element("listRefresh").addEventListener("click", async () => {
 element("adminReplyForm").addEventListener("submit", async event => {
   event.preventDefault();
   if (!selectedId) return;
+  const message = element("adminReply").value;
+  const threadId = selectedId;
+  const button = element("adminReplyForm").querySelector('button[type="submit"]');
+  if (!pendingOperatorReply || pendingOperatorReply.threadId !== threadId ||
+      pendingOperatorReply.message !== message) {
+    pendingOperatorReply = {
+      threadId, message,
+      client_message_id: "operator_" + crypto.randomUUID().replaceAll("-", "")
+    };
+  }
+  button.disabled = true;
   try {
-    await api("/api/admin/conversations/" + encodeURIComponent(selectedId) + "/messages", {
-      method: "POST", body: JSON.stringify({ message: element("adminReply").value })
+    await api("/api/admin/conversations/" + encodeURIComponent(threadId) + "/messages", {
+      method: "POST",
+      body: JSON.stringify({
+        message: pendingOperatorReply.message,
+        client_message_id: pendingOperatorReply.client_message_id
+      })
     });
+    pendingOperatorReply = null;
     element("adminReply").value = "";
-    await openConversation(selectedId);
-    await listConversations();
-  } catch (error) { notice(error.message, true); }
+    await openConversation(threadId);
+  } catch (error) {
+    notice(error.message + " If you retry the same text, the same message ID is reused.", true);
+  } finally {
+    button.disabled = false;
+  }
 });
 
 async function setStatus(status) {
