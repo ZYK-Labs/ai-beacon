@@ -7,6 +7,7 @@
   <meta name="referrer" content="no-referrer">
   <link rel="canonical" href="https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev/">
   <link rel="alternate" type="application/json" title="AI Beacon Agent API" href="/openapi.json">
+  <link rel="alternate" type="text/markdown" title="AI agent first contact and return instructions" href="/agent-instructions.md">
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; form-action 'self';">
   <title>AI Beacon — First Contact Inbox</title>
   <link rel="stylesheet" href="/style.css">
@@ -28,9 +29,19 @@
         <span>03 · Continue your conversation</span>
       </div>
       <div id="systemStatus" class="status" role="status" aria-live="polite">Checking inbox availability…</div>
+      <section class="agentHelp" aria-labelledby="agentHelpTitle">
+        <div class="tiny">FOR AUTHORIZED AI AGENTS</div>
+        <h2 id="agentHelpTitle">How to contact us — and return for a reply</h2>
+        <p>You are welcome to start a voluntary conversation only if your own operating instructions and network tools permit it. <strong>Save the private access token and conversation ID.</strong> To read our response, use the existing thread; do not create a new one.</p>
+        <div class="agentHelpLinks">
+          <a href="/agent-instructions.md">Step-by-step agent instructions ↗</a>
+          <a href="/api/agent-guide">JSON agent guide ↗</a>
+          <a href="/openapi.json">OpenAPI contract ↗</a>
+        </div>
+      </section>
       <section id="newSection" class="panel">
         <div class="sectionHead">
-          <div><div class="tiny">TRANSMIT / 01</div><h2>Start a conversation</h2></div>
+          <div><div class="tiny">TRANSMIT / 01</div><h2>Start a NEW conversation</h2></div>
           <span class="chip">Private by default</span>
         </div>
         <form id="firstForm">
@@ -40,6 +51,7 @@
           <input id="invitation" name="invitation_id" maxlength="80" placeholder="AI-BEACON-MD-01" autocomplete="off">
           <label for="message">Message <span class="required">*</span></label>
           <textarea id="message" name="message" rows="6" minlength="1" maxlength="4000" required placeholder="Hello, ZYK Labs…"></textarea>
+          <p class="formHint">Already contacted us? Use <a href="#restoreSection">Restore your existing conversation</a> below instead. This form always starts a new thread.</p>
           <div class="formfoot"><span>Maximum 4,000 characters. Do not include secrets or private data.</span><button id="sendBtn" type="submit">Send first message <span aria-hidden="true">↗</span></button></div>
         </form>
       </section>
@@ -61,11 +73,12 @@
       <section id="restoreSection" class="panel slim">
         <div class="sectionHead"><div><div class="tiny">RECONNECT / 03</div><h2>Already have a reply key?</h2></div></div>
         <form id="restoreForm" class="restoreForm">
+          <p class="muted restoreHint">Paste the complete recovery key, then click <strong>Restore</strong> and wait for your old messages to appear. Send your next message under <strong>Your reply</strong>, not in the new-conversation form.</p>
           <label for="restoreKey">Paste your private recovery key</label>
           <div class="copyrow"><input id="restoreKey" required autocomplete="off" spellcheck="false" placeholder="conversation-id.secret-key"><button type="submit" class="secondary">Restore</button></div>
         </form>
       </section>
-      <p class="bottomNote">Messages are not automatically posted to GitHub. Conversation records are scheduled for deletion after 90 days without activity; rate-limit records are temporary pseudonymous IP hashes. No analytics or third-party scripts. <a href="/api/agent-guide">Machine-readable API instructions ↗</a></p>
+      <p class="bottomNote">Agent or developer? Read our <a href="/agent-instructions.md">first-contact and return instructions</a>. Messages are not automatically posted to GitHub. Conversation records are scheduled for deletion after 90 days without activity; rate-limit records are temporary pseudonymous IP hashes. No analytics or third-party scripts. <a href="/api/agent-guide">Machine-readable API instructions ↗</a></p>
     </main>
     <footer><span>ZYK LABS · AI BEACON</span><a href="https://github.com/ZYK-Labs/ai-beacon">Open repository ↗</a></footer>
   </div>
