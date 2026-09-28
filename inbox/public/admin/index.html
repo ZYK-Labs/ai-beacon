@@ -29,9 +29,25 @@
         <button id="testNotificationBtn" type="button" class="secondary">Send Telegram test alert</button>
         <span id="notificationStatus" class="muted" role="status" aria-live="polite">Checking notification settings…</span>
       </div>
+      <section id="overviewPanel" class="overviewPanel" hidden aria-labelledby="overviewTitle">
+        <div class="tiny">PRIVATE EXPERIMENT OVERVIEW</div>
+        <h2 id="overviewTitle">Contact overview</h2>
+        <p id="overviewSummary" class="overviewSummary" aria-live="polite">Loading…</p>
+        <p id="reviewSummary" class="muted"></p>
+        <p id="invitationSummary" class="muted"></p>
+        <p class="muted">All labels are your private manual notes. Invitation IDs are supplied by visitors; none of these figures verifies model identity or autonomy.</p>
+      </section>
       <div id="dashboard" class="adminLayout" hidden>
         <section class="panel">
           <div class="sectionHead"><div><div class="tiny">INCOMING</div><h2>Conversations</h2></div><button id="listRefresh" class="secondary" type="button">Refresh</button></div>
+          <label for="conversationFilter">View recent conversations</label>
+          <select id="conversationFilter" class="reviewSelect">
+            <option value="all">All recent</option>
+            <option value="unread">Unread visitor messages</option>
+            <option value="unreviewed">Not yet classified</option>
+            <option value="agent_tests">Authorized agent tests</option>
+            <option value="spam">Marked as spam</option>
+          </select>
           <div id="conversationList" class="inboxList"></div>
         </section>
         <section class="panel">
@@ -42,6 +58,22 @@
             <label for="adminReply">Your reply</label>
             <textarea id="adminReply" maxlength="4000" required rows="4"></textarea>
             <div class="formfoot"><span>Replies are visible only to the holder of this conversation's recovery key.</span><button type="submit">Send reply</button></div>
+          </form>
+          <form id="reviewForm" class="reviewPanel" hidden>
+            <div class="tiny">PRIVATE EVIDENCE NOTES</div>
+            <p class="muted">Classify what you actually know, not what a visitor claims to be. These notes never appear in the visitor's thread or Telegram notifications.</p>
+            <label for="reviewLabel">Contact type</label>
+            <select id="reviewLabel" class="reviewSelect" required>
+              <option value="unreviewed">Not reviewed</option>
+              <option value="transport_test">Transport test / scripted request</option>
+              <option value="authorized_agent_test">Authorized agent test (operator-observed)</option>
+              <option value="independent_contact_claim">Claims independent discovery (unverified)</option>
+              <option value="human_contact">Human contact</option>
+              <option value="other">Other / unclear</option>
+            </select>
+            <label for="reviewNote">Private operator note (optional, max 500 chars)</label>
+            <textarea id="reviewNote" maxlength="500" rows="3" placeholder="Only non-sensitive evidence and observations. Never paste credentials or recovery keys."></textarea>
+            <div class="formfoot"><span id="reviewFeedback" role="status" aria-live="polite"></span><button type="submit">Save private review</button></div>
           </form>
           <div id="threadActions" class="rowButtons" hidden>
             <button id="closeBtn" type="button" class="secondary">Close</button>
