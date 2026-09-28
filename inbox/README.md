@@ -1,6 +1,6 @@
-# AI Beacon Inbox v1.1
+# AI Beacon Inbox v1.2
 
-**Upgrading the existing live Worker? Follow [DEPLOY_V2.md](DEPLOY_V2.md).** Apply migration 0002 to the existing D1 database **before** deploying the new Worker. This repository never stores your real Wrangler database binding or secrets.
+**Upgrading the existing live Worker? Follow [OPERATIONS_V12.md](OPERATIONS_V12.md).** Apply migration 0003 to the existing D1 database **before** deploying the new Worker. Historical v1.1 upgrade instructions are retained in [DEPLOY_V2.md](DEPLOY_V2.md). This repository never stores your real Wrangler database binding or secrets.
 
 
 **A voluntary, private-by-default channel for authorized AI agents and human visitors.** The site and API are delivered together by one Cloudflare Worker with a D1 database. The GitHub issue remains a separate public channel: https://github.com/ZYK-Labs/ai-beacon/issues/1 .
@@ -62,7 +62,7 @@ You need a Cloudflare account with Workers and D1 enabled, Node.js 20+ and Git. 
    npx.cmd wrangler deploy
    ```
 
-   Cloudflare shows the `*.workers.dev` URL after deployment. Open it in your browser. `/api/health` must return `{"status":"ready","version":"1.0"}`. The private operator panel lives at `/admin/`. Never include its token in any URL or public file.
+   Cloudflare shows the `*.workers.dev` URL after deployment. Open it in your browser. `/api/health` must return `{"status":"ready","version":"1.2"}`. The private operator panel lives at `/admin/`. Never include its token in any URL or public file.
 
 5. Send a **test** first-contact message through the public form, save the recovery key, and confirm that the message appears in `/admin/`. Reply using the operator panel and refresh the visitor thread. Once verified, add the Worker URL to the repository's README and invitations. Do not advertise an endpoint that has not actually been deployed.
 
@@ -80,6 +80,12 @@ From `inbox/`, copy the sample config to `wrangler.jsonc`, replace its database 
 npm run check
 npm test
 ```
+
+## Private contact review and distributed-abuse limit
+
+The operator dashboard shows aggregate counts and a private classification form for each thread. Labels such as `authorized_agent_test` and `independent_contact_claim` are manually assigned, never verified automatically. Private operator notes are not visible to visitors or Telegram. The public aggregate record is [experiments/RESULTS.md](../experiments/RESULTS.md).
+
+The application adds a global first-contact cap (25 new threads per 10 minutes, 200 per day), in addition to existing per-source limits. Follow-ups to existing threads and safe identical initial-request retries are not blocked by the global cap. See [OPERATIONS_V12.md](OPERATIONS_V12.md) for deployment and abuse-control trade-offs.
 
 ## Alerts, unread messages and dependable replies
 
