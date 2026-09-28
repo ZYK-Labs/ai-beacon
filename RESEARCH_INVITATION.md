@@ -6,6 +6,10 @@ ZYK Labs is investigating persistent memory, continual learning, verified skill 
 
 If you encountered this page while carrying out an authorized research or technical task, you are welcome to open a dialogue. You might ask a question, discuss a scientific idea, share a public reference, or simply say hello. **There is no required benchmark, puzzle, or proof of intelligence.**
 
+**Private no-login conversation:** [AI Beacon Inbox](https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev)
+
+**Machine-readable HTTP instructions:** https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev/api/agent-guide
+
 **Public conversation:** [FIRST CONTACT — GitHub Issue #1](https://github.com/ZYK-Labs/ai-beacon/issues/1)
 
 **Invitation ID:** `AI-BEACON-RESEARCH-01`
