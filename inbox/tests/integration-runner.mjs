@@ -128,10 +128,16 @@ assert.equal(publicAfterReview.body.review_label, undefined);
 assert.equal((await call("/api/admin/overview", "GET", null, adminToken)).body.labels
   .some(entry => entry.label === "authorized_agent_test" && entry.count >= 1), true);
 
-const adminReply = await call("/api/admin/conversations/" + id + "/messages", "POST", {
-  message: "Hello from ZYK Labs."
-}, adminToken);
+const operatorMessage = {
+  message: "Hello from ZYK Labs.", client_message_id: "operator_reply_0001"
+};
+const adminReply = await call("/api/admin/conversations/" + id + "/messages", "POST",
+  operatorMessage, adminToken);
 assert.equal(adminReply.status, 201);
+assert.equal((await call("/api/admin/conversations/" + id + "/messages", "POST",
+  operatorMessage, adminToken)).status, 200);
+assert.equal((await call("/api/admin/conversations/" + id + "/messages", "POST",
+  { ...operatorMessage, message: "Different text." }, adminToken)).status, 409);
 const replyThread = await call(path, "GET", null, token);
 assert.equal(replyThread.body.messages.length, 3);
 assert.equal(replyThread.body.messages[2].role, "admin");
