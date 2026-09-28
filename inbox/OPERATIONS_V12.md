@@ -15,7 +15,7 @@ cd .\inbox
 if (-not (Test-Path .\wrangler.jsonc)) { throw "Production wrangler.jsonc is missing. Stop." }
 
 # Keep the private database export OUTSIDE the public repository.
-$backupDir = Join-Path $HOME "Documents\ai-beacon-private-backups"
+$backupDir = Join-Path $HOME "ai-beacon-private-backups"
 New-Item -ItemType Directory -Force -Path $backupDir | Out-Null
 $backup = Join-Path $backupDir ("ai-beacon-d1-" + (Get-Date -Format "yyyyMMdd-HHmmss") + ".sql")
 npx.cmd wrangler d1 export ai-beacon-inbox-db --remote --output="$backup"
@@ -31,7 +31,7 @@ if ($LASTEXITCODE -ne 0) { throw "Worker deployment failed." }
 Invoke-RestMethod "https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev/api/health"
 ```
 
-The exported SQL file contains private conversation data. Keep it locally in a protected location, never attach it to GitHub, send it to ChatGPT or put it in a public cloud folder; delete it securely when no longer needed. The export command and required `--remote --output` flags are documented in [Cloudflare's official D1 guide](https://developers.cloudflare.com/d1/best-practices/import-export-data/).
+The exported SQL file contains private conversation data. Keep it locally in a protected location outside OneDrive/Dropbox/other automatic cloud-sync folders; never attach it to GitHub, send it to ChatGPT or put it in a public cloud folder; delete it securely when no longer needed. The export command and required `--remote --output` flags are documented in [Cloudflare's official D1 guide](https://developers.cloudflare.com/d1/best-practices/import-export-data/).
 
 Expected result: `status: ready`, `version: 1.2`. The health check verifies D1 tables and the new review columns; it returns HTTP 503/degraded if migration 0003 is missing. Apply the migration, **not** a new database.
 
