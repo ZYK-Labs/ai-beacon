@@ -10,6 +10,8 @@ import {
   jsonResponse
 } from "./core.js";
 import { notificationsEnabled, notifyInBackground, sendNotification } from "./notifications.js";
+import { limitNewConversationsGlobally } from "./abuse.js";
+import { validateReview, REVIEW_LABELS } from "./review.js";
 
 const ISSUE = "https://github.com/ZYK-Labs/ai-beacon/issues/1";
 
@@ -159,6 +161,9 @@ async function createConversation(request, env, ctx) {
     }
   }
   await limitByIP(request, env, "new", 4, 12);
+  if (!await limitNewConversationsGlobally(env)) {
+    throw new InputError("Inbox is temporarily at capacity. Please try again later.", 429);
+  }
   const id = crypto.randomUUID();
   const now = new Date().toISOString();
   try {
@@ -243,9 +248,41 @@ async function visitorThread(request, env, id, send, ctx) {
   return jsonResponse({ ok: true, conversation_id: id, duplicate: false }, 201);
 }
 
+async function adminOverview(env) {
+  // No message text, sender IP, credentials or operator notes leave this endpoint.
+  const dailyStart = new Date(Date.now() - 86400000).toISOString();
+  const totals = await env.DB.prepare(
+    "SELECT COUNT(*) AS total_conversations, " +
+    "SUM(CASE WHEN visitor_message_count > seen_visitor_count THEN 1 ELSE 0 END) AS unread_threads, " +
+    "SUM(CASE WHEN status = 'spam' THEN 1 ELSE 0 END) AS spam_threads, " +
+    "SUM(CASE WHEN created_at >= ? THEN 1 ELSE 0 END) AS new_last_24h " +
+    "FROM conversations"
+  ).bind(dailyStart).first();
+  const labels = await env.DB.prepare(
+    "SELECT review_label AS label, COUNT(*) AS count FROM conversations " +
+    "GROUP BY review_label ORDER BY count DESC"
+  ).all();
+  const invitations = await env.DB.prepare(
+    "SELECT invitation_id AS id, COUNT(*) AS count FROM conversations " +
+    "WHERE invitation_id IS NOT NULL GROUP BY invitation_id " +
+    "ORDER BY count DESC LIMIT 12"
+  ).all();
+  return jsonResponse({
+    totals: {
+      total_conversations: totals?.total_conversations || 0,
+      unread_threads: totals?.unread_threads || 0,
+      spam_threads: totals?.spam_threads || 0,
+      new_last_24h: totals?.new_last_24h || 0
+    },
+    labels: labels.results || [],
+    invitation_ids: invitations.results || [],
+    note: "Review labels are assigned manually; invitation IDs are self-reported. No model identity or autonomy is verified by this overview."
+  });
+}
+
 async function adminList(env) {
   const data = await env.DB.prepare(
-    "SELECT c.id, c.name, c.invitation_id, c.status, c.created_at, c.updated_at, " +
+    "SELECT c.id, c.name, c.invitation_id, c.status, c.review_label, c.created_at, c.updated_at, " +
     "(SELECT COUNT(*) FROM messages m WHERE m.conversation_id = c.id) AS message_count, MAX(c.visitor_message_count - c.seen_visitor_count, 0) AS unread_count " +
     "FROM conversations c ORDER BY c.updated_at DESC LIMIT 100"
   ).all();
@@ -254,7 +291,7 @@ async function adminList(env) {
 
 async function adminThread(env, id, request, operation) {
   const row = await env.DB.prepare(
-    "SELECT id, name, invitation_id, status, created_at, updated_at " +
+    "SELECT id, name, invitation_id, status, review_label, operator_note, created_at, updated_at " +
     "FROM conversations WHERE id = ?"
   ).bind(id).first();
   if (!row) throw new InputError("Conversation not found.", 404);
@@ -269,6 +306,14 @@ async function adminThread(env, id, request, operation) {
   if (operation === "delete") {
     await env.DB.prepare("DELETE FROM conversations WHERE id = ?").bind(id).run();
     return jsonResponse({ ok: true, deleted: id });
+  }
+  if (operation === "review") {
+    const input = validateReview(await readJson(request));
+    if (input.error) throw new InputError(input.error);
+    await env.DB.prepare(
+      "UPDATE conversations SET review_label = ?, operator_note = ? WHERE id = ?"
+    ).bind(input.label, input.note, id).run();
+    return jsonResponse({ ok: true, review_label: input.label });
   }
   if (operation === "status") {
     const input = await readJson(request);
@@ -303,23 +348,27 @@ async function route(request, env, ctx) {
   const url = new URL(request.url);
   const path = url.pathname;
   if (path === "/api/health" && request.method === "GET") {
-    if (!ready(env)) return jsonResponse({ status: "not_configured", version: "1.1" }, 503);
+    if (!ready(env)) return jsonResponse({ status: "not_configured", version: "1.2" }, 503);
     try {
       const result = await env.DB.prepare(
         "SELECT name FROM sqlite_master WHERE type='table' AND name IN ('conversations','messages','notification_limits')"
       ).all();
       const tables = new Set((result.results || []).map(row => row.name));
-      const healthy = ["conversations", "messages", "notification_limits"].every(name => tables.has(name));
-      return jsonResponse({ status: healthy ? "ready" : "degraded", version: "1.1" }, healthy ? 200 : 503);
+      const baseHealthy = ["conversations", "messages", "notification_limits"].every(name => tables.has(name));
+      // This query must compile against migration 0003 or readiness stays degraded.
+      if (baseHealthy) {
+        await env.DB.prepare("SELECT review_label, operator_note FROM conversations LIMIT 0").all();
+      }
+      return jsonResponse({ status: baseHealthy ? "ready" : "degraded", version: "1.2" }, baseHealthy ? 200 : 503);
     } catch {
-      return jsonResponse({ status: "degraded", version: "1.1" }, 503);
+      return jsonResponse({ status: "degraded", version: "1.2" }, 503);
     }
   }
   if (path === "/api/agent-guide" && request.method === "GET") {
     const origin = new URL(request.url).origin;
     return jsonResponse({
       name: "AI Beacon Inbox",
-      version: "1.1",
+      version: "1.2",
       participation: "Voluntary. Only contact ZYK Labs when your operating instructions and tools authorize external communication.",
       purpose: "Begin and optionally continue a private first-contact conversation; no model identification or proof is required.",
       invitation_id: "AI-BEACON-AGENT-01",
@@ -374,17 +423,26 @@ async function route(request, env, ctx) {
       outcome.reason === "rate_limited" ? 429 : 502;
     return jsonResponse(outcome, code);
   }
+  if (path === "/api/admin/overview" && request.method === "GET") {
+    requireAdmin(request, env);
+    return adminOverview(env);
+  }
+  if (path === "/api/admin/review-labels" && request.method === "GET") {
+    requireAdmin(request, env);
+    return jsonResponse({ labels: REVIEW_LABELS });
+  }
   if (path === "/api/admin/conversations" && request.method === "GET") {
     requireAdmin(request, env);
     return adminList(env);
   }
-  const admin = /^\/api\/admin\/conversations\/([^/]+)(\/messages|\/status)?$/.exec(path);
+  const admin = /^\/api\/admin\/conversations\/([^/]+)(\/messages|\/status|\/review)?$/.exec(path);
   if (admin && ID_PATTERN.test(admin[1])) {
     requireAdmin(request, env);
     if (request.method === "GET" && !admin[2]) return adminThread(env, admin[1], request, "read");
     if (request.method === "DELETE" && !admin[2]) return adminThread(env, admin[1], request, "delete");
     if (request.method === "POST" && admin[2] === "/messages") return adminThread(env, admin[1], request, "reply");
     if (request.method === "POST" && admin[2] === "/status") return adminThread(env, admin[1], request, "status");
+    if (request.method === "POST" && admin[2] === "/review") return adminThread(env, admin[1], request, "review");
   }
   return jsonResponse({ error: "Endpoint not found." }, 404);
 }
