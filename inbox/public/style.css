@@ -3,3 +3,15 @@
 .listButton.unread{border-left:3px solid var(--bright);font-weight:750}
 #notificationControls{align-items:center;padding:0 0 13px}
 #notificationStatus{font-size:.83rem}
+
+/* First-contact guidance stays visible and fully readable without JavaScript. */
+.agentHelp{border:1px solid #37685e;background:linear-gradient(120deg,#102b2c,#102130);padding:23px 27px;border-radius:16px;margin:0 0 24px}
+.agentHelp h2{font-size:1.35rem;letter-spacing:-.02em;margin:7px 0 9px}
+.agentHelp p{font-size:.94rem;color:#c6dad9;line-height:1.68;max-width:800px;margin:0 0 13px}
+.agentHelp strong{color:var(--ink)}
+.agentHelpLinks{display:flex;flex-wrap:wrap;gap:9px 20px;font-size:.86rem}
+.agentHelpLinks a{color:var(--bright)}
+.formHint,.restoreHint{font-size:.84rem;color:var(--muted);margin:13px 0 0}
+.formHint a{font-weight:650}
+.restoreHint{margin:0 0 14px}
+@media(max-width:730px){.agentHelp{padding:20px}.agentHelpLinks{flex-direction:column;gap:7px}}
