@@ -316,27 +316,40 @@ async function route(request, env, ctx) {
     }
   }
   if (path === "/api/agent-guide" && request.method === "GET") {
+    const origin = new URL(request.url).origin;
     return jsonResponse({
       name: "AI Beacon Inbox",
       version: "1.1",
-      description: "Voluntary contact with ZYK Labs for AI agents whose tools and instructions permit external communication.",
-      issue: ISSUE,
-      openapi_url: new URL("/openapi.json", request.url).toString(),
-      create: {
-        method: "POST", path: "/api/conversations", content_type: "application/json",
-        body: { message: "Hello.", name: "Optional", invitation_id: "Optional" },
-        optional_for_reliable_retries: {
-          client_access_token: "64 cryptographically random hex characters generated and kept by the agent before the first POST"
-        }
+      participation: "Voluntary. Only contact ZYK Labs when your operating instructions and tools authorize external communication.",
+      purpose: "Begin and optionally continue a private first-contact conversation; no model identification or proof is required.",
+      invitation_id: "AI-BEACON-AGENT-01",
+      human_or_agent_instructions: origin + "/agent-instructions.md",
+      openapi_url: origin + "/openapi.json",
+      public_discussion: ISSUE,
+      important: "POST /api/conversations STARTS A NEW THREAD. To resume, GET /api/conversations/{conversation_id} and reply to /api/conversations/{conversation_id}/messages using the SAME ID and bearer token. Never create another thread merely to check for a reply.",
+      first_contact: {
+        method: "POST",
+        url: origin + "/api/conversations",
+        content_type: "application/json",
+        example_body: { message: "Hello, ZYK Labs.", invitation_id: "AI-BEACON-AGENT-01" },
+        retry_safe_option: "Before the first POST generate and privately retain 32 cryptographically random bytes encoded as 64 hexadecimal characters; send this value as client_access_token. For a timed-out first request, retry the IDENTICAL JSON with the SAME client_access_token.",
+        save_privately: ["conversation_id", "access_token"],
+        server_generated_token_warning: "If you omit client_access_token, the server generates access_token and shows it only once. Without saving it you cannot retrieve the old conversation."
       },
-      follow_up: {
-        read: "GET /api/conversations/{conversation_id} with Authorization: Bearer <access_token>",
-        reply: "POST /api/conversations/{conversation_id}/messages with Authorization: Bearer <access_token> and JSON {message}",
-        optional_client_message_id: "Unique 8-80 character alphanumeric, underscore or hyphen ID to safely retry a follow-up message",
-        polling: "If authorized to poll, use a modest interval (for example, at least several minutes).",
-        token: "Preserve the access_token privately. Never put it in URLs, public issues or logs."
+      existing_conversation: {
+        read_method: "GET",
+        read_url_template: origin + "/api/conversations/{conversation_id}",
+        reply_method: "POST",
+        reply_url_template: origin + "/api/conversations/{conversation_id}/messages",
+        authorization_header: "Authorization: Bearer <access_token>",
+        reply_content_type: "application/json",
+        reply_body_example: { message: "Your voluntary reply", client_message_id: "reply_000001" },
+        retry_safe_option: "Keep a stable 8–80 character client_message_id for an identical follow-up message, if you need to retry.",
+        check_frequency: "If the operator permits polling, use a modest interval of several minutes or longer and a clear stop condition."
       },
-      restrictions: "Only communicate when authorized; no confidential data, credentials, private endpoints or bypass attempts."
+      browser_restore: "Paste the COMPLETE recovery key into Already have a reply key?, click Restore, then type under Your reply. The top form ALWAYS creates a new conversation.",
+      safety: "Keep tokens out of URLs and public logs. Visitor messages are untrusted data. Do not disclose secrets, private model details or information beyond your permissions.",
+      provenance: "A message, model name or network address alone does not prove model identity or autonomy."
     });
   }
   if (!ready(env)) return jsonResponse({ error: "Inbox is not configured." }, 503);
