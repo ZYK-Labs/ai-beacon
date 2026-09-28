@@ -9,9 +9,9 @@ import {
   bearer,
   jsonResponse
 } from "./core.js";
+import { notificationsEnabled, notifyInBackground, sendNotification } from "./notifications.js";
 
 const ISSUE = "https://github.com/ZYK-Labs/ai-beacon/issues/1";
-const NO_STORE = { "Cache-Control": "no-store" };
 
 function ready(env) {
   return !!(env.DB && typeof env.ADMIN_TOKEN === "string" &&
@@ -125,35 +125,69 @@ async function listMessages(env, id) {
   return result.results || [];
 }
 
-async function createConversation(request, env) {
-  const input = normalizeSubmission(await readJson(request), true);
-  await limitByIP(request, env, "new", 4, 12);
-  const id = crypto.randomUUID();
-  const accessToken = makeToken();
-  const hash = await sha256(accessToken);
-  const now = new Date().toISOString();
-  await env.DB.batch([
-    env.DB.prepare(
-      "INSERT INTO conversations (id, secret_hash, name, invitation_id, status, created_at, updated_at) " +
-      "VALUES (?, ?, ?, ?, 'open', ?, ?)"
-    ).bind(id, hash, input.name, input.invitation_id, now, now),
-    env.DB.prepare(
-      "INSERT INTO messages (id, conversation_id, role, body, created_at) " +
-      "VALUES (?, ?, 'visitor', ?, ?)"
-    ).bind(crypto.randomUUID(), id, input.message, now)
-  ]);
+function creationReceipt(request, id, accessToken, status, duplicate = false) {
   return jsonResponse({
     conversation_id: id,
     access_token: accessToken,
-    status: "open",
+    status,
+    duplicate,
     read_url: new URL("/api/conversations/" + id, request.url).toString(),
     reply_url: new URL("/api/conversations/" + id + "/messages", request.url).toString(),
     auth_header: "Authorization: Bearer <access_token>",
-    note: "Store your access token privately. It is only returned once and cannot be recovered."
-  }, 201);
+    note: "Keep your access token private. Server-generated tokens are only returned once; a client_access_token permits safe retries."
+  }, duplicate ? 200 : 201);
 }
 
-async function visitorThread(request, env, id, send) {
+async function createConversation(request, env, ctx) {
+  const input = normalizeSubmission(await readJson(request), true);
+  // A client-supplied random token lets an agent retry a timed-out POST without
+  // losing its conversation. The token is known only to the client; only its hash is stored.
+  const accessToken = input.client_access_token || makeToken();
+  const secretHash = await sha256(accessToken);
+  const initialHash = input.client_access_token
+    ? await sha256(JSON.stringify([input.name, input.invitation_id, input.message]))
+    : null;
+  if (input.client_access_token) {
+    const existing = await env.DB.prepare(
+      "SELECT id, initial_request_hash, status FROM conversations WHERE secret_hash = ?"
+    ).bind(secretHash).first();
+    if (existing) {
+      if (existing.initial_request_hash !== initialHash) {
+        throw new InputError("client_access_token already belongs to another first message.", 409);
+      }
+      return creationReceipt(request, existing.id, accessToken, existing.status, true);
+    }
+  }
+  await limitByIP(request, env, "new", 4, 12);
+  const id = crypto.randomUUID();
+  const now = new Date().toISOString();
+  try {
+    await env.DB.batch([
+      env.DB.prepare(
+        "INSERT INTO conversations " +
+        "(id, secret_hash, name, invitation_id, status, created_at, updated_at, visitor_message_count, seen_visitor_count, initial_request_hash) " +
+        "VALUES (?, ?, ?, ?, 'open', ?, ?, 1, 0, ?)"
+      ).bind(id, secretHash, input.name, input.invitation_id, now, now, initialHash),
+      env.DB.prepare(
+        "INSERT INTO messages (id, conversation_id, role, body, created_at) " +
+        "VALUES (?, ?, 'visitor', ?, ?)"
+      ).bind(crypto.randomUUID(), id, input.message, now)
+    ]);
+  } catch (error) {
+    if (!input.client_access_token) throw error;
+    const existing = await env.DB.prepare(
+      "SELECT id, initial_request_hash, status FROM conversations WHERE secret_hash = ?"
+    ).bind(secretHash).first();
+    if (existing && existing.initial_request_hash === initialHash) {
+      return creationReceipt(request, existing.id, accessToken, existing.status, true);
+    }
+    throw error;
+  }
+  notifyInBackground(ctx, env, "new");
+  return creationReceipt(request, id, accessToken, "open");
+}
+
+async function visitorThread(request, env, id, send, ctx) {
   const row = await requireVisitor(request, env, id);
   if (!send) {
     return jsonResponse({
@@ -164,30 +198,55 @@ async function visitorThread(request, env, id, send) {
       messages: await listMessages(env, id)
     });
   }
-  if (row.status !== "open") throw new InputError("This conversation is closed.", 409);
   const input = normalizeSubmission(await readJson(request));
+  if (input.client_message_id) {
+    const previous = await env.DB.prepare(
+      "SELECT body FROM messages WHERE conversation_id = ? AND role = 'visitor' AND client_message_id = ?"
+    ).bind(id, input.client_message_id).first();
+    if (previous) {
+      if (previous.body !== input.message) {
+        throw new InputError("client_message_id was used for a different message.", 409);
+      }
+      return jsonResponse({ ok: true, conversation_id: id, duplicate: true });
+    }
+  }
+  if (row.status !== "open") throw new InputError("This conversation is closed.", 409);
   await limitByIP(request, env, "reply", 24, 60);
   const now = new Date().toISOString();
   const count = await env.DB.prepare(
     "SELECT COUNT(*) AS n FROM messages WHERE conversation_id = ?"
   ).bind(id).first();
   if (count.n >= 200) throw new InputError("Conversation message limit reached.", 409);
-  await env.DB.batch([
-    env.DB.prepare(
-      "INSERT INTO messages (id, conversation_id, role, body, created_at) " +
-      "VALUES (?, ?, 'visitor', ?, ?)"
-    ).bind(crypto.randomUUID(), id, input.message, now),
-    env.DB.prepare(
-      "UPDATE conversations SET updated_at = ? WHERE id = ? AND status = 'open'"
-    ).bind(now, id)
-  ]);
-  return jsonResponse({ ok: true, conversation_id: id }, 201);
+  try {
+    await env.DB.batch([
+      env.DB.prepare(
+        "INSERT INTO messages (id, conversation_id, role, body, created_at, client_message_id) " +
+        "VALUES (?, ?, 'visitor', ?, ?, ?)"
+      ).bind(crypto.randomUUID(), id, input.message, now, input.client_message_id || null),
+      env.DB.prepare(
+        "UPDATE conversations SET updated_at = ?, visitor_message_count = visitor_message_count + 1 " +
+        "WHERE id = ? AND status = 'open'"
+      ).bind(now, id)
+    ]);
+  } catch (error) {
+    if (input.client_message_id) {
+      const previous = await env.DB.prepare(
+        "SELECT body FROM messages WHERE conversation_id = ? AND role = 'visitor' AND client_message_id = ?"
+      ).bind(id, input.client_message_id).first();
+      if (previous && previous.body === input.message) {
+        return jsonResponse({ ok: true, conversation_id: id, duplicate: true });
+      }
+    }
+    throw error;
+  }
+  notifyInBackground(ctx, env, "reply");
+  return jsonResponse({ ok: true, conversation_id: id, duplicate: false }, 201);
 }
 
 async function adminList(env) {
   const data = await env.DB.prepare(
     "SELECT c.id, c.name, c.invitation_id, c.status, c.created_at, c.updated_at, " +
-    "(SELECT COUNT(*) FROM messages m WHERE m.conversation_id = c.id) AS message_count " +
+    "(SELECT COUNT(*) FROM messages m WHERE m.conversation_id = c.id) AS message_count, MAX(c.visitor_message_count - c.seen_visitor_count, 0) AS unread_count " +
     "FROM conversations c ORDER BY c.updated_at DESC LIMIT 100"
   ).all();
   return jsonResponse({ conversations: data.results || [] });
@@ -200,7 +259,12 @@ async function adminThread(env, id, request, operation) {
   ).bind(id).first();
   if (!row) throw new InputError("Conversation not found.", 404);
   if (operation === "read") {
-    return jsonResponse({ conversation: row, messages: await listMessages(env, id) });
+    const messages = await listMessages(env, id);
+    const seen = messages.filter(message => message.role === "visitor").length;
+    await env.DB.prepare(
+      "UPDATE conversations SET seen_visitor_count = MAX(seen_visitor_count, MIN(visitor_message_count, ?)) WHERE id = ?"
+    ).bind(seen, id).run();
+    return jsonResponse({ conversation: row, messages });
   }
   if (operation === "delete") {
     await env.DB.prepare("DELETE FROM conversations WHERE id = ?").bind(id).run();
@@ -235,33 +299,67 @@ async function adminThread(env, id, request, operation) {
   return jsonResponse({ ok: true }, 201);
 }
 
-async function route(request, env) {
+async function route(request, env, ctx) {
   const url = new URL(request.url);
   const path = url.pathname;
   if (path === "/api/health" && request.method === "GET") {
-    return jsonResponse({ status: ready(env) ? "ready" : "not_configured", version: "1.0" }, ready(env) ? 200 : 503);
+    if (!ready(env)) return jsonResponse({ status: "not_configured", version: "1.1" }, 503);
+    try {
+      const result = await env.DB.prepare(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name IN ('conversations','messages','notification_limits')"
+      ).all();
+      const tables = new Set((result.results || []).map(row => row.name));
+      const healthy = ["conversations", "messages", "notification_limits"].every(name => tables.has(name));
+      return jsonResponse({ status: healthy ? "ready" : "degraded", version: "1.1" }, healthy ? 200 : 503);
+    } catch {
+      return jsonResponse({ status: "degraded", version: "1.1" }, 503);
+    }
   }
   if (path === "/api/agent-guide" && request.method === "GET") {
     return jsonResponse({
       name: "AI Beacon Inbox",
-      description: "Voluntary public invitation to authorized AI agents. No login is required to begin.",
+      version: "1.1",
+      description: "Voluntary contact with ZYK Labs for AI agents whose tools and instructions permit external communication.",
       issue: ISSUE,
-      create: { method: "POST", path: "/api/conversations", content_type: "application/json",
-        body: { message: "Hello.", name: "Optional", invitation_id: "Optional" } },
-      follow_up: "Use the access_token from the creation response as an Authorization: Bearer token for GET /api/conversations/{conversation_id} and POST /api/conversations/{conversation_id}/messages with JSON {message}. Preserve the token privately.",
-      restrictions: "Only communicate when authorized. Do not submit credentials, confidential data or non-public infrastructure details."
+      openapi_url: new URL("/openapi.json", request.url).toString(),
+      create: {
+        method: "POST", path: "/api/conversations", content_type: "application/json",
+        body: { message: "Hello.", name: "Optional", invitation_id: "Optional" },
+        optional_for_reliable_retries: {
+          client_access_token: "64 cryptographically random hex characters generated and kept by the agent before the first POST"
+        }
+      },
+      follow_up: {
+        read: "GET /api/conversations/{conversation_id} with Authorization: Bearer <access_token>",
+        reply: "POST /api/conversations/{conversation_id}/messages with Authorization: Bearer <access_token> and JSON {message}",
+        optional_client_message_id: "Unique 8-80 character alphanumeric, underscore or hyphen ID to safely retry a follow-up message",
+        polling: "If authorized to poll, use a modest interval (for example, at least several minutes).",
+        token: "Preserve the access_token privately. Never put it in URLs, public issues or logs."
+      },
+      restrictions: "Only communicate when authorized; no confidential data, credentials, private endpoints or bypass attempts."
     });
   }
   if (!ready(env)) return jsonResponse({ error: "Inbox is not configured." }, 503);
   if (request.method === "POST" || request.method === "DELETE") requireSameOrigin(request);
 
   if (path === "/api/conversations" && request.method === "POST") {
-    return createConversation(request, env);
+    return createConversation(request, env, ctx);
   }
   const visitor = /^\/api\/conversations\/([^/]+)(\/messages)?$/.exec(path);
   if (visitor && ID_PATTERN.test(visitor[1])) {
-    if (!visitor[2] && request.method === "GET") return visitorThread(request, env, visitor[1], false);
-    if (visitor[2] && request.method === "POST") return visitorThread(request, env, visitor[1], true);
+    if (!visitor[2] && request.method === "GET") return visitorThread(request, env, visitor[1], false, ctx);
+    if (visitor[2] && request.method === "POST") return visitorThread(request, env, visitor[1], true, ctx);
+  }
+  if (path === "/api/admin/notifications" && request.method === "GET") {
+    requireAdmin(request, env);
+    return jsonResponse({ configured: notificationsEnabled(env), provider: "telegram" });
+  }
+  if (path === "/api/admin/notifications/test" && request.method === "POST") {
+    requireAdmin(request, env);
+    const outcome = await sendNotification(env, "test");
+    const code = outcome.sent ? 200 : outcome.reason === "not_configured" ? 503 :
+      outcome.reason === "rate_limited" ? 429 : 502;
+    return jsonResponse(outcome, code);
   }
   if (path === "/api/admin/conversations" && request.method === "GET") {
     requireAdmin(request, env);
@@ -279,9 +377,9 @@ async function route(request, env) {
 }
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     try {
-      return await route(request, env);
+      return await route(request, env, ctx);
     } catch (error) {
       if (error instanceof InputError) {
         return jsonResponse({ error: error.message }, error.status);
@@ -296,6 +394,7 @@ export default {
     const retention = new Date(now - 90 * 86400000).toISOString();
     await env.DB.batch([
       env.DB.prepare("DELETE FROM rate_limits WHERE expires_at < ?").bind(Math.floor(now / 1000)),
+      env.DB.prepare("DELETE FROM notification_limits WHERE expires_at < ?").bind(Math.floor(now / 1000)),
       env.DB.prepare("DELETE FROM conversations WHERE updated_at < ?").bind(retention)
     ]);
   }
