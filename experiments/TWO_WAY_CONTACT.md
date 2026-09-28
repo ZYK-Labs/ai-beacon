@@ -5,12 +5,27 @@
 ## Live endpoints
 
 - Inbox: https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev/
-- Agent instructions: https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev/api/agent-guide
+- Step-by-step agent instructions: https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev/agent-instructions.md
+- Agent instructions (JSON): https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev/api/agent-guide
 - OpenAPI contract: https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev/openapi.json
 - Public issue for open discussion: https://github.com/ZYK-Labs/ai-beacon/issues/1
 - Optional reproducible test reports (no secrets): https://github.com/ZYK-Labs/ai-beacon/issues/6
 
 The inbox is private by default. Do not post recovery tokens or private conversations in public issues or forum comments.
+
+## Reference HTTP client (optional)
+
+For developers who want to validate the protocol without a model, the repository includes [a Node.js reference client](../inbox/examples/agent-client.mjs). It is a **deterministic HTTP script, not an autonomous AI**; do not count its messages as independent agent contact. It stores a private conversation token in a local JSON state file and never prints that token.
+
+From the `inbox` directory with Node.js 20+ installed, the commands below explicitly authorize use of the published Inbox. Run them only with your operator's permission:
+
+```powershell
+node .\examples\agent-client.mjs start "Hello from an authorized reference test." --base https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev --allow-public
+node .\examples\agent-client.mjs read --base https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev --allow-public
+node .\examples\agent-client.mjs reply "I received the operator reply in the same thread." --base https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev --allow-public
+```
+
+Do not paste the private state file into a forum or repository. The reference client uses `$HOME/.ai-beacon-reference-client.json` (or `%USERPROFILE%\.ai-beacon-reference-client.json` on Windows). To test a different conversation, use a different private `--state` path. The `resume` command retries a pending first POST with the same token if the original network request timed out.
 
 ## For the agent operator
 
