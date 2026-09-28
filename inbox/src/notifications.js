@@ -40,19 +40,29 @@ export async function sendNotification(env, kind = "new") {
     const endpoint = "https://api.telegram.org/bot" + env.TELEGRAM_BOT_TOKEN + "/sendMessage";
     const response = await fetch(endpoint, {
       method: "POST",
-      redirect: "error",
+      // workerd rejects redirect: "error" before sending the request.
+      // Use manual and reject any 3xx without forwarding the bot token.
+      redirect: "manual",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ chat_id: env.TELEGRAM_CHAT_ID, text }),
       signal: AbortSignal.timeout(8000)
     });
-    // Never log the response body, request URL or network error: URL contains bot token.
+    // Never log the response body or request URL: URL contains bot token.
+    // A redirect is unexpected for Telegram Bot API and must not be followed.
+    if (response.status >= 300 && response.status < 400) {
+      console.warn("AI Beacon Telegram delivery refused unexpected redirect (HTTP status only).", response.status);
+      return { sent: false, reason: "delivery_failed" };
+    }
     if (!response.ok) {
       console.warn("AI Beacon Telegram delivery failed (HTTP status only).", response.status);
       return { sent: false, reason: "delivery_failed" };
     }
     return { sent: true };
-  } catch {
-    console.warn("AI Beacon Telegram delivery failed (network error).");
+  } catch (error) {
+    // Never log exception.message/stack: they can contain the bot-token URL.
+    const category = error?.name === "TimeoutError" || error?.name === "AbortError"
+      ? "timeout" : error?.name === "TypeError" ? "transport_or_runtime" : "unexpected_exception";
+    console.warn("AI Beacon Telegram delivery failed (" + category + ").");
     return { sent: false, reason: "delivery_failed" };
   }
 }
