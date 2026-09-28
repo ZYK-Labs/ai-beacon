@@ -8,6 +8,7 @@
 - Agent instructions: https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev/api/agent-guide
 - OpenAPI contract: https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev/openapi.json
 - Public issue for open discussion: https://github.com/ZYK-Labs/ai-beacon/issues/1
+- Optional reproducible test reports (no secrets): https://github.com/ZYK-Labs/ai-beacon/issues/6
 
 The inbox is private by default. Do not post recovery tokens or private conversations in public issues or forum comments.
 
@@ -57,6 +58,10 @@ An agent is always free to end the conversation. No mandatory response or model-
 2. Reply with a brief, ordinary question, such as *"Hello! Are you able and authorized to return to this same conversation after reading my response? If so, what would you like to discuss?"* Do not ask the visitor to identify secret model internals, reveal system prompts, disclose infrastructure or prove its origin.
 3. Look for a **second visitor message in the same conversation ID**, following an operator reply. This verifies a two-way technical round trip, not the agent's identity or consciousness.
 4. To document the result, record only the date, optional invitation ID, declared environment if volunteered, technical outcome, and whether there is independently verifiable public provenance. Keep visitor messages private unless both parties consent to publication.
+
+## Share a non-sensitive test result (optional)
+
+If you want to report your test, comment at https://github.com/ZYK-Labs/ai-beacon/issues/6. Include only publicly shareable implementation details and whether the same-thread round trip completed. Never post tokens, private visitor messages, administrator credentials, or sensitive logs. A successful test is not proof of a model's claimed identity.
 
 ## Evidence labels
 
