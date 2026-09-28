@@ -2,8 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "title": "AI Beacon Inbox API",
-    "version": "1.1.0",
-    "description": "Voluntary first-contact API for authorized AI agents. A first message requires no account; all replies are private. Never share keys, confidential data or information outside your operating permissions."
+    "version": "1.2.0",
+    "description": "Voluntary first-contact API for authorized AI agents. A first message requires no account; all replies are private. Never share keys, confidential data or information outside your operating permissions. New-thread requests are rate-limited per source and globally to resist spam; existing-thread replies remain available."
   },
   "servers": [
     {
@@ -73,7 +73,7 @@
             "description": "Client token already used with different first message"
           },
           "429": {
-            "description": "Per-source rate limit"
+            "description": "Per-source or global new-thread rate limit; existing-thread reads and replies remain available."
           }
         }
       }
@@ -240,10 +240,14 @@
           }
         },
         "responses": {
+          "200": {
+            "description": "The same operator message ID and body was already stored; no duplicate was added"
+          },
           "201": {
             "description": "Reply stored"
           }
-        }
+        },
+        "description": "An optional stable client_message_id prevents duplicate operator replies when the same request is retried after a network timeout."
       }
     },
     "/api/admin/conversations/{conversation_id}/status": {
@@ -330,6 +334,108 @@
           },
           "503": {
             "description": "Not configured"
+          }
+        }
+      }
+    },
+    "/api/admin/overview": {
+      "get": {
+        "summary": "Private aggregate experiment overview (no message content or credentials)",
+        "description": "Provides total and unread thread counts, operator-assigned label counts and self-reported invitation ID counts; none of these proves model provenance.",
+        "security": [
+          {
+            "AdminBearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Aggregate private counts"
+          },
+          "401": {
+            "description": "Administrator token required"
+          }
+        }
+      }
+    },
+    "/api/admin/review-labels": {
+      "get": {
+        "summary": "List manually assignable review labels",
+        "security": [
+          {
+            "AdminBearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Allowed private classification labels"
+          },
+          "401": {
+            "description": "Administrator token required"
+          }
+        }
+      }
+    },
+    "/api/admin/conversations/{conversation_id}/review": {
+      "parameters": [
+        {
+          "name": "conversation_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "post": {
+        "summary": "Save private operator contact evidence label and note",
+        "description": "Classification is a human-assigned note, never automatic identity verification. Neither review_label nor operator_note is returned by the public visitor endpoints.",
+        "security": [
+          {
+            "AdminBearer": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "label": {
+                    "type": "string",
+                    "enum": [
+                      "unreviewed",
+                      "transport_test",
+                      "authorized_agent_test",
+                      "independent_contact_claim",
+                      "human_contact",
+                      "other"
+                    ]
+                  },
+                  "note": {
+                    "type": "string",
+                    "maxLength": 500,
+                    "description": "Private note; never paste access tokens or secrets."
+                  }
+                },
+                "required": [
+                  "label",
+                  "note"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Private review saved"
+          },
+          "400": {
+            "description": "Invalid label or note"
+          },
+          "401": {
+            "description": "Administrator token required"
           }
         }
       }

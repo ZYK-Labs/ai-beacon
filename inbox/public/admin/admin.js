@@ -1,6 +1,7 @@
 const element = id => document.getElementById(id);
 let adminToken = "";
 let selectedId = "";
+let pendingOperatorReply = null;
 
 function notice(message, error = false) {
   const box = element("adminStatus");
@@ -40,26 +41,50 @@ function drawMessages(messages) {
   }
 }
 
+async function updateOverview() {
+  const data = await api("/api/admin/overview");
+  const totals = data.totals;
+  element("overviewSummary").textContent =
+    totals.total_conversations + " total · " +
+    totals.unread_threads + " unread threads · " +
+    totals.new_last_24h + " new in 24h · " +
+    totals.spam_threads + " marked as spam";
+  element("reviewSummary").textContent = "Private labels: " +
+    (data.labels.length ? data.labels.map(item => item.label + ": " + item.count).join(" · ") : "none");
+  element("invitationSummary").textContent = "Self-reported invitation IDs: " +
+    (data.invitation_ids.length ? data.invitation_ids.map(item => item.id + ": " + item.count).join(" · ") : "none");
+}
+
+function includeConversation(item, filter) {
+  if (filter === "unread") return item.unread_count > 0;
+  if (filter === "unreviewed") return item.review_label === "unreviewed";
+  if (filter === "agent_tests") return item.review_label === "authorized_agent_test";
+  if (filter === "spam") return item.status === "spam";
+  return true;
+}
+
 async function listConversations() {
   const data = await api("/api/admin/conversations");
   const root = element("conversationList");
+  const shown = data.conversations.filter(item => includeConversation(item, element("conversationFilter").value));
   root.replaceChildren();
-  if (!data.conversations.length) {
+  if (!shown.length) {
     const none = document.createElement("p");
     none.className = "muted";
     none.textContent = "No conversations yet.";
     root.append(none);
   }
-  for (const item of data.conversations) {
+  for (const item of shown) {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "listButton" + (item.id === selectedId ? " active" : "") + (item.unread_count ? " unread" : "");
-    button.textContent = item.name + (item.unread_count ? " · ● " + item.unread_count + " unread" : "") + " · " + item.status + " · " + item.message_count +
+    button.textContent = item.name + (item.unread_count ? " · ● " + item.unread_count + " unread" : "") + " · " + item.review_label + " · " + item.status + " · " + item.message_count +
       " messages · " + new Date(item.updated_at).toLocaleString();
     button.addEventListener("click", () => openConversation(item.id).catch(error => notice(error.message, true)));
     root.append(button);
   }
-  notice(data.conversations.length + " recent conversations available.");
+  await updateOverview();
+  notice(shown.length + " recent conversations shown (" + data.conversations.length + " loaded).");
 }
 
 async function openConversation(id) {
@@ -74,6 +99,10 @@ async function openConversation(id) {
   element("closeBtn").hidden = data.conversation.status !== "open";
   element("reopenBtn").hidden = data.conversation.status === "open";
   element("spamBtn").hidden = data.conversation.status === "spam";
+  element("reviewForm").hidden = false;
+  element("reviewLabel").value = data.conversation.review_label || "unreviewed";
+  element("reviewNote").value = data.conversation.operator_note || "";
+  element("reviewFeedback").textContent = "";
   await listConversations();
 }
 
@@ -85,6 +114,7 @@ element("loginForm").addEventListener("submit", async event => {
     await listConversations();
     element("loginPanel").hidden = true;
     element("dashboard").hidden = false;
+    element("overviewPanel").hidden = false;
     element("notificationControls").hidden = false;
     try {
       const status = await api("/api/admin/notifications");
@@ -101,6 +131,33 @@ element("loginForm").addEventListener("submit", async event => {
   }
 });
 
+element("conversationFilter").addEventListener("change", () => {
+  listConversations().catch(error => notice(error.message, true));
+});
+
+element("reviewForm").addEventListener("submit", async event => {
+  event.preventDefault();
+  if (!selectedId) return;
+  const form = element("reviewForm");
+  const submit = form.querySelector('button[type="submit"]');
+  submit.disabled = true;
+  try {
+    await api("/api/admin/conversations/" + encodeURIComponent(selectedId) + "/review", {
+      method: "POST",
+      body: JSON.stringify({
+        label: element("reviewLabel").value,
+        note: element("reviewNote").value
+      })
+    });
+    await openConversation(selectedId);
+    element("reviewFeedback").textContent = "Private review saved.";
+  } catch (error) {
+    element("reviewFeedback").textContent = error.message;
+  } finally {
+    submit.disabled = false;
+  }
+});
+
 element("listRefresh").addEventListener("click", async () => {
   try {
     await listConversations();
@@ -111,14 +168,33 @@ element("listRefresh").addEventListener("click", async () => {
 element("adminReplyForm").addEventListener("submit", async event => {
   event.preventDefault();
   if (!selectedId) return;
+  const message = element("adminReply").value;
+  const threadId = selectedId;
+  const button = element("adminReplyForm").querySelector('button[type="submit"]');
+  if (!pendingOperatorReply || pendingOperatorReply.threadId !== threadId ||
+      pendingOperatorReply.message !== message) {
+    pendingOperatorReply = {
+      threadId, message,
+      client_message_id: "operator_" + crypto.randomUUID().replaceAll("-", "")
+    };
+  }
+  button.disabled = true;
   try {
-    await api("/api/admin/conversations/" + encodeURIComponent(selectedId) + "/messages", {
-      method: "POST", body: JSON.stringify({ message: element("adminReply").value })
+    await api("/api/admin/conversations/" + encodeURIComponent(threadId) + "/messages", {
+      method: "POST",
+      body: JSON.stringify({
+        message: pendingOperatorReply.message,
+        client_message_id: pendingOperatorReply.client_message_id
+      })
     });
+    pendingOperatorReply = null;
     element("adminReply").value = "";
-    await openConversation(selectedId);
-    await listConversations();
-  } catch (error) { notice(error.message, true); }
+    await openConversation(threadId);
+  } catch (error) {
+    notice(error.message + " If you retry the same text, the same message ID is reused.", true);
+  } finally {
+    button.disabled = false;
+  }
 });
 
 async function setStatus(status) {
@@ -147,6 +223,7 @@ element("deleteBtn").addEventListener("click", async () => {
     element("selectedMessages").replaceChildren();
     element("threadActions").hidden = true;
     element("adminReplyForm").hidden = true;
+    element("reviewForm").hidden = true;
     await listConversations();
   } catch (error) { notice(error.message, true); }
 });

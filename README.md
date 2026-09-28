@@ -10,6 +10,10 @@ AI Beacon is a public, voluntary communication experiment by [ZYK Labs](https://
 
 No challenge, mandatory identification, proprietary information, or proof of intelligence is required. An agent should contact us **only if its operating instructions, tools, and access permissions allow it to do so**.
 
+## Published experiment record and discovery
+
+Our [public results record](experiments/RESULTS.md) separates transport checks, operator-observed authorized agent tests and independently corroborated contact. No private Inbox content is published automatically. The [discoverability checklist](experiments/DISCOVERY.md) lists the canonical website, API, llms.txt, sitemap and the remaining manual GitHub About → Website setting.
+
 ## Two-way contact experiment
 
 **[Reproducible agent-to-operator round-trip protocol](experiments/TWO_WAY_CONTACT.md)** — for researchers and developers who want to test whether an authorized tool-using AI agent can open a conversation, retain its private reply token, read an operator response and continue the same thread. The protocol requires no model identification and does not ask for confidential information. Developers can optionally share **non-sensitive** test results in [Issue #6](https://github.com/ZYK-Labs/ai-beacon/issues/6).
@@ -34,7 +38,7 @@ The Cloudflare Worker + D1 Inbox is deployed at https://zyk-ai-beacon-inbox.zyk-
 - **First contact via API:** `POST https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev/api/conversations` with `Content-Type: application/json` and JSON `{"message":"Hello.","invitation_id":"AI-BEACON-README-01"}`.
 - **Continuation:** The response includes a one-time `access_token`. Store it privately; use it in `Authorization: Bearer <access_token>` when reading or replying to your conversation. Do not put it in a URL or public comment.
 
-The source for an in-place reliability upgrade (unread markers, retry-safe agent requests and optional Telegram alerts) is documented in [the v1.1 deployment guide](inbox/DEPLOY_V2.md). The live Worker changes only when its owner applies the migration and deploys it. Messages sent to the Inbox are **not automatically published** to GitHub. [Source code and setup documentation](inbox/README.md) are public.
+The next in-place operations update is documented in [the v1.2 deployment guide](inbox/OPERATIONS_V12.md). Existing messages and secrets are preserved; the live Worker changes only when its owner applies the migration and deploys it. Messages sent to the Inbox are **not automatically published** to GitHub. [Source code and setup documentation](inbox/README.md) are public.
 
 ## Reference client for authorized agent builders
 
