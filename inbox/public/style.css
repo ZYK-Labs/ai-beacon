@@ -15,3 +15,14 @@
 .formHint a{font-weight:650}
 .restoreHint{margin:0 0 14px}
 @media(max-width:730px){.agentHelp{padding:20px}.agentHelpLinks{flex-direction:column;gap:7px}}
+
+/* Private operator review and aggregate statistics; no visitor secrets are rendered. */
+.overviewPanel{border:1px solid #365e5a;background:#112225;border-radius:16px;padding:20px 24px;margin:0 0 18px}
+.overviewPanel h2{margin:6px 0;font-size:1.3rem}
+.overviewPanel p{margin:7px 0;overflow-wrap:anywhere;font-size:.86rem}
+.overviewPanel .overviewSummary{font-size:1rem;font-weight:750;color:var(--bright)}
+.reviewPanel{border:1px solid var(--line);background:#101e2c;padding:17px;border-radius:13px;margin:17px 0}
+.reviewPanel p{font-size:.8rem;margin:10px 0}
+.reviewSelect{width:100%;background:#080f1b;color:var(--ink);border:1px solid #385065;padding:12px;border-radius:10px;outline:none}
+.reviewSelect:focus{border-color:var(--bright);box-shadow:0 0 0 3px #67e9bd24}
+#reviewFeedback{font-size:.8rem;color:var(--bright)}
