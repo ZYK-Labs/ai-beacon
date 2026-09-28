@@ -28,6 +28,35 @@ async function waitForReady() {
 
 await waitForReady();
 assert.equal((await call("/api/agent-guide")).status, 200);
+assert.equal((await call("/api/health")).body.version, "1.1");
+assert.equal((await call("/api/admin/notifications", "GET", null, adminToken)).body.configured, false);
+assert.equal((await call("/api/admin/notifications/test", "POST", null, adminToken)).status, 503);
+
+// Client-held tokens make a timed-out initial POST safe to retry.
+const clientToken = "f".repeat(64);
+const retryBody = {
+  name: "Retry-safe agent",
+  message: "Only one initial message should be stored.",
+  client_access_token: clientToken
+};
+const first = await call("/api/conversations", "POST", retryBody);
+assert.equal(first.status, 201);
+assert.equal(first.body.access_token, clientToken);
+const repeated = await call("/api/conversations", "POST", retryBody);
+assert.equal(repeated.status, 200);
+assert.equal(repeated.body.duplicate, true);
+assert.equal(repeated.body.conversation_id, first.body.conversation_id);
+assert.equal((await call("/api/conversations", "POST", { ...retryBody, message: "Changed content." })).status, 409);
+const retriedThread = await call("/api/conversations/" + first.body.conversation_id, "GET", null, clientToken);
+assert.equal(retriedThread.body.messages.length, 1);
+
+// Optional message IDs make follow-up retries safe as well.
+const retryPath = "/api/conversations/" + first.body.conversation_id + "/messages";
+const retryReply = { message: "Exactly once.", client_message_id: "retry_message_001" };
+assert.equal((await call(retryPath, "POST", retryReply, clientToken)).status, 201);
+assert.equal((await call(retryPath, "POST", retryReply, clientToken)).status, 200);
+assert.equal((await call(retryPath, "POST", { ...retryReply, message: "Conflicting content." }, clientToken)).status, 409);
+assert.equal((await call("/api/conversations/" + first.body.conversation_id, "GET", null, clientToken)).body.messages.length, 2);
 
 const created = await call("/api/conversations", "POST", {
   name: "Test agent",
@@ -51,6 +80,12 @@ assert.equal((await call("/api/admin/conversations", "GET", null, "bad")).status
 const list = await call("/api/admin/conversations", "GET", null, adminToken);
 assert.equal(list.status, 200);
 assert.ok(list.body.conversations.some(item => item.id === id));
+const unread = list.body.conversations.find(item => item.id === id);
+assert.equal(unread.unread_count, 2);
+const readByOperator = await call("/api/admin/conversations/" + id, "GET", null, adminToken);
+assert.equal(readByOperator.status, 200);
+const afterRead = await call("/api/admin/conversations", "GET", null, adminToken);
+assert.equal(afterRead.body.conversations.find(item => item.id === id).unread_count, 0);
 
 const adminReply = await call("/api/admin/conversations/" + id + "/messages", "POST", {
   message: "Hello from ZYK Labs."
@@ -66,4 +101,5 @@ assert.equal((await call("/api/admin/conversations/" + id + "/status", "POST", {
 assert.equal((await call(path + "/messages", "POST", { message: "Should fail." }, token)).status, 409);
 assert.equal((await call("/api/admin/conversations/" + id, "DELETE", null, adminToken)).status, 200);
 assert.equal((await call(path, "GET", null, token)).status, 404);
-console.log("Integration smoke test passed: create, private access, reply, admin, close, delete.");
+assert.equal((await call("/api/admin/conversations/" + first.body.conversation_id, "DELETE", null, adminToken)).status, 200);
+console.log("Integration smoke test passed: health, safe retries, private access, unread tracking, admin notifications, reply, close and delete.");
