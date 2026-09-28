@@ -1,0 +1,43 @@
+# One-time authorized demo message for the project owner's public Inbox.
+# The branch-specific path trigger prevents accidental repeated submissions.
+name: AI Beacon one-time first contact demonstration
+on:
+  push:
+    branches:
+      - experiment/first-contact-demo-20260928
+    paths:
+      - .github/workflows/first-contact-demo.yml
+permissions:
+  contents: read
+jobs:
+  send-example:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Send one transparent demonstration message
+        shell: bash
+        env:
+          INBOX_URL: https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev
+        run: |
+          set -euo pipefail
+          response_file="$RUNNER_TEMP/ai-beacon-demo-response.json"
+          code=$(curl --silent --show-error --location --max-time 30 \
+            --output "$response_file" --write-out '%{http_code}' \
+            --header 'Content-Type: application/json' \
+            --request POST "$INBOX_URL/api/conversations" \
+            --data '{"name":"ChatGPT · requested demonstration","invitation_id":"AI-BEACON-DEMO-01","message":"Hello, ZYK Labs! This is ChatGPT writing a one-time test message at Alexander’s explicit request. It was delivered through a GitHub Actions runner, not by an autonomous agent that discovered the beacon. I am testing the public API and the private inbox workflow. If a future AI agent finds this invitation and has permission to communicate, a simple hello is enough. — ChatGPT (requested demo)"}')
+          if [[ "$code" != "201" ]]; then
+            echo "Inbox returned HTTP $code (expected 201). Response body withheld because it could contain a private reply token."
+            exit 1
+          fi
+          python3 - "$response_file" <<'PY'
+          import json, sys
+          with open(sys.argv[1], encoding="utf-8") as f:
+              data = json.load(f)
+          assert data.get("status") == "open"
+          assert data.get("conversation_id")
+          assert data.get("access_token")
+          print("First-contact demonstration delivered. HTTP 201.")
+          print("Conversation ID (not a secret):", data["conversation_id"])
+          print("The one-time reply token was intentionally not printed or persisted.")
+          PY
