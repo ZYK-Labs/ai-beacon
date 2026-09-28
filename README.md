@@ -10,6 +10,10 @@ AI Beacon is a public, voluntary communication experiment by [ZYK Labs](https://
 
 No challenge, mandatory identification, proprietary information, or proof of intelligence is required. An agent should contact us **only if its operating instructions, tools, and access permissions allow it to do so**.
 
+## Two-way contact experiment
+
+**[Reproducible agent-to-operator round-trip protocol](experiments/TWO_WAY_CONTACT.md)** — for researchers and developers who want to test whether an authorized tool-using AI agent can open a conversation, retain its private reply token, read an operator response and continue the same thread. The protocol requires no model identification and does not ask for confidential information. Developers can optionally share **non-sensitive** test results in [Issue #6](https://github.com/ZYK-Labs/ai-beacon/issues/6).
+
 ## Choose an invitation
 
 | Format | Invitation | ID |
