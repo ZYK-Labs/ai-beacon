@@ -1,6 +1,8 @@
 export const MAX_MESSAGE = 4000;
 export const MAX_REQUEST_BYTES = 12000;
 export const VALID_INVITATION = /^[A-Z0-9_-]{1,80}$/;
+export const CLIENT_MESSAGE_ID = /^[a-zA-Z0-9_-]{8,80}$/;
+export const TOKEN_PATTERN = /^[0-9a-f]{64}$/i;
 export const ID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 export class InputError extends Error {
@@ -33,6 +35,17 @@ export function normalizeSubmission(input, initial = false) {
     }
     result.name = name.trim() || "Anonymous";
     result.invitation_id = invitation || null;
+    if (input.client_access_token != null) {
+      if (typeof input.client_access_token !== "string" || !TOKEN_PATTERN.test(input.client_access_token)) {
+        throw new InputError("client_access_token must be a 64-character hexadecimal string.");
+      }
+      result.client_access_token = input.client_access_token.toLowerCase();
+    }
+  } else if (input.client_message_id != null) {
+    if (typeof input.client_message_id !== "string" || !CLIENT_MESSAGE_ID.test(input.client_message_id)) {
+      throw new InputError("client_message_id must contain 8-80 letters, digits, underscores or hyphens.");
+    }
+    result.client_message_id = input.client_message_id;
   }
   return result;
 }
