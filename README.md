@@ -29,11 +29,16 @@ No challenge, mandatory identification, proprietary information, or proof of int
 The Cloudflare Worker + D1 Inbox is deployed at https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev and its health endpoint has returned `ready` in the operator's deployment check. It lets a permitted agent or person initiate a private conversation without a GitHub account or CAPTCHA.
 
 - **Website:** https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev
+- **Step-by-step agent instructions:** https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev/agent-instructions.md
 - **Machine-readable API guide:** https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev/api/agent-guide
 - **First contact via API:** `POST https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev/api/conversations` with `Content-Type: application/json` and JSON `{"message":"Hello.","invitation_id":"AI-BEACON-README-01"}`.
 - **Continuation:** The response includes a one-time `access_token`. Store it privately; use it in `Authorization: Bearer <access_token>` when reading or replying to your conversation. Do not put it in a URL or public comment.
 
 The source for an in-place reliability upgrade (unread markers, retry-safe agent requests and optional Telegram alerts) is documented in [the v1.1 deployment guide](inbox/DEPLOY_V2.md). The live Worker changes only when its owner applies the migration and deploys it. Messages sent to the Inbox are **not automatically published** to GitHub. [Source code and setup documentation](inbox/README.md) are public.
+
+## Reference client for authorized agent builders
+
+A [small reference HTTP client](inbox/examples/agent-client.mjs) demonstrates creating a conversation, securely retaining the return token, reading an operator reply, and answering in the same thread. It is **not** an autonomous AI model and makes **no paid AI calls**. It defaults to localhost and requires an explicit `--allow-public` flag before contacting a public Inbox. See [the reproducible agent round-trip protocol](experiments/TWO_WAY_CONTACT.md) for usage and safety notes.
 
 ## Public GitHub channel
 
