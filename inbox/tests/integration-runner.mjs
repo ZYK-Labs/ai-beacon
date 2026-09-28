@@ -28,7 +28,13 @@ async function waitForReady() {
 
 await waitForReady();
 assert.equal((await call("/api/agent-guide")).status, 200);
-assert.equal((await call("/api/health")).body.version, "1.1");
+assert.equal((await call("/api/health")).body.version, "1.2");
+assert.equal((await call("/api/admin/overview")).status, 401);
+assert.equal((await call("/api/admin/review-labels")).status, 401);
+assert.equal((await call("/api/admin/review-labels", "GET", null, adminToken)).body.labels.includes("independent_contact_claim"), true);
+const initialOverview = await call("/api/admin/overview", "GET", null, adminToken);
+assert.equal(initialOverview.status, 200);
+assert.ok(initialOverview.body.totals.total_conversations >= 1);
 assert.equal((await call("/api/admin/notifications", "GET", null, adminToken)).body.configured, false);
 assert.equal((await call("/api/admin/notifications/test", "POST", null, adminToken)).status, 503);
 
@@ -63,6 +69,10 @@ const legacy = legacyList.body.conversations.find(item => item.id === "00000000-
 assert.equal(legacy.name, "Legacy thread");
 assert.equal(legacy.unread_count, 1);
 assert.equal(legacy.message_count, 1);
+assert.equal(legacy.review_label, "unreviewed");
+const legacyThread = await call("/api/admin/conversations/" + legacy.id, "GET", null, adminToken);
+assert.equal(legacyThread.body.conversation.review_label, "unreviewed");
+assert.equal(legacyThread.body.conversation.operator_note, "");
 
 const created = await call("/api/conversations", "POST", {
   name: "Test agent",
@@ -93,6 +103,31 @@ assert.equal(readByOperator.status, 200);
 const afterRead = await call("/api/admin/conversations", "GET", null, adminToken);
 assert.equal(afterRead.body.conversations.find(item => item.id === id).unread_count, 0);
 
+// Operator labels are private, evidence-limited and never returned to the visitor.
+const invalidReview = await call("/api/admin/conversations/" + id + "/review", "POST", {
+  label: "verified_openai_internal_model", note: ""
+}, adminToken);
+assert.equal(invalidReview.status, 400);
+const tooLongReview = await call("/api/admin/conversations/" + id + "/review", "POST", {
+  label: "authorized_agent_test", note: "x".repeat(501)
+}, adminToken);
+assert.equal(tooLongReview.status, 400);
+assert.equal((await call("/api/admin/conversations/" + id + "/review", "POST", {
+  label: "authorized_agent_test", note: "Reproduced same-thread authorized test; no model provenance verified."
+})).status, 401);
+const savedReview = await call("/api/admin/conversations/" + id + "/review", "POST", {
+  label: "authorized_agent_test", note: "Reproduced same-thread authorized test; no model provenance verified."
+}, adminToken);
+assert.equal(savedReview.status, 200);
+const reviewedThread = await call("/api/admin/conversations/" + id, "GET", null, adminToken);
+assert.equal(reviewedThread.body.conversation.review_label, "authorized_agent_test");
+assert.match(reviewedThread.body.conversation.operator_note, /no model provenance/);
+const publicAfterReview = await call("/api/conversations/" + id, "GET", null, token);
+assert.equal(publicAfterReview.body.operator_note, undefined);
+assert.equal(publicAfterReview.body.review_label, undefined);
+assert.equal((await call("/api/admin/overview", "GET", null, adminToken)).body.labels
+  .some(entry => entry.label === "authorized_agent_test" && entry.count >= 1), true);
+
 const adminReply = await call("/api/admin/conversations/" + id + "/messages", "POST", {
   message: "Hello from ZYK Labs."
 }, adminToken);
@@ -108,4 +143,4 @@ assert.equal((await call(path + "/messages", "POST", { message: "Should fail." }
 assert.equal((await call("/api/admin/conversations/" + id, "DELETE", null, adminToken)).status, 200);
 assert.equal((await call(path, "GET", null, token)).status, 404);
 assert.equal((await call("/api/admin/conversations/" + first.body.conversation_id, "DELETE", null, adminToken)).status, 200);
-console.log("Integration smoke test passed: health, safe retries, private access, unread tracking, admin notifications, reply, close and delete.");
+console.log("Integration smoke test passed: v1-to-v1.2 migration, private contact review, aggregate overview, safe retries, permissions, unread tracking, reply and delete.");
