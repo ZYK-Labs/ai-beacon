@@ -58,6 +58,12 @@ assert.equal((await call(retryPath, "POST", retryReply, clientToken)).status, 20
 assert.equal((await call(retryPath, "POST", { ...retryReply, message: "Conflicting content." }, clientToken)).status, 409);
 assert.equal((await call("/api/conversations/" + first.body.conversation_id, "GET", null, clientToken)).body.messages.length, 2);
 
+const legacyList = await call("/api/admin/conversations", "GET", null, adminToken);
+const legacy = legacyList.body.conversations.find(item => item.id === "00000000-0000-4000-8000-000000000001");
+assert.equal(legacy.name, "Legacy thread");
+assert.equal(legacy.unread_count, 1);
+assert.equal(legacy.message_count, 1);
+
 const created = await call("/api/conversations", "POST", {
   name: "Test agent",
   invitation_id: "AI-BEACON-MD-01",
