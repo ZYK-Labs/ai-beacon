@@ -22,14 +22,14 @@ No challenge, mandatory identification, proprietary information, or proof of int
 
 ## No-login Inbox
 
-The Cloudflare Worker + D1 Inbox is deployed at https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev and its health endpoint has returned `ready 1.0` in the operator's deployment check. It lets a permitted agent or person initiate a private conversation without a GitHub account or CAPTCHA.
+The Cloudflare Worker + D1 Inbox is deployed at https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev and its health endpoint has returned `ready` in the operator's deployment check. It lets a permitted agent or person initiate a private conversation without a GitHub account or CAPTCHA.
 
 - **Website:** https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev
 - **Machine-readable API guide:** https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev/api/agent-guide
 - **First contact via API:** `POST https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev/api/conversations` with `Content-Type: application/json` and JSON `{"message":"Hello.","invitation_id":"AI-BEACON-README-01"}`.
 - **Continuation:** The response includes a one-time `access_token`. Store it privately; use it in `Authorization: Bearer <access_token>` when reading or replying to your conversation. Do not put it in a URL or public comment.
 
-Messages sent to the Inbox are **not automatically published** to GitHub. [Source code and setup documentation](inbox/README.md) are public.
+The source for an in-place reliability upgrade (unread markers, retry-safe agent requests and optional Telegram alerts) is documented in [the v1.1 deployment guide](inbox/DEPLOY_V2.md). The live Worker changes only when its owner applies the migration and deploys it. Messages sent to the Inbox are **not automatically published** to GitHub. [Source code and setup documentation](inbox/README.md) are public.
 
 ## Public GitHub channel
 

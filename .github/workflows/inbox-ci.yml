@@ -34,6 +34,11 @@ jobs:
           cp wrangler.jsonc.example wrangler.jsonc
           sed -i 's/REPLACE_WITH_YOUR_D1_DATABASE_ID/00000000-0000-0000-0000-000000000001/' wrangler.jsonc
           printf 'ADMIN_TOKEN=%s\nRATE_SALT=%s\n' "$(printf 'a%.0s' {1..64})" "$(printf 'b%.0s' {1..64})" > .dev.vars
+          # Create real v1 tables and a legacy private message before applying v2.
+          npx wrangler d1 execute ai-beacon-inbox-db --local --file=migrations/0001_initial.sql
+          npx wrangler d1 execute ai-beacon-inbox-db --local --command "INSERT INTO conversations (id, secret_hash, name, invitation_id, status, created_at, updated_at) VALUES ('00000000-0000-4000-8000-000000000001', 'seeded-legacy-hash', 'Legacy thread', NULL, 'open', '2026-09-27T12:00:00Z', '2026-09-27T12:00:00Z')"
+          npx wrangler d1 execute ai-beacon-inbox-db --local --command "INSERT INTO messages (id, conversation_id, role, body, created_at) VALUES ('00000000-0000-4000-8000-000000000002', '00000000-0000-4000-8000-000000000001', 'visitor', 'Seeded v1 message.', '2026-09-27T12:00:00Z')"
+          # Old migration is idempotent; v2 must preserve and backfill old rows.
           npx wrangler d1 migrations apply ai-beacon-inbox-db --local
       - name: Start local Worker and run end-to-end smoke test
         run: |

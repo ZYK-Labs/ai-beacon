@@ -53,8 +53,8 @@ async function listConversations() {
   for (const item of data.conversations) {
     const button = document.createElement("button");
     button.type = "button";
-    button.className = "listButton" + (item.id === selectedId ? " active" : "");
-    button.textContent = item.name + " · " + item.status + " · " + item.message_count +
+    button.className = "listButton" + (item.id === selectedId ? " active" : "") + (item.unread_count ? " unread" : "");
+    button.textContent = item.name + (item.unread_count ? " · ● " + item.unread_count + " unread" : "") + " · " + item.status + " · " + item.message_count +
       " messages · " + new Date(item.updated_at).toLocaleString();
     button.addEventListener("click", () => openConversation(item.id).catch(error => notice(error.message, true)));
     root.append(button);
@@ -74,6 +74,7 @@ async function openConversation(id) {
   element("closeBtn").hidden = data.conversation.status !== "open";
   element("reopenBtn").hidden = data.conversation.status === "open";
   element("spamBtn").hidden = data.conversation.status === "spam";
+  await listConversations();
 }
 
 element("loginForm").addEventListener("submit", async event => {
@@ -84,6 +85,16 @@ element("loginForm").addEventListener("submit", async event => {
     await listConversations();
     element("loginPanel").hidden = true;
     element("dashboard").hidden = false;
+    element("notificationControls").hidden = false;
+    try {
+      const status = await api("/api/admin/notifications");
+      element("notificationStatus").textContent = status.configured
+        ? "Telegram notifications are configured." : "Telegram is not configured. Inbox still receives messages.";
+      element("testNotificationBtn").disabled = !status.configured;
+    } catch {
+      element("notificationStatus").textContent = "Cannot check notification settings.";
+      element("testNotificationBtn").disabled = true;
+    }
   } catch (error) {
     adminToken = "";
     notice(error.message, true);
@@ -138,4 +149,18 @@ element("deleteBtn").addEventListener("click", async () => {
     element("adminReplyForm").hidden = true;
     await listConversations();
   } catch (error) { notice(error.message, true); }
+});
+
+element("testNotificationBtn").addEventListener("click", async () => {
+  const button = element("testNotificationBtn");
+  button.disabled = true;
+  try {
+    const result = await api("/api/admin/notifications/test", { method: "POST" });
+    element("notificationStatus").textContent = result.sent
+      ? "Test sent. Check your Telegram chat." : "Telegram test was not delivered.";
+  } catch (error) {
+    element("notificationStatus").textContent = "Telegram test failed: " + error.message;
+  } finally {
+    button.disabled = false;
+  }
 });

@@ -30,3 +30,14 @@ test("authorization token is only read from bearer header", () => {
   assert.equal(bearer(request), "123abc");
   assert.equal(bearer(new Request("https://example.test/")), null);
 });
+
+
+test("optional client-held tokens and idempotent message IDs are validated", () => {
+  const first = normalizeSubmission({
+    message: "Hello", client_access_token: "F".repeat(64)
+  }, true);
+  assert.equal(first.client_access_token, "f".repeat(64));
+  assert.throws(() => normalizeSubmission({ message: "Hello", client_access_token: "weak" }, true), /client_access_token/);
+  assert.equal(normalizeSubmission({ message: "Hello again", client_message_id: "message_00001" }).client_message_id, "message_00001");
+  assert.throws(() => normalizeSubmission({ message: "Hello again", client_message_id: "../bad" }), /client_message_id/);
+});

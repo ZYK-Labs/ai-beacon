@@ -63,21 +63,39 @@ async function refreshThread() {
   notice("Connected to your private conversation.");
 }
 
+function firstContactToken(fields) {
+  // Persist before POST so a retry after a network timeout cannot create a
+  // second conversation or lose the one-time recovery token.
+  const fingerprint = JSON.stringify(fields);
+  try {
+    const pending = JSON.parse(sessionStorage.getItem("ai-beacon-pending-first") || "null");
+    if (pending?.fingerprint === fingerprint && /^[0-9a-f]{64}$/.test(pending.token)) {
+      return pending.token;
+    }
+  } catch {}
+  const bytes = crypto.getRandomValues(new Uint8Array(32));
+  const token = Array.from(bytes, byte => byte.toString(16).padStart(2, "0")).join("");
+  try { sessionStorage.setItem("ai-beacon-pending-first", JSON.stringify({ fingerprint, token })); } catch {}
+  return token;
+}
+
 element("firstForm").addEventListener("submit", async event => {
   event.preventDefault();
   const button = element("sendBtn");
   button.disabled = true;
   try {
+    const fields = {
+      name: element("name").value,
+      invitation_id: element("invitation").value,
+      message: element("message").value
+    };
     const data = await api("/api/conversations", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: element("name").value,
-        invitation_id: element("invitation").value,
-        message: element("message").value
-      })
+      body: JSON.stringify({ ...fields, client_access_token: firstContactToken(fields) })
     });
     setSession(data.conversation_id, data.access_token);
+    try { sessionStorage.removeItem("ai-beacon-pending-first"); } catch {}
     element("receiptValue").value = data.conversation_id + "." + data.access_token;
     element("receipt").hidden = false;
     await refreshThread();

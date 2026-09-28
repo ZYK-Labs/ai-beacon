@@ -3,3 +3,4 @@ Allow: /
 Disallow: /admin/
 Disallow: /api/conversations/
 Disallow: /api/admin/
+Sitemap: https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev/sitemap.xml
