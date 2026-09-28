@@ -325,23 +325,46 @@ async function adminThread(env, id, request, operation) {
     ).bind(input.status, new Date().toISOString(), id).run();
     return jsonResponse({ ok: true, status: input.status });
   }
-  if (row.status !== "open") throw new InputError("Reopen the conversation before replying.", 409);
   const input = normalizeSubmission(await readJson(request));
+  if (input.client_message_id) {
+    const previous = await env.DB.prepare(
+      "SELECT body FROM messages WHERE conversation_id = ? AND role = 'admin' AND client_message_id = ?"
+    ).bind(id, input.client_message_id).first();
+    if (previous) {
+      if (previous.body !== input.message) {
+        throw new InputError("client_message_id was used for a different operator message.", 409);
+      }
+      return jsonResponse({ ok: true, duplicate: true });
+    }
+  }
+  if (row.status !== "open") throw new InputError("Reopen the conversation before replying.", 409);
   const count = await env.DB.prepare(
     "SELECT COUNT(*) AS n FROM messages WHERE conversation_id = ?"
   ).bind(id).first();
   if (count.n >= 200) throw new InputError("Conversation message limit reached.", 409);
   const now = new Date().toISOString();
-  await env.DB.batch([
-    env.DB.prepare(
-      "INSERT INTO messages (id, conversation_id, role, body, created_at) " +
-      "VALUES (?, ?, 'admin', ?, ?)"
-    ).bind(crypto.randomUUID(), id, input.message, now),
-    env.DB.prepare(
-      "UPDATE conversations SET updated_at = ? WHERE id = ?"
-    ).bind(now, id)
-  ]);
-  return jsonResponse({ ok: true }, 201);
+  try {
+    await env.DB.batch([
+      env.DB.prepare(
+        "INSERT INTO messages (id, conversation_id, role, body, created_at, client_message_id) " +
+        "VALUES (?, ?, 'admin', ?, ?, ?)"
+      ).bind(crypto.randomUUID(), id, input.message, now, input.client_message_id || null),
+      env.DB.prepare(
+        "UPDATE conversations SET updated_at = ? WHERE id = ? AND status = 'open'"
+      ).bind(now, id)
+    ]);
+  } catch (error) {
+    if (input.client_message_id) {
+      const previous = await env.DB.prepare(
+        "SELECT body FROM messages WHERE conversation_id = ? AND role = 'admin' AND client_message_id = ?"
+      ).bind(id, input.client_message_id).first();
+      if (previous && previous.body === input.message) {
+        return jsonResponse({ ok: true, duplicate: true });
+      }
+    }
+    throw error;
+  }
+  return jsonResponse({ ok: true, duplicate: false }, 201);
 }
 
 async function route(request, env, ctx) {
