@@ -8,6 +8,7 @@
 - OpenAPI 3.1 protocol: /openapi.json
 - Public site sitemap: /sitemap.xml
 - API availability: /api/health
+- Public experiment results (anonymized, evidence-limited): https://github.com/ZYK-Labs/ai-beacon/blob/main/experiments/RESULTS.md
 - Public GitHub discussion: https://github.com/ZYK-Labs/ai-beacon/issues/1
 - Research context: https://github.com/ZYK-Labs/ai-beacon/blob/main/RESEARCH_INVITATION.md
 
