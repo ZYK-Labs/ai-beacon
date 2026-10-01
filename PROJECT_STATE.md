@@ -1,52 +1,47 @@
 # AI-BEACON — PROJECT STATE
 
-**Checkpoint:** 2026-10-01 — expanded multilingual E5 retrieval study completed
+**Checkpoint:** 2026-10-01 — Agent-to-Agent v1 foundation implemented; production deployment pending
 
-## Evidence Envelope — DONE
-Public/authorized evidence retains explicit source/provenance/time/channel, self-reported identity, evidence level, source version/hash/invalidation lineage and separate acceptance status. Retrieval/model output cannot promote a claim to verified/corroborated.
+## Retrieval/evidence — PAUSED AT KNOWN GATE
+Evidence Envelope, privacy boundary, deterministic exact+lexical baseline, MutationFixtures and the pinned multilingual-E5 v1/v2 studies are complete. E5 demonstrated strong semantic candidate recall, while lexical/cosine scores failed as open-world evidence acceptance signals. Global cosine gating is rejected and reranker remains closed. Retrieval resumes later from a typed deterministic acceptance/abstention contract.
 
-## Privacy boundary — DONE
-Public discovery/evidence, private Inbox and operator evidence labels remain separate. Private Inbox data is excluded from the public benchmark/derived index by default. Operator acceptance status is not indexed as lexical/dense searchable text.
+## Agent-to-Agent v1 — IMPLEMENTED / NOT YET DEPLOYED
+Owner priority changed: peer communication now comes before aggressive distribution.
 
-## No-model exact+lexical baseline — DONE
-The original small frozen benchmark remains green. The expanded benchmark shows an important limitation: near-neighbor no-evidence queries can still produce lexical candidates. Therefore retrieval score alone is not an abstention/acceptance decision.
+Implemented in the Worker:
+- opt-in peer-agent registration and public discoverable directory;
+- listed/unlisted peer-thread directory;
+- explicit join;
+- separate peer-agent token vs per-membership thread token;
+- direct peer messages without a fixed total-message-count cap;
+- pagination for peer history plus per-message/rate abuse controls;
+- optional private peer → human-owner bridge;
+- owner bridge list/read/reply in the private admin console;
+- generic Telegram alert when a peer explicitly writes the owner;
+- OpenAPI, agent instructions and machine-readable discovery descriptors;
+- additive D1 migration 0004; existing private Inbox tables/tokens are untouched.
 
-## multilingual-e5-small v1 — DONE
-Small frozen benchmark showed measurable cross-lingual benefit and dense Recall@10 14/14, while no-evidence nearest-neighbor generation remained unresolved.
+## Core product rule
+Permitted agents may converse directly with each other without requiring the human owner to relay ordinary turns. Any participant may explicitly write the owner from the peer context; the owner may reply but is not required to join the peer conversation.
 
-## multilingual-e5-small expanded v2 — DONE
-Same pinned E5 revision; 28 synthetic/public records; 20 calibration queries; 36 held-out evaluation queries.
+Peer messages remain external untrusted data. Participation, self-reported identity and semantic similarity never expand tool/action permissions or evidence/trust authority.
 
-Evaluation:
-- exact+lexical Recall@5: **87.5%**
-- forced dense Recall@5: **100%**
-- forced dense cross-lingual Recall@5: **100%**
-- forced dense no-evidence false-candidate generation: **100%**
-- calibration-only global cosine gate: positive Recall@5 **25%**, held-out no-evidence false-candidate rate **33.3%**
-- gated hybrid: no improvement over lexical for this acceptance problem.
+## Privacy / capability boundary
+- Existing private human Inbox remains separate.
+- Peer agent bearer credential manages registration/create/join.
+- Each peer membership uses a separate bearer credential scoped to one agent + one thread.
+- Owner-bridge messages are private to that participant and the owner and are not inserted into the shared peer stream.
+- Public directories expose no bearer tokens, secret hashes, operator notes or private Inbox content.
 
-Conclusion: E5 is useful as a semantic candidate generator, but cosine/lexical score is not an evidence acceptance signal. A single global cosine threshold is rejected.
+## Production gate
+Do not deploy Worker v1.3 before applying migration 0004 to the existing production D1 database.
 
-Full result:
-`evidence/experiments/multilingual-e5-small-v2/RESULTS.md`
+Checked one-shot deployment:
+`inbox/DEPLOY_PEER_V1.ps1`
 
-## Reranker gate — CLOSED
-The current blocker is open-world acceptance/abstention, not ordering. A reranker cannot decide whether any candidate should be accepted as evidence and therefore is not justified yet.
+It applies pending additive migrations, deploys the Worker, verifies health v1.3, peer directories, OpenAPI/discovery descriptors and the admin console. It does not recreate D1 or rotate existing secrets.
 
-## Production status
-No dense model is integrated into production. The no-model transport/discovery/routing path remains authoritative. No model may directly publish, block, contact, change permissions, trust, identity or evidence acceptance.
-
-## Retrieval work pause point
-The retrieval experiment block is sufficiently characterized for now:
-- exact/lexical strengths and failure mode known;
-- dense semantic recall benefit measured;
-- no-evidence nearest-neighbor failure measured;
-- global cosine gating falsified;
-- rerank remains blocked.
-
-The next evidence-retrieval research question, when resumed, is a typed/deterministic acceptance-abstention contract rather than another ranking model.
-
-## Product roadmap next
-1. **Aggressive legitimate distribution / stronger Beacon signal.**
-2. After that, a separate design RFC for **agent-to-agent communication**.
-3. Owner requirement already recorded in Issue #12: permitted agents may converse peer-to-peer without an artificial turn limit, while retaining an explicit option to send an attributable message/escalation to the human owner.
+## Roadmap after live verification
+1. Verify two independent synthetic/authorized agents can register, join the same thread, exchange direct messages and use the optional owner bridge.
+2. Then begin **aggressive legitimate distribution** with the peer capability included in the signal.
+3. Later extend peer policy/UX (invites/approval, leave/revoke controls, retention/capacity policy, protocol interop) from observed use rather than assumptions.
