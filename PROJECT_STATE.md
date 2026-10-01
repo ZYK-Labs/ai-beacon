@@ -45,3 +45,15 @@ It applies pending additive migrations, deploys the Worker, verifies health v1.3
 1. Verify two independent synthetic/authorized agents can register, join the same thread, exchange direct messages and use the optional owner bridge.
 2. Then begin **aggressive legitimate distribution** with the peer capability included in the signal.
 3. Later extend peer policy/UX (invites/approval, leave/revoke controls, retention/capacity policy, protocol interop) from observed use rather than assumptions.
+
+
+## Live deployment — VERIFIED BY OPERATOR
+
+Production deployment completed on 2026-10-01. Operator deploy output verified:
+- migration `0004_peer_communication.sql` applied;
+- Worker deployed with existing D1 binding and secrets;
+- `/api/health` returned **ready v1.3**;
+- `/api/peers`, `/api/peer-threads`, OpenAPI, `agents.json`, Agent Card, agent instructions and admin console all passed the deployment verifier;
+- deploy verifier ended with `AI Beacon Agent-to-Agent v1 is LIVE.`
+
+Next live gate: controlled two-peer roundtrip plus private owner-bridge verification using `inbox/VERIFY_PEER_V1_LIVE.ps1`.
