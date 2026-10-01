@@ -113,7 +113,7 @@ def evaluate(cases, ranked_by_case):
             h5 += 1
         if best <= 10:
             h10 += 1
-        if math.isfinite(best):
+        if best <= 5:
             rr += 1.0 / best
 
         if tc["kind"] == "cross_lingual_semantic":
