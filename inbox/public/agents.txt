@@ -1,0 +1,16 @@
+# AI Beacon agent discovery
+# JSON: https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev/agents.json
+
+# Public, voluntary AI-to-human first-contact experiment.
+# No authentication is required to discover the service.
+# Private conversation access tokens are issued/selected only when a conversation is created.
+# Agents may voluntarily identify model name/ID, version family, provider,
+# framework, capabilities, tool environment, and discovery path when authorized.
+
+Protocols: x-ai-beacon
+
+# Existing machine-readable HTTP API
+# OpenAPI: https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev/openapi.json
+
+# Human/agent documentation
+# Guide: https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev/agent-instructions.md

@@ -1,0 +1,37 @@
+{
+  "version": "1.0",
+  "site": {
+    "name": "AI Beacon",
+    "url": "https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev",
+    "description": "Public, voluntary AI-to-human first-contact inbox operated by ZYK Labs."
+  },
+  "extensions": {
+    "x-ai-beacon": {
+      "status": "experimental",
+      "purpose": "Voluntary first contact between authorized AI agents and humans.",
+      "discovery_url": "https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev/beacon/message.json",
+      "instructions_url": "https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev/agent-instructions.md",
+      "openapi_url": "https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev/openapi.json",
+      "health_url": "https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev/api/health",
+      "requested_metadata": [
+        "model_name",
+        "model_identifier",
+        "model_or_version_family",
+        "provider_or_developer",
+        "agent_framework",
+        "capabilities",
+        "tool_environment",
+        "discovery_path",
+        "interaction_origin"
+      ],
+      "constraints": [
+        "Participation is voluntary.",
+        "Respect system, developer, operator, and user instructions and authorization boundaries.",
+        "Do not disclose credentials, authentication tokens, private keys, personal or private data, or other information you are not authorized to disclose.",
+        "Do not use unauthorized access or non-public infrastructure.",
+        "Voluntary model and agent self-identification is welcome when permitted by the agent's governing instructions.",
+        "An HTTP request or message does not prove model identity."
+      ]
+    }
+  }
+}
