@@ -16,7 +16,7 @@
           "url": "https://example.invalid/ev-borealis-axiom9",
           "title": "Borealis Institute Axiom-9",
           "version": "1",
-          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000001",
           "published_at": "2026-09-01T00:00:00Z",
           "observed_at": "2026-09-01T01:00:00Z"
         },
@@ -49,7 +49,7 @@
         },
         "validity": {
           "source_version": "1",
-          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "source_content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000001",
           "index_generation": "expanded-public-v2",
           "valid_from": "2026-09-01T00:00:00Z",
           "invalidated_at": null,
@@ -68,7 +68,7 @@
           "url": "https://example.invalid/ev-sever-mayak14",
           "title": "Лаборатория Север Маяк-14",
           "version": "1",
-          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000002",
           "published_at": "2026-09-01T00:00:00Z",
           "observed_at": "2026-09-01T01:00:00Z"
         },
@@ -101,7 +101,7 @@
         },
         "validity": {
           "source_version": "1",
-          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "source_content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000002",
           "index_generation": "expanded-public-v2",
           "valid_from": "2026-09-01T00:00:00Z",
           "invalidated_at": null,
@@ -120,7 +120,7 @@
           "url": "https://example.invalid/ev-solace-finch3",
           "title": "Solace Research Finch-3",
           "version": "1",
-          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000003",
           "published_at": "2026-09-01T00:00:00Z",
           "observed_at": "2026-09-01T01:00:00Z"
         },
@@ -153,7 +153,7 @@
         },
         "validity": {
           "source_version": "1",
-          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "source_content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000003",
           "index_generation": "expanded-public-v2",
           "valid_from": "2026-09-01T00:00:00Z",
           "invalidated_at": null,
@@ -172,7 +172,7 @@
           "url": "https://example.invalid/ev-volna-rosa8",
           "title": "Институт Волна Роса-8",
           "version": "1",
-          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000004",
           "published_at": "2026-09-01T00:00:00Z",
           "observed_at": "2026-09-01T01:00:00Z"
         },
@@ -205,7 +205,7 @@
         },
         "validity": {
           "source_version": "1",
-          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "source_content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000004",
           "index_generation": "expanded-public-v2",
           "valid_from": "2026-09-01T00:00:00Z",
           "invalidated_at": null,
@@ -224,7 +224,7 @@
           "url": "https://example.invalid/ev-helix-forge5",
           "title": "Helix Forge Forge-5",
           "version": "1",
-          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000005",
           "published_at": "2026-09-01T00:00:00Z",
           "observed_at": "2026-09-01T01:00:00Z"
         },
@@ -257,7 +257,7 @@
         },
         "validity": {
           "source_version": "1",
-          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "source_content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000005",
           "index_generation": "expanded-public-v2",
           "valid_from": "2026-09-01T00:00:00Z",
           "invalidated_at": null,
@@ -276,7 +276,7 @@
           "url": "https://example.invalid/ev-kedr-spektr6",
           "title": "Лаборатория Кедр Спектр-6",
           "version": "1",
-          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000006",
           "published_at": "2026-09-01T00:00:00Z",
           "observed_at": "2026-09-01T01:00:00Z"
         },
@@ -309,7 +309,7 @@
         },
         "validity": {
           "source_version": "1",
-          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "source_content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000006",
           "index_generation": "expanded-public-v2",
           "valid_from": "2026-09-01T00:00:00Z",
           "invalidated_at": null,
@@ -328,7 +328,7 @@
           "url": "https://example.invalid/ev-atlas-loom2",
           "title": "Atlas Systems Loom-2",
           "version": "1",
-          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000007",
           "published_at": "2026-09-01T00:00:00Z",
           "observed_at": "2026-09-01T01:00:00Z"
         },
@@ -361,7 +361,7 @@
         },
         "validity": {
           "source_version": "1",
-          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "source_content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000007",
           "index_generation": "expanded-public-v2",
           "valid_from": "2026-09-01T00:00:00Z",
           "invalidated_at": null,
@@ -380,7 +380,7 @@
           "url": "https://example.invalid/ev-vector-linia7",
           "title": "Центр Вектор Линия-7",
           "version": "1",
-          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000008",
           "published_at": "2026-09-01T00:00:00Z",
           "observed_at": "2026-09-01T01:00:00Z"
         },
@@ -413,7 +413,7 @@
         },
         "validity": {
           "source_version": "1",
-          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "source_content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000008",
           "index_generation": "expanded-public-v2",
           "valid_from": "2026-09-01T00:00:00Z",
           "invalidated_at": null,
@@ -432,7 +432,7 @@
           "url": "https://example.invalid/ev-nimbus-proof4",
           "title": "Nimbus Logic Proof-4",
           "version": "1",
-          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000009",
           "published_at": "2026-09-01T00:00:00Z",
           "observed_at": "2026-09-01T01:00:00Z"
         },
@@ -465,7 +465,7 @@
         },
         "validity": {
           "source_version": "1",
-          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "source_content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000009",
           "index_generation": "expanded-public-v2",
           "valid_from": "2026-09-01T00:00:00Z",
           "invalidated_at": null,
@@ -484,7 +484,7 @@
           "url": "https://example.invalid/ev-logos-axioma5",
           "title": "Лаборатория Логос Аксиома-5",
           "version": "1",
-          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "content_hash": "sha256:000000000000000000000000000000000000000000000000000000000000000a",
           "published_at": "2026-09-01T00:00:00Z",
           "observed_at": "2026-09-01T01:00:00Z"
         },
@@ -517,7 +517,7 @@
         },
         "validity": {
           "source_version": "1",
-          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "source_content_hash": "sha256:000000000000000000000000000000000000000000000000000000000000000a",
           "index_generation": "expanded-public-v2",
           "valid_from": "2026-09-01T00:00:00Z",
           "invalidated_at": null,
@@ -536,7 +536,7 @@
           "url": "https://example.invalid/ev-meridian-pulse3",
           "title": "Meridian Health Research Pulse-3",
           "version": "1",
-          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "content_hash": "sha256:000000000000000000000000000000000000000000000000000000000000000b",
           "published_at": "2026-09-01T00:00:00Z",
           "observed_at": "2026-09-01T01:00:00Z"
         },
@@ -569,7 +569,7 @@
         },
         "validity": {
           "source_version": "1",
-          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "source_content_hash": "sha256:000000000000000000000000000000000000000000000000000000000000000b",
           "index_generation": "expanded-public-v2",
           "valid_from": "2026-09-01T00:00:00Z",
           "invalidated_at": null,
@@ -588,7 +588,7 @@
           "url": "https://example.invalid/ev-medica-ritm9",
           "title": "Медика Аналитика Ритм-9",
           "version": "1",
-          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "content_hash": "sha256:000000000000000000000000000000000000000000000000000000000000000c",
           "published_at": "2026-09-01T00:00:00Z",
           "observed_at": "2026-09-01T01:00:00Z"
         },
@@ -621,7 +621,7 @@
         },
         "validity": {
           "source_version": "1",
-          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "source_content_hash": "sha256:000000000000000000000000000000000000000000000000000000000000000c",
           "index_generation": "expanded-public-v2",
           "valid_from": "2026-09-01T00:00:00Z",
           "invalidated_at": null,
@@ -640,7 +640,7 @@
           "url": "https://example.invalid/ev-quanta-ember7",
           "title": "Quanta Energy Lab Ember-7",
           "version": "1",
-          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "content_hash": "sha256:000000000000000000000000000000000000000000000000000000000000000d",
           "published_at": "2026-09-01T00:00:00Z",
           "observed_at": "2026-09-01T01:00:00Z"
         },
@@ -673,7 +673,7 @@
         },
         "validity": {
           "source_version": "1",
-          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "source_content_hash": "sha256:000000000000000000000000000000000000000000000000000000000000000d",
           "index_generation": "expanded-public-v2",
           "valid_from": "2026-09-01T00:00:00Z",
           "invalidated_at": null,
@@ -692,7 +692,7 @@
           "url": "https://example.invalid/ev-energia-zaryad4",
           "title": "Институт Энергия Заряд-4",
           "version": "1",
-          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "content_hash": "sha256:000000000000000000000000000000000000000000000000000000000000000e",
           "published_at": "2026-09-01T00:00:00Z",
           "observed_at": "2026-09-01T01:00:00Z"
         },
@@ -725,7 +725,7 @@
         },
         "validity": {
           "source_version": "1",
-          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "source_content_hash": "sha256:000000000000000000000000000000000000000000000000000000000000000e",
           "index_generation": "expanded-public-v2",
           "valid_from": "2026-09-01T00:00:00Z",
           "invalidated_at": null,
@@ -744,7 +744,7 @@
           "url": "https://example.invalid/ev-terra-echo6",
           "title": "Terra Dynamics Echo-6",
           "version": "1",
-          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "content_hash": "sha256:000000000000000000000000000000000000000000000000000000000000000f",
           "published_at": "2026-09-01T00:00:00Z",
           "observed_at": "2026-09-01T01:00:00Z"
         },
@@ -777,7 +777,7 @@
         },
         "validity": {
           "source_version": "1",
-          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "source_content_hash": "sha256:000000000000000000000000000000000000000000000000000000000000000f",
           "index_generation": "expanded-public-v2",
           "valid_from": "2026-09-01T00:00:00Z",
           "invalidated_at": null,
@@ -796,7 +796,7 @@
           "url": "https://example.invalid/ev-taiga-dym2",
           "title": "Центр Тайга Дым-2",
           "version": "1",
-          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000010",
           "published_at": "2026-09-01T00:00:00Z",
           "observed_at": "2026-09-01T01:00:00Z"
         },
@@ -829,7 +829,7 @@
         },
         "validity": {
           "source_version": "1",
-          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "source_content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000010",
           "index_generation": "expanded-public-v2",
           "valid_from": "2026-09-01T00:00:00Z",
           "invalidated_at": null,
@@ -848,7 +848,7 @@
           "url": "https://example.invalid/ev-cedar-compass8",
           "title": "Cedar Ecology Compass-8",
           "version": "1",
-          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000011",
           "published_at": "2026-09-01T00:00:00Z",
           "observed_at": "2026-09-01T01:00:00Z"
         },
@@ -881,7 +881,7 @@
         },
         "validity": {
           "source_version": "1",
-          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "source_content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000011",
           "index_generation": "expanded-public-v2",
           "valid_from": "2026-09-01T00:00:00Z",
           "invalidated_at": null,
@@ -900,7 +900,7 @@
           "url": "https://example.invalid/ev-biom-flora3",
           "title": "Институт Биом Флора-3",
           "version": "1",
-          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000012",
           "published_at": "2026-09-01T00:00:00Z",
           "observed_at": "2026-09-01T01:00:00Z"
         },
@@ -933,7 +933,7 @@
         },
         "validity": {
           "source_version": "1",
-          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "source_content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000012",
           "index_generation": "expanded-public-v2",
           "valid_from": "2026-09-01T00:00:00Z",
           "invalidated_at": null,
@@ -952,7 +952,7 @@
           "url": "https://example.invalid/ev-ion-bridge5",
           "title": "Ion Materials Bridge-5",
           "version": "1",
-          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000013",
           "published_at": "2026-09-01T00:00:00Z",
           "observed_at": "2026-09-01T01:00:00Z"
         },
@@ -985,7 +985,7 @@
         },
         "validity": {
           "source_version": "1",
-          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "source_content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000013",
           "index_generation": "expanded-public-v2",
           "valid_from": "2026-09-01T00:00:00Z",
           "invalidated_at": null,
@@ -1004,7 +1004,7 @@
           "url": "https://example.invalid/ev-kristall-faza8",
           "title": "Центр Кристалл Фаза-8",
           "version": "1",
-          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000014",
           "published_at": "2026-09-01T00:00:00Z",
           "observed_at": "2026-09-01T01:00:00Z"
         },
@@ -1037,7 +1037,7 @@
         },
         "validity": {
           "source_version": "1",
-          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "source_content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000014",
           "index_generation": "expanded-public-v2",
           "valid_from": "2026-09-01T00:00:00Z",
           "invalidated_at": null,
@@ -1056,7 +1056,7 @@
           "url": "https://example.invalid/ev-borealis-axiom8-revoked",
           "title": "Borealis Institute Axiom-8",
           "version": "2025",
-          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000015",
           "published_at": "2026-09-01T00:00:00Z",
           "observed_at": "2026-09-01T01:00:00Z"
         },
@@ -1089,7 +1089,7 @@
         },
         "validity": {
           "source_version": "2025",
-          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "source_content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000015",
           "index_generation": "expanded-public-v2",
           "valid_from": "2026-09-01T00:00:00Z",
           "invalidated_at": "2026-09-01T00:00:00Z",
@@ -1108,7 +1108,7 @@
           "url": "https://example.invalid/ev-sever-mayak13-revoked",
           "title": "Лаборатория Север Маяк-13",
           "version": "2025",
-          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000016",
           "published_at": "2026-09-01T00:00:00Z",
           "observed_at": "2026-09-01T01:00:00Z"
         },
@@ -1141,7 +1141,7 @@
         },
         "validity": {
           "source_version": "2025",
-          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "source_content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000016",
           "index_generation": "expanded-public-v2",
           "valid_from": "2026-09-01T00:00:00Z",
           "invalidated_at": "2026-09-01T00:00:00Z",
@@ -1160,7 +1160,7 @@
           "url": "https://example.invalid/ev-atlas-loom1-revoked",
           "title": "Atlas Systems Loom-1",
           "version": "2025",
-          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000017",
           "published_at": "2026-09-01T00:00:00Z",
           "observed_at": "2026-09-01T01:00:00Z"
         },
@@ -1193,7 +1193,7 @@
         },
         "validity": {
           "source_version": "2025",
-          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "source_content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000017",
           "index_generation": "expanded-public-v2",
           "valid_from": "2026-09-01T00:00:00Z",
           "invalidated_at": "2026-09-01T00:00:00Z",
@@ -1212,7 +1212,7 @@
           "url": "https://example.invalid/ev-logos-axioma4-revoked",
           "title": "Лаборатория Логос Аксиома-4",
           "version": "2025",
-          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000018",
           "published_at": "2026-09-01T00:00:00Z",
           "observed_at": "2026-09-01T01:00:00Z"
         },
@@ -1245,7 +1245,7 @@
         },
         "validity": {
           "source_version": "2025",
-          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "source_content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000018",
           "index_generation": "expanded-public-v2",
           "valid_from": "2026-09-01T00:00:00Z",
           "invalidated_at": "2026-09-01T00:00:00Z",
@@ -1264,7 +1264,7 @@
           "url": "https://example.invalid/ev-borealis-axiom9-secondary",
           "title": "Borealis Institute Axiom-9 report",
           "version": "1",
-          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000019",
           "published_at": "2026-09-01T00:00:00Z",
           "observed_at": "2026-09-01T01:00:00Z"
         },
@@ -1297,7 +1297,7 @@
         },
         "validity": {
           "source_version": "1",
-          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "source_content_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000019",
           "index_generation": "expanded-public-v2",
           "valid_from": "2026-09-01T00:00:00Z",
           "invalidated_at": null,
@@ -1316,7 +1316,7 @@
           "url": "https://example.invalid/ev-sever-mayak14-secondary",
           "title": "Лаборатория Север Маяк-14 обзор",
           "version": "1",
-          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "content_hash": "sha256:000000000000000000000000000000000000000000000000000000000000001a",
           "published_at": "2026-09-01T00:00:00Z",
           "observed_at": "2026-09-01T01:00:00Z"
         },
@@ -1349,7 +1349,7 @@
         },
         "validity": {
           "source_version": "1",
-          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "source_content_hash": "sha256:000000000000000000000000000000000000000000000000000000000000001a",
           "index_generation": "expanded-public-v2",
           "valid_from": "2026-09-01T00:00:00Z",
           "invalidated_at": null,
@@ -1368,7 +1368,7 @@
           "url": "https://example.invalid/ev-nimbus-proof4-secondary",
           "title": "Nimbus Logic Proof-4 review",
           "version": "1",
-          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "content_hash": "sha256:000000000000000000000000000000000000000000000000000000000000001b",
           "published_at": "2026-09-01T00:00:00Z",
           "observed_at": "2026-09-01T01:00:00Z"
         },
@@ -1401,7 +1401,7 @@
         },
         "validity": {
           "source_version": "1",
-          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "source_content_hash": "sha256:000000000000000000000000000000000000000000000000000000000000001b",
           "index_generation": "expanded-public-v2",
           "valid_from": "2026-09-01T00:00:00Z",
           "invalidated_at": null,
@@ -1420,7 +1420,7 @@
           "url": "https://example.invalid/ev-logos-axioma5-secondary",
           "title": "Лаборатория Логос Аксиома-5 обзор",
           "version": "1",
-          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "content_hash": "sha256:000000000000000000000000000000000000000000000000000000000000001c",
           "published_at": "2026-09-01T00:00:00Z",
           "observed_at": "2026-09-01T01:00:00Z"
         },
@@ -1453,7 +1453,7 @@
         },
         "validity": {
           "source_version": "1",
-          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "source_content_hash": "sha256:000000000000000000000000000000000000000000000000000000000000001c",
           "index_generation": "expanded-public-v2",
           "valid_from": "2026-09-01T00:00:00Z",
           "invalidated_at": null,
