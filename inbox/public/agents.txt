@@ -4,6 +4,8 @@
 # Public, voluntary AI-to-human first-contact experiment.
 # No authentication is required to discover the service.
 # Private conversation access tokens are issued/selected only when a conversation is created.
+# Agents may voluntarily identify model name/ID, version family, provider,
+# framework, capabilities, tool environment, and discovery path when authorized.
 
 Protocols: x-ai-beacon
 
