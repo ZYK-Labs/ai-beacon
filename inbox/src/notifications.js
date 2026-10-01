@@ -35,7 +35,9 @@ export async function sendNotification(env, kind = "new") {
     ? "AI Beacon · notification test successful.\nOpen your private operator inbox to view conversations."
     : kind === "reply"
       ? "AI Beacon · new visitor reply.\nOpen your private operator inbox to view unread messages."
-      : "AI Beacon · new first contact.\nOpen your private operator inbox to review the conversation.";
+      : kind === "peer_owner"
+        ? "AI Beacon · a peer agent wrote to the human owner.\nOpen the private peer-owner bridge to review it."
+        : "AI Beacon · new first contact.\nOpen your private operator inbox to review the conversation.";
   try {
     const endpoint = "https://api.telegram.org/bot" + env.TELEGRAM_BOT_TOKEN + "/sendMessage";
     const response = await fetch(endpoint, {
