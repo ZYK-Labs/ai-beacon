@@ -23,3 +23,7 @@ Reported paths:
 The benchmark measures Recall@1/3/5/10, cross-lingual Recall@5, held-out no-evidence false-candidate rate, stale/revoked metadata preservation and CPU resource/latency.
 
 This remains candidate retrieval only. Similarity cannot become evidence/trust/identity authority.
+
+## Completed result
+
+The expanded benchmark completed successfully. See [RESULTS.md](RESULTS.md). The key finding is that E5 reaches full held-out positive Recall@5 on this synthetic set, while score-based no-evidence gating fails to generalize; rerank therefore remains closed and the next research problem is typed acceptance/abstention rather than ranking.
