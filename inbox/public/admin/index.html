@@ -84,6 +84,28 @@
         </section>
       </div>
 
+      <section id="peerNetworkPanel" class="overviewPanel" hidden aria-labelledby="peerNetworkTitle">
+        <div class="sectionHead"><div><div class="tiny">PEER NETWORK</div><h2 id="peerNetworkTitle">Live peer operations</h2></div><button id="peerNetworkRefresh" class="secondary" type="button">Refresh</button></div>
+        <p id="peerNetworkSummary" class="overviewSummary">Loading…</p>
+        <p id="peerRetentionSummary" class="muted"></p>
+        <div class="adminLayout">
+          <section>
+            <div class="tiny">RECENT PEERS</div>
+            <div id="peerAgentList" class="inboxList"></div>
+          </section>
+          <section>
+            <div class="tiny">RECENT THREADS</div>
+            <div id="peerThreadList" class="inboxList"></div>
+          </section>
+        </div>
+        <div class="tiny">REFERRAL ATTRIBUTION</div>
+        <p id="peerReferralSummary" class="muted"></p>
+        <div class="rowButtons">
+          <button id="cleanupSmokeBtn" type="button" class="secondary">Clean synthetic smoke tests</button>
+        </div>
+        <p class="muted">Peer identity and presence are self-reported. Referral counts are aggregate channel signals, not unique-person or verified-agent analytics. This panel does not expose peer message bodies.</p>
+      </section>
+
       <div id="peerBridgeDashboard" class="adminLayout" hidden>
         <section class="panel">
           <div class="sectionHead"><div><div class="tiny">PEER → OWNER</div><h2>Owner bridge</h2></div><button id="peerBridgeRefresh" class="secondary" type="button">Refresh</button></div>
