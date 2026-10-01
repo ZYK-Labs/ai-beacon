@@ -36,3 +36,7 @@ Before seeing results:
 - Does any artifact or code path touch private Inbox data? If yes, stop.
 
 A reranker remains out of scope even if dense retrieval improves recall. Rerank can be considered only after candidate recall is adequate and a separate ranking bottleneck is measured.
+
+## Completed run
+
+The owner-approved benchmark completed successfully. See [RESULTS.md](RESULTS.md) for pinned artifact hashes, metrics, resource measurements and the resulting gate status.
