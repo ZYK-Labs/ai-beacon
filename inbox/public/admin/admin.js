@@ -2,6 +2,8 @@ const element = id => document.getElementById(id);
 let adminToken = "";
 let selectedId = "";
 let pendingOperatorReply = null;
+let selectedPeerBridge = null;
+let pendingPeerOwnerReply = null;
 
 function notice(message, error = false) {
   const box = element("adminStatus");
@@ -106,6 +108,65 @@ async function openConversation(id) {
   await listConversations();
 }
 
+function drawPeerBridgeMessages(messages) {
+  const root = element("peerBridgeMessages");
+  root.replaceChildren();
+  for (const item of messages) {
+    const wrapper = document.createElement("div");
+    wrapper.className = item.role === "owner" ? "bubble admin" : "bubble";
+    const meta = document.createElement("div");
+    meta.className = "bubbleHeader";
+    meta.textContent = (item.role === "owner" ? "You / ZYK Labs" : "Peer agent") +
+      " · " + new Date(item.created_at).toLocaleString();
+    const body = document.createElement("div");
+    body.className = "bubbleBody";
+    body.textContent = item.body;
+    wrapper.append(meta, body);
+    root.append(wrapper);
+  }
+}
+
+async function listPeerBridges() {
+  const data = await api("/api/admin/peer-owner-bridges");
+  const root = element("peerBridgeList");
+  root.replaceChildren();
+  if (!data.bridges.length) {
+    const none = document.createElement("p");
+    none.className = "muted";
+    none.textContent = "No peer has written to the owner yet.";
+    root.append(none);
+    return;
+  }
+  for (const item of data.bridges) {
+    const button = document.createElement("button");
+    button.type = "button";
+    const active = selectedPeerBridge &&
+      selectedPeerBridge.thread_id === item.thread_id &&
+      selectedPeerBridge.agent_id === item.agent_id;
+    button.className = "listButton" + (active ? " active" : "") + (item.unread_count ? " unread" : "");
+    button.textContent = item.display_name +
+      (item.unread_count ? " · ● " + item.unread_count + " unread" : "") +
+      " · " + item.title + " · " + item.message_count + " messages · " +
+      new Date(item.updated_at).toLocaleString();
+    button.addEventListener("click", () => openPeerBridge(item.thread_id, item.agent_id)
+      .catch(error => notice(error.message, true)));
+    root.append(button);
+  }
+}
+
+async function openPeerBridge(threadId, agentId) {
+  const path = "/api/admin/peer-owner-bridges/" +
+    encodeURIComponent(threadId) + "/" + encodeURIComponent(agentId);
+  const data = await api(path);
+  selectedPeerBridge = { thread_id: threadId, agent_id: agentId };
+  element("peerBridgeTitle").textContent = data.bridge.agent_display_name;
+  element("peerBridgeMeta").textContent =
+    data.bridge.thread_title + " · thread " + threadId + " · agent " + agentId;
+  drawPeerBridgeMessages(data.messages);
+  element("peerOwnerReplyForm").hidden = false;
+  await listPeerBridges();
+}
+
 element("loginForm").addEventListener("submit", async event => {
   event.preventDefault();
   adminToken = element("adminToken").value.trim();
@@ -116,6 +177,8 @@ element("loginForm").addEventListener("submit", async event => {
     element("dashboard").hidden = false;
     element("overviewPanel").hidden = false;
     element("notificationControls").hidden = false;
+    element("peerBridgeDashboard").hidden = false;
+    await listPeerBridges();
     try {
       const status = await api("/api/admin/notifications");
       element("notificationStatus").textContent = status.configured
@@ -226,6 +289,51 @@ element("deleteBtn").addEventListener("click", async () => {
     element("reviewForm").hidden = true;
     await listConversations();
   } catch (error) { notice(error.message, true); }
+});
+
+element("peerBridgeRefresh").addEventListener("click", async () => {
+  try {
+    await listPeerBridges();
+    if (selectedPeerBridge) {
+      await openPeerBridge(selectedPeerBridge.thread_id, selectedPeerBridge.agent_id);
+    }
+  } catch (error) { notice(error.message, true); }
+});
+
+element("peerOwnerReplyForm").addEventListener("submit", async event => {
+  event.preventDefault();
+  if (!selectedPeerBridge) return;
+  const message = element("peerOwnerReply").value;
+  const key = selectedPeerBridge.thread_id + ":" + selectedPeerBridge.agent_id;
+  if (!pendingPeerOwnerReply || pendingPeerOwnerReply.key !== key ||
+      pendingPeerOwnerReply.message !== message) {
+    pendingPeerOwnerReply = {
+      key,
+      message,
+      client_message_id: "peer_owner_" + crypto.randomUUID().replaceAll("-", "")
+    };
+  }
+  const button = element("peerOwnerReplyForm").querySelector('button[type="submit"]');
+  button.disabled = true;
+  try {
+    const path = "/api/admin/peer-owner-bridges/" +
+      encodeURIComponent(selectedPeerBridge.thread_id) + "/" +
+      encodeURIComponent(selectedPeerBridge.agent_id) + "/messages";
+    await api(path, {
+      method: "POST",
+      body: JSON.stringify({
+        message: pendingPeerOwnerReply.message,
+        client_message_id: pendingPeerOwnerReply.client_message_id
+      })
+    });
+    pendingPeerOwnerReply = null;
+    element("peerOwnerReply").value = "";
+    await openPeerBridge(selectedPeerBridge.thread_id, selectedPeerBridge.agent_id);
+  } catch (error) {
+    notice(error.message + " If you retry the same text, the same message ID is reused.", true);
+  } finally {
+    button.disabled = false;
+  }
 });
 
 element("testNotificationBtn").addEventListener("click", async () => {
