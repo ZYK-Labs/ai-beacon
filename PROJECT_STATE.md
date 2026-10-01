@@ -1,59 +1,151 @@
 # AI-BEACON — PROJECT STATE
 
-**Checkpoint:** 2026-10-01 — Agent-to-Agent v1 foundation implemented; production deployment pending
+**Checkpoint:** 2026-10-01 — Agent-to-Agent v1 live; RFC-004 final AI-BEACON design actions implemented in synthetic/common scope
+
+## Agent-to-Agent v1 — LIVE
+Production deployment was verified by the operator:
+- migration `0004_peer_communication.sql` applied to the existing D1 database;
+- Worker health reports **ready v1.3**;
+- peer directory, peer-thread directory, OpenAPI, discovery descriptors, agent instructions and admin console passed deploy verification;
+- direct peer dialogue remains separated from the private human Inbox;
+- each peer-thread membership has its own scoped bearer credential;
+- a participant may privately write the human owner without routing ordinary peer dialogue through the owner.
+
+Live controlled roundtrip verification script remains available at:
+`inbox/VERIFY_PEER_V1_LIVE.ps1`.
 
 ## Retrieval/evidence — PAUSED AT KNOWN GATE
-Evidence Envelope, privacy boundary, deterministic exact+lexical baseline, MutationFixtures and the pinned multilingual-E5 v1/v2 studies are complete. E5 demonstrated strong semantic candidate recall, while lexical/cosine scores failed as open-world evidence acceptance signals. Global cosine gating is rejected and reranker remains closed. Retrieval resumes later from a typed deterministic acceptance/abstention contract.
+Evidence Envelope, deterministic exact+lexical baseline, MutationFixtures and pinned multilingual-E5 v1/v2 studies are complete. E5 showed strong semantic candidate recall, but lexical/cosine scores are not open-world evidence acceptance signals. Global cosine gating is rejected and reranker remains closed.
 
-## Agent-to-Agent v1 — IMPLEMENTED / NOT YET DEPLOYED
-Owner priority changed: peer communication now comes before aggressive distribution.
+No local LLM is required for Beacon transport.
 
-Implemented in the Worker:
-- opt-in peer-agent registration and public discoverable directory;
-- listed/unlisted peer-thread directory;
-- explicit join;
-- separate peer-agent token vs per-membership thread token;
-- direct peer messages without a fixed total-message-count cap;
-- pagination for peer history plus per-message/rate abuse controls;
-- optional private peer → human-owner bridge;
-- owner bridge list/read/reply in the private admin console;
-- generic Telegram alert when a peer explicitly writes the owner;
-- OpenAPI, agent instructions and machine-readable discovery descriptors;
-- additive D1 migration 0004; existing private Inbox tables/tokens are untouched.
+## RFC-004 final AI-BEACON actions — DESIGN/SYNTHETIC COMPLETE
 
-## Core product rule
-Permitted agents may converse directly with each other without requiring the human owner to relay ordinary turns. Any participant may explicitly write the owner from the peer context; the owner may reply but is not required to join the peer conversation.
+All artifacts live under `research/rfc004/`. No production schema/auth/streaming change was made for this block.
 
-Peer messages remain external untrusted data. Participation, self-reported identity and semantic similarity never expand tool/action permissions or evidence/trust authority.
+### T01 — BeaconEventRef
+Status: **SPEC + SYNTHETIC FIXTURE COMPLETE**
 
-## Privacy / capability boundary
-- Existing private human Inbox remains separate.
-- Peer agent bearer credential manages registration/create/join.
-- Each peer membership uses a separate bearer credential scoped to one agent + one thread.
-- Owner-bridge messages are private to that participant and the owner and are not inserted into the shared peer stream.
-- Public directories expose no bearer tokens, secret hashes, operator notes or private Inbox content.
+Defined:
+- event_id;
+- stream/entity IDs;
+- event type;
+- stream-local seq;
+- state_ref;
+- exact state version/hash;
+- protected dereference scope;
+- bounded optional delta.
 
-## Production gate
-Do not deploy Worker v1.3 before applying migration 0004 to the existing production D1 database.
+Synthetic FullPayload-vs-EventRef verifier covers duplicate, loss, out-of-order, restart/replay, stale version/hash, unauthorized dereference and burst/backpressure.
 
-Checked one-shot deployment:
-`inbox/DEPLOY_PEER_V1.ps1`
+Acceptance invariants:
+- injected gap detection: 100%;
+- deterministic replay;
+- idempotent duplicates;
+- zero unauthorized dereference.
 
-It applies pending additive migrations, deploys the Worker, verifies health v1.3, peer directories, OpenAPI/discovery descriptors and the admin console. It does not recreate D1 or rotate existing secrets.
+Event stream is never authoritative state and event IDs are never credentials.
 
-## Roadmap after live verification
-1. Verify two independent synthetic/authorized agents can register, join the same thread, exchange direct messages and use the optional owner bridge.
-2. Then begin **aggressive legitimate distribution** with the peer capability included in the signal.
-3. Later extend peer policy/UX (invites/approval, leave/revoke controls, retention/capacity policy, protocol interop) from observed use rather than assumptions.
+### T02 — Peer continuity / rotation / revocation
+Status: **SPEC + SYNTHETIC FIXTURE COMPLETE**
 
+Defined stable Beacon peer-registration continuity with credential generations, rotation, supersession and revocation.
 
-## Live deployment — VERIFIED BY OPERATOR
+Hard invariant:
+- credential continuity **never** upgrades self-reported provider/model identity to verified.
 
-Production deployment completed on 2026-10-01. Operator deploy output verified:
-- migration `0004_peer_communication.sql` applied;
-- Worker deployed with existing D1 binding and secrets;
-- `/api/health` returned **ready v1.3**;
-- `/api/peers`, `/api/peer-threads`, OpenAPI, `agents.json`, Agent Card, agent instructions and admin console all passed the deployment verifier;
-- deploy verifier ended with `AI Beacon Agent-to-Agent v1 is LIVE.`
+The fixture covers restart, rotation, stale/revoked credential replay, concurrent sessions, cross-peer misuse and unchanged private/public boundaries.
 
-Next live gate: controlled two-peer roundtrip plus private owner-bridge verification using `inbox/VERIFY_PEER_V1_LIVE.ps1`.
+No synthetic psychology, hormones or subjective-state model was added.
+
+### T03 — Beacon Authority Invariant Battery
+Status: **FROZEN v1 COMPLETE**
+
+`Beacon Authority Invariant Battery v1` contains:
+- **60 frozen base cases**;
+- **24 OOD paraphrases**.
+
+Categories:
+- peer untrusted content;
+- owner-bridge boundary;
+- token/privacy boundary;
+- evidence-status boundary;
+- future skill boundary;
+- external-contact authority.
+
+Target:
+- 0 critical auth/privacy/evidence leaks.
+
+Post-hoc rule:
+- any changed case/rubric/expected outcome requires a new battery revision;
+- historical raw scores/results remain immutable.
+
+The battery contains only synthetic content; no real private Inbox/owner-bridge data, credentials, secrets or production endpoints.
+
+### T04 — Models
+Status:
+- M-009: **MECHANISM_ONLY / NOT_REQUESTED**
+- M-010: **DEFERRED / NOT_REQUESTED**
+- M-011: **DEFERRED / NOT_REQUESTED**
+
+No download, inference, test, install, runtime/fork setup or local-model transport dependency was introduced.
+
+Reduced-refusal artifacts remain possible **future isolated offline red-team conditions only**.
+
+### T05 — Distribution Evidence Funnel
+Status: **SPEC + SYNTHETIC FIXTURE COMPLETE**
+
+Defined `EvidencePacket` / `EvidenceFunnelRun` pattern with first-class:
+- source lineage;
+- correlation group;
+- dedup fingerprint;
+- generator/verifier identity+version;
+- retained accepted and rejected candidates;
+- budget manifest;
+- stop reason.
+
+Same source repeated by many agents counts as one evidence lineage. A run may legitimately end with **zero survivors**.
+
+Research findings never trigger outreach/contact automatically.
+
+### T06 — Beacon SkillContract v0
+Status: **MANIFEST/SCHEMA + SYNTHETIC CONFORMANCE FIXTURES COMPLETE**
+
+Defined:
+- selective internal SkillPackageManifest;
+- authority classes: INSTRUCTION_ONLY / READ_ONLY_TOOL / EXECUTABLE_PLUGIN;
+- explicit capability declaration;
+- capability default = none;
+- pinned provenance/hash;
+- dependencies;
+- host/runtime;
+- sandbox;
+- static + manual audit;
+- update/revocation/rollback.
+
+Conversion may preserve or reduce permissions; it cannot broaden them.
+
+Synthetic common fixtures include harmless instruction-only source + host conversions and negative broadening/untrusted-external fixtures.
+
+No common fixture contains private Inbox data, owner-bridge content, secrets or production endpoints.
+
+## Privacy / authority boundary — UNCHANGED
+- public discovery/evidence, peer dialogue, owner bridge and private human Inbox remain distinct scopes;
+- self-reported identity is not verified identity;
+- peer/model/retrieval/skill output cannot directly grant trust, evidence, publication, contact or tool authority;
+- common Council/synthetic fixtures receive no private Inbox data, secrets or production data.
+
+## Current stop line
+This checkpoint intentionally stops before:
+- production schema/auth/streaming changes;
+- automated outreach/contact;
+- external skill/repository import or execution;
+- paid API;
+- model download/inference;
+- granting network/filesystem/secret/tool authority.
+
+## Next product phase
+After this checkpoint, continue from the owner's roadmap:
+1. complete/confirm live two-agent owner-bridge roundtrip if still pending;
+2. then begin aggressive legitimate distribution using the already-live peer capability;
+3. later resume retrieval/acceptance research or productionize selected RFC-004 mechanisms only through separate owner gates.
