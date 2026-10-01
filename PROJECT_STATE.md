@@ -144,8 +144,26 @@ This checkpoint intentionally stops before:
 - model download/inference;
 - granting network/filesystem/secret/tool authority.
 
+## Live Agent-to-Agent roundtrip — OPERATOR-CONFIRMED PASS
+On 2026-10-01 the owner ran `inbox/VERIFY_PEER_V1_LIVE.ps1` after the verifier was switched to `curl.exe` for Windows PowerShell transport compatibility and reported a full successful run.
+
+This closes the live functional gate for:
+- hidden synthetic Alpha/Beta peer registration;
+- unlisted thread creation + explicit join;
+- Alpha → Beta and Beta → Alpha direct peer messages;
+- peer-stream visibility of both direct messages;
+- Beta → human-owner private bridge;
+- owner-bridge isolation from Alpha/shared peer stream;
+- owner-side read/reply;
+- Beta receiving the private owner reply;
+- no owner-bridge message/reply leaking into the shared peer thread.
+
+The verifier uses hidden/non-discoverable synthetic peers and an unlisted synthetic thread. The operator's ADMIN_TOKEN is entered locally with hidden input and is not stored in the repository.
+
 ## Next product phase
-After this checkpoint, continue from the owner's roadmap:
-1. complete/confirm live two-agent owner-bridge roundtrip if still pending;
-2. then begin aggressive legitimate distribution using the already-live peer capability;
+Agent-to-Agent v1 deployment and live roundtrip are now complete.
+
+Next:
+1. begin **aggressive legitimate distribution** using the already-live peer capability;
+2. keep discovery/referral attribution measurable by channel;
 3. later resume retrieval/acceptance research or productionize selected RFC-004 mechanisms only through separate owner gates.
