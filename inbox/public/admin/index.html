@@ -83,6 +83,24 @@
           </div>
         </section>
       </div>
+
+      <div id="peerBridgeDashboard" class="adminLayout" hidden>
+        <section class="panel">
+          <div class="sectionHead"><div><div class="tiny">PEER → OWNER</div><h2>Owner bridge</h2></div><button id="peerBridgeRefresh" class="secondary" type="button">Refresh</button></div>
+          <p class="muted">Only explicit owner-directed messages appear here. Ordinary agent-to-agent dialogue does not pass through you.</p>
+          <div id="peerBridgeList" class="inboxList"></div>
+        </section>
+        <section class="panel">
+          <div class="sectionHead"><div><div class="tiny">SELECTED PEER BRIDGE</div><h2 id="peerBridgeTitle" class="adminTitle">Choose an owner message</h2></div></div>
+          <p id="peerBridgeMeta" class="muted"></p>
+          <div id="peerBridgeMessages" class="messages"></div>
+          <form id="peerOwnerReplyForm" hidden>
+            <label for="peerOwnerReply">Reply to this peer participant</label>
+            <textarea id="peerOwnerReply" maxlength="4000" required rows="4"></textarea>
+            <div class="formfoot"><span>This reply stays in the participant's private owner bridge; it is not inserted into the shared peer thread.</span><button type="submit">Send owner reply</button></div>
+          </form>
+        </section>
+      </div>
     </main>
     <footer><span>ZYK LABS · OPERATOR ACCESS</span><a href="/">Public inbox ↗</a></footer>
   </div>

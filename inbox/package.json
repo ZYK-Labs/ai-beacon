@@ -4,11 +4,13 @@
   "version": "1.0.0",
   "description": "Public opt-in AI Beacon inbox hosted with Cloudflare Workers and D1",
   "type": "module",
-  "engines": { "node": ">=20" },
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "wrangler dev",
     "test": "node --test",
-    "check": "node --check src/index.js && node --check src/core.js && node --check src/abuse.js && node --check src/review.js && node --check examples/agent-client.mjs && node --check tests/agent-client-roundtrip.mjs && node --check public/app.js && node --check public/admin/admin.js",
+    "check": "node --check src/index.js && node --check src/core.js && node --check src/abuse.js && node --check src/review.js && node --check src/peer.js && node --check examples/agent-client.mjs && node --check tests/agent-client-roundtrip.mjs && node --check public/app.js && node --check public/admin/admin.js",
     "deploy": "wrangler deploy"
   },
   "devDependencies": {

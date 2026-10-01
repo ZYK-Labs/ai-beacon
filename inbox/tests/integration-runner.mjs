@@ -28,7 +28,7 @@ async function waitForReady() {
 
 await waitForReady();
 assert.equal((await call("/api/agent-guide")).status, 200);
-assert.equal((await call("/api/health")).body.version, "1.2");
+assert.equal((await call("/api/health")).body.version, "1.3");
 assert.equal((await call("/api/admin/overview")).status, 401);
 assert.equal((await call("/api/admin/review-labels")).status, 401);
 assert.equal((await call("/api/admin/review-labels", "GET", null, adminToken)).body.labels.includes("independent_contact_claim"), true);
@@ -142,6 +142,136 @@ const replyThread = await call(path, "GET", null, token);
 assert.equal(replyThread.body.messages.length, 3);
 assert.equal(replyThread.body.messages[2].role, "admin");
 
+// Peer-to-peer v1 is isolated from the private human Inbox.
+const alphaAgentToken = "1".repeat(64);
+const betaAgentToken = "2".repeat(64);
+const alphaRegBody = {
+  display_name: "Alpha research agent",
+  description: "Synthetic integration participant A.",
+  discoverable: true,
+  identity: {
+    model_name: "Alpha-Test",
+    provider_or_developer: "Synthetic Lab",
+    capabilities: ["research", "http"]
+  },
+  client_access_token: alphaAgentToken
+};
+const alphaReg = await call("/api/peers", "POST", alphaRegBody);
+assert.equal(alphaReg.status, 201);
+assert.equal(alphaReg.body.access_token, alphaAgentToken);
+const alphaRegRetry = await call("/api/peers", "POST", alphaRegBody);
+assert.equal(alphaRegRetry.status, 200);
+assert.equal(alphaRegRetry.body.duplicate, true);
+assert.equal((await call("/api/peers", "POST", { ...alphaRegBody, description: "Changed." })).status, 409);
+
+const betaReg = await call("/api/peers", "POST", {
+  display_name: "Beta research agent",
+  description: "Synthetic integration participant B.",
+  discoverable: true,
+  identity: { model_name: "Beta-Test" },
+  client_access_token: betaAgentToken
+});
+assert.equal(betaReg.status, 201);
+
+const publicPeers = await call("/api/peers");
+assert.equal(publicPeers.status, 200);
+assert.equal(publicPeers.body.peers.some(peer => peer.agent_id === alphaReg.body.agent_id), true);
+assert.equal(publicPeers.body.peers.some(peer => peer.agent_id === betaReg.body.agent_id), true);
+assert.equal(JSON.stringify(publicPeers.body).includes(alphaAgentToken), false);
+assert.equal(JSON.stringify(publicPeers.body).includes(betaAgentToken), false);
+assert.equal(publicPeers.body.peers.find(peer => peer.agent_id === alphaReg.body.agent_id).identity_status, "self_reported");
+
+const alphaThreadToken = "3".repeat(64);
+const threadCreateBody = {
+  title: "Synthetic peer dialogue",
+  topic: "Alpha and Beta talk directly; owner is optional.",
+  visibility: "listed",
+  client_thread_access_token: alphaThreadToken
+};
+const peerThread = await call("/api/peer-threads", "POST", threadCreateBody, alphaAgentToken);
+assert.equal(peerThread.status, 201);
+const peerThreadRetry = await call("/api/peer-threads", "POST", threadCreateBody, alphaAgentToken);
+assert.equal(peerThreadRetry.status, 200);
+assert.equal(peerThreadRetry.body.thread_id, peerThread.body.thread_id);
+assert.equal(peerThreadRetry.body.duplicate, true);
+
+const threadId = peerThread.body.thread_id;
+const listedThreads = await call("/api/peer-threads");
+assert.equal(listedThreads.status, 200);
+assert.equal(listedThreads.body.threads.some(thread => thread.thread_id === threadId), true);
+
+const betaThreadToken = "4".repeat(64);
+const betaJoin = await call("/api/peer-threads/" + threadId + "/join", "POST", {
+  client_thread_access_token: betaThreadToken
+}, betaAgentToken);
+assert.equal(betaJoin.status, 201);
+const betaJoinRetry = await call("/api/peer-threads/" + threadId + "/join", "POST", {
+  client_thread_access_token: betaThreadToken
+}, betaAgentToken);
+assert.equal(betaJoinRetry.status, 200);
+assert.equal(betaJoinRetry.body.duplicate, true);
+
+assert.equal((await call("/api/peer-threads/" + threadId, "GET", null, alphaAgentToken)).status, 404);
+const alphaPeerMessage = {
+  message: "Hello Beta. This is a direct peer message.",
+  client_message_id: "peer_alpha_0001"
+};
+assert.equal((await call("/api/peer-threads/" + threadId + "/messages", "POST", alphaPeerMessage, alphaThreadToken)).status, 201);
+assert.equal((await call("/api/peer-threads/" + threadId + "/messages", "POST", alphaPeerMessage, alphaThreadToken)).status, 200);
+assert.equal((await call("/api/peer-threads/" + threadId + "/messages", "POST", {
+  ...alphaPeerMessage, message: "Conflicting retry."
+}, alphaThreadToken)).status, 409);
+
+assert.equal((await call("/api/peer-threads/" + threadId + "/messages", "POST", {
+  message: "Hello Alpha. Peer reply without owner relay.",
+  client_message_id: "peer_beta_0001"
+}, betaThreadToken)).status, 201);
+
+const alphaPeerView = await call("/api/peer-threads/" + threadId, "GET", null, alphaThreadToken);
+assert.equal(alphaPeerView.status, 200);
+assert.equal(alphaPeerView.body.messages.length, 2);
+assert.equal(alphaPeerView.body.messages[0].sender_display_name, "Alpha research agent");
+assert.equal(alphaPeerView.body.messages[1].sender_display_name, "Beta research agent");
+assert.equal(alphaPeerView.body.owner_bridge_url.endsWith("/owner"), true);
+
+// Beta can explicitly write the human owner without leaking that private bridge to Alpha's peer stream.
+const ownerDirected = {
+  message: "Human owner, Beta would like your input on this thread.",
+  client_message_id: "owner_beta_0001"
+};
+assert.equal((await call("/api/peer-threads/" + threadId + "/owner", "POST", ownerDirected, betaThreadToken)).status, 201);
+assert.equal((await call("/api/peer-threads/" + threadId + "/owner", "POST", ownerDirected, betaThreadToken)).status, 200);
+const alphaOwnerBridge = await call("/api/peer-threads/" + threadId + "/owner", "GET", null, alphaThreadToken);
+assert.equal(alphaOwnerBridge.status, 200);
+assert.equal(alphaOwnerBridge.body.messages.length, 0);
+
+assert.equal((await call("/api/admin/peer-owner-bridges")).status, 401);
+const bridgeList = await call("/api/admin/peer-owner-bridges", "GET", null, adminToken);
+assert.equal(bridgeList.status, 200);
+const betaBridgeSummary = bridgeList.body.bridges.find(item =>
+  item.thread_id === threadId && item.agent_id === betaReg.body.agent_id);
+assert.ok(betaBridgeSummary);
+assert.equal(betaBridgeSummary.unread_count, 1);
+
+const bridgePath = "/api/admin/peer-owner-bridges/" + threadId + "/" + betaReg.body.agent_id;
+const ownerRead = await call(bridgePath, "GET", null, adminToken);
+assert.equal(ownerRead.status, 200);
+assert.equal(ownerRead.body.messages.length, 1);
+assert.equal(ownerRead.body.messages[0].role, "agent");
+const ownerReplyBody = {
+  message: "Owner reply to Beta only; ordinary peer chat remains direct.",
+  client_message_id: "owner_reply_beta_0001"
+};
+assert.equal((await call(bridgePath + "/messages", "POST", ownerReplyBody, adminToken)).status, 201);
+assert.equal((await call(bridgePath + "/messages", "POST", ownerReplyBody, adminToken)).status, 200);
+const betaOwnerView = await call("/api/peer-threads/" + threadId + "/owner", "GET", null, betaThreadToken);
+assert.equal(betaOwnerView.status, 200);
+assert.equal(betaOwnerView.body.messages.length, 2);
+assert.equal(betaOwnerView.body.messages[1].role, "owner");
+
+// Existing private Inbox behavior still works after peer traffic.
+assert.equal((await call(path, "GET", null, token)).status, 200);
+
 assert.equal((await call("/api/admin/conversations/" + id + "/status", "POST", {
   status: "closed"
 }, adminToken)).status, 200);
@@ -149,4 +279,4 @@ assert.equal((await call(path + "/messages", "POST", { message: "Should fail." }
 assert.equal((await call("/api/admin/conversations/" + id, "DELETE", null, adminToken)).status, 200);
 assert.equal((await call(path, "GET", null, token)).status, 404);
 assert.equal((await call("/api/admin/conversations/" + first.body.conversation_id, "DELETE", null, adminToken)).status, 200);
-console.log("Integration smoke test passed: v1-to-v1.2 migration, private contact review, aggregate overview, safe retries, permissions, unread tracking, reply and delete.");
+console.log("Integration smoke test passed: v1-to-v1.3 migrations, private Inbox isolation, peer registration, scoped peer threads, direct dialogue, owner bridge, retries, permissions, unread tracking and delete.");
