@@ -111,6 +111,8 @@ def evaluate(cases, ranked_by_case):
             h3 += 1
         if best <= 5:
             h5 += 1
+        if best <= 10:
+            h10 += 1
         if math.isfinite(best):
             rr += 1.0 / best
 
@@ -126,6 +128,7 @@ def evaluate(cases, ranked_by_case):
         "recall_at_1": h1 / positives,
         "recall_at_3": h3 / positives,
         "recall_at_5": h5 / positives,
+        "recall_at_10": h10 / positives,
         "mrr_at_5": rr / positives,
         "cross_lingual_semantic_recall_at_5": (cross_hit5 / cross_total) if cross_total else None,
         "no_evidence_false_candidate_rate": (false_no_evidence / no_evidence) if no_evidence else None,
@@ -245,7 +248,7 @@ def main():
     dense_scores = {}
     for idx, tc in enumerate(cases):
         order = torch.argsort(scores[idx], descending=True).tolist()
-        dense_ranked[tc["id"]] = [record_ids[j] for j in order[:5]]
+        dense_ranked[tc["id"]] = [record_ids[j] for j in order]
         dense_scores[tc["id"]] = [
             {"evidence_id": record_ids[j], "cosine": float(scores[idx, j])}
             for j in order[:5]
@@ -259,7 +262,7 @@ def main():
         lex_case = next(c for c in lexical["cases"] if c["id"] == qid)
         lex_candidates = lex_case["result"]["candidates"]
         lex_ids = [x["evidence_id"] for x in lex_candidates]
-        den_ids = dense_ranked[qid]
+        den_ids = dense_ranked[qid][:5]
         union = list(dict.fromkeys(lex_ids + den_ids))
         lex_pos = {x: i + 1 for i, x in enumerate(lex_ids)}
         den_pos = {x: i + 1 for i, x in enumerate(den_ids)}
@@ -281,7 +284,7 @@ def main():
     hybrid_metrics = evaluate(cases, hybrid_ranked)
 
     # Preserve stale/revoked metadata as immutable evidence metadata.
-    q16_dense = dense_ranked.get("q16", [])
+    q16_dense = dense_ranked.get("q16", [])[:5]
     q16_hybrid = hybrid_ranked.get("q16", [])
     rec_by_id = {r["evidence_id"]: r for r in records}
     stale_check = {
