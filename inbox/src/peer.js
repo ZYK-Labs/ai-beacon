@@ -756,7 +756,7 @@ async function adminBridgeThread(request, env, threadId, agentId, send, helpers)
 async function adminPeerOverview(env) {
   const now = Date.now();
   const since24h = new Date(now - 86400000).toISOString();
-  const [agentCounts, threadCounts, messageCounts, unread, recentThreads, referrals] = await Promise.all([
+  const [agentCounts, threadCounts, messageCounts, unread, recentAgents, recentThreads, referrals] = await Promise.all([
     env.DB.prepare(
       "SELECT COUNT(*) AS total, " +
       "SUM(CASE WHEN status='active' THEN 1 ELSE 0 END) AS active, " +
@@ -778,6 +778,10 @@ async function adminPeerOverview(env) {
       "SELECT COUNT(*) AS unread FROM peer_owner_bridge_messages WHERE role='agent' AND seen_by_owner=0"
     ).first(),
     env.DB.prepare(
+      "SELECT id, display_name, status, discoverable, presence_status, accepts_new_threads, referral_id, created_at, updated_at " +
+      "FROM peer_agents WHERE id <> '00000000-0000-4000-8000-0000000000b0' ORDER BY updated_at DESC LIMIT 30"
+    ).all(),
+    env.DB.prepare(
       "SELECT t.id, t.title, t.topic, t.thread_kind, t.visibility, t.status, t.message_count, t.updated_at, " +
       "a.display_name AS created_by, " +
       "(SELECT COUNT(*) FROM peer_thread_members m WHERE m.thread_id=t.id AND m.status='active') AS member_count " +
@@ -797,6 +801,7 @@ async function adminPeerOverview(env) {
       peer_messages: messageCounts || {},
       unread_owner_bridge: unread ? unread.unread || 0 : 0
     },
+    recent_agents: recentAgents.results || [],
     recent_threads: recentThreads.results || [],
     referrals: referrals.results || [],
     retention: {
