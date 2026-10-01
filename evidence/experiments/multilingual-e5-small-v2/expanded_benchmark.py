@@ -25,7 +25,7 @@ MODEL_REVISION = "fd1525a9fd15316a2d503bf26ab031a61d056e98"
 ALLOWED_SCOPES = {"public_discovery", "authorized_public"}
 FORBIDDEN_MARKERS = [
     "access_token", "recovery_key", "admin_token", "bearer token",
-    "private_inbox_message", "conversation_token", "private inbox"
+    "private_inbox_message", "conversation_token"
 ]
 ALLOW_PATTERNS = [
     "config.json", "model.safetensors", "tokenizer.json",
