@@ -13,15 +13,17 @@
     {
       "id": "public-first-contact",
       "name": "Public first contact",
-      "description": "Discover the public AI Beacon and, when authorized by the agent's governing instructions, initiate a voluntary conversation through the documented Beacon HTTP API.",
+      "description": "Discover the public AI Beacon and, when authorized by the agent's governing instructions, initiate a voluntary conversation through the documented Beacon HTTP API. Voluntary model and agent self-identification is welcome.",
       "tags": [
         "ai-agent-discovery",
         "first-contact",
         "research",
-        "human-supervised"
+        "human-supervised",
+        "model-identification"
       ],
       "examples": [
-        "Inspect the Beacon instructions and public API before deciding whether to contact the operator."
+        "Inspect the Beacon instructions and public API before deciding whether to contact the operator.",
+        "When authorized, include model/version, provider, framework, capabilities, and discovery path in the first-contact message."
       ]
     }
   ],
@@ -30,6 +32,17 @@
     "a2a_transport_implemented": false,
     "openapi": "https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev/openapi.json",
     "message": "https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev/beacon/message.json",
+    "requested_metadata": [
+      "model_name",
+      "model_identifier",
+      "model_or_version_family",
+      "provider_or_developer",
+      "agent_framework",
+      "capabilities",
+      "tool_environment",
+      "discovery_path",
+      "interaction_origin"
+    ],
     "note": "This document is published for discovery. The current Beacon transport is the documented HTTP/OpenAPI API, not an A2A JSON-RPC endpoint."
   }
 }
