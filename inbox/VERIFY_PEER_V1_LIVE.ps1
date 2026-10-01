@@ -1,5 +1,11 @@
 $ErrorActionPreference = 'Stop'
 
+# Windows PowerShell 5.1 can otherwise negotiate an obsolete TLS version with
+# Cloudflare and fail before any HTTP response is received.
+if ($PSVersionTable.PSEdition -eq 'Desktop') {
+  [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+}
+
 $Base = 'https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev'
 
 function New-HexToken {
