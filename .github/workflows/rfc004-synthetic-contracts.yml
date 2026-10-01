@@ -1,0 +1,29 @@
+name: AI Beacon RFC-004 synthetic contracts
+
+on:
+  pull_request:
+    paths:
+      - "research/rfc004/**"
+      - "PROJECT_STATE.md"
+      - "handoffs/AI_BEACON_HANDOFF_2026-10-01_RFC004_FINAL_ACTIONS_V1.md"
+      - ".github/workflows/rfc004-synthetic-contracts.yml"
+  push:
+    branches: [main]
+    paths:
+      - "research/rfc004/**"
+      - ".github/workflows/rfc004-synthetic-contracts.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  synthetic-contracts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify RFC-004 AI-BEACON synthetic contracts
+        run: node research/rfc004/verify-all.mjs
