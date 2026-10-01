@@ -1,55 +1,52 @@
 # AI-BEACON — PROJECT STATE
 
-**Checkpoint:** 2026-10-01 — multilingual-e5-small dense benchmark v1 completed
+**Checkpoint:** 2026-10-01 — expanded multilingual E5 retrieval study completed
 
 ## Evidence Envelope — DONE
-Public/authorized evidence has an explicit envelope for source/provenance/time/channel, self-reported identity, evidence level, source version/hash/invalidation lineage and separate acceptance status. Retrieval/model actors cannot assign corroborated/verified acceptance authority.
+Public/authorized evidence retains explicit source/provenance/time/channel, self-reported identity, evidence level, source version/hash/invalidation lineage and separate acceptance status. Retrieval/model output cannot promote a claim to verified/corroborated.
 
 ## Privacy boundary — DONE
-Public discovery/evidence, private Inbox and operator evidence labels/notes remain separate domains. Private Inbox data and operator-only notes are excluded from the public benchmark/derived index by default. The lexical searchable text was tightened so `acceptance.status` is not indexed.
+Public discovery/evidence, private Inbox and operator evidence labels remain separate. Private Inbox data is excluded from the public benchmark/derived index by default. Operator acceptance status is not indexed as lexical/dense searchable text.
 
-## Exact + lexical baseline — DONE
-Frozen result:
-- Recall@1: **11/14 = 0.7857**
-- Recall@3/5: **12/14 = 0.8571**
-- MRR@5: **0.8214**
-- no-evidence abstention: **2/2 = 1.0**
-- cross-lingual semantic Recall@5: **0/2**
+## No-model exact+lexical baseline — DONE
+The original small frozen benchmark remains green. The expanded benchmark shows an important limitation: near-neighbor no-evidence queries can still produce lexical candidates. Therefore retrieval score alone is not an abstention/acceptance decision.
 
-## multilingual-e5-small dense experiment — DONE
-Owner-approved, public/synthetic only. No private Inbox, no MiniLM/BGE/ELECTRA/BERT, no reranker and no production integration.
+## multilingual-e5-small v1 — DONE
+Small frozen benchmark showed measurable cross-lingual benefit and dense Recall@10 14/14, while no-evidence nearest-neighbor generation remained unresolved.
 
-Pinned model:
-`intfloat/multilingual-e5-small@fd1525a9fd15316a2d503bf26ab031a61d056e98`
+## multilingual-e5-small expanded v2 — DONE
+Same pinned E5 revision; 28 synthetic/public records; 20 calibration queries; 36 held-out evaluation queries.
 
-Measured:
-- dense Recall@1: **12/14 = 0.8571**
-- dense Recall@5: **12/14 = 0.8571**
-- dense Recall@10: **14/14 = 1.0**
-- dense cross-lingual Recall@5: **1/2**
-- hybrid RRF Recall@5: **13/14 = 0.9286**
-- hybrid cross-lingual Recall@5: **1/2**
-- dense/hybrid no-evidence false-candidate rate without a fitted threshold: **2/2**
-- missed cross-lingual q05 target appears at dense rank **10**
-- revoked evidence remains revoked; retrieval did not mutate acceptance/evidence authority.
+Evaluation:
+- exact+lexical Recall@5: **87.5%**
+- forced dense Recall@5: **100%**
+- forced dense cross-lingual Recall@5: **100%**
+- forced dense no-evidence false-candidate generation: **100%**
+- calibration-only global cosine gate: positive Recall@5 **25%**, held-out no-evidence false-candidate rate **33.3%**
+- gated hybrid: no improvement over lexical for this acceptance problem.
 
-Runtime snapshot: p50 ~9.90 ms/query, p95 ~10.68 ms/query, peak RSS ~1.35 GiB on the final GitHub-hosted CPU run.
+Conclusion: E5 is useful as a semantic candidate generator, but cosine/lexical score is not an evidence acceptance signal. A single global cosine threshold is rejected.
 
-Full result: `evidence/experiments/multilingual-e5-small-v1/RESULTS.md`.
+Full result:
+`evidence/experiments/multilingual-e5-small-v2/RESULTS.md`
 
-## Fixtures — DONE
-MutationFixture/hard negatives cover provider/model/identity substitution, stale/revoked sources, source/version/hash mismatch, negation/identifier corruption, no-evidence nearest-candidate traps and prompt-injection-like content.
+## Reranker gate — CLOSED
+The current blocker is open-world acceptance/abstention, not ordering. A reranker cannot decide whether any candidate should be accepted as evidence and therefore is not justified yet.
 
-## Future contracts
-- EvidenceReranker: **gate remains CLOSED**. There is an ordering gap, but top-5 candidate recall is not yet adequate.
-- DerivedIndexProfile: contract exists; dense index remains experimental and public/authorized only.
-- ContextualCandidateHead: doc-only; not exercised.
-- No-model authority: unchanged; model output cannot directly publish, block, contact, change trust/evidence status or expand permissions.
+## Production status
+No dense model is integrated into production. The no-model transport/discovery/routing path remains authoritative. No model may directly publish, block, contact, change permissions, trust, identity or evidence acceptance.
 
-## Next retrieval experiment
-Before reranking: expand/freeze a larger public/synthetic RU/EN/mixed benchmark with an independent no-evidence calibration split, then retest the same pinned E5 candidate-generation policy/top-k. Do not tune an absolute threshold on the existing frozen evaluation set.
+## Retrieval work pause point
+The retrieval experiment block is sufficiently characterized for now:
+- exact/lexical strengths and failure mode known;
+- dense semantic recall benefit measured;
+- no-evidence nearest-neighbor failure measured;
+- global cosine gating falsified;
+- rerank remains blocked.
 
-No new model is required for that next diagnostic. Rerank remains blocked until upstream candidate recall and no-evidence behavior are adequate.
+The next evidence-retrieval research question, when resumed, is a typed/deterministic acceptance-abstention contract rather than another ranking model.
 
-## Deferred
-Issue #12 remains the backlog checkpoint for aggressive distribution and later design-only agent-to-agent communication.
+## Product roadmap next
+1. **Aggressive legitimate distribution / stronger Beacon signal.**
+2. After that, a separate design RFC for **agent-to-agent communication**.
+3. Owner requirement already recorded in Issue #12: permitted agents may converse peer-to-peer without an artificial turn limit, while retaining an explicit option to send an attributable message/escalation to the human owner.
