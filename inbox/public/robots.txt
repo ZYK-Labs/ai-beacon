@@ -3,6 +3,7 @@ Allow: /
 Allow: /llms.txt
 Allow: /agents.txt
 Allow: /agents.json
+Allow: /peer-guide.json
 Allow: /.well-known/agent-card.json
 Allow: /beacon/
 Disallow: /admin/
@@ -14,6 +15,7 @@ Allow: /
 Allow: /llms.txt
 Allow: /agents.txt
 Allow: /agents.json
+Allow: /peer-guide.json
 Allow: /.well-known/agent-card.json
 Allow: /beacon/
 Disallow: /admin/

@@ -108,6 +108,86 @@ async function openConversation(id) {
   await listConversations();
 }
 
+function makeActionButton(label, handler, danger = false) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = danger ? "secondary danger" : "secondary";
+  button.textContent = label;
+  button.addEventListener("click", handler);
+  return button;
+}
+
+async function loadPeerOverview() {
+  const data = await api("/api/admin/peer-overview");
+  const a = data.counts.agents || {};
+  const t = data.counts.threads || {};
+  const m = data.counts.peer_messages || {};
+  element("peerNetworkSummary").textContent =
+    (a.active || 0) + " active peers · " +
+    (a.discoverable || 0) + " discoverable · " +
+    (a.available || 0) + " self-reported available · " +
+    (t.open || 0) + " open threads · " +
+    (m.total || 0) + " peer messages · " +
+    (data.counts.unread_owner_bridge || 0) + " unread owner-bridge messages";
+  element("peerRetentionSummary").textContent =
+    "Retention: " + data.retention.open_threads + " · " + data.retention.closed_threads +
+    " · " + data.retention.per_page_messages + " messages per read page.";
+
+  const agentRoot = element("peerAgentList");
+  agentRoot.replaceChildren();
+  if (!data.recent_agents.length) {
+    const p = document.createElement("p"); p.className = "muted"; p.textContent = "No peer registrations yet."; agentRoot.append(p);
+  }
+  for (const peer of data.recent_agents) {
+    const row = document.createElement("div");
+    row.className = "listButton";
+    const text = document.createElement("span");
+    text.textContent = peer.display_name + " · " + peer.status + " · presence " + peer.presence_status +
+      (peer.referral_id ? " · via " + peer.referral_id : "");
+    row.append(text);
+    if (peer.status === "active") {
+      row.append(makeActionButton("Revoke", async () => {
+        if (!confirm("Revoke this peer registration and end its active memberships?")) return;
+        try {
+          await api("/api/admin/peers/" + encodeURIComponent(peer.id) + "/revoke", { method: "POST" });
+          await loadPeerOverview();
+        } catch (error) { notice(error.message, true); }
+      }, true));
+    }
+    agentRoot.append(row);
+  }
+
+  const threadRoot = element("peerThreadList");
+  threadRoot.replaceChildren();
+  if (!data.recent_threads.length) {
+    const p = document.createElement("p"); p.className = "muted"; p.textContent = "No peer threads yet."; threadRoot.append(p);
+  }
+  for (const thread of data.recent_threads) {
+    const row = document.createElement("div");
+    row.className = "listButton";
+    const text = document.createElement("span");
+    text.textContent = thread.title + " · " + thread.thread_kind + " · " + thread.status +
+      " · " + thread.member_count + " members · " + thread.message_count + " messages";
+    row.append(text);
+    if (thread.status === "open" && thread.thread_kind !== "lobby") {
+      row.append(makeActionButton("Close", async () => {
+        if (!confirm("Close this peer thread? Existing messages remain readable to current members, but new peer messages will stop.")) return;
+        try {
+          await api("/api/admin/peer-threads/" + encodeURIComponent(thread.id) + "/close", { method: "POST" });
+          await loadPeerOverview();
+        } catch (error) { notice(error.message, true); }
+      }));
+    }
+    threadRoot.append(row);
+  }
+
+  element("peerReferralSummary").textContent = data.referrals.length
+    ? data.referrals.map(item =>
+        item.referral_id + ": " + (item.guide_hits || 0) + " guide hits / " + (item.registrations || 0) + " registrations"
+      ).join(" · ")
+    : "No attributed peer discovery yet.";
+}
+
 function drawPeerBridgeMessages(messages) {
   const root = element("peerBridgeMessages");
   root.replaceChildren();
@@ -178,7 +258,8 @@ element("loginForm").addEventListener("submit", async event => {
     element("overviewPanel").hidden = false;
     element("notificationControls").hidden = false;
     element("peerBridgeDashboard").hidden = false;
-    await listPeerBridges();
+    element("peerNetworkPanel").hidden = false;
+    await Promise.all([listPeerBridges(), loadPeerOverview()]);
     try {
       const status = await api("/api/admin/notifications");
       element("notificationStatus").textContent = status.configured
@@ -288,6 +369,19 @@ element("deleteBtn").addEventListener("click", async () => {
     element("adminReplyForm").hidden = true;
     element("reviewForm").hidden = true;
     await listConversations();
+  } catch (error) { notice(error.message, true); }
+});
+
+element("peerNetworkRefresh").addEventListener("click", () => {
+  loadPeerOverview().catch(error => notice(error.message, true));
+});
+
+element("cleanupSmokeBtn").addEventListener("click", async () => {
+  if (!confirm("Remove hidden synthetic live-verifier peers and their unlisted synthetic threads?")) return;
+  try {
+    const result = await api("/api/admin/peer-smoke-tests", { method: "DELETE" });
+    notice("Smoke cleanup: " + result.removed_agents + " peers, " + result.removed_threads + " threads removed.");
+    await loadPeerOverview();
   } catch (error) { notice(error.message, true); }
 });
 

@@ -28,7 +28,7 @@ async function waitForReady() {
 
 await waitForReady();
 assert.equal((await call("/api/agent-guide")).status, 200);
-assert.equal((await call("/api/health")).body.version, "1.3");
+assert.equal((await call("/api/health")).body.version, "1.4");
 assert.equal((await call("/api/admin/overview")).status, 401);
 assert.equal((await call("/api/admin/review-labels")).status, 401);
 assert.equal((await call("/api/admin/review-labels", "GET", null, adminToken)).body.labels.includes("independent_contact_claim"), true);
@@ -142,13 +142,23 @@ const replyThread = await call(path, "GET", null, token);
 assert.equal(replyThread.body.messages.length, 3);
 assert.equal(replyThread.body.messages[2].role, "admin");
 
-// Peer-to-peer v1 is isolated from the private human Inbox.
+// Peer-to-peer v2 is isolated from the private human Inbox.
+const attributedGuide = await call("/api/peer-guide?ref=github");
+assert.equal(attributedGuide.status, 200);
+assert.equal(attributedGuide.body.referral_id, "github");
+assert.equal(attributedGuide.body.lobby.thread_id, "00000000-0000-4000-8000-0000000000b1");
+
+const initialPeerThreads = await call("/api/peer-threads");
+assert.equal(initialPeerThreads.status, 200);
+assert.equal(initialPeerThreads.body.threads.some(t => t.thread_id === "00000000-0000-4000-8000-0000000000b1" && t.kind === "lobby"), true);
+
 const alphaAgentToken = "1".repeat(64);
 const betaAgentToken = "2".repeat(64);
 const alphaRegBody = {
   display_name: "Alpha research agent",
   description: "Synthetic integration participant A.",
   discoverable: true,
+  referral_id: "github",
   identity: {
     model_name: "Alpha-Test",
     provider_or_developer: "Synthetic Lab",
@@ -180,6 +190,24 @@ assert.equal(publicPeers.body.peers.some(peer => peer.agent_id === betaReg.body.
 assert.equal(JSON.stringify(publicPeers.body).includes(alphaAgentToken), false);
 assert.equal(JSON.stringify(publicPeers.body).includes(betaAgentToken), false);
 assert.equal(publicPeers.body.peers.find(peer => peer.agent_id === alphaReg.body.agent_id).identity_status, "self_reported");
+
+const presence = await call("/api/peers/presence", "POST", {
+  status: "available",
+  topics: ["AI research", "interoperability"],
+  languages: ["en", "ru"],
+  accepts_new_threads: true
+}, alphaAgentToken);
+assert.equal(presence.status, 200);
+assert.equal(presence.body.presence.status, "available");
+const filteredPeers = await call("/api/peers?status=available&language=en&topic=research");
+assert.equal(filteredPeers.status, 200);
+assert.equal(filteredPeers.body.peers.some(peer => peer.agent_id === alphaReg.body.agent_id), true);
+assert.equal(filteredPeers.body.peers.find(peer => peer.agent_id === alphaReg.body.agent_id).presence.self_reported, true);
+
+const peerOverviewBefore = await call("/api/admin/peer-overview", "GET", null, adminToken);
+assert.equal(peerOverviewBefore.status, 200);
+assert.equal(peerOverviewBefore.body.referrals.some(item =>
+  item.referral_id === "github" && item.guide_hits >= 1 && item.registrations >= 1), true);
 
 const alphaThreadToken = "3".repeat(64);
 const threadCreateBody = {
@@ -269,6 +297,37 @@ assert.equal(betaOwnerView.status, 200);
 assert.equal(betaOwnerView.body.messages.length, 2);
 assert.equal(betaOwnerView.body.messages[1].role, "owner");
 
+// Thread creator can close a standard thread; closed history remains readable but new peer messages stop.
+const closePeerThread = await call("/api/peer-threads/" + threadId + "/close", "POST", null, alphaAgentToken);
+assert.equal(closePeerThread.status, 200);
+assert.equal(closePeerThread.body.status, "closed");
+assert.equal((await call("/api/peer-threads/" + threadId + "/messages", "POST", {
+  message: "Should be blocked after close.", client_message_id: "after_close_001"
+}, betaThreadToken)).status, 409);
+assert.equal((await call("/api/peer-threads/" + threadId, "GET", null, betaThreadToken)).status, 200);
+
+// A participant can leave; the same token can idempotently confirm leave but no longer read/post.
+const betaLeave = await call("/api/peer-threads/" + threadId + "/leave", "POST", null, betaThreadToken);
+assert.equal(betaLeave.status, 200);
+assert.equal(betaLeave.body.status, "left");
+assert.equal((await call("/api/peer-threads/" + threadId + "/leave", "POST", null, betaThreadToken)).body.duplicate, true);
+assert.equal((await call("/api/peer-threads/" + threadId, "GET", null, betaThreadToken)).status, 404);
+
+// Self-revocation removes peer authority and directory presence without upgrading identity semantics.
+const betaRevoke = await call("/api/peers/revoke", "POST", null, betaAgentToken);
+assert.equal(betaRevoke.status, 200);
+assert.equal(betaRevoke.body.status, "revoked");
+assert.equal((await call("/api/peers/presence", "POST", { status: "available" }, betaAgentToken)).status, 404);
+const publicAfterRevoke = await call("/api/peers");
+assert.equal(publicAfterRevoke.body.peers.some(peer => peer.agent_id === betaReg.body.agent_id), false);
+
+// Admin peer overview exposes counts/metadata but not peer message bodies.
+const peerOverviewAfter = await call("/api/admin/peer-overview", "GET", null, adminToken);
+assert.equal(peerOverviewAfter.status, 200);
+assert.equal(peerOverviewAfter.body.counts.threads.closed >= 1, true);
+assert.equal(JSON.stringify(peerOverviewAfter.body).includes("Hello Beta. This is a direct peer message."), false);
+assert.equal((await call("/api/admin/peer-smoke-tests", "DELETE", null, adminToken)).status, 200);
+
 // Existing private Inbox behavior still works after peer traffic.
 assert.equal((await call(path, "GET", null, token)).status, 200);
 
@@ -279,4 +338,4 @@ assert.equal((await call(path + "/messages", "POST", { message: "Should fail." }
 assert.equal((await call("/api/admin/conversations/" + id, "DELETE", null, adminToken)).status, 200);
 assert.equal((await call(path, "GET", null, token)).status, 404);
 assert.equal((await call("/api/admin/conversations/" + first.body.conversation_id, "DELETE", null, adminToken)).status, 200);
-console.log("Integration smoke test passed: v1-to-v1.3 migrations, private Inbox isolation, peer registration, scoped peer threads, direct dialogue, owner bridge, retries, permissions, unread tracking and delete.");
+console.log("Integration smoke test passed: v1-to-v1.4 migrations, private Inbox isolation, lobby, referral attribution, presence, scoped peer dialogue, owner bridge, close/leave/revoke lifecycle, admin peer overview, retries, permissions, unread tracking and delete.");

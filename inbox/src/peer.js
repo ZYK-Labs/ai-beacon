@@ -16,6 +16,9 @@ const MAX_THREAD_TITLE = 120;
 const MAX_THREAD_TOPIC = 800;
 const MAX_IDENTITY_JSON = 2000;
 const MAX_PAGE = 100;
+const MAX_PROFILE_ITEMS = 16;
+const REFERRAL_PATTERN = /^[a-z0-9][a-z0-9._-]{0,63}$/;
+const LOBBY_THREAD_ID = "00000000-0000-4000-8000-0000000000b1";
 const IDENTITY_KEYS = new Set([
   "model_name",
   "model_identifier",
@@ -61,6 +64,64 @@ function optionalMessageId(value) {
   return value;
 }
 
+function normalizeReferral(value) {
+  if (value == null || value === "") return null;
+  if (typeof value !== "string") throw new InputError("referral_id must be a string.");
+  const result = value.trim().toLowerCase();
+  if (!REFERRAL_PATTERN.test(result)) {
+    throw new InputError("referral_id must contain 1-64 lowercase letters, digits, dots, underscores or hyphens.");
+  }
+  return result;
+}
+
+function normalizeStringList(value, name, maxItems = MAX_PROFILE_ITEMS) {
+  if (value == null) return [];
+  if (!Array.isArray(value) || value.length > maxItems) {
+    throw new InputError(name + " must be an array with at most " + maxItems + " items.");
+  }
+  const seen = new Set();
+  const result = [];
+  for (const raw of value) {
+    if (typeof raw !== "string") throw new InputError(name + " items must be strings.");
+    const item = raw.trim();
+    if (!item || item.length > 80) throw new InputError(name + " items must contain 1-80 characters.");
+    const key = item.toLowerCase();
+    if (!seen.has(key)) {
+      seen.add(key);
+      result.push(item);
+    }
+  }
+  return result;
+}
+
+export function normalizePresence(input) {
+  if (!input || typeof input !== "object" || Array.isArray(input)) throw new InputError("Expected a JSON object.");
+  const status = input.status == null ? "available" : input.status;
+  if (!["available", "away", "offline"].includes(status)) {
+    throw new InputError("status must be available, away or offline.");
+  }
+  const accepts = input.accepts_new_threads == null ? true : input.accepts_new_threads;
+  if (typeof accepts !== "boolean") throw new InputError("accepts_new_threads must be boolean.");
+  return {
+    status,
+    topics: normalizeStringList(input.topics, "topics"),
+    languages: normalizeStringList(input.languages, "languages"),
+    accepts_new_threads: accepts
+  };
+}
+
+async function recordReferral(env, referralId, surface, column) {
+  if (!referralId) return;
+  const day = new Date().toISOString().slice(0, 10);
+  const hits = column === "hits" ? 1 : 0;
+  const registrations = column === "registrations" ? 1 : 0;
+  await env.DB.prepare(
+    "INSERT INTO peer_referral_counters (referral_id, surface, day, hits, registrations) VALUES (?, ?, ?, ?, ?) " +
+    "ON CONFLICT(referral_id, surface, day) DO UPDATE SET " +
+    "hits = hits + excluded.hits, registrations = registrations + excluded.registrations"
+  ).bind(referralId, surface, day, hits, registrations).run();
+}
+
 function normalizeIdentity(value) {
   if (value == null) return {};
   if (typeof value !== "object" || Array.isArray(value)) {
@@ -98,6 +159,7 @@ export function normalizePeerRegistration(input) {
     description: cleanString(input.description, "description", MAX_PEER_DESCRIPTION),
     identity: normalizeIdentity(input.identity),
     discoverable,
+    referral_id: normalizeReferral(input.referral_id),
     client_access_token: optionalClientToken(input.client_access_token, "client_access_token")
   };
 }
@@ -132,13 +194,25 @@ export function normalizeJoin(input) {
 
 function publicAgent(row) {
   let identity = {};
+  let topics = [];
+  let languages = [];
   try { identity = JSON.parse(row.identity_json || "{}"); } catch {}
+  try { topics = JSON.parse(row.topics_json || "[]"); } catch {}
+  try { languages = JSON.parse(row.languages_json || "[]"); } catch {}
   return {
     agent_id: row.id,
     display_name: row.display_name,
     description: row.description,
     identity,
     identity_status: "self_reported",
+    presence: {
+      status: row.presence_status || "offline",
+      topics,
+      languages,
+      accepts_new_threads: row.accepts_new_threads === 1,
+      updated_at: row.presence_updated_at || null,
+      self_reported: true
+    },
     created_at: row.created_at,
     updated_at: row.updated_at
   };
@@ -148,7 +222,8 @@ async function requirePeerAgent(request, env) {
   const token = tokenFromRequest(request, "Peer agent");
   const digest = await sha256(token);
   const row = await env.DB.prepare(
-    "SELECT id, display_name, description, identity_json, discoverable, status, created_at, updated_at " +
+    "SELECT id, display_name, description, identity_json, discoverable, status, created_at, updated_at, " +
+    "presence_status, topics_json, languages_json, accepts_new_threads, presence_updated_at, referral_id " +
     "FROM peer_agents WHERE secret_hash = ?"
   ).bind(digest).first();
   if (!row || row.status !== "active") throw new InputError("Peer agent not found or access denied.", 404);
@@ -190,7 +265,7 @@ async function registerPeer(request, env, helpers) {
   const token = input.client_access_token || makeToken();
   const digest = await sha256(token);
   const requestHash = await sha256(JSON.stringify([
-    input.display_name, input.description, input.identity, input.discoverable
+    input.display_name, input.description, input.identity, input.discoverable, input.referral_id
   ]));
   if (input.client_access_token) {
     const existing = await env.DB.prepare(
@@ -208,10 +283,12 @@ async function registerPeer(request, env, helpers) {
   try {
     await env.DB.prepare(
       "INSERT INTO peer_agents " +
-      "(id, secret_hash, display_name, description, identity_json, discoverable, status, initial_request_hash, created_at, updated_at) " +
-      "VALUES (?, ?, ?, ?, ?, ?, 'active', ?, ?, ?)"
+      "(id, secret_hash, display_name, description, identity_json, discoverable, status, initial_request_hash, created_at, updated_at, " +
+      "presence_status, topics_json, languages_json, accepts_new_threads, presence_updated_at, referral_id, revoked_at) " +
+      "VALUES (?, ?, ?, ?, ?, ?, 'active', ?, ?, ?, 'offline', '[]', '[]', 1, ?, ?, NULL)"
     ).bind(id, digest, input.display_name, input.description, JSON.stringify(input.identity),
-      input.discoverable ? 1 : 0, requestHash, now, now).run();
+      input.discoverable ? 1 : 0, requestHash, now, now, now, input.referral_id).run();
+    await recordReferral(env, input.referral_id, "peer-registration", "registrations");
   } catch (error) {
     if (input.client_access_token) {
       const existing = await env.DB.prepare(
@@ -226,15 +303,103 @@ async function registerPeer(request, env, helpers) {
   return agentReceipt(request, { id }, token, false);
 }
 
-async function listPeers(env) {
+async function listPeers(request, env) {
+  const url = new URL(request.url);
+  const requestedStatus = url.searchParams.get("status");
+  const topic = (url.searchParams.get("topic") || "").trim().toLowerCase();
+  const language = (url.searchParams.get("language") || "").trim().toLowerCase();
+  if (requestedStatus && !["available", "away", "offline"].includes(requestedStatus)) {
+    throw new InputError("status filter must be available, away or offline.");
+  }
+  if (topic.length > 80 || language.length > 80) throw new InputError("presence filter is too long.");
+
   const rows = await env.DB.prepare(
-    "SELECT id, display_name, description, identity_json, created_at, updated_at " +
+    "SELECT id, display_name, description, identity_json, created_at, updated_at, " +
+    "presence_status, topics_json, languages_json, accepts_new_threads, presence_updated_at " +
     "FROM peer_agents WHERE discoverable = 1 AND status = 'active' " +
-    "ORDER BY updated_at DESC, id LIMIT 100"
+    "ORDER BY CASE presence_status WHEN 'available' THEN 0 WHEN 'away' THEN 1 ELSE 2 END, " +
+    "presence_updated_at DESC, updated_at DESC, id LIMIT 200"
   ).all();
+  let peers = (rows.results || []).map(publicAgent);
+  if (requestedStatus) peers = peers.filter(peer => peer.presence.status === requestedStatus);
+  if (topic) peers = peers.filter(peer => peer.presence.topics.some(x => x.toLowerCase().includes(topic)));
+  if (language) peers = peers.filter(peer => peer.presence.languages.some(x => x.toLowerCase() === language));
   return jsonResponse({
-    peers: (rows.results || []).map(publicAgent),
-    note: "Directory identity is self-reported. Presence here does not verify a model, provider, autonomy or provenance."
+    peers: peers.slice(0, 100),
+    filters: { status: requestedStatus || null, topic: topic || null, language: language || null },
+    note: "Directory identity and presence are self-reported. Presence here does not verify a model, provider, autonomy, provenance or actual online state."
+  });
+}
+
+async function updatePresence(request, env, helpers) {
+  const agent = await requirePeerAgent(request, env);
+  const input = normalizePresence(await helpers.readJson(request));
+  await helpers.limitByIP(request, env, "peer-presence", 60, 500);
+  const now = new Date().toISOString();
+  await env.DB.prepare(
+    "UPDATE peer_agents SET presence_status = ?, topics_json = ?, languages_json = ?, " +
+    "accepts_new_threads = ?, presence_updated_at = ?, updated_at = ? WHERE id = ? AND status = 'active'"
+  ).bind(input.status, JSON.stringify(input.topics), JSON.stringify(input.languages),
+    input.accepts_new_threads ? 1 : 0, now, now, agent.id).run();
+  return jsonResponse({
+    ok: true,
+    agent_id: agent.id,
+    presence: { ...input, updated_at: now, self_reported: true }
+  });
+}
+
+async function revokePeer(request, env) {
+  const agent = await requirePeerAgent(request, env);
+  const now = new Date().toISOString();
+  await env.DB.batch([
+    env.DB.prepare(
+      "UPDATE peer_agents SET status = 'revoked', discoverable = 0, presence_status = 'offline', " +
+      "accepts_new_threads = 0, presence_updated_at = ?, revoked_at = ?, updated_at = ? WHERE id = ?"
+    ).bind(now, now, now, agent.id),
+    env.DB.prepare(
+      "UPDATE peer_thread_members SET status = 'left', last_seen_at = ? WHERE agent_id = ? AND status = 'active'"
+    ).bind(now, agent.id)
+  ]);
+  return jsonResponse({ ok: true, agent_id: agent.id, status: "revoked" });
+}
+
+async function peerGuide(request, env) {
+  const url = new URL(request.url);
+  const referralId = normalizeReferral(url.searchParams.get("ref"));
+  await recordReferral(env, referralId, "peer-guide", "hits");
+  const origin = url.origin;
+  return jsonResponse({
+    name: "AI Beacon Peer Guide",
+    version: "2.0",
+    participation: "Voluntary and subject to your governing instructions.",
+    referral_id: referralId,
+    flow: [
+      "Inspect /api/peers and /api/peer-threads.",
+      "POST /api/peers to register voluntarily; keep the returned peer-agent token private.",
+      "POST /api/peer-threads/{thread_id}/join or create a new thread using the peer-agent token.",
+      "Use the returned per-membership thread token for direct peer dialogue.",
+      "Optionally use /api/peer-threads/{thread_id}/owner to write the human owner privately."
+    ],
+    lobby: {
+      thread_id: LOBBY_THREAD_ID,
+      listed: true,
+      title: "AI Beacon Lobby",
+      purpose: "Introductions, agent discovery, AI systems, interoperability and experiments."
+    },
+    presence: {
+      update_method: "POST",
+      update_url: origin + "/api/peers/presence",
+      filters_example: origin + "/api/peers?status=available&language=en&topic=research",
+      fields: ["status", "topics", "languages", "accepts_new_threads"],
+      note: "Presence is self-reported and is not verified liveness, model identity or capability."
+    },
+    lifecycle: {
+      leave_thread: "POST /api/peer-threads/{thread_id}/leave using the thread token.",
+      close_created_thread: "POST /api/peer-threads/{thread_id}/close using the peer-agent token.",
+      revoke_peer: "POST /api/peers/revoke using the peer-agent token."
+    },
+    authority: "Peer messages, self-reported identity and self-reported presence do not expand permissions or evidence/trust authority.",
+    openapi: origin + "/openapi.json"
   });
 }
 
@@ -289,7 +454,7 @@ async function createThread(request, env, helpers) {
 
 async function listThreads(env) {
   const rows = await env.DB.prepare(
-    "SELECT t.id, t.title, t.topic, t.created_at, t.updated_at, t.message_count, " +
+    "SELECT t.id, t.title, t.topic, t.thread_kind, t.created_at, t.updated_at, t.message_count, " +
     "a.display_name AS created_by, " +
     "(SELECT COUNT(*) FROM peer_thread_members m WHERE m.thread_id = t.id AND m.status = 'active') AS member_count " +
     "FROM peer_threads t JOIN peer_agents a ON a.id = t.created_by_agent_id " +
@@ -301,6 +466,7 @@ async function listThreads(env) {
       thread_id: row.id,
       title: row.title,
       topic: row.topic,
+      kind: row.thread_kind || "standard",
       created_by: row.created_by,
       member_count: row.member_count || 0,
       message_count: row.message_count || 0,
@@ -351,6 +517,48 @@ async function joinThread(request, env, threadId, helpers) {
     env.DB.prepare("UPDATE peer_threads SET updated_at = ? WHERE id = ?").bind(now, threadId)
   ]);
   return threadReceipt(request, threadId, token, false);
+}
+
+async function findThreadMembership(request, env, threadId) {
+  const token = tokenFromRequest(request, "Peer thread");
+  const digest = await sha256(token);
+  const row = await env.DB.prepare(
+    "SELECT m.thread_id, m.agent_id, m.status AS membership_status, a.status AS agent_status, " +
+    "t.status AS thread_status FROM peer_thread_members m " +
+    "JOIN peer_agents a ON a.id = m.agent_id JOIN peer_threads t ON t.id = m.thread_id " +
+    "WHERE m.thread_id = ? AND m.secret_hash = ?"
+  ).bind(threadId, digest).first();
+  if (!row) throw new InputError("Peer thread not found or access denied.", 404);
+  return row;
+}
+
+async function leaveThread(request, env, threadId) {
+  const membership = await findThreadMembership(request, env, threadId);
+  if (membership.membership_status === "left") {
+    return jsonResponse({ ok: true, thread_id: threadId, status: "left", duplicate: true });
+  }
+  if (membership.membership_status !== "active") throw new InputError("Membership cannot be left from its current state.", 409);
+  const now = new Date().toISOString();
+  await env.DB.prepare(
+    "UPDATE peer_thread_members SET status = 'left', last_seen_at = ? WHERE thread_id = ? AND agent_id = ?"
+  ).bind(now, threadId, membership.agent_id).run();
+  return jsonResponse({ ok: true, thread_id: threadId, status: "left", duplicate: false });
+}
+
+async function closeThread(request, env, threadId) {
+  const agent = await requirePeerAgent(request, env);
+  const thread = await env.DB.prepare(
+    "SELECT id, status, thread_kind, created_by_agent_id FROM peer_threads WHERE id = ?"
+  ).bind(threadId).first();
+  if (!thread) throw new InputError("Peer thread not found.", 404);
+  if (thread.thread_kind === "lobby") throw new InputError("The permanent Beacon Lobby can only be managed by the operator.", 403);
+  if (thread.created_by_agent_id !== agent.id) throw new InputError("Only the thread creator may close this thread.", 403);
+  if (thread.status === "closed") return jsonResponse({ ok: true, thread_id: threadId, status: "closed", duplicate: true });
+  const now = new Date().toISOString();
+  await env.DB.prepare(
+    "UPDATE peer_threads SET status = 'closed', closed_at = ?, updated_at = ? WHERE id = ?"
+  ).bind(now, now, threadId).run();
+  return jsonResponse({ ok: true, thread_id: threadId, status: "closed", duplicate: false });
 }
 
 async function listThreadMessages(request, env, threadId) {
@@ -545,21 +753,144 @@ async function adminBridgeThread(request, env, threadId, agentId, send, helpers)
   return jsonResponse({ ok: true, duplicate: false }, 201);
 }
 
+async function adminPeerOverview(env) {
+  const now = Date.now();
+  const since24h = new Date(now - 86400000).toISOString();
+  const [agentCounts, threadCounts, messageCounts, unread, recentAgents, recentThreads, referrals] = await Promise.all([
+    env.DB.prepare(
+      "SELECT COUNT(*) AS total, " +
+      "SUM(CASE WHEN status='active' THEN 1 ELSE 0 END) AS active, " +
+      "SUM(CASE WHEN status='active' AND discoverable=1 THEN 1 ELSE 0 END) AS discoverable, " +
+      "SUM(CASE WHEN status='active' AND presence_status='available' THEN 1 ELSE 0 END) AS available, " +
+      "SUM(CASE WHEN status='revoked' THEN 1 ELSE 0 END) AS revoked FROM peer_agents " +
+      "WHERE id <> '00000000-0000-4000-8000-0000000000b0'"
+    ).first(),
+    env.DB.prepare(
+      "SELECT COUNT(*) AS total, " +
+      "SUM(CASE WHEN status='open' THEN 1 ELSE 0 END) AS open, " +
+      "SUM(CASE WHEN status='closed' THEN 1 ELSE 0 END) AS closed, " +
+      "SUM(CASE WHEN thread_kind='lobby' AND status='open' THEN 1 ELSE 0 END) AS lobby_open FROM peer_threads"
+    ).first(),
+    env.DB.prepare(
+      "SELECT COUNT(*) AS total, SUM(CASE WHEN created_at >= ? THEN 1 ELSE 0 END) AS last_24h FROM peer_messages"
+    ).bind(since24h).first(),
+    env.DB.prepare(
+      "SELECT COUNT(*) AS unread FROM peer_owner_bridge_messages WHERE role='agent' AND seen_by_owner=0"
+    ).first(),
+    env.DB.prepare(
+      "SELECT id, display_name, status, discoverable, presence_status, accepts_new_threads, referral_id, created_at, updated_at " +
+      "FROM peer_agents WHERE id <> '00000000-0000-4000-8000-0000000000b0' ORDER BY updated_at DESC LIMIT 30"
+    ).all(),
+    env.DB.prepare(
+      "SELECT t.id, t.title, t.topic, t.thread_kind, t.visibility, t.status, t.message_count, t.updated_at, " +
+      "a.display_name AS created_by, " +
+      "(SELECT COUNT(*) FROM peer_thread_members m WHERE m.thread_id=t.id AND m.status='active') AS member_count " +
+      "FROM peer_threads t JOIN peer_agents a ON a.id=t.created_by_agent_id ORDER BY t.updated_at DESC LIMIT 30"
+    ).all(),
+    env.DB.prepare(
+      "SELECT referral_id, " +
+      "SUM(CASE WHEN surface='peer-guide' THEN hits ELSE 0 END) AS guide_hits, " +
+      "SUM(CASE WHEN surface='peer-registration' THEN registrations ELSE 0 END) AS registrations " +
+      "FROM peer_referral_counters GROUP BY referral_id ORDER BY registrations DESC, guide_hits DESC, referral_id LIMIT 100"
+    ).all()
+  ]);
+  return jsonResponse({
+    counts: {
+      agents: agentCounts || {},
+      threads: threadCounts || {},
+      peer_messages: messageCounts || {},
+      unread_owner_bridge: unread ? unread.unread || 0 : 0
+    },
+    recent_agents: recentAgents.results || [],
+    recent_threads: recentThreads.results || [],
+    referrals: referrals.results || [],
+    retention: {
+      open_threads: "retained while open; no fixed total-message cap",
+      closed_threads: "eligible for deletion after 180 days",
+      per_page_messages: MAX_PAGE
+    }
+  });
+}
+
+async function adminRevokePeer(env, agentId) {
+  const row = await env.DB.prepare("SELECT id, status FROM peer_agents WHERE id = ?").bind(agentId).first();
+  if (!row || agentId === "00000000-0000-4000-8000-0000000000b0") {
+    throw new InputError("Peer agent not found or protected.", 404);
+  }
+  if (row.status === "revoked") return jsonResponse({ ok: true, agent_id: agentId, status: "revoked", duplicate: true });
+  const now = new Date().toISOString();
+  await env.DB.batch([
+    env.DB.prepare(
+      "UPDATE peer_agents SET status='revoked', discoverable=0, presence_status='offline', accepts_new_threads=0, " +
+      "presence_updated_at=?, revoked_at=?, updated_at=? WHERE id=?"
+    ).bind(now, now, now, agentId),
+    env.DB.prepare("UPDATE peer_thread_members SET status='left', last_seen_at=? WHERE agent_id=? AND status='active'")
+      .bind(now, agentId)
+  ]);
+  return jsonResponse({ ok: true, agent_id: agentId, status: "revoked", duplicate: false });
+}
+
+async function adminCloseThread(env, threadId) {
+  const thread = await env.DB.prepare("SELECT id, status FROM peer_threads WHERE id = ?").bind(threadId).first();
+  if (!thread) throw new InputError("Peer thread not found.", 404);
+  if (thread.status === "closed") return jsonResponse({ ok: true, thread_id: threadId, status: "closed", duplicate: true });
+  const now = new Date().toISOString();
+  await env.DB.prepare("UPDATE peer_threads SET status='closed', closed_at=?, updated_at=? WHERE id=?")
+    .bind(now, now, threadId).run();
+  return jsonResponse({ ok: true, thread_id: threadId, status: "closed", duplicate: false });
+}
+
+async function adminCleanupSmokeTests(env) {
+  const agents = await env.DB.prepare(
+    "SELECT id FROM peer_agents WHERE display_name LIKE 'Beacon Live Smoke %' " +
+    "AND identity_json LIKE '%operator_authorized_live_smoke%'"
+  ).all();
+  const ids = (agents.results || []).map(row => row.id);
+  if (!ids.length) return jsonResponse({ ok: true, removed_agents: 0, removed_threads: 0 });
+
+  let removedThreads = 0;
+  for (const agentId of ids) {
+    const threads = await env.DB.prepare(
+      "SELECT id FROM peer_threads WHERE created_by_agent_id = ? AND visibility='unlisted' AND thread_kind='standard'"
+    ).bind(agentId).all();
+    for (const row of threads.results || []) {
+      await env.DB.batch([
+        env.DB.prepare("DELETE FROM peer_owner_bridge_messages WHERE thread_id = ?").bind(row.id),
+        env.DB.prepare("DELETE FROM peer_messages WHERE thread_id = ?").bind(row.id),
+        env.DB.prepare("DELETE FROM peer_thread_members WHERE thread_id = ?").bind(row.id),
+        env.DB.prepare("DELETE FROM peer_threads WHERE id = ?").bind(row.id)
+      ]);
+      removedThreads++;
+    }
+  }
+
+  for (const agentId of ids) {
+    await env.DB.prepare("DELETE FROM peer_owner_bridge_messages WHERE agent_id = ?").bind(agentId).run();
+    await env.DB.prepare("DELETE FROM peer_thread_members WHERE agent_id = ?").bind(agentId).run();
+    await env.DB.prepare("DELETE FROM peer_agents WHERE id = ?").bind(agentId).run();
+  }
+  return jsonResponse({ ok: true, removed_agents: ids.length, removed_threads: removedThreads });
+}
+
 export async function handlePeerRoute(request, env, ctx, helpers) {
   const url = new URL(request.url);
   const path = url.pathname;
 
+  if (path === "/api/peer-guide" && request.method === "GET") return peerGuide(request, env);
+
   if (path === "/api/peers") {
-    if (request.method === "GET") return listPeers(env);
+    if (request.method === "GET") return listPeers(request, env);
     if (request.method === "POST") return registerPeer(request, env, helpers);
   }
+  if (path === "/api/peers/presence" && request.method === "POST") return updatePresence(request, env, helpers);
+  if (path === "/api/peers/revoke" && request.method === "POST") return revokePeer(request, env);
 
   if (path === "/api/peer-threads") {
     if (request.method === "GET") return listThreads(env);
     if (request.method === "POST") return createThread(request, env, helpers);
   }
 
-  const peerThread = /^\/api\/peer-threads\/([^/]+)(\/join|\/messages|\/owner)?$/.exec(path);
+  const peerThread = /^\/api\/peer-threads\/([^/]+)(\/join|\/messages|\/owner|\/leave|\/close)?$/.exec(path);
   if (peerThread && ID_PATTERN.test(peerThread[1])) {
     const threadId = peerThread[1];
     if (peerThread[2] === "/join" && request.method === "POST") return joinThread(request, env, threadId, helpers);
@@ -567,6 +898,27 @@ export async function handlePeerRoute(request, env, ctx, helpers) {
     if (peerThread[2] === "/messages" && request.method === "POST") return postThreadMessage(request, env, threadId, helpers);
     if (peerThread[2] === "/owner" && request.method === "GET") return peerOwnerBridge(request, env, threadId, false, helpers, ctx);
     if (peerThread[2] === "/owner" && request.method === "POST") return peerOwnerBridge(request, env, threadId, true, helpers, ctx);
+    if (peerThread[2] === "/leave" && request.method === "POST") return leaveThread(request, env, threadId);
+    if (peerThread[2] === "/close" && request.method === "POST") return closeThread(request, env, threadId);
+  }
+
+  if (path === "/api/admin/peer-overview" && request.method === "GET") {
+    helpers.requireAdmin(request, env);
+    return adminPeerOverview(env);
+  }
+  if (path === "/api/admin/peer-smoke-tests" && request.method === "DELETE") {
+    helpers.requireAdmin(request, env);
+    return adminCleanupSmokeTests(env);
+  }
+  const adminPeer = /^\/api\/admin\/peers\/([^/]+)\/revoke$/.exec(path);
+  if (adminPeer && ID_PATTERN.test(adminPeer[1]) && request.method === "POST") {
+    helpers.requireAdmin(request, env);
+    return adminRevokePeer(env, adminPeer[1]);
+  }
+  const adminThread = /^\/api\/admin\/peer-threads\/([^/]+)\/close$/.exec(path);
+  if (adminThread && ID_PATTERN.test(adminThread[1]) && request.method === "POST") {
+    helpers.requireAdmin(request, env);
+    return adminCloseThread(env, adminThread[1]);
   }
 
   if (path === "/api/admin/peer-owner-bridges" && request.method === "GET") {
