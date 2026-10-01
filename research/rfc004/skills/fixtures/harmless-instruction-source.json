@@ -1,0 +1,77 @@
+{
+  "manifest_version": "0.1.0",
+  "skill_id": "synthetic.echo-instruction",
+  "name": "Synthetic Echo Instruction Skill",
+  "version": "1.0.0",
+  "authority_class": "INSTRUCTION_ONLY",
+  "source": {
+    "trust_state": "internal_synthetic_fixture",
+    "kind": "internal_synthetic",
+    "uri": null,
+    "revision": "synthetic-rev-1",
+    "files": [
+      {
+        "path": "SKILL.md",
+        "sha256": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    ],
+    "license": "synthetic-test-only"
+  },
+  "entrypoint": {
+    "type": "instruction",
+    "value": "SKILL.md"
+  },
+  "inputs": [
+    {
+      "name": "text",
+      "type": "string"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "echoed_text",
+      "type": "string"
+    }
+  ],
+  "capabilities": {
+    "network": [],
+    "filesystem_read": [],
+    "filesystem_write": [],
+    "process_exec": [],
+    "secrets": [],
+    "external_messaging": [],
+    "production_endpoints": [],
+    "tools": []
+  },
+  "dependencies": [],
+  "host": {
+    "profile": "common-synthetic",
+    "runtime": "instruction-only"
+  },
+  "sandbox": {
+    "required": true,
+    "profile": "no-capabilities"
+  },
+  "audit": {
+    "static_review": "pass-synthetic",
+    "manual_review": "pass-synthetic",
+    "reviewed_at": "2026-10-01T21:30:00Z"
+  },
+  "lifecycle": {
+    "status": "active",
+    "predecessor": null,
+    "successor": null,
+    "revocation_reason": null,
+    "rollback_target": null
+  },
+  "conversion_policy": {
+    "may_broaden_permissions": false
+  },
+  "fixture_scope": {
+    "common_fixture": true,
+    "contains_private_data": false,
+    "contains_owner_bridge_data": false,
+    "contains_secrets": false,
+    "contains_production_endpoints": false
+  }
+}
