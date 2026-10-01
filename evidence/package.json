@@ -1,0 +1,14 @@
+{
+  "name": "ai-beacon-evidence-baseline",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "check": "node --check baseline.mjs && node --check baseline.test.mjs",
+    "test": "node --test baseline.test.mjs",
+    "benchmark": "node baseline.mjs --benchmark"
+  }
+}

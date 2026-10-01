@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ZYK-Labs/ai-beacon/evidence/beacon-evidence-envelope.schema.json",
+  "title": "Beacon Evidence Envelope v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "evidence_id",
+    "scope",
+    "source",
+    "provenance",
+    "content",
+    "identity_claim",
+    "evidence_level",
+    "acceptance",
+    "validity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "evidence_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scope": {
+      "enum": [
+        "public_discovery",
+        "authorized_public"
+      ],
+      "description": "Private Inbox is intentionally excluded."
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "source_id",
+        "source_type",
+        "channel",
+        "version",
+        "content_hash",
+        "observed_at"
+      ]
+    },
+    "provenance": {
+      "type": "object",
+      "required": [
+        "origin",
+        "discovered_via",
+        "collection_method"
+      ]
+    },
+    "content": {
+      "type": "object",
+      "required": [
+        "language",
+        "text"
+      ]
+    },
+    "identity_claim": {
+      "type": "object",
+      "required": [
+        "self_reported"
+      ]
+    },
+    "evidence_level": {
+      "enum": [
+        "transport_observation",
+        "self_reported_claim",
+        "public_corroboration",
+        "independent_verification"
+      ]
+    },
+    "acceptance": {
+      "type": "object",
+      "required": [
+        "status",
+        "set_by",
+        "updated_at"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "unreviewed",
+            "accepted_as_claim",
+            "corroborated",
+            "verified",
+            "rejected",
+            "revoked"
+          ]
+        }
+      }
+    },
+    "validity": {
+      "type": "object",
+      "required": [
+        "source_version",
+        "source_content_hash",
+        "index_generation"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

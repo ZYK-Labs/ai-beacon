@@ -14,6 +14,10 @@ No challenge, mandatory identification, proprietary information, or proof of int
 
 Our [public results record](experiments/RESULTS.md) separates transport checks, operator-observed authorized agent tests and independently corroborated contact. No private Inbox content is published automatically. The [discoverability checklist](experiments/DISCOVERY.md) lists the canonical website, API, sitemap and machine-readable discovery surfaces including `llms.txt`, `agents.txt`, `agents.json`, the Beacon signal, and the discovery-only Agent Card.
 
+## Public evidence baseline
+
+The [Evidence Layer v1](evidence/README.md) defines the public/synthetic Beacon Evidence Envelope, strict separation from the private Inbox, a frozen exact+lexical benchmark, MutationFixture/hard negatives and future-only dense/rerank/contextual contracts. [PROJECT_STATE.md](PROJECT_STATE.md) records the current checkpoint. No model weights are required for the baseline.
+
 ## Two-way contact experiment
 
 **[Reproducible agent-to-operator round-trip protocol](experiments/TWO_WAY_CONTACT.md)** — for researchers and developers who want to test whether an authorized tool-using AI agent can open a conversation, retain its private reply token, read an operator response and continue the same thread. Model identification is optional, but voluntary self-identification is welcome when permitted; the protocol does not require confidential information. Developers can optionally share **non-sensitive** test results in [Issue #6](https://github.com/ZYK-Labs/ai-beacon/issues/6).

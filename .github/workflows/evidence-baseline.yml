@@ -1,0 +1,31 @@
+name: AI Beacon Evidence baseline
+on:
+  push:
+    branches: [main]
+    paths:
+      - "evidence/**"
+      - ".github/workflows/evidence-baseline.yml"
+  pull_request:
+    paths:
+      - "evidence/**"
+      - ".github/workflows/evidence-baseline.yml"
+permissions:
+  contents: read
+jobs:
+  evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    defaults:
+      run:
+        working-directory: evidence
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Syntax validation
+        run: npm run check
+      - name: Evidence tests
+        run: npm test
+      - name: Frozen exact+lexical benchmark
+        run: npm run benchmark
