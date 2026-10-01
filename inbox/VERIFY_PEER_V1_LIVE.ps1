@@ -1,7 +1,9 @@
 $ErrorActionPreference = 'Stop'
 
-# Windows PowerShell 5.1 can otherwise negotiate an obsolete TLS version with
-# Cloudflare and fail before any HTTP response is received.
+# Windows PowerShell 5.1 Invoke-RestMethod can fail at the TLS/Schannel layer
+# against the Cloudflare Worker on some Windows installations. The verifier
+# therefore uses the OS curl.exe transport below. We still keep TLS 1.2 enabled
+# for any incidental .NET web calls in this PowerShell process.
 if ($PSVersionTable.PSEdition -eq 'Desktop') {
   [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 }
@@ -26,12 +28,59 @@ function Invoke-Json {
     [object]$Body = $null,
     [string]$Bearer = $null
   )
-  $headers = @{}
-  if ($Bearer) { $headers['Authorization'] = 'Bearer ' + $Bearer }
-  if ($null -ne $Body) {
-    return Invoke-RestMethod -Uri $Uri -Method $Method -Headers $headers -ContentType 'application/json' -Body ($Body | ConvertTo-Json -Depth 8 -Compress) -TimeoutSec 30
+
+  $curl = Get-Command curl.exe -ErrorAction SilentlyContinue
+  if (-not $curl) {
+    throw 'curl.exe is required for this verifier on Windows. It is included with supported Windows 10/11 builds.'
   }
-  return Invoke-RestMethod -Uri $Uri -Method $Method -Headers $headers -TimeoutSec 30
+
+  $tmpHeader = $null
+  $tmpBody = $null
+  try {
+    $args = @(
+      '--silent',
+      '--show-error',
+      '--fail',
+      '--connect-timeout', '10',
+      '--max-time', '30',
+      '--request', $Method,
+      '--header', 'Accept: application/json'
+    )
+
+    # Keep bearer credentials out of the process command line.
+    # curl supports reading headers from a file via: -H @filename
+    if ($Bearer) {
+      $tmpHeader = [IO.Path]::GetTempFileName()
+      [IO.File]::WriteAllText($tmpHeader, ('Authorization: Bearer ' + $Bearer + [Environment]::NewLine))
+      $args += @('--header', ('@' + $tmpHeader))
+    }
+
+    if ($null -ne $Body) {
+      $tmpBody = [IO.Path]::GetTempFileName()
+      $json = $Body | ConvertTo-Json -Depth 8 -Compress
+      [IO.File]::WriteAllText($tmpBody, $json, ([Text.UTF8Encoding]::new($false)))
+      $args += @('--header', 'Content-Type: application/json', '--data-binary', ('@' + $tmpBody))
+    }
+
+    $args += $Uri
+    $raw = & $curl.Source @args
+    if ($LASTEXITCODE -ne 0) {
+      throw "curl.exe failed with exit code $LASTEXITCODE for $Method $Uri"
+    }
+
+    if ([string]::IsNullOrWhiteSpace(($raw -join [Environment]::NewLine))) {
+      return $null
+    }
+    return (($raw -join [Environment]::NewLine) | ConvertFrom-Json)
+  }
+  finally {
+    if ($tmpHeader -and (Test-Path $tmpHeader)) {
+      Remove-Item -LiteralPath $tmpHeader -Force -ErrorAction SilentlyContinue
+    }
+    if ($tmpBody -and (Test-Path $tmpBody)) {
+      Remove-Item -LiteralPath $tmpBody -Force -ErrorAction SilentlyContinue
+    }
+  }
 }
 
 function Assert-True([bool]$Condition, [string]$Message) {
