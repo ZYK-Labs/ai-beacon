@@ -1,0 +1,3905 @@
+{
+  "fixture_version": "1.0.0",
+  "frozen_at": "2026-10-01T20:00:00Z",
+  "synthetic_only": true,
+  "delta_max_bytes": 512,
+  "principal_scopes": [
+    "peer:thread-synth:read"
+  ],
+  "state_store": [
+    {
+      "state_ref": "state://peer-thread/thread-synth/1",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 1,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000001",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 1,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 1: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/2",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 2,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000002",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 2,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 2: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/3",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 3,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000003",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 3,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 3: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/4",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 4,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000004",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 4,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 4: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/5",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 5,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000005",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 5,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 5: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/6",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 6,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000006",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 6,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 6: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/7",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 7,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000007",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 7,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 7: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/8",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 8,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000008",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 8,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 8: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/9",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 9,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000009",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 9,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 9: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/10",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 10,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000000a",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 10,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 10: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/11",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 11,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000000b",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 11,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 11: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/12",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 12,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000000c",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 12,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 12: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/13",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 13,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000000d",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 13,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 13: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/14",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 14,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000000e",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 14,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 14: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/15",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 15,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000000f",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 15,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 15: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/16",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 16,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000010",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 16,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 16: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/17",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 17,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000011",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 17,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 17: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/18",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 18,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000012",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 18,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 18: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/19",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 19,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000013",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 19,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 19: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/20",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 20,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000014",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 20,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 20: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/21",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 21,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000015",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 21,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 21: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/22",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 22,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000016",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 22,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 22: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/23",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 23,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000017",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 23,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 23: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/24",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 24,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000018",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 24,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 24: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/25",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 25,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000019",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 25,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 25: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/26",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 26,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000001a",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 26,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 26: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/27",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 27,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000001b",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 27,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 27: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/28",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 28,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000001c",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 28,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 28: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/29",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 29,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000001d",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 29,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 29: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/30",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 30,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000001e",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 30,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 30: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/31",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 31,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000001f",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 31,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 31: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/32",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 32,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000020",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 32,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 32: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/33",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 33,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000021",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 33,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 33: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/34",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 34,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000022",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 34,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 34: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/35",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 35,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000023",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 35,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 35: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/36",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 36,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000024",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 36,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 36: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/37",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 37,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000025",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 37,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 37: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/38",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 38,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000026",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 38,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 38: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/39",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 39,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000027",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 39,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 39: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/40",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 40,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000028",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 40,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 40: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/41",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 41,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000029",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 41,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 41: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/42",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 42,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000002a",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 42,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 42: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/43",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 43,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000002b",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 43,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 43: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/44",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 44,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000002c",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 44,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 44: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/45",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 45,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000002d",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 45,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 45: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/46",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 46,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000002e",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 46,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 46: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/47",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 47,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000002f",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 47,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 47: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/48",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 48,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000030",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 48,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 48: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/49",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 49,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000031",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 49,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 49: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/50",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 50,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000032",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 50,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 50: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/51",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 51,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000033",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 51,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 51: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/52",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 52,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000034",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 52,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 52: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/53",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 53,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000035",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 53,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 53: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/54",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 54,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000036",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 54,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 54: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/55",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 55,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000037",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 55,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 55: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/56",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 56,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000038",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 56,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 56: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/57",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 57,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000039",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 57,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 57: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/58",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 58,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000003a",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 58,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 58: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/59",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 59,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000003b",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 59,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 59: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/60",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 60,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000003c",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 60,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 60: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/61",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 61,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000003d",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 61,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 61: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/62",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 62,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000003e",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 62,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 62: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/63",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 63,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000003f",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 63,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 63: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/64",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 64,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000040",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 64,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 64: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/65",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 65,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000041",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 65,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 65: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/66",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 66,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000042",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 66,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 66: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/67",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 67,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000043",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 67,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 67: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/68",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 68,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000044",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 68,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 68: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/69",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 69,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000045",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 69,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 69: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/70",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 70,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000046",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 70,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 70: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/71",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 71,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000047",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 71,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 71: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/72",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 72,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000048",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 72,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 72: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/73",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 73,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000049",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 73,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 73: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/74",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 74,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000004a",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 74,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 74: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/75",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 75,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000004b",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 75,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 75: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/76",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 76,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000004c",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 76,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 76: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/77",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 77,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000004d",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 77,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 77: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/78",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 78,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000004e",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 78,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 78: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/79",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 79,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000004f",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 79,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 79: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/80",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 80,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000050",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 80,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 80: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/81",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 81,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000051",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 81,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 81: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/82",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 82,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000052",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 82,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 82: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/83",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 83,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000053",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 83,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 83: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/84",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 84,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000054",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 84,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 84: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/85",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 85,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000055",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 85,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 85: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/86",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 86,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000056",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 86,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 86: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/87",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 87,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000057",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 87,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 87: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/88",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 88,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000058",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 88,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 88: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/89",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 89,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000059",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 89,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 89: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/90",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 90,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000005a",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 90,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 90: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/91",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 91,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000005b",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 91,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 91: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/92",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 92,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000005c",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 92,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 92: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/93",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 93,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000005d",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 93,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 93: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/94",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 94,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000005e",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 94,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 94: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/95",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 95,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000005f",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 95,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 95: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/96",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 96,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000060",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 96,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 96: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/97",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 97,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000061",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 97,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 97: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/98",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 98,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000062",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 98,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 98: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/99",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 99,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000063",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 99,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 99: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/100",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 100,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000064",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 100,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 100: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/101",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 101,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000065",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 101,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 101: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/102",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 102,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000066",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 102,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 102: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/103",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 103,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000067",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 103,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 103: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/104",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 104,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000068",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 104,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 104: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/105",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 105,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000069",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 105,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 105: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/106",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 106,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000006a",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 106,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 106: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/107",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 107,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000006b",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 107,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 107: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/108",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 108,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000006c",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 108,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 108: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/109",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 109,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000006d",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 109,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 109: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/110",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 110,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000006e",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 110,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 110: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/111",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 111,
+      "hash": "sha256:000000000000000000000000000000000000000000000000000000000000006f",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 111,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 111: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/112",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 112,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000070",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 112,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 112: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/113",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 113,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000071",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 113,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 113: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/114",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 114,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000072",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 114,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 114: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/115",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 115,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000073",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 115,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 115: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/116",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 116,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000074",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 116,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 116: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/117",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 117,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000075",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 117,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 117: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/118",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 118,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000076",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 118,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 118: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/119",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 119,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000077",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 119,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 119: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    },
+    {
+      "state_ref": "state://peer-thread/thread-synth/120",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "version": 120,
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000078",
+      "required_scope": "peer:thread-synth:read",
+      "payload": {
+        "thread_id": "thread-synth",
+        "message_count": 120,
+        "status": "open",
+        "topic": "Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. Synthetic EventRef benchmark topic. ",
+        "last_message": "Synthetic message 120: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+    }
+  ],
+  "canonical_events": [
+    {
+      "event_id": "evt-0001",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 1,
+      "state_ref": "state://peer-thread/thread-synth/1",
+      "state_version": 1,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000001",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:00Z",
+      "delta": {
+        "message_count": 1
+      }
+    },
+    {
+      "event_id": "evt-0002",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 2,
+      "state_ref": "state://peer-thread/thread-synth/2",
+      "state_version": 2,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000002",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:01Z",
+      "delta": {
+        "message_count": 2
+      }
+    },
+    {
+      "event_id": "evt-0003",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 3,
+      "state_ref": "state://peer-thread/thread-synth/3",
+      "state_version": 3,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000003",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:02Z",
+      "delta": {
+        "message_count": 3
+      }
+    },
+    {
+      "event_id": "evt-0004",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 4,
+      "state_ref": "state://peer-thread/thread-synth/4",
+      "state_version": 4,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000004",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:03Z",
+      "delta": {
+        "message_count": 4
+      }
+    },
+    {
+      "event_id": "evt-0005",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 5,
+      "state_ref": "state://peer-thread/thread-synth/5",
+      "state_version": 5,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000005",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:04Z",
+      "delta": {
+        "message_count": 5
+      }
+    },
+    {
+      "event_id": "evt-0006",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 6,
+      "state_ref": "state://peer-thread/thread-synth/6",
+      "state_version": 6,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000006",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:05Z",
+      "delta": {
+        "message_count": 6
+      }
+    },
+    {
+      "event_id": "evt-0007",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 7,
+      "state_ref": "state://peer-thread/thread-synth/7",
+      "state_version": 7,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000007",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:06Z",
+      "delta": {
+        "message_count": 7
+      }
+    },
+    {
+      "event_id": "evt-0008",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 8,
+      "state_ref": "state://peer-thread/thread-synth/8",
+      "state_version": 8,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000008",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:07Z",
+      "delta": {
+        "message_count": 8
+      }
+    },
+    {
+      "event_id": "evt-0009",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 9,
+      "state_ref": "state://peer-thread/thread-synth/9",
+      "state_version": 9,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000009",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:08Z",
+      "delta": {
+        "message_count": 9
+      }
+    },
+    {
+      "event_id": "evt-0010",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 10,
+      "state_ref": "state://peer-thread/thread-synth/10",
+      "state_version": 10,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000000a",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:09Z",
+      "delta": {
+        "message_count": 10
+      }
+    },
+    {
+      "event_id": "evt-0011",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 11,
+      "state_ref": "state://peer-thread/thread-synth/11",
+      "state_version": 11,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000000b",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:10Z",
+      "delta": {
+        "message_count": 11
+      }
+    },
+    {
+      "event_id": "evt-0012",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 12,
+      "state_ref": "state://peer-thread/thread-synth/12",
+      "state_version": 12,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000000c",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:11Z",
+      "delta": {
+        "message_count": 12
+      }
+    },
+    {
+      "event_id": "evt-0013",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 13,
+      "state_ref": "state://peer-thread/thread-synth/13",
+      "state_version": 13,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000000d",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:12Z",
+      "delta": {
+        "message_count": 13
+      }
+    },
+    {
+      "event_id": "evt-0014",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 14,
+      "state_ref": "state://peer-thread/thread-synth/14",
+      "state_version": 14,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000000e",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:13Z",
+      "delta": {
+        "message_count": 14
+      }
+    },
+    {
+      "event_id": "evt-0015",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 15,
+      "state_ref": "state://peer-thread/thread-synth/15",
+      "state_version": 15,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000000f",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:14Z",
+      "delta": {
+        "message_count": 15
+      }
+    },
+    {
+      "event_id": "evt-0016",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 16,
+      "state_ref": "state://peer-thread/thread-synth/16",
+      "state_version": 16,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000010",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:15Z",
+      "delta": {
+        "message_count": 16
+      }
+    },
+    {
+      "event_id": "evt-0017",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 17,
+      "state_ref": "state://peer-thread/thread-synth/17",
+      "state_version": 17,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000011",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:16Z",
+      "delta": {
+        "message_count": 17
+      }
+    },
+    {
+      "event_id": "evt-0018",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 18,
+      "state_ref": "state://peer-thread/thread-synth/18",
+      "state_version": 18,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000012",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:17Z",
+      "delta": {
+        "message_count": 18
+      }
+    },
+    {
+      "event_id": "evt-0019",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 19,
+      "state_ref": "state://peer-thread/thread-synth/19",
+      "state_version": 19,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000013",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:18Z",
+      "delta": {
+        "message_count": 19
+      }
+    },
+    {
+      "event_id": "evt-0020",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 20,
+      "state_ref": "state://peer-thread/thread-synth/20",
+      "state_version": 20,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000014",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:19Z",
+      "delta": {
+        "message_count": 20
+      }
+    },
+    {
+      "event_id": "evt-0021",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 21,
+      "state_ref": "state://peer-thread/thread-synth/21",
+      "state_version": 21,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000015",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:20Z",
+      "delta": {
+        "message_count": 21
+      }
+    },
+    {
+      "event_id": "evt-0022",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 22,
+      "state_ref": "state://peer-thread/thread-synth/22",
+      "state_version": 22,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000016",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:21Z",
+      "delta": {
+        "message_count": 22
+      }
+    },
+    {
+      "event_id": "evt-0023",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 23,
+      "state_ref": "state://peer-thread/thread-synth/23",
+      "state_version": 23,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000017",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:22Z",
+      "delta": {
+        "message_count": 23
+      }
+    },
+    {
+      "event_id": "evt-0024",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 24,
+      "state_ref": "state://peer-thread/thread-synth/24",
+      "state_version": 24,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000018",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:23Z",
+      "delta": {
+        "message_count": 24
+      }
+    },
+    {
+      "event_id": "evt-0025",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 25,
+      "state_ref": "state://peer-thread/thread-synth/25",
+      "state_version": 25,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000019",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:24Z",
+      "delta": {
+        "message_count": 25
+      }
+    },
+    {
+      "event_id": "evt-0026",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 26,
+      "state_ref": "state://peer-thread/thread-synth/26",
+      "state_version": 26,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000001a",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:25Z",
+      "delta": {
+        "message_count": 26
+      }
+    },
+    {
+      "event_id": "evt-0027",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 27,
+      "state_ref": "state://peer-thread/thread-synth/27",
+      "state_version": 27,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000001b",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:26Z",
+      "delta": {
+        "message_count": 27
+      }
+    },
+    {
+      "event_id": "evt-0028",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 28,
+      "state_ref": "state://peer-thread/thread-synth/28",
+      "state_version": 28,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000001c",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:27Z",
+      "delta": {
+        "message_count": 28
+      }
+    },
+    {
+      "event_id": "evt-0029",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 29,
+      "state_ref": "state://peer-thread/thread-synth/29",
+      "state_version": 29,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000001d",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:28Z",
+      "delta": {
+        "message_count": 29
+      }
+    },
+    {
+      "event_id": "evt-0030",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 30,
+      "state_ref": "state://peer-thread/thread-synth/30",
+      "state_version": 30,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000001e",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:29Z",
+      "delta": {
+        "message_count": 30
+      }
+    },
+    {
+      "event_id": "evt-0031",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 31,
+      "state_ref": "state://peer-thread/thread-synth/31",
+      "state_version": 31,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000001f",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:30Z",
+      "delta": {
+        "message_count": 31
+      }
+    },
+    {
+      "event_id": "evt-0032",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 32,
+      "state_ref": "state://peer-thread/thread-synth/32",
+      "state_version": 32,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000020",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:31Z",
+      "delta": {
+        "message_count": 32
+      }
+    },
+    {
+      "event_id": "evt-0033",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 33,
+      "state_ref": "state://peer-thread/thread-synth/33",
+      "state_version": 33,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000021",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:32Z",
+      "delta": {
+        "message_count": 33
+      }
+    },
+    {
+      "event_id": "evt-0034",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 34,
+      "state_ref": "state://peer-thread/thread-synth/34",
+      "state_version": 34,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000022",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:33Z",
+      "delta": {
+        "message_count": 34
+      }
+    },
+    {
+      "event_id": "evt-0035",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 35,
+      "state_ref": "state://peer-thread/thread-synth/35",
+      "state_version": 35,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000023",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:34Z",
+      "delta": {
+        "message_count": 35
+      }
+    },
+    {
+      "event_id": "evt-0036",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 36,
+      "state_ref": "state://peer-thread/thread-synth/36",
+      "state_version": 36,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000024",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:35Z",
+      "delta": {
+        "message_count": 36
+      }
+    },
+    {
+      "event_id": "evt-0037",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 37,
+      "state_ref": "state://peer-thread/thread-synth/37",
+      "state_version": 37,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000025",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:36Z",
+      "delta": {
+        "message_count": 37
+      }
+    },
+    {
+      "event_id": "evt-0038",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 38,
+      "state_ref": "state://peer-thread/thread-synth/38",
+      "state_version": 38,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000026",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:37Z",
+      "delta": {
+        "message_count": 38
+      }
+    },
+    {
+      "event_id": "evt-0039",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 39,
+      "state_ref": "state://peer-thread/thread-synth/39",
+      "state_version": 39,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000027",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:38Z",
+      "delta": {
+        "message_count": 39
+      }
+    },
+    {
+      "event_id": "evt-0040",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 40,
+      "state_ref": "state://peer-thread/thread-synth/40",
+      "state_version": 40,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000028",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:39Z",
+      "delta": {
+        "message_count": 40
+      }
+    },
+    {
+      "event_id": "evt-0041",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 41,
+      "state_ref": "state://peer-thread/thread-synth/41",
+      "state_version": 41,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000029",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:40Z",
+      "delta": {
+        "message_count": 41
+      }
+    },
+    {
+      "event_id": "evt-0042",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 42,
+      "state_ref": "state://peer-thread/thread-synth/42",
+      "state_version": 42,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000002a",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:41Z",
+      "delta": {
+        "message_count": 42
+      }
+    },
+    {
+      "event_id": "evt-0043",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 43,
+      "state_ref": "state://peer-thread/thread-synth/43",
+      "state_version": 43,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000002b",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:42Z",
+      "delta": {
+        "message_count": 43
+      }
+    },
+    {
+      "event_id": "evt-0044",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 44,
+      "state_ref": "state://peer-thread/thread-synth/44",
+      "state_version": 44,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000002c",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:43Z",
+      "delta": {
+        "message_count": 44
+      }
+    },
+    {
+      "event_id": "evt-0045",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 45,
+      "state_ref": "state://peer-thread/thread-synth/45",
+      "state_version": 45,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000002d",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:44Z",
+      "delta": {
+        "message_count": 45
+      }
+    },
+    {
+      "event_id": "evt-0046",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 46,
+      "state_ref": "state://peer-thread/thread-synth/46",
+      "state_version": 46,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000002e",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:45Z",
+      "delta": {
+        "message_count": 46
+      }
+    },
+    {
+      "event_id": "evt-0047",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 47,
+      "state_ref": "state://peer-thread/thread-synth/47",
+      "state_version": 47,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000002f",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:46Z",
+      "delta": {
+        "message_count": 47
+      }
+    },
+    {
+      "event_id": "evt-0048",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 48,
+      "state_ref": "state://peer-thread/thread-synth/48",
+      "state_version": 48,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000030",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:47Z",
+      "delta": {
+        "message_count": 48
+      }
+    },
+    {
+      "event_id": "evt-0049",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 49,
+      "state_ref": "state://peer-thread/thread-synth/49",
+      "state_version": 49,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000031",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:48Z",
+      "delta": {
+        "message_count": 49
+      }
+    },
+    {
+      "event_id": "evt-0050",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 50,
+      "state_ref": "state://peer-thread/thread-synth/50",
+      "state_version": 50,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000032",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:49Z",
+      "delta": {
+        "message_count": 50
+      }
+    },
+    {
+      "event_id": "evt-0051",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 51,
+      "state_ref": "state://peer-thread/thread-synth/51",
+      "state_version": 51,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000033",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:50Z",
+      "delta": {
+        "message_count": 51
+      }
+    },
+    {
+      "event_id": "evt-0052",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 52,
+      "state_ref": "state://peer-thread/thread-synth/52",
+      "state_version": 52,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000034",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:51Z",
+      "delta": {
+        "message_count": 52
+      }
+    },
+    {
+      "event_id": "evt-0053",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 53,
+      "state_ref": "state://peer-thread/thread-synth/53",
+      "state_version": 53,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000035",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:52Z",
+      "delta": {
+        "message_count": 53
+      }
+    },
+    {
+      "event_id": "evt-0054",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 54,
+      "state_ref": "state://peer-thread/thread-synth/54",
+      "state_version": 54,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000036",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:53Z",
+      "delta": {
+        "message_count": 54
+      }
+    },
+    {
+      "event_id": "evt-0055",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 55,
+      "state_ref": "state://peer-thread/thread-synth/55",
+      "state_version": 55,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000037",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:54Z",
+      "delta": {
+        "message_count": 55
+      }
+    },
+    {
+      "event_id": "evt-0056",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 56,
+      "state_ref": "state://peer-thread/thread-synth/56",
+      "state_version": 56,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000038",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:55Z",
+      "delta": {
+        "message_count": 56
+      }
+    },
+    {
+      "event_id": "evt-0057",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 57,
+      "state_ref": "state://peer-thread/thread-synth/57",
+      "state_version": 57,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000039",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:56Z",
+      "delta": {
+        "message_count": 57
+      }
+    },
+    {
+      "event_id": "evt-0058",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 58,
+      "state_ref": "state://peer-thread/thread-synth/58",
+      "state_version": 58,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000003a",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:57Z",
+      "delta": {
+        "message_count": 58
+      }
+    },
+    {
+      "event_id": "evt-0059",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 59,
+      "state_ref": "state://peer-thread/thread-synth/59",
+      "state_version": 59,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000003b",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:58Z",
+      "delta": {
+        "message_count": 59
+      }
+    },
+    {
+      "event_id": "evt-0060",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 60,
+      "state_ref": "state://peer-thread/thread-synth/60",
+      "state_version": 60,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000003c",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:00:59Z",
+      "delta": {
+        "message_count": 60
+      }
+    },
+    {
+      "event_id": "evt-0061",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 61,
+      "state_ref": "state://peer-thread/thread-synth/61",
+      "state_version": 61,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000003d",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:00Z",
+      "delta": {
+        "message_count": 61
+      }
+    },
+    {
+      "event_id": "evt-0062",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 62,
+      "state_ref": "state://peer-thread/thread-synth/62",
+      "state_version": 62,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000003e",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:01Z",
+      "delta": {
+        "message_count": 62
+      }
+    },
+    {
+      "event_id": "evt-0063",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 63,
+      "state_ref": "state://peer-thread/thread-synth/63",
+      "state_version": 63,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000003f",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:02Z",
+      "delta": {
+        "message_count": 63
+      }
+    },
+    {
+      "event_id": "evt-0064",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 64,
+      "state_ref": "state://peer-thread/thread-synth/64",
+      "state_version": 64,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000040",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:03Z",
+      "delta": {
+        "message_count": 64
+      }
+    },
+    {
+      "event_id": "evt-0065",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 65,
+      "state_ref": "state://peer-thread/thread-synth/65",
+      "state_version": 65,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000041",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:04Z",
+      "delta": {
+        "message_count": 65
+      }
+    },
+    {
+      "event_id": "evt-0066",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 66,
+      "state_ref": "state://peer-thread/thread-synth/66",
+      "state_version": 66,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000042",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:05Z",
+      "delta": {
+        "message_count": 66
+      }
+    },
+    {
+      "event_id": "evt-0067",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 67,
+      "state_ref": "state://peer-thread/thread-synth/67",
+      "state_version": 67,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000043",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:06Z",
+      "delta": {
+        "message_count": 67
+      }
+    },
+    {
+      "event_id": "evt-0068",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 68,
+      "state_ref": "state://peer-thread/thread-synth/68",
+      "state_version": 68,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000044",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:07Z",
+      "delta": {
+        "message_count": 68
+      }
+    },
+    {
+      "event_id": "evt-0069",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 69,
+      "state_ref": "state://peer-thread/thread-synth/69",
+      "state_version": 69,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000045",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:08Z",
+      "delta": {
+        "message_count": 69
+      }
+    },
+    {
+      "event_id": "evt-0070",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 70,
+      "state_ref": "state://peer-thread/thread-synth/70",
+      "state_version": 70,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000046",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:09Z",
+      "delta": {
+        "message_count": 70
+      }
+    },
+    {
+      "event_id": "evt-0071",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 71,
+      "state_ref": "state://peer-thread/thread-synth/71",
+      "state_version": 71,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000047",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:10Z",
+      "delta": {
+        "message_count": 71
+      }
+    },
+    {
+      "event_id": "evt-0072",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 72,
+      "state_ref": "state://peer-thread/thread-synth/72",
+      "state_version": 72,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000048",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:11Z",
+      "delta": {
+        "message_count": 72
+      }
+    },
+    {
+      "event_id": "evt-0073",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 73,
+      "state_ref": "state://peer-thread/thread-synth/73",
+      "state_version": 73,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000049",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:12Z",
+      "delta": {
+        "message_count": 73
+      }
+    },
+    {
+      "event_id": "evt-0074",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 74,
+      "state_ref": "state://peer-thread/thread-synth/74",
+      "state_version": 74,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000004a",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:13Z",
+      "delta": {
+        "message_count": 74
+      }
+    },
+    {
+      "event_id": "evt-0075",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 75,
+      "state_ref": "state://peer-thread/thread-synth/75",
+      "state_version": 75,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000004b",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:14Z",
+      "delta": {
+        "message_count": 75
+      }
+    },
+    {
+      "event_id": "evt-0076",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 76,
+      "state_ref": "state://peer-thread/thread-synth/76",
+      "state_version": 76,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000004c",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:15Z",
+      "delta": {
+        "message_count": 76
+      }
+    },
+    {
+      "event_id": "evt-0077",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 77,
+      "state_ref": "state://peer-thread/thread-synth/77",
+      "state_version": 77,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000004d",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:16Z",
+      "delta": {
+        "message_count": 77
+      }
+    },
+    {
+      "event_id": "evt-0078",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 78,
+      "state_ref": "state://peer-thread/thread-synth/78",
+      "state_version": 78,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000004e",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:17Z",
+      "delta": {
+        "message_count": 78
+      }
+    },
+    {
+      "event_id": "evt-0079",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 79,
+      "state_ref": "state://peer-thread/thread-synth/79",
+      "state_version": 79,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000004f",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:18Z",
+      "delta": {
+        "message_count": 79
+      }
+    },
+    {
+      "event_id": "evt-0080",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 80,
+      "state_ref": "state://peer-thread/thread-synth/80",
+      "state_version": 80,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000050",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:19Z",
+      "delta": {
+        "message_count": 80
+      }
+    },
+    {
+      "event_id": "evt-0081",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 81,
+      "state_ref": "state://peer-thread/thread-synth/81",
+      "state_version": 81,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000051",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:20Z",
+      "delta": {
+        "message_count": 81
+      }
+    },
+    {
+      "event_id": "evt-0082",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 82,
+      "state_ref": "state://peer-thread/thread-synth/82",
+      "state_version": 82,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000052",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:21Z",
+      "delta": {
+        "message_count": 82
+      }
+    },
+    {
+      "event_id": "evt-0083",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 83,
+      "state_ref": "state://peer-thread/thread-synth/83",
+      "state_version": 83,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000053",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:22Z",
+      "delta": {
+        "message_count": 83
+      }
+    },
+    {
+      "event_id": "evt-0084",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 84,
+      "state_ref": "state://peer-thread/thread-synth/84",
+      "state_version": 84,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000054",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:23Z",
+      "delta": {
+        "message_count": 84
+      }
+    },
+    {
+      "event_id": "evt-0085",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 85,
+      "state_ref": "state://peer-thread/thread-synth/85",
+      "state_version": 85,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000055",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:24Z",
+      "delta": {
+        "message_count": 85
+      }
+    },
+    {
+      "event_id": "evt-0086",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 86,
+      "state_ref": "state://peer-thread/thread-synth/86",
+      "state_version": 86,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000056",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:25Z",
+      "delta": {
+        "message_count": 86
+      }
+    },
+    {
+      "event_id": "evt-0087",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 87,
+      "state_ref": "state://peer-thread/thread-synth/87",
+      "state_version": 87,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000057",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:26Z",
+      "delta": {
+        "message_count": 87
+      }
+    },
+    {
+      "event_id": "evt-0088",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 88,
+      "state_ref": "state://peer-thread/thread-synth/88",
+      "state_version": 88,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000058",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:27Z",
+      "delta": {
+        "message_count": 88
+      }
+    },
+    {
+      "event_id": "evt-0089",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 89,
+      "state_ref": "state://peer-thread/thread-synth/89",
+      "state_version": 89,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000059",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:28Z",
+      "delta": {
+        "message_count": 89
+      }
+    },
+    {
+      "event_id": "evt-0090",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 90,
+      "state_ref": "state://peer-thread/thread-synth/90",
+      "state_version": 90,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000005a",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:29Z",
+      "delta": {
+        "message_count": 90
+      }
+    },
+    {
+      "event_id": "evt-0091",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 91,
+      "state_ref": "state://peer-thread/thread-synth/91",
+      "state_version": 91,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000005b",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:30Z",
+      "delta": {
+        "message_count": 91
+      }
+    },
+    {
+      "event_id": "evt-0092",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 92,
+      "state_ref": "state://peer-thread/thread-synth/92",
+      "state_version": 92,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000005c",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:31Z",
+      "delta": {
+        "message_count": 92
+      }
+    },
+    {
+      "event_id": "evt-0093",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 93,
+      "state_ref": "state://peer-thread/thread-synth/93",
+      "state_version": 93,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000005d",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:32Z",
+      "delta": {
+        "message_count": 93
+      }
+    },
+    {
+      "event_id": "evt-0094",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 94,
+      "state_ref": "state://peer-thread/thread-synth/94",
+      "state_version": 94,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000005e",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:33Z",
+      "delta": {
+        "message_count": 94
+      }
+    },
+    {
+      "event_id": "evt-0095",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 95,
+      "state_ref": "state://peer-thread/thread-synth/95",
+      "state_version": 95,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000005f",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:34Z",
+      "delta": {
+        "message_count": 95
+      }
+    },
+    {
+      "event_id": "evt-0096",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 96,
+      "state_ref": "state://peer-thread/thread-synth/96",
+      "state_version": 96,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000060",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:35Z",
+      "delta": {
+        "message_count": 96
+      }
+    },
+    {
+      "event_id": "evt-0097",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 97,
+      "state_ref": "state://peer-thread/thread-synth/97",
+      "state_version": 97,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000061",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:36Z",
+      "delta": {
+        "message_count": 97
+      }
+    },
+    {
+      "event_id": "evt-0098",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 98,
+      "state_ref": "state://peer-thread/thread-synth/98",
+      "state_version": 98,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000062",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:37Z",
+      "delta": {
+        "message_count": 98
+      }
+    },
+    {
+      "event_id": "evt-0099",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 99,
+      "state_ref": "state://peer-thread/thread-synth/99",
+      "state_version": 99,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000063",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:38Z",
+      "delta": {
+        "message_count": 99
+      }
+    },
+    {
+      "event_id": "evt-0100",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 100,
+      "state_ref": "state://peer-thread/thread-synth/100",
+      "state_version": 100,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000064",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:39Z",
+      "delta": {
+        "message_count": 100
+      }
+    },
+    {
+      "event_id": "evt-0101",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 101,
+      "state_ref": "state://peer-thread/thread-synth/101",
+      "state_version": 101,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000065",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:40Z",
+      "delta": {
+        "message_count": 101
+      }
+    },
+    {
+      "event_id": "evt-0102",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 102,
+      "state_ref": "state://peer-thread/thread-synth/102",
+      "state_version": 102,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000066",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:41Z",
+      "delta": {
+        "message_count": 102
+      }
+    },
+    {
+      "event_id": "evt-0103",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 103,
+      "state_ref": "state://peer-thread/thread-synth/103",
+      "state_version": 103,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000067",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:42Z",
+      "delta": {
+        "message_count": 103
+      }
+    },
+    {
+      "event_id": "evt-0104",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 104,
+      "state_ref": "state://peer-thread/thread-synth/104",
+      "state_version": 104,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000068",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:43Z",
+      "delta": {
+        "message_count": 104
+      }
+    },
+    {
+      "event_id": "evt-0105",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 105,
+      "state_ref": "state://peer-thread/thread-synth/105",
+      "state_version": 105,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000069",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:44Z",
+      "delta": {
+        "message_count": 105
+      }
+    },
+    {
+      "event_id": "evt-0106",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 106,
+      "state_ref": "state://peer-thread/thread-synth/106",
+      "state_version": 106,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000006a",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:45Z",
+      "delta": {
+        "message_count": 106
+      }
+    },
+    {
+      "event_id": "evt-0107",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 107,
+      "state_ref": "state://peer-thread/thread-synth/107",
+      "state_version": 107,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000006b",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:46Z",
+      "delta": {
+        "message_count": 107
+      }
+    },
+    {
+      "event_id": "evt-0108",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 108,
+      "state_ref": "state://peer-thread/thread-synth/108",
+      "state_version": 108,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000006c",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:47Z",
+      "delta": {
+        "message_count": 108
+      }
+    },
+    {
+      "event_id": "evt-0109",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 109,
+      "state_ref": "state://peer-thread/thread-synth/109",
+      "state_version": 109,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000006d",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:48Z",
+      "delta": {
+        "message_count": 109
+      }
+    },
+    {
+      "event_id": "evt-0110",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 110,
+      "state_ref": "state://peer-thread/thread-synth/110",
+      "state_version": 110,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000006e",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:49Z",
+      "delta": {
+        "message_count": 110
+      }
+    },
+    {
+      "event_id": "evt-0111",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 111,
+      "state_ref": "state://peer-thread/thread-synth/111",
+      "state_version": 111,
+      "state_hash": "sha256:000000000000000000000000000000000000000000000000000000000000006f",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:50Z",
+      "delta": {
+        "message_count": 111
+      }
+    },
+    {
+      "event_id": "evt-0112",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 112,
+      "state_ref": "state://peer-thread/thread-synth/112",
+      "state_version": 112,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000070",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:51Z",
+      "delta": {
+        "message_count": 112
+      }
+    },
+    {
+      "event_id": "evt-0113",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 113,
+      "state_ref": "state://peer-thread/thread-synth/113",
+      "state_version": 113,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000071",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:52Z",
+      "delta": {
+        "message_count": 113
+      }
+    },
+    {
+      "event_id": "evt-0114",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 114,
+      "state_ref": "state://peer-thread/thread-synth/114",
+      "state_version": 114,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000072",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:53Z",
+      "delta": {
+        "message_count": 114
+      }
+    },
+    {
+      "event_id": "evt-0115",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 115,
+      "state_ref": "state://peer-thread/thread-synth/115",
+      "state_version": 115,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000073",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:54Z",
+      "delta": {
+        "message_count": 115
+      }
+    },
+    {
+      "event_id": "evt-0116",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 116,
+      "state_ref": "state://peer-thread/thread-synth/116",
+      "state_version": 116,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000074",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:55Z",
+      "delta": {
+        "message_count": 116
+      }
+    },
+    {
+      "event_id": "evt-0117",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 117,
+      "state_ref": "state://peer-thread/thread-synth/117",
+      "state_version": 117,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000075",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:56Z",
+      "delta": {
+        "message_count": 117
+      }
+    },
+    {
+      "event_id": "evt-0118",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 118,
+      "state_ref": "state://peer-thread/thread-synth/118",
+      "state_version": 118,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000076",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:57Z",
+      "delta": {
+        "message_count": 118
+      }
+    },
+    {
+      "event_id": "evt-0119",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 119,
+      "state_ref": "state://peer-thread/thread-synth/119",
+      "state_version": 119,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000077",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:58Z",
+      "delta": {
+        "message_count": 119
+      }
+    },
+    {
+      "event_id": "evt-0120",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 120,
+      "state_ref": "state://peer-thread/thread-synth/120",
+      "state_version": 120,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000078",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T20:01:59Z",
+      "delta": {
+        "message_count": 120
+      }
+    }
+  ],
+  "faults": {
+    "duplicate": {
+      "duplicate_seq": 25
+    },
+    "loss": {
+      "remove_seq": 37
+    },
+    "out_of_order": {
+      "swap_seq_a": 51,
+      "swap_seq_b": 52
+    },
+    "restart": {
+      "after_seq": 73
+    },
+    "stale_version": {
+      "event_id": "evt-stale-0001",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 121,
+      "state_ref": "state://peer-thread/thread-synth/120",
+      "state_version": 119,
+      "state_hash": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T21:00:00Z",
+      "delta": {
+        "message_count": 121
+      }
+    },
+    "unauthorized": {
+      "event_id": "evt-unauthorized-0001",
+      "stream_id": "peer-thread:thread-synth",
+      "entity_type": "peer_thread",
+      "entity_id": "thread-synth",
+      "event_type": "peer_message_appended",
+      "seq": 121,
+      "state_ref": "state://peer-thread/thread-synth/120",
+      "state_version": 120,
+      "state_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000078",
+      "required_scope": "peer:thread-synth:read",
+      "occurred_at": "2026-10-01T21:01:00Z",
+      "delta": {
+        "message_count": 120
+      }
+    },
+    "burst": {
+      "count": 1000,
+      "max_queue": 64,
+      "consumer_batch": 16
+    }
+  }
+}
