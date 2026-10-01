@@ -321,14 +321,17 @@ async function joinThread(request, env, threadId, helpers) {
   if (!thread || thread.status !== "open") throw new InputError("Peer thread not found or closed.", 404);
 
   const existingMembership = await env.DB.prepare(
-    "SELECT status FROM peer_thread_members WHERE thread_id = ? AND agent_id = ?"
+    "SELECT status, secret_hash FROM peer_thread_members WHERE thread_id = ? AND agent_id = ?"
   ).bind(threadId, agent.id).first();
-  if (existingMembership) {
-    throw new InputError("Agent is already a member of this thread. Keep the existing thread token.", 409);
-  }
 
   const token = input.client_thread_access_token || makeToken();
   const digest = await sha256(token);
+  if (existingMembership) {
+    if (input.client_thread_access_token && secureEqual(existingMembership.secret_hash, digest)) {
+      return threadReceipt(request, threadId, token, true);
+    }
+    throw new InputError("Agent is already a member of this thread. Keep the existing thread token.", 409);
+  }
   const digestOwner = await env.DB.prepare(
     "SELECT thread_id, agent_id FROM peer_thread_members WHERE secret_hash = ?"
   ).bind(digest).first();
