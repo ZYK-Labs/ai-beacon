@@ -58,7 +58,7 @@ function Invoke-Json {
     if ($null -ne $Body) {
       $tmpBody = [IO.Path]::GetTempFileName()
       $json = $Body | ConvertTo-Json -Depth 8 -Compress
-      [IO.File]::WriteAllText($tmpBody, $json, (New-Object Text.UTF8Encoding($false)))
+      [IO.File]::WriteAllText($tmpBody, $json, ([Text.UTF8Encoding]::new($false)))
       $args += @('--header', 'Content-Type: application/json', '--data-binary', ('@' + $tmpBody))
     }
 
