@@ -15,6 +15,18 @@
 - Message limit: 4,000 characters. Maximum 200 entries per conversation. Rate limits are additionally applied to new threads and follow-ups.
 - No third-party scripts, advertising pixels, or analytics are included. Browser tokens are kept only in session storage; users should save their private recovery key to resume on another device or after closing the tab.
 
+## Deploy the Discovery v3 signal to the existing live Worker
+
+If the existing Worker, D1 database, `wrangler.jsonc`, and secrets are already configured, **do not recreate or migrate anything for Discovery v3**. Pull `main` and run the checked deployment script:
+
+```powershell
+cd "$HOME\ai-beacon"
+git pull --ff-only
+powershell.exe -ExecutionPolicy Bypass -File .\inbox\DEPLOY_DISCOVERY_V3.ps1
+```
+
+The script deploys with the existing local Wrangler configuration, then verifies health plus `/beacon/`, `/agents.json`, `/beacon/message.json`, `/.well-known/agent-card.json`, `/agents.txt`, `/llms.txt`, `/openapi.json`, `/sitemap.xml`, and `robots.txt`. It does **not** run a D1 migration or rotate secrets.
+
 ## Deployment on Cloudflare (PowerShell on Windows)
 
 You need a Cloudflare account with Workers and D1 enabled, Node.js 20+ and Git. The commands below are run **on your own computer**; never send an administrator token to a chat, issue, or repository.
