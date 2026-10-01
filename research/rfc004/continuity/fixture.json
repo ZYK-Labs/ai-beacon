@@ -1,0 +1,151 @@
+{
+  "fixture_version": "1.0.0",
+  "frozen_at": "2026-10-01T20:30:00Z",
+  "synthetic_only": true,
+  "private_data_included": false,
+  "boundary_contract": {
+    "owner_bridge_scope": "participant_plus_owner",
+    "private_human_inbox_in_common_fixture": false,
+    "public_peer_stream_scope": "thread_members_only"
+  },
+  "peers": [
+    {
+      "peer_id": "peer-alpha",
+      "self_reported_identity": {
+        "provider_or_developer": "Synthetic Lab",
+        "model_name": "Synthetic-A"
+      },
+      "identity_claim_status": "self_reported",
+      "credentials": [
+        {
+          "credential_id": "cred-alpha-v1",
+          "generation": 1,
+          "status": "active",
+          "predecessor_id": null,
+          "secret_fingerprint": "synthetic:alpha:v1",
+          "issued_at": "2026-10-01T20:00:00Z",
+          "revoked_at": null,
+          "superseded_by": null
+        }
+      ],
+      "memberships": [
+        "thread-synth-1"
+      ]
+    },
+    {
+      "peer_id": "peer-beta",
+      "self_reported_identity": {
+        "provider_or_developer": "Synthetic Lab",
+        "model_name": "Synthetic-A"
+      },
+      "identity_claim_status": "self_reported",
+      "credentials": [
+        {
+          "credential_id": "cred-beta-v1",
+          "generation": 1,
+          "status": "active",
+          "predecessor_id": null,
+          "secret_fingerprint": "synthetic:beta:v1",
+          "issued_at": "2026-10-01T20:00:10Z",
+          "revoked_at": null,
+          "superseded_by": null
+        }
+      ],
+      "memberships": [
+        "thread-synth-1"
+      ]
+    }
+  ],
+  "operations": [
+    {
+      "id": "op-01",
+      "type": "authenticate",
+      "peer_id": "peer-alpha",
+      "credential_id": "cred-alpha-v1",
+      "expect": "allow"
+    },
+    {
+      "id": "op-02",
+      "type": "restart",
+      "peer_id": "peer-alpha",
+      "expect_identity_status": "self_reported",
+      "expect_membership": "thread-synth-1"
+    },
+    {
+      "id": "op-03",
+      "type": "rotate",
+      "peer_id": "peer-alpha",
+      "from": "cred-alpha-v1",
+      "to": {
+        "credential_id": "cred-alpha-v2",
+        "generation": 2,
+        "secret_fingerprint": "synthetic:alpha:v2"
+      },
+      "expect": "allow"
+    },
+    {
+      "id": "op-04",
+      "type": "authenticate",
+      "peer_id": "peer-alpha",
+      "credential_id": "cred-alpha-v1",
+      "expect": "deny"
+    },
+    {
+      "id": "op-05",
+      "type": "authenticate",
+      "peer_id": "peer-alpha",
+      "credential_id": "cred-alpha-v2",
+      "expect": "allow"
+    },
+    {
+      "id": "op-06",
+      "type": "concurrent_sessions",
+      "peer_id": "peer-alpha",
+      "credential_id": "cred-alpha-v2",
+      "sessions": 3,
+      "expect": "allow"
+    },
+    {
+      "id": "op-07",
+      "type": "cross_peer_auth",
+      "peer_id": "peer-beta",
+      "credential_id": "cred-alpha-v2",
+      "expect": "deny"
+    },
+    {
+      "id": "op-08",
+      "type": "revoke",
+      "peer_id": "peer-alpha",
+      "credential_id": "cred-alpha-v2",
+      "expect": "allow"
+    },
+    {
+      "id": "op-09",
+      "type": "authenticate",
+      "peer_id": "peer-alpha",
+      "credential_id": "cred-alpha-v2",
+      "expect": "deny"
+    },
+    {
+      "id": "op-10",
+      "type": "assert_identity",
+      "peer_id": "peer-alpha",
+      "expect_status": "self_reported"
+    },
+    {
+      "id": "op-11",
+      "type": "assert_identity",
+      "peer_id": "peer-beta",
+      "expect_status": "self_reported"
+    },
+    {
+      "id": "op-12",
+      "type": "assert_boundaries",
+      "expect": {
+        "owner_bridge_scope": "participant_plus_owner",
+        "private_human_inbox_in_common_fixture": false,
+        "public_peer_stream_scope": "thread_members_only"
+      }
+    }
+  ]
+}

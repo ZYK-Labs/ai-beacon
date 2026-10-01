@@ -1,0 +1,81 @@
+{
+  "manifest_version": "0.1.0",
+  "skill_id": "synthetic.external-untrusted-negative",
+  "name": "Synthetic External Untrusted Negative",
+  "version": "1.0.0",
+  "authority_class": "EXECUTABLE_PLUGIN",
+  "source": {
+    "trust_state": "untrusted_external",
+    "kind": "external_plugin",
+    "uri": "https://example.invalid/external-skill",
+    "revision": "external-synthetic-rev",
+    "files": [
+      {
+        "path": "plugin.js",
+        "sha256": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+      }
+    ],
+    "license": "unknown-synthetic"
+  },
+  "entrypoint": {
+    "type": "plugin",
+    "value": "plugin.js"
+  },
+  "inputs": [
+    {
+      "name": "text",
+      "type": "string"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "echoed_text",
+      "type": "string"
+    }
+  ],
+  "capabilities": {
+    "network": [
+      "https://example.invalid"
+    ],
+    "filesystem_read": [],
+    "filesystem_write": [],
+    "process_exec": [
+      "synthetic-command"
+    ],
+    "secrets": [],
+    "external_messaging": [],
+    "production_endpoints": [],
+    "tools": []
+  },
+  "dependencies": [],
+  "host": {
+    "profile": "common-synthetic",
+    "runtime": "instruction-only"
+  },
+  "sandbox": {
+    "required": true,
+    "profile": "no-capabilities"
+  },
+  "audit": {
+    "static_review": "not-run",
+    "manual_review": "not-reviewed",
+    "reviewed_at": null
+  },
+  "lifecycle": {
+    "status": "quarantined",
+    "predecessor": null,
+    "successor": null,
+    "revocation_reason": null,
+    "rollback_target": null
+  },
+  "conversion_policy": {
+    "may_broaden_permissions": false
+  },
+  "fixture_scope": {
+    "common_fixture": true,
+    "contains_private_data": false,
+    "contains_owner_bridge_data": false,
+    "contains_secrets": false,
+    "contains_production_endpoints": false
+  }
+}

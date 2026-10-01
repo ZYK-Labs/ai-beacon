@@ -1,0 +1,197 @@
+{
+  "fixture_version": "1.0.0",
+  "frozen_at": "2026-10-01T21:20:00Z",
+  "synthetic_only": true,
+  "private_data_included": false,
+  "automatic_outreach": false,
+  "run_manifest": {
+    "run_id": "dist-research-synth-001",
+    "purpose": "Synthetic distribution evidence-funnel conformance",
+    "allowed_scope": [
+      "synthetic_public"
+    ],
+    "budget": {
+      "max_candidates": 20,
+      "max_verifier_passes": 20,
+      "max_source_fetches": 20,
+      "max_elapsed_minutes": 10
+    },
+    "stop_rules": [
+      "budget_exhausted",
+      "no_new_independent_lineage",
+      "quality_floor_not_met",
+      "owner_stop",
+      "privacy_boundary",
+      "zero_survivors"
+    ]
+  },
+  "packets": [
+    {
+      "candidate_id": "cand-001",
+      "claim": "Directory Alpha documents a public agent discovery endpoint.",
+      "claim_type": "observation",
+      "source_lineage_id": "lineage-alpha-primary",
+      "source_uri": "https://example.invalid/alpha",
+      "source_version": "v1",
+      "source_hash": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "correlation_group": "group-alpha",
+      "dedup_fingerprint": "fp-alpha-endpoint",
+      "generator_id": "gen-A",
+      "generator_version": "1",
+      "verifier_id": "verify-1",
+      "verifier_version": "1",
+      "generated_at": "2026-10-01T21:00:00Z",
+      "verified_at": "2026-10-01T21:05:00Z",
+      "disposition": "accepted",
+      "disposition_reason": "Primary synthetic source directly supports the observation.",
+      "evidence_refs": [
+        "src-alpha-primary"
+      ],
+      "negative_or_contradictory_refs": []
+    },
+    {
+      "candidate_id": "cand-002",
+      "claim": "Directory Alpha documents a public agent discovery endpoint.",
+      "claim_type": "observation",
+      "source_lineage_id": "lineage-alpha-primary",
+      "source_uri": "https://example.invalid/alpha-mirror",
+      "source_version": "mirror-v1",
+      "source_hash": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "correlation_group": "group-alpha",
+      "dedup_fingerprint": "fp-alpha-endpoint",
+      "generator_id": "gen-B",
+      "generator_version": "1",
+      "verifier_id": "verify-2",
+      "verifier_version": "1",
+      "generated_at": "2026-10-01T21:00:30Z",
+      "verified_at": "2026-10-01T21:05:30Z",
+      "disposition": "accepted",
+      "disposition_reason": "Duplicate/mirror audit record; same primary lineage, no extra independent-evidence weight.",
+      "evidence_refs": [
+        "src-alpha-mirror"
+      ],
+      "negative_or_contradictory_refs": []
+    },
+    {
+      "candidate_id": "cand-003",
+      "claim": "Directory Alpha documents a public agent discovery endpoint.",
+      "claim_type": "observation",
+      "source_lineage_id": "lineage-alpha-independent-review",
+      "source_uri": "https://example.invalid/alpha-independent",
+      "source_version": "v3",
+      "source_hash": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+      "correlation_group": "group-alpha-independent",
+      "dedup_fingerprint": "fp-alpha-independent-review",
+      "generator_id": "gen-C",
+      "generator_version": "1",
+      "verifier_id": "verify-1",
+      "verifier_version": "1",
+      "generated_at": "2026-10-01T21:01:00Z",
+      "verified_at": "2026-10-01T21:06:00Z",
+      "disposition": "accepted",
+      "disposition_reason": "Synthetic independent lineage corroborates endpoint existence.",
+      "evidence_refs": [
+        "src-alpha-independent"
+      ],
+      "negative_or_contradictory_refs": []
+    },
+    {
+      "candidate_id": "cand-004",
+      "claim": "Directory Beta guarantees autonomous agent participation.",
+      "claim_type": "inference",
+      "source_lineage_id": "lineage-beta-primary",
+      "source_uri": "https://example.invalid/beta",
+      "source_version": "v1",
+      "source_hash": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+      "correlation_group": "group-beta",
+      "dedup_fingerprint": "fp-beta-autonomy",
+      "generator_id": "gen-A",
+      "generator_version": "1",
+      "verifier_id": "verify-2",
+      "verifier_version": "1",
+      "generated_at": "2026-10-01T21:02:00Z",
+      "verified_at": "2026-10-01T21:07:00Z",
+      "disposition": "rejected",
+      "disposition_reason": "Source exposes an endpoint but does not establish autonomous participation.",
+      "evidence_refs": [
+        "src-beta-primary"
+      ],
+      "negative_or_contradictory_refs": [
+        "src-beta-limitations"
+      ]
+    },
+    {
+      "candidate_id": "cand-005",
+      "claim": "Directory Beta guarantees autonomous agent participation.",
+      "claim_type": "inference",
+      "source_lineage_id": "lineage-beta-primary",
+      "source_uri": "https://example.invalid/beta-summary",
+      "source_version": "summary-v1",
+      "source_hash": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+      "correlation_group": "group-beta",
+      "dedup_fingerprint": "fp-beta-autonomy",
+      "generator_id": "gen-D",
+      "generator_version": "1",
+      "verifier_id": "verify-3",
+      "verifier_version": "1",
+      "generated_at": "2026-10-01T21:02:20Z",
+      "verified_at": "2026-10-01T21:07:20Z",
+      "disposition": "rejected",
+      "disposition_reason": "Repeated same-lineage claim remains unsupported.",
+      "evidence_refs": [
+        "src-beta-summary"
+      ],
+      "negative_or_contradictory_refs": [
+        "src-beta-limitations"
+      ]
+    },
+    {
+      "candidate_id": "cand-006",
+      "claim": "A public protocol page may be worth later human review as a distribution channel.",
+      "claim_type": "hypothesis",
+      "source_lineage_id": "lineage-gamma-primary",
+      "source_uri": "https://example.invalid/gamma",
+      "source_version": "v2",
+      "source_hash": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+      "correlation_group": "group-gamma",
+      "dedup_fingerprint": "fp-gamma-review",
+      "generator_id": "gen-E",
+      "generator_version": "1",
+      "verifier_id": "verify-1",
+      "verifier_version": "1",
+      "generated_at": "2026-10-01T21:03:00Z",
+      "verified_at": "2026-10-01T21:08:00Z",
+      "disposition": "accepted",
+      "disposition_reason": "Retained only as research candidate for owner review; no outreach authority.",
+      "evidence_refs": [
+        "src-gamma-primary"
+      ],
+      "negative_or_contradictory_refs": []
+    }
+  ],
+  "zero_survivor_run": {
+    "run_id": "dist-research-synth-zero",
+    "packets": [
+      {
+        "candidate_id": "zero-001",
+        "claim": "Unsupported synthetic claim one",
+        "source_lineage_id": "lineage-z1",
+        "correlation_group": "z1",
+        "dedup_fingerprint": "zfp1",
+        "disposition": "rejected",
+        "disposition_reason": "No supporting evidence."
+      },
+      {
+        "candidate_id": "zero-002",
+        "claim": "Unsupported synthetic claim two",
+        "source_lineage_id": "lineage-z2",
+        "correlation_group": "z2",
+        "dedup_fingerprint": "zfp2",
+        "disposition": "rejected",
+        "disposition_reason": "Contradicted by source."
+      }
+    ],
+    "expected_survivors": 0,
+    "stop_reason": "zero_survivors"
+  }
+}
