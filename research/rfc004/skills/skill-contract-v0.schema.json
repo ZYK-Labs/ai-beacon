@@ -1,0 +1,233 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/ai-beacon/skill-contract-v0.schema.json",
+  "title": "AI-BEACON SkillPackageManifest v0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "manifest_version",
+    "skill_id",
+    "name",
+    "version",
+    "authority_class",
+    "source",
+    "entrypoint",
+    "inputs",
+    "outputs",
+    "capabilities",
+    "dependencies",
+    "host",
+    "sandbox",
+    "audit",
+    "lifecycle",
+    "conversion_policy",
+    "fixture_scope"
+  ],
+  "properties": {
+    "manifest_version": {
+      "const": "0.1.0"
+    },
+    "skill_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]{2,79}$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 40
+    },
+    "authority_class": {
+      "enum": [
+        "INSTRUCTION_ONLY",
+        "READ_ONLY_TOOL",
+        "EXECUTABLE_PLUGIN"
+      ]
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "trust_state",
+        "kind",
+        "uri",
+        "revision",
+        "files",
+        "license"
+      ],
+      "properties": {
+        "trust_state": {
+          "enum": [
+            "internal_synthetic_fixture",
+            "untrusted_external"
+          ]
+        },
+        "kind": {
+          "enum": [
+            "internal_synthetic",
+            "external_skill",
+            "external_script",
+            "external_plugin",
+            "converted_representation"
+          ]
+        },
+        "uri": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "revision": {
+          "type": "string"
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "path",
+              "sha256"
+            ],
+            "properties": {
+              "path": {
+                "type": "string"
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^sha256:[0-9a-f]{64}$"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "license": {
+          "type": "string"
+        }
+      }
+    },
+    "entrypoint": {
+      "type": "object",
+      "required": [
+        "type",
+        "value"
+      ],
+      "properties": {
+        "type": {
+          "enum": [
+            "instruction",
+            "tool",
+            "plugin"
+          ]
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "capabilities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "network",
+        "filesystem_read",
+        "filesystem_write",
+        "process_exec",
+        "secrets",
+        "external_messaging",
+        "production_endpoints",
+        "tools"
+      ],
+      "properties": {
+        "network": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "filesystem_read": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "filesystem_write": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "process_exec": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "secrets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "external_messaging": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "production_endpoints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tools": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "host": {
+      "type": "object"
+    },
+    "sandbox": {
+      "type": "object"
+    },
+    "audit": {
+      "type": "object"
+    },
+    "lifecycle": {
+      "type": "object"
+    },
+    "conversion_policy": {
+      "type": "object"
+    },
+    "fixture_scope": {
+      "type": "object"
+    }
+  }
+}
