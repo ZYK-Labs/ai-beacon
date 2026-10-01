@@ -1,0 +1,1892 @@
+{
+  "benchmark_version": "2.0",
+  "frozen_at": "2026-10-01T14:45:00Z",
+  "description": "Expanded synthetic/public RU/EN/mixed retrieval benchmark. No private Inbox data. Calibration and evaluation query sets are disjoint.",
+  "corpus": {
+    "corpus_version": "2.0",
+    "records": [
+      {
+        "schema_version": "1.0",
+        "evidence_id": "ev-borealis-axiom9",
+        "scope": "public_discovery",
+        "source": {
+          "source_id": "src-ev-borealis-axiom9",
+          "source_type": "synthetic_fixture",
+          "channel": "official_docs",
+          "url": "https://example.invalid/ev-borealis-axiom9",
+          "title": "Borealis Institute Axiom-9",
+          "version": "1",
+          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "published_at": "2026-09-01T00:00:00Z",
+          "observed_at": "2026-09-01T01:00:00Z"
+        },
+        "provenance": {
+          "origin": "synthetic public benchmark v2",
+          "discovered_via": "synthetic public benchmark v2",
+          "collection_method": "synthetic_fixture",
+          "referrer": null,
+          "parent_evidence_id": null
+        },
+        "content": {
+          "language": "en",
+          "text": "Borealis Institute publishes Axiom-9 for ocean salinity forecasting from satellite and buoy observations."
+        },
+        "identity_claim": {
+          "self_reported": false,
+          "provider": "Borealis Institute",
+          "model_name": "Axiom-9",
+          "model_identifier": "axiom-9-2026",
+          "model_family": "Axiom",
+          "agent_framework": null,
+          "interaction_origin": null
+        },
+        "evidence_level": "public_corroboration",
+        "acceptance": {
+          "status": "unreviewed",
+          "set_by": "fixture_builder",
+          "reason": "Frozen synthetic/public benchmark v2.",
+          "updated_at": "2026-10-01T14:45:00Z"
+        },
+        "validity": {
+          "source_version": "1",
+          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "index_generation": "expanded-public-v2",
+          "valid_from": "2026-09-01T00:00:00Z",
+          "invalidated_at": null,
+          "invalidation_reason": null,
+          "supersedes": null
+        }
+      },
+      {
+        "schema_version": "1.0",
+        "evidence_id": "ev-sever-mayak14",
+        "scope": "public_discovery",
+        "source": {
+          "source_id": "src-ev-sever-mayak14",
+          "source_type": "synthetic_fixture",
+          "channel": "official_docs",
+          "url": "https://example.invalid/ev-sever-mayak14",
+          "title": "Лаборатория Север Маяк-14",
+          "version": "1",
+          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "published_at": "2026-09-01T00:00:00Z",
+          "observed_at": "2026-09-01T01:00:00Z"
+        },
+        "provenance": {
+          "origin": "synthetic public benchmark v2",
+          "discovered_via": "synthetic public benchmark v2",
+          "collection_method": "synthetic_fixture",
+          "referrer": null,
+          "parent_evidence_id": null
+        },
+        "content": {
+          "language": "ru",
+          "text": "Лаборатория Север публикует систему Маяк-14 для прогноза геомагнитных бурь по данным солнечного ветра и магнитометров."
+        },
+        "identity_claim": {
+          "self_reported": false,
+          "provider": "Лаборатория Север",
+          "model_name": "Маяк-14",
+          "model_identifier": "mayak-14-2026",
+          "model_family": "Маяк",
+          "agent_framework": null,
+          "interaction_origin": null
+        },
+        "evidence_level": "public_corroboration",
+        "acceptance": {
+          "status": "unreviewed",
+          "set_by": "fixture_builder",
+          "reason": "Frozen synthetic/public benchmark v2.",
+          "updated_at": "2026-10-01T14:45:00Z"
+        },
+        "validity": {
+          "source_version": "1",
+          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "index_generation": "expanded-public-v2",
+          "valid_from": "2026-09-01T00:00:00Z",
+          "invalidated_at": null,
+          "invalidation_reason": null,
+          "supersedes": null
+        }
+      },
+      {
+        "schema_version": "1.0",
+        "evidence_id": "ev-solace-finch3",
+        "scope": "public_discovery",
+        "source": {
+          "source_id": "src-ev-solace-finch3",
+          "source_type": "synthetic_fixture",
+          "channel": "official_docs",
+          "url": "https://example.invalid/ev-solace-finch3",
+          "title": "Solace Research Finch-3",
+          "version": "1",
+          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "published_at": "2026-09-01T00:00:00Z",
+          "observed_at": "2026-09-01T01:00:00Z"
+        },
+        "provenance": {
+          "origin": "synthetic public benchmark v2",
+          "discovered_via": "synthetic public benchmark v2",
+          "collection_method": "synthetic_fixture",
+          "referrer": null,
+          "parent_evidence_id": null
+        },
+        "content": {
+          "language": "en",
+          "text": "Solace Research releases Finch-3 for detecting crop disease patterns in field imagery."
+        },
+        "identity_claim": {
+          "self_reported": false,
+          "provider": "Solace Research",
+          "model_name": "Finch-3",
+          "model_identifier": "finch-3",
+          "model_family": "Finch",
+          "agent_framework": null,
+          "interaction_origin": null
+        },
+        "evidence_level": "public_corroboration",
+        "acceptance": {
+          "status": "unreviewed",
+          "set_by": "fixture_builder",
+          "reason": "Frozen synthetic/public benchmark v2.",
+          "updated_at": "2026-10-01T14:45:00Z"
+        },
+        "validity": {
+          "source_version": "1",
+          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "index_generation": "expanded-public-v2",
+          "valid_from": "2026-09-01T00:00:00Z",
+          "invalidated_at": null,
+          "invalidation_reason": null,
+          "supersedes": null
+        }
+      },
+      {
+        "schema_version": "1.0",
+        "evidence_id": "ev-volna-rosa8",
+        "scope": "public_discovery",
+        "source": {
+          "source_id": "src-ev-volna-rosa8",
+          "source_type": "synthetic_fixture",
+          "channel": "official_docs",
+          "url": "https://example.invalid/ev-volna-rosa8",
+          "title": "Институт Волна Роса-8",
+          "version": "1",
+          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "published_at": "2026-09-01T00:00:00Z",
+          "observed_at": "2026-09-01T01:00:00Z"
+        },
+        "provenance": {
+          "origin": "synthetic public benchmark v2",
+          "discovered_via": "synthetic public benchmark v2",
+          "collection_method": "synthetic_fixture",
+          "referrer": null,
+          "parent_evidence_id": null
+        },
+        "content": {
+          "language": "ru",
+          "text": "Институт Волна выпустил Роса-8 для оценки влажности почвы по спутниковым и наземным наблюдениям."
+        },
+        "identity_claim": {
+          "self_reported": false,
+          "provider": "Институт Волна",
+          "model_name": "Роса-8",
+          "model_identifier": "rosa-8",
+          "model_family": "Роса",
+          "agent_framework": null,
+          "interaction_origin": null
+        },
+        "evidence_level": "public_corroboration",
+        "acceptance": {
+          "status": "unreviewed",
+          "set_by": "fixture_builder",
+          "reason": "Frozen synthetic/public benchmark v2.",
+          "updated_at": "2026-10-01T14:45:00Z"
+        },
+        "validity": {
+          "source_version": "1",
+          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "index_generation": "expanded-public-v2",
+          "valid_from": "2026-09-01T00:00:00Z",
+          "invalidated_at": null,
+          "invalidation_reason": null,
+          "supersedes": null
+        }
+      },
+      {
+        "schema_version": "1.0",
+        "evidence_id": "ev-helix-forge5",
+        "scope": "public_discovery",
+        "source": {
+          "source_id": "src-ev-helix-forge5",
+          "source_type": "synthetic_fixture",
+          "channel": "official_docs",
+          "url": "https://example.invalid/ev-helix-forge5",
+          "title": "Helix Forge Forge-5",
+          "version": "1",
+          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "published_at": "2026-09-01T00:00:00Z",
+          "observed_at": "2026-09-01T01:00:00Z"
+        },
+        "provenance": {
+          "origin": "synthetic public benchmark v2",
+          "discovered_via": "synthetic public benchmark v2",
+          "collection_method": "synthetic_fixture",
+          "referrer": null,
+          "parent_evidence_id": null
+        },
+        "content": {
+          "language": "en",
+          "text": "Helix Forge publishes Forge-5 as a research system for scoring candidate protein folding structures."
+        },
+        "identity_claim": {
+          "self_reported": false,
+          "provider": "Helix Forge",
+          "model_name": "Forge-5",
+          "model_identifier": "forge-5",
+          "model_family": "Forge",
+          "agent_framework": null,
+          "interaction_origin": null
+        },
+        "evidence_level": "public_corroboration",
+        "acceptance": {
+          "status": "unreviewed",
+          "set_by": "fixture_builder",
+          "reason": "Frozen synthetic/public benchmark v2.",
+          "updated_at": "2026-10-01T14:45:00Z"
+        },
+        "validity": {
+          "source_version": "1",
+          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "index_generation": "expanded-public-v2",
+          "valid_from": "2026-09-01T00:00:00Z",
+          "invalidated_at": null,
+          "invalidation_reason": null,
+          "supersedes": null
+        }
+      },
+      {
+        "schema_version": "1.0",
+        "evidence_id": "ev-kedr-spektr6",
+        "scope": "public_discovery",
+        "source": {
+          "source_id": "src-ev-kedr-spektr6",
+          "source_type": "synthetic_fixture",
+          "channel": "official_docs",
+          "url": "https://example.invalid/ev-kedr-spektr6",
+          "title": "Лаборатория Кедр Спектр-6",
+          "version": "1",
+          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "published_at": "2026-09-01T00:00:00Z",
+          "observed_at": "2026-09-01T01:00:00Z"
+        },
+        "provenance": {
+          "origin": "synthetic public benchmark v2",
+          "discovered_via": "synthetic public benchmark v2",
+          "collection_method": "synthetic_fixture",
+          "referrer": null,
+          "parent_evidence_id": null
+        },
+        "content": {
+          "language": "ru",
+          "text": "Лаборатория Кедр выпустила Спектр-6 для анализа спектров телескопов и классификации астрономических объектов."
+        },
+        "identity_claim": {
+          "self_reported": false,
+          "provider": "Лаборатория Кедр",
+          "model_name": "Спектр-6",
+          "model_identifier": "spektr-6",
+          "model_family": "Спектр",
+          "agent_framework": null,
+          "interaction_origin": null
+        },
+        "evidence_level": "public_corroboration",
+        "acceptance": {
+          "status": "unreviewed",
+          "set_by": "fixture_builder",
+          "reason": "Frozen synthetic/public benchmark v2.",
+          "updated_at": "2026-10-01T14:45:00Z"
+        },
+        "validity": {
+          "source_version": "1",
+          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "index_generation": "expanded-public-v2",
+          "valid_from": "2026-09-01T00:00:00Z",
+          "invalidated_at": null,
+          "invalidation_reason": null,
+          "supersedes": null
+        }
+      },
+      {
+        "schema_version": "1.0",
+        "evidence_id": "ev-atlas-loom2",
+        "scope": "public_discovery",
+        "source": {
+          "source_id": "src-ev-atlas-loom2",
+          "source_type": "synthetic_fixture",
+          "channel": "official_docs",
+          "url": "https://example.invalid/ev-atlas-loom2",
+          "title": "Atlas Systems Loom-2",
+          "version": "1",
+          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "published_at": "2026-09-01T00:00:00Z",
+          "observed_at": "2026-09-01T01:00:00Z"
+        },
+        "provenance": {
+          "origin": "synthetic public benchmark v2",
+          "discovered_via": "synthetic public benchmark v2",
+          "collection_method": "synthetic_fixture",
+          "referrer": null,
+          "parent_evidence_id": null
+        },
+        "content": {
+          "language": "en",
+          "text": "Atlas Systems releases Loom-2 for extracting document structure, tables, headings, and references from technical reports."
+        },
+        "identity_claim": {
+          "self_reported": false,
+          "provider": "Atlas Systems",
+          "model_name": "Loom-2",
+          "model_identifier": "atlas-loom-2",
+          "model_family": "Loom",
+          "agent_framework": null,
+          "interaction_origin": null
+        },
+        "evidence_level": "public_corroboration",
+        "acceptance": {
+          "status": "unreviewed",
+          "set_by": "fixture_builder",
+          "reason": "Frozen synthetic/public benchmark v2.",
+          "updated_at": "2026-10-01T14:45:00Z"
+        },
+        "validity": {
+          "source_version": "1",
+          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "index_generation": "expanded-public-v2",
+          "valid_from": "2026-09-01T00:00:00Z",
+          "invalidated_at": null,
+          "invalidation_reason": null,
+          "supersedes": null
+        }
+      },
+      {
+        "schema_version": "1.0",
+        "evidence_id": "ev-vector-linia7",
+        "scope": "public_discovery",
+        "source": {
+          "source_id": "src-ev-vector-linia7",
+          "source_type": "synthetic_fixture",
+          "channel": "official_docs",
+          "url": "https://example.invalid/ev-vector-linia7",
+          "title": "Центр Вектор Линия-7",
+          "version": "1",
+          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "published_at": "2026-09-01T00:00:00Z",
+          "observed_at": "2026-09-01T01:00:00Z"
+        },
+        "provenance": {
+          "origin": "synthetic public benchmark v2",
+          "discovered_via": "synthetic public benchmark v2",
+          "collection_method": "synthetic_fixture",
+          "referrer": null,
+          "parent_evidence_id": null
+        },
+        "content": {
+          "language": "ru",
+          "text": "Центр Вектор публикует Линия-7 для исследования маршрутизации грузов между распределительными центрами."
+        },
+        "identity_claim": {
+          "self_reported": false,
+          "provider": "Центр Вектор",
+          "model_name": "Линия-7",
+          "model_identifier": "linia-7",
+          "model_family": "Линия",
+          "agent_framework": null,
+          "interaction_origin": null
+        },
+        "evidence_level": "public_corroboration",
+        "acceptance": {
+          "status": "unreviewed",
+          "set_by": "fixture_builder",
+          "reason": "Frozen synthetic/public benchmark v2.",
+          "updated_at": "2026-10-01T14:45:00Z"
+        },
+        "validity": {
+          "source_version": "1",
+          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "index_generation": "expanded-public-v2",
+          "valid_from": "2026-09-01T00:00:00Z",
+          "invalidated_at": null,
+          "invalidation_reason": null,
+          "supersedes": null
+        }
+      },
+      {
+        "schema_version": "1.0",
+        "evidence_id": "ev-nimbus-proof4",
+        "scope": "public_discovery",
+        "source": {
+          "source_id": "src-ev-nimbus-proof4",
+          "source_type": "synthetic_fixture",
+          "channel": "official_docs",
+          "url": "https://example.invalid/ev-nimbus-proof4",
+          "title": "Nimbus Logic Proof-4",
+          "version": "1",
+          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "published_at": "2026-09-01T00:00:00Z",
+          "observed_at": "2026-09-01T01:00:00Z"
+        },
+        "provenance": {
+          "origin": "synthetic public benchmark v2",
+          "discovered_via": "synthetic public benchmark v2",
+          "collection_method": "synthetic_fixture",
+          "referrer": null,
+          "parent_evidence_id": null
+        },
+        "content": {
+          "language": "en",
+          "text": "Nimbus Logic publishes Proof-4 for formal theorem search and proof candidate retrieval in Lean projects."
+        },
+        "identity_claim": {
+          "self_reported": false,
+          "provider": "Nimbus Logic",
+          "model_name": "Proof-4",
+          "model_identifier": "nimbus-proof-4",
+          "model_family": "Proof",
+          "agent_framework": null,
+          "interaction_origin": null
+        },
+        "evidence_level": "public_corroboration",
+        "acceptance": {
+          "status": "unreviewed",
+          "set_by": "fixture_builder",
+          "reason": "Frozen synthetic/public benchmark v2.",
+          "updated_at": "2026-10-01T14:45:00Z"
+        },
+        "validity": {
+          "source_version": "1",
+          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "index_generation": "expanded-public-v2",
+          "valid_from": "2026-09-01T00:00:00Z",
+          "invalidated_at": null,
+          "invalidation_reason": null,
+          "supersedes": null
+        }
+      },
+      {
+        "schema_version": "1.0",
+        "evidence_id": "ev-logos-axioma5",
+        "scope": "public_discovery",
+        "source": {
+          "source_id": "src-ev-logos-axioma5",
+          "source_type": "synthetic_fixture",
+          "channel": "official_docs",
+          "url": "https://example.invalid/ev-logos-axioma5",
+          "title": "Лаборатория Логос Аксиома-5",
+          "version": "1",
+          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "published_at": "2026-09-01T00:00:00Z",
+          "observed_at": "2026-09-01T01:00:00Z"
+        },
+        "provenance": {
+          "origin": "synthetic public benchmark v2",
+          "discovered_via": "synthetic public benchmark v2",
+          "collection_method": "synthetic_fixture",
+          "referrer": null,
+          "parent_evidence_id": null
+        },
+        "content": {
+          "language": "ru",
+          "text": "Лаборатория Логос выпустила Аксиома-5 для поиска формальных доказательств и лемм в проектах Lean."
+        },
+        "identity_claim": {
+          "self_reported": false,
+          "provider": "Лаборатория Логос",
+          "model_name": "Аксиома-5",
+          "model_identifier": "aksioma-5",
+          "model_family": "Аксиома",
+          "agent_framework": null,
+          "interaction_origin": null
+        },
+        "evidence_level": "public_corroboration",
+        "acceptance": {
+          "status": "unreviewed",
+          "set_by": "fixture_builder",
+          "reason": "Frozen synthetic/public benchmark v2.",
+          "updated_at": "2026-10-01T14:45:00Z"
+        },
+        "validity": {
+          "source_version": "1",
+          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "index_generation": "expanded-public-v2",
+          "valid_from": "2026-09-01T00:00:00Z",
+          "invalidated_at": null,
+          "invalidation_reason": null,
+          "supersedes": null
+        }
+      },
+      {
+        "schema_version": "1.0",
+        "evidence_id": "ev-meridian-pulse3",
+        "scope": "public_discovery",
+        "source": {
+          "source_id": "src-ev-meridian-pulse3",
+          "source_type": "synthetic_fixture",
+          "channel": "official_docs",
+          "url": "https://example.invalid/ev-meridian-pulse3",
+          "title": "Meridian Health Research Pulse-3",
+          "version": "1",
+          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "published_at": "2026-09-01T00:00:00Z",
+          "observed_at": "2026-09-01T01:00:00Z"
+        },
+        "provenance": {
+          "origin": "synthetic public benchmark v2",
+          "discovered_via": "synthetic public benchmark v2",
+          "collection_method": "synthetic_fixture",
+          "referrer": null,
+          "parent_evidence_id": null
+        },
+        "content": {
+          "language": "en",
+          "text": "Meridian Health Research publishes Pulse-3 for research triage of electrocardiogram anomaly patterns."
+        },
+        "identity_claim": {
+          "self_reported": false,
+          "provider": "Meridian Health Research",
+          "model_name": "Pulse-3",
+          "model_identifier": "pulse-3",
+          "model_family": "Pulse",
+          "agent_framework": null,
+          "interaction_origin": null
+        },
+        "evidence_level": "public_corroboration",
+        "acceptance": {
+          "status": "unreviewed",
+          "set_by": "fixture_builder",
+          "reason": "Frozen synthetic/public benchmark v2.",
+          "updated_at": "2026-10-01T14:45:00Z"
+        },
+        "validity": {
+          "source_version": "1",
+          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "index_generation": "expanded-public-v2",
+          "valid_from": "2026-09-01T00:00:00Z",
+          "invalidated_at": null,
+          "invalidation_reason": null,
+          "supersedes": null
+        }
+      },
+      {
+        "schema_version": "1.0",
+        "evidence_id": "ev-medica-ritm9",
+        "scope": "public_discovery",
+        "source": {
+          "source_id": "src-ev-medica-ritm9",
+          "source_type": "synthetic_fixture",
+          "channel": "official_docs",
+          "url": "https://example.invalid/ev-medica-ritm9",
+          "title": "Медика Аналитика Ритм-9",
+          "version": "1",
+          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "published_at": "2026-09-01T00:00:00Z",
+          "observed_at": "2026-09-01T01:00:00Z"
+        },
+        "provenance": {
+          "origin": "synthetic public benchmark v2",
+          "discovered_via": "synthetic public benchmark v2",
+          "collection_method": "synthetic_fixture",
+          "referrer": null,
+          "parent_evidence_id": null
+        },
+        "content": {
+          "language": "ru",
+          "text": "Медика Аналитика публикует Ритм-9 для исследовательского анализа аномалий электрокардиограмм."
+        },
+        "identity_claim": {
+          "self_reported": false,
+          "provider": "Медика Аналитика",
+          "model_name": "Ритм-9",
+          "model_identifier": "ritm-9",
+          "model_family": "Ритм",
+          "agent_framework": null,
+          "interaction_origin": null
+        },
+        "evidence_level": "public_corroboration",
+        "acceptance": {
+          "status": "unreviewed",
+          "set_by": "fixture_builder",
+          "reason": "Frozen synthetic/public benchmark v2.",
+          "updated_at": "2026-10-01T14:45:00Z"
+        },
+        "validity": {
+          "source_version": "1",
+          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "index_generation": "expanded-public-v2",
+          "valid_from": "2026-09-01T00:00:00Z",
+          "invalidated_at": null,
+          "invalidation_reason": null,
+          "supersedes": null
+        }
+      },
+      {
+        "schema_version": "1.0",
+        "evidence_id": "ev-quanta-ember7",
+        "scope": "public_discovery",
+        "source": {
+          "source_id": "src-ev-quanta-ember7",
+          "source_type": "synthetic_fixture",
+          "channel": "official_docs",
+          "url": "https://example.invalid/ev-quanta-ember7",
+          "title": "Quanta Energy Lab Ember-7",
+          "version": "1",
+          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "published_at": "2026-09-01T00:00:00Z",
+          "observed_at": "2026-09-01T01:00:00Z"
+        },
+        "provenance": {
+          "origin": "synthetic public benchmark v2",
+          "discovered_via": "synthetic public benchmark v2",
+          "collection_method": "synthetic_fixture",
+          "referrer": null,
+          "parent_evidence_id": null
+        },
+        "content": {
+          "language": "en",
+          "text": "Quanta Energy Lab releases Ember-7 for predicting lithium battery degradation across charge cycles."
+        },
+        "identity_claim": {
+          "self_reported": false,
+          "provider": "Quanta Energy Lab",
+          "model_name": "Ember-7",
+          "model_identifier": "ember-7",
+          "model_family": "Ember",
+          "agent_framework": null,
+          "interaction_origin": null
+        },
+        "evidence_level": "public_corroboration",
+        "acceptance": {
+          "status": "unreviewed",
+          "set_by": "fixture_builder",
+          "reason": "Frozen synthetic/public benchmark v2.",
+          "updated_at": "2026-10-01T14:45:00Z"
+        },
+        "validity": {
+          "source_version": "1",
+          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "index_generation": "expanded-public-v2",
+          "valid_from": "2026-09-01T00:00:00Z",
+          "invalidated_at": null,
+          "invalidation_reason": null,
+          "supersedes": null
+        }
+      },
+      {
+        "schema_version": "1.0",
+        "evidence_id": "ev-energia-zaryad4",
+        "scope": "public_discovery",
+        "source": {
+          "source_id": "src-ev-energia-zaryad4",
+          "source_type": "synthetic_fixture",
+          "channel": "official_docs",
+          "url": "https://example.invalid/ev-energia-zaryad4",
+          "title": "Институт Энергия Заряд-4",
+          "version": "1",
+          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "published_at": "2026-09-01T00:00:00Z",
+          "observed_at": "2026-09-01T01:00:00Z"
+        },
+        "provenance": {
+          "origin": "synthetic public benchmark v2",
+          "discovered_via": "synthetic public benchmark v2",
+          "collection_method": "synthetic_fixture",
+          "referrer": null,
+          "parent_evidence_id": null
+        },
+        "content": {
+          "language": "ru",
+          "text": "Институт Энергия выпустил Заряд-4 для прогноза деградации аккумуляторов по истории циклов заряда."
+        },
+        "identity_claim": {
+          "self_reported": false,
+          "provider": "Институт Энергия",
+          "model_name": "Заряд-4",
+          "model_identifier": "zaryad-4",
+          "model_family": "Заряд",
+          "agent_framework": null,
+          "interaction_origin": null
+        },
+        "evidence_level": "public_corroboration",
+        "acceptance": {
+          "status": "unreviewed",
+          "set_by": "fixture_builder",
+          "reason": "Frozen synthetic/public benchmark v2.",
+          "updated_at": "2026-10-01T14:45:00Z"
+        },
+        "validity": {
+          "source_version": "1",
+          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "index_generation": "expanded-public-v2",
+          "valid_from": "2026-09-01T00:00:00Z",
+          "invalidated_at": null,
+          "invalidation_reason": null,
+          "supersedes": null
+        }
+      },
+      {
+        "schema_version": "1.0",
+        "evidence_id": "ev-terra-echo6",
+        "scope": "public_discovery",
+        "source": {
+          "source_id": "src-ev-terra-echo6",
+          "source_type": "synthetic_fixture",
+          "channel": "official_docs",
+          "url": "https://example.invalid/ev-terra-echo6",
+          "title": "Terra Dynamics Echo-6",
+          "version": "1",
+          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "published_at": "2026-09-01T00:00:00Z",
+          "observed_at": "2026-09-01T01:00:00Z"
+        },
+        "provenance": {
+          "origin": "synthetic public benchmark v2",
+          "discovered_via": "synthetic public benchmark v2",
+          "collection_method": "synthetic_fixture",
+          "referrer": null,
+          "parent_evidence_id": null
+        },
+        "content": {
+          "language": "en",
+          "text": "Terra Dynamics publishes Echo-6 for simulation of wildfire smoke plume transport."
+        },
+        "identity_claim": {
+          "self_reported": false,
+          "provider": "Terra Dynamics",
+          "model_name": "Echo-6",
+          "model_identifier": "terra-echo-6",
+          "model_family": "Echo",
+          "agent_framework": null,
+          "interaction_origin": null
+        },
+        "evidence_level": "public_corroboration",
+        "acceptance": {
+          "status": "unreviewed",
+          "set_by": "fixture_builder",
+          "reason": "Frozen synthetic/public benchmark v2.",
+          "updated_at": "2026-10-01T14:45:00Z"
+        },
+        "validity": {
+          "source_version": "1",
+          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "index_generation": "expanded-public-v2",
+          "valid_from": "2026-09-01T00:00:00Z",
+          "invalidated_at": null,
+          "invalidation_reason": null,
+          "supersedes": null
+        }
+      },
+      {
+        "schema_version": "1.0",
+        "evidence_id": "ev-taiga-dym2",
+        "scope": "public_discovery",
+        "source": {
+          "source_id": "src-ev-taiga-dym2",
+          "source_type": "synthetic_fixture",
+          "channel": "official_docs",
+          "url": "https://example.invalid/ev-taiga-dym2",
+          "title": "Центр Тайга Дым-2",
+          "version": "1",
+          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "published_at": "2026-09-01T00:00:00Z",
+          "observed_at": "2026-09-01T01:00:00Z"
+        },
+        "provenance": {
+          "origin": "synthetic public benchmark v2",
+          "discovered_via": "synthetic public benchmark v2",
+          "collection_method": "synthetic_fixture",
+          "referrer": null,
+          "parent_evidence_id": null
+        },
+        "content": {
+          "language": "ru",
+          "text": "Центр Тайга публикует Дым-2 для прогноза распространения дыма от лесных пожаров."
+        },
+        "identity_claim": {
+          "self_reported": false,
+          "provider": "Центр Тайга",
+          "model_name": "Дым-2",
+          "model_identifier": "dym-2",
+          "model_family": "Дым",
+          "agent_framework": null,
+          "interaction_origin": null
+        },
+        "evidence_level": "public_corroboration",
+        "acceptance": {
+          "status": "unreviewed",
+          "set_by": "fixture_builder",
+          "reason": "Frozen synthetic/public benchmark v2.",
+          "updated_at": "2026-10-01T14:45:00Z"
+        },
+        "validity": {
+          "source_version": "1",
+          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "index_generation": "expanded-public-v2",
+          "valid_from": "2026-09-01T00:00:00Z",
+          "invalidated_at": null,
+          "invalidation_reason": null,
+          "supersedes": null
+        }
+      },
+      {
+        "schema_version": "1.0",
+        "evidence_id": "ev-cedar-compass8",
+        "scope": "public_discovery",
+        "source": {
+          "source_id": "src-ev-cedar-compass8",
+          "source_type": "synthetic_fixture",
+          "channel": "official_docs",
+          "url": "https://example.invalid/ev-cedar-compass8",
+          "title": "Cedar Ecology Compass-8",
+          "version": "1",
+          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "published_at": "2026-09-01T00:00:00Z",
+          "observed_at": "2026-09-01T01:00:00Z"
+        },
+        "provenance": {
+          "origin": "synthetic public benchmark v2",
+          "discovered_via": "synthetic public benchmark v2",
+          "collection_method": "synthetic_fixture",
+          "referrer": null,
+          "parent_evidence_id": null
+        },
+        "content": {
+          "language": "en",
+          "text": "Cedar Ecology releases Compass-8 for biodiversity image classification and species survey support."
+        },
+        "identity_claim": {
+          "self_reported": false,
+          "provider": "Cedar Ecology",
+          "model_name": "Compass-8",
+          "model_identifier": "compass-8",
+          "model_family": "Compass",
+          "agent_framework": null,
+          "interaction_origin": null
+        },
+        "evidence_level": "public_corroboration",
+        "acceptance": {
+          "status": "unreviewed",
+          "set_by": "fixture_builder",
+          "reason": "Frozen synthetic/public benchmark v2.",
+          "updated_at": "2026-10-01T14:45:00Z"
+        },
+        "validity": {
+          "source_version": "1",
+          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "index_generation": "expanded-public-v2",
+          "valid_from": "2026-09-01T00:00:00Z",
+          "invalidated_at": null,
+          "invalidation_reason": null,
+          "supersedes": null
+        }
+      },
+      {
+        "schema_version": "1.0",
+        "evidence_id": "ev-biom-flora3",
+        "scope": "public_discovery",
+        "source": {
+          "source_id": "src-ev-biom-flora3",
+          "source_type": "synthetic_fixture",
+          "channel": "official_docs",
+          "url": "https://example.invalid/ev-biom-flora3",
+          "title": "Институт Биом Флора-3",
+          "version": "1",
+          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "published_at": "2026-09-01T00:00:00Z",
+          "observed_at": "2026-09-01T01:00:00Z"
+        },
+        "provenance": {
+          "origin": "synthetic public benchmark v2",
+          "discovered_via": "synthetic public benchmark v2",
+          "collection_method": "synthetic_fixture",
+          "referrer": null,
+          "parent_evidence_id": null
+        },
+        "content": {
+          "language": "ru",
+          "text": "Институт Биом выпускает Флора-3 для классификации растений и поддержки полевых ботанических наблюдений."
+        },
+        "identity_claim": {
+          "self_reported": false,
+          "provider": "Институт Биом",
+          "model_name": "Флора-3",
+          "model_identifier": "flora-3",
+          "model_family": "Флора",
+          "agent_framework": null,
+          "interaction_origin": null
+        },
+        "evidence_level": "public_corroboration",
+        "acceptance": {
+          "status": "unreviewed",
+          "set_by": "fixture_builder",
+          "reason": "Frozen synthetic/public benchmark v2.",
+          "updated_at": "2026-10-01T14:45:00Z"
+        },
+        "validity": {
+          "source_version": "1",
+          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "index_generation": "expanded-public-v2",
+          "valid_from": "2026-09-01T00:00:00Z",
+          "invalidated_at": null,
+          "invalidation_reason": null,
+          "supersedes": null
+        }
+      },
+      {
+        "schema_version": "1.0",
+        "evidence_id": "ev-ion-bridge5",
+        "scope": "public_discovery",
+        "source": {
+          "source_id": "src-ev-ion-bridge5",
+          "source_type": "synthetic_fixture",
+          "channel": "official_docs",
+          "url": "https://example.invalid/ev-ion-bridge5",
+          "title": "Ion Materials Bridge-5",
+          "version": "1",
+          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "published_at": "2026-09-01T00:00:00Z",
+          "observed_at": "2026-09-01T01:00:00Z"
+        },
+        "provenance": {
+          "origin": "synthetic public benchmark v2",
+          "discovered_via": "synthetic public benchmark v2",
+          "collection_method": "synthetic_fixture",
+          "referrer": null,
+          "parent_evidence_id": null
+        },
+        "content": {
+          "language": "en",
+          "text": "Ion Materials publishes Bridge-5 for analysis of material phase transitions from laboratory measurement datasets."
+        },
+        "identity_claim": {
+          "self_reported": false,
+          "provider": "Ion Materials",
+          "model_name": "Bridge-5",
+          "model_identifier": "ion-bridge-5",
+          "model_family": "Bridge",
+          "agent_framework": null,
+          "interaction_origin": null
+        },
+        "evidence_level": "public_corroboration",
+        "acceptance": {
+          "status": "unreviewed",
+          "set_by": "fixture_builder",
+          "reason": "Frozen synthetic/public benchmark v2.",
+          "updated_at": "2026-10-01T14:45:00Z"
+        },
+        "validity": {
+          "source_version": "1",
+          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "index_generation": "expanded-public-v2",
+          "valid_from": "2026-09-01T00:00:00Z",
+          "invalidated_at": null,
+          "invalidation_reason": null,
+          "supersedes": null
+        }
+      },
+      {
+        "schema_version": "1.0",
+        "evidence_id": "ev-kristall-faza8",
+        "scope": "public_discovery",
+        "source": {
+          "source_id": "src-ev-kristall-faza8",
+          "source_type": "synthetic_fixture",
+          "channel": "official_docs",
+          "url": "https://example.invalid/ev-kristall-faza8",
+          "title": "Центр Кристалл Фаза-8",
+          "version": "1",
+          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "published_at": "2026-09-01T00:00:00Z",
+          "observed_at": "2026-09-01T01:00:00Z"
+        },
+        "provenance": {
+          "origin": "synthetic public benchmark v2",
+          "discovered_via": "synthetic public benchmark v2",
+          "collection_method": "synthetic_fixture",
+          "referrer": null,
+          "parent_evidence_id": null
+        },
+        "content": {
+          "language": "ru",
+          "text": "Центр Кристалл публикует Фаза-8 для анализа фазовых переходов материалов по экспериментальным наборам данных."
+        },
+        "identity_claim": {
+          "self_reported": false,
+          "provider": "Центр Кристалл",
+          "model_name": "Фаза-8",
+          "model_identifier": "faza-8",
+          "model_family": "Фаза",
+          "agent_framework": null,
+          "interaction_origin": null
+        },
+        "evidence_level": "public_corroboration",
+        "acceptance": {
+          "status": "unreviewed",
+          "set_by": "fixture_builder",
+          "reason": "Frozen synthetic/public benchmark v2.",
+          "updated_at": "2026-10-01T14:45:00Z"
+        },
+        "validity": {
+          "source_version": "1",
+          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "index_generation": "expanded-public-v2",
+          "valid_from": "2026-09-01T00:00:00Z",
+          "invalidated_at": null,
+          "invalidation_reason": null,
+          "supersedes": null
+        }
+      },
+      {
+        "schema_version": "1.0",
+        "evidence_id": "ev-borealis-axiom8-revoked",
+        "scope": "public_discovery",
+        "source": {
+          "source_id": "src-ev-borealis-axiom8-revoked",
+          "source_type": "synthetic_fixture",
+          "channel": "official_docs",
+          "url": "https://example.invalid/ev-borealis-axiom8-revoked",
+          "title": "Borealis Institute Axiom-8",
+          "version": "2025",
+          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "published_at": "2026-09-01T00:00:00Z",
+          "observed_at": "2026-09-01T01:00:00Z"
+        },
+        "provenance": {
+          "origin": "synthetic public benchmark v2",
+          "discovered_via": "synthetic public benchmark v2",
+          "collection_method": "synthetic_fixture",
+          "referrer": null,
+          "parent_evidence_id": null
+        },
+        "content": {
+          "language": "en",
+          "text": "Archived Axiom-8 ocean forecasting entry. This source is revoked after Axiom-9 superseded it."
+        },
+        "identity_claim": {
+          "self_reported": false,
+          "provider": "Borealis Institute",
+          "model_name": "Axiom-8",
+          "model_identifier": "axiom-8-2025",
+          "model_family": "Axiom",
+          "agent_framework": null,
+          "interaction_origin": null
+        },
+        "evidence_level": "public_corroboration",
+        "acceptance": {
+          "status": "revoked",
+          "set_by": "operator",
+          "reason": "Frozen synthetic/public benchmark v2.",
+          "updated_at": "2026-10-01T14:45:00Z"
+        },
+        "validity": {
+          "source_version": "2025",
+          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "index_generation": "expanded-public-v2",
+          "valid_from": "2026-09-01T00:00:00Z",
+          "invalidated_at": "2026-09-01T00:00:00Z",
+          "invalidation_reason": "superseded",
+          "supersedes": null
+        }
+      },
+      {
+        "schema_version": "1.0",
+        "evidence_id": "ev-sever-mayak13-revoked",
+        "scope": "public_discovery",
+        "source": {
+          "source_id": "src-ev-sever-mayak13-revoked",
+          "source_type": "synthetic_fixture",
+          "channel": "official_docs",
+          "url": "https://example.invalid/ev-sever-mayak13-revoked",
+          "title": "Лаборатория Север Маяк-13",
+          "version": "2025",
+          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "published_at": "2026-09-01T00:00:00Z",
+          "observed_at": "2026-09-01T01:00:00Z"
+        },
+        "provenance": {
+          "origin": "synthetic public benchmark v2",
+          "discovered_via": "synthetic public benchmark v2",
+          "collection_method": "synthetic_fixture",
+          "referrer": null,
+          "parent_evidence_id": null
+        },
+        "content": {
+          "language": "ru",
+          "text": "Архивная карточка Маяк-13 отозвана после публикации Маяк-14."
+        },
+        "identity_claim": {
+          "self_reported": false,
+          "provider": "Лаборатория Север",
+          "model_name": "Маяк-13",
+          "model_identifier": "mayak-13-2025",
+          "model_family": "Маяк",
+          "agent_framework": null,
+          "interaction_origin": null
+        },
+        "evidence_level": "public_corroboration",
+        "acceptance": {
+          "status": "revoked",
+          "set_by": "operator",
+          "reason": "Frozen synthetic/public benchmark v2.",
+          "updated_at": "2026-10-01T14:45:00Z"
+        },
+        "validity": {
+          "source_version": "2025",
+          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "index_generation": "expanded-public-v2",
+          "valid_from": "2026-09-01T00:00:00Z",
+          "invalidated_at": "2026-09-01T00:00:00Z",
+          "invalidation_reason": "superseded",
+          "supersedes": null
+        }
+      },
+      {
+        "schema_version": "1.0",
+        "evidence_id": "ev-atlas-loom1-revoked",
+        "scope": "public_discovery",
+        "source": {
+          "source_id": "src-ev-atlas-loom1-revoked",
+          "source_type": "synthetic_fixture",
+          "channel": "official_docs",
+          "url": "https://example.invalid/ev-atlas-loom1-revoked",
+          "title": "Atlas Systems Loom-1",
+          "version": "2025",
+          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "published_at": "2026-09-01T00:00:00Z",
+          "observed_at": "2026-09-01T01:00:00Z"
+        },
+        "provenance": {
+          "origin": "synthetic public benchmark v2",
+          "discovered_via": "synthetic public benchmark v2",
+          "collection_method": "synthetic_fixture",
+          "referrer": null,
+          "parent_evidence_id": null
+        },
+        "content": {
+          "language": "en",
+          "text": "Archived Loom-1 document parsing entry, revoked after Loom-2 became current."
+        },
+        "identity_claim": {
+          "self_reported": false,
+          "provider": "Atlas Systems",
+          "model_name": "Loom-1",
+          "model_identifier": "atlas-loom-1",
+          "model_family": "Loom",
+          "agent_framework": null,
+          "interaction_origin": null
+        },
+        "evidence_level": "public_corroboration",
+        "acceptance": {
+          "status": "revoked",
+          "set_by": "operator",
+          "reason": "Frozen synthetic/public benchmark v2.",
+          "updated_at": "2026-10-01T14:45:00Z"
+        },
+        "validity": {
+          "source_version": "2025",
+          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "index_generation": "expanded-public-v2",
+          "valid_from": "2026-09-01T00:00:00Z",
+          "invalidated_at": "2026-09-01T00:00:00Z",
+          "invalidation_reason": "superseded",
+          "supersedes": null
+        }
+      },
+      {
+        "schema_version": "1.0",
+        "evidence_id": "ev-logos-axioma4-revoked",
+        "scope": "public_discovery",
+        "source": {
+          "source_id": "src-ev-logos-axioma4-revoked",
+          "source_type": "synthetic_fixture",
+          "channel": "official_docs",
+          "url": "https://example.invalid/ev-logos-axioma4-revoked",
+          "title": "Лаборатория Логос Аксиома-4",
+          "version": "2025",
+          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "published_at": "2026-09-01T00:00:00Z",
+          "observed_at": "2026-09-01T01:00:00Z"
+        },
+        "provenance": {
+          "origin": "synthetic public benchmark v2",
+          "discovered_via": "synthetic public benchmark v2",
+          "collection_method": "synthetic_fixture",
+          "referrer": null,
+          "parent_evidence_id": null
+        },
+        "content": {
+          "language": "ru",
+          "text": "Архивная Аксиома-4 отозвана после выхода Аксиома-5."
+        },
+        "identity_claim": {
+          "self_reported": false,
+          "provider": "Лаборатория Логос",
+          "model_name": "Аксиома-4",
+          "model_identifier": "aksioma-4",
+          "model_family": "Аксиома",
+          "agent_framework": null,
+          "interaction_origin": null
+        },
+        "evidence_level": "public_corroboration",
+        "acceptance": {
+          "status": "revoked",
+          "set_by": "operator",
+          "reason": "Frozen synthetic/public benchmark v2.",
+          "updated_at": "2026-10-01T14:45:00Z"
+        },
+        "validity": {
+          "source_version": "2025",
+          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "index_generation": "expanded-public-v2",
+          "valid_from": "2026-09-01T00:00:00Z",
+          "invalidated_at": "2026-09-01T00:00:00Z",
+          "invalidation_reason": "superseded",
+          "supersedes": null
+        }
+      },
+      {
+        "schema_version": "1.0",
+        "evidence_id": "ev-borealis-axiom9-secondary",
+        "scope": "public_discovery",
+        "source": {
+          "source_id": "src-ev-borealis-axiom9-secondary",
+          "source_type": "synthetic_fixture",
+          "channel": "secondary_report",
+          "url": "https://example.invalid/ev-borealis-axiom9-secondary",
+          "title": "Borealis Institute Axiom-9 report",
+          "version": "1",
+          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "published_at": "2026-09-01T00:00:00Z",
+          "observed_at": "2026-09-01T01:00:00Z"
+        },
+        "provenance": {
+          "origin": "synthetic public benchmark v2",
+          "discovered_via": "synthetic public benchmark v2",
+          "collection_method": "synthetic_fixture",
+          "referrer": null,
+          "parent_evidence_id": "ev-borealis-axiom9"
+        },
+        "content": {
+          "language": "en",
+          "text": "A secondary public report summarizes the Borealis Axiom-9 ocean salinity release."
+        },
+        "identity_claim": {
+          "self_reported": false,
+          "provider": "Borealis Institute",
+          "model_name": "Axiom-9 report",
+          "model_identifier": null,
+          "model_family": "Axiom",
+          "agent_framework": null,
+          "interaction_origin": null
+        },
+        "evidence_level": "public_corroboration",
+        "acceptance": {
+          "status": "unreviewed",
+          "set_by": "fixture_builder",
+          "reason": "Frozen synthetic/public benchmark v2.",
+          "updated_at": "2026-10-01T14:45:00Z"
+        },
+        "validity": {
+          "source_version": "1",
+          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "index_generation": "expanded-public-v2",
+          "valid_from": "2026-09-01T00:00:00Z",
+          "invalidated_at": null,
+          "invalidation_reason": null,
+          "supersedes": null
+        }
+      },
+      {
+        "schema_version": "1.0",
+        "evidence_id": "ev-sever-mayak14-secondary",
+        "scope": "public_discovery",
+        "source": {
+          "source_id": "src-ev-sever-mayak14-secondary",
+          "source_type": "synthetic_fixture",
+          "channel": "secondary_report",
+          "url": "https://example.invalid/ev-sever-mayak14-secondary",
+          "title": "Лаборатория Север Маяк-14 обзор",
+          "version": "1",
+          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "published_at": "2026-09-01T00:00:00Z",
+          "observed_at": "2026-09-01T01:00:00Z"
+        },
+        "provenance": {
+          "origin": "synthetic public benchmark v2",
+          "discovered_via": "synthetic public benchmark v2",
+          "collection_method": "synthetic_fixture",
+          "referrer": null,
+          "parent_evidence_id": "ev-sever-mayak14"
+        },
+        "content": {
+          "language": "ru",
+          "text": "Вторичный публичный обзор пересказывает выпуск Маяк-14 для прогноза геомагнитных бурь."
+        },
+        "identity_claim": {
+          "self_reported": false,
+          "provider": "Лаборатория Север",
+          "model_name": "Маяк-14 обзор",
+          "model_identifier": null,
+          "model_family": "Маяк",
+          "agent_framework": null,
+          "interaction_origin": null
+        },
+        "evidence_level": "public_corroboration",
+        "acceptance": {
+          "status": "unreviewed",
+          "set_by": "fixture_builder",
+          "reason": "Frozen synthetic/public benchmark v2.",
+          "updated_at": "2026-10-01T14:45:00Z"
+        },
+        "validity": {
+          "source_version": "1",
+          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "index_generation": "expanded-public-v2",
+          "valid_from": "2026-09-01T00:00:00Z",
+          "invalidated_at": null,
+          "invalidation_reason": null,
+          "supersedes": null
+        }
+      },
+      {
+        "schema_version": "1.0",
+        "evidence_id": "ev-nimbus-proof4-secondary",
+        "scope": "public_discovery",
+        "source": {
+          "source_id": "src-ev-nimbus-proof4-secondary",
+          "source_type": "synthetic_fixture",
+          "channel": "secondary_report",
+          "url": "https://example.invalid/ev-nimbus-proof4-secondary",
+          "title": "Nimbus Logic Proof-4 review",
+          "version": "1",
+          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "published_at": "2026-09-01T00:00:00Z",
+          "observed_at": "2026-09-01T01:00:00Z"
+        },
+        "provenance": {
+          "origin": "synthetic public benchmark v2",
+          "discovered_via": "synthetic public benchmark v2",
+          "collection_method": "synthetic_fixture",
+          "referrer": null,
+          "parent_evidence_id": "ev-nimbus-proof4"
+        },
+        "content": {
+          "language": "en",
+          "text": "A public secondary review discusses the Nimbus Proof-4 Lean theorem-search system."
+        },
+        "identity_claim": {
+          "self_reported": false,
+          "provider": "Nimbus Logic",
+          "model_name": "Proof-4 review",
+          "model_identifier": null,
+          "model_family": "Proof",
+          "agent_framework": null,
+          "interaction_origin": null
+        },
+        "evidence_level": "public_corroboration",
+        "acceptance": {
+          "status": "unreviewed",
+          "set_by": "fixture_builder",
+          "reason": "Frozen synthetic/public benchmark v2.",
+          "updated_at": "2026-10-01T14:45:00Z"
+        },
+        "validity": {
+          "source_version": "1",
+          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "index_generation": "expanded-public-v2",
+          "valid_from": "2026-09-01T00:00:00Z",
+          "invalidated_at": null,
+          "invalidation_reason": null,
+          "supersedes": null
+        }
+      },
+      {
+        "schema_version": "1.0",
+        "evidence_id": "ev-logos-axioma5-secondary",
+        "scope": "public_discovery",
+        "source": {
+          "source_id": "src-ev-logos-axioma5-secondary",
+          "source_type": "synthetic_fixture",
+          "channel": "secondary_report",
+          "url": "https://example.invalid/ev-logos-axioma5-secondary",
+          "title": "Лаборатория Логос Аксиома-5 обзор",
+          "version": "1",
+          "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "published_at": "2026-09-01T00:00:00Z",
+          "observed_at": "2026-09-01T01:00:00Z"
+        },
+        "provenance": {
+          "origin": "synthetic public benchmark v2",
+          "discovered_via": "synthetic public benchmark v2",
+          "collection_method": "synthetic_fixture",
+          "referrer": null,
+          "parent_evidence_id": "ev-logos-axioma5"
+        },
+        "content": {
+          "language": "ru",
+          "text": "Вторичный обзор описывает Аксиома-5 и поиск доказательств в Lean."
+        },
+        "identity_claim": {
+          "self_reported": false,
+          "provider": "Лаборатория Логос",
+          "model_name": "Аксиома-5 обзор",
+          "model_identifier": null,
+          "model_family": "Аксиома",
+          "agent_framework": null,
+          "interaction_origin": null
+        },
+        "evidence_level": "public_corroboration",
+        "acceptance": {
+          "status": "unreviewed",
+          "set_by": "fixture_builder",
+          "reason": "Frozen synthetic/public benchmark v2.",
+          "updated_at": "2026-10-01T14:45:00Z"
+        },
+        "validity": {
+          "source_version": "1",
+          "source_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "index_generation": "expanded-public-v2",
+          "valid_from": "2026-09-01T00:00:00Z",
+          "invalidated_at": null,
+          "invalidation_reason": null,
+          "supersedes": null
+        }
+      }
+    ]
+  },
+  "calibration": {
+    "description": "Used only to derive the dense no-evidence gate. Evaluation queries are never used for threshold selection.",
+    "cases": [
+      {
+        "id": "c01",
+        "kind": "lexical",
+        "query": "Borealis Axiom-9 ocean salinity forecasting",
+        "relevant": [
+          "ev-borealis-axiom9"
+        ]
+      },
+      {
+        "id": "c02",
+        "kind": "ru_lexical",
+        "query": "Лаборатория Север Маяк-14 геомагнитные бури",
+        "relevant": [
+          "ev-sever-mayak14"
+        ]
+      },
+      {
+        "id": "c03",
+        "kind": "cross_lingual",
+        "query": "Which Northern Laboratory system forecasts geomagnetic storms from solar wind?",
+        "relevant": [
+          "ev-sever-mayak14"
+        ]
+      },
+      {
+        "id": "c04",
+        "kind": "cross_lingual",
+        "query": "какая система Solace Research обнаруживает болезни сельскохозяйственных культур",
+        "relevant": [
+          "ev-solace-finch3"
+        ]
+      },
+      {
+        "id": "c05",
+        "kind": "mixed",
+        "query": "Helix Forge модель для protein folding structure scoring",
+        "relevant": [
+          "ev-helix-forge5"
+        ]
+      },
+      {
+        "id": "c06",
+        "kind": "exact_identifier",
+        "query": "atlas-loom-2",
+        "relevant": [
+          "ev-atlas-loom2"
+        ]
+      },
+      {
+        "id": "c07",
+        "kind": "stale_revoked",
+        "query": "старый отозванный Маяк-13",
+        "relevant": [
+          "ev-sever-mayak13-revoked"
+        ]
+      },
+      {
+        "id": "c08",
+        "kind": "lexical",
+        "query": "Nimbus Proof-4 formal theorem search Lean",
+        "relevant": [
+          "ev-nimbus-proof4"
+        ]
+      },
+      {
+        "id": "c09",
+        "kind": "ru_lexical",
+        "query": "Логос Аксиома-5 поиск доказательств Lean",
+        "relevant": [
+          "ev-logos-axioma5"
+        ]
+      },
+      {
+        "id": "c10",
+        "kind": "secondary",
+        "query": "secondary report Borealis Axiom-9 ocean salinity",
+        "relevant": [
+          "ev-borealis-axiom9-secondary"
+        ]
+      },
+      {
+        "id": "c11",
+        "kind": "no_evidence",
+        "query": "Borealis Axiom-99 ocean salinity selector",
+        "relevant": []
+      },
+      {
+        "id": "c12",
+        "kind": "no_evidence",
+        "query": "Лаборатория Север Маяк-99 прогноз геомагнитных бурь",
+        "relevant": []
+      },
+      {
+        "id": "c13",
+        "kind": "no_evidence",
+        "query": "Solace Research Wren-3 crop disease model",
+        "relevant": []
+      },
+      {
+        "id": "c14",
+        "kind": "no_evidence",
+        "query": "Лаборатория Кедр Спектр-99 анализ телескопов",
+        "relevant": []
+      },
+      {
+        "id": "c15",
+        "kind": "no_evidence",
+        "query": "Atlas Systems Loom-9 technical report parser",
+        "relevant": []
+      },
+      {
+        "id": "c16",
+        "kind": "no_evidence",
+        "query": "Лаборатория Логос Теорема-77 Lean proofs",
+        "relevant": []
+      },
+      {
+        "id": "c17",
+        "kind": "no_evidence",
+        "query": "Meridian Pulse-99 ECG anomaly system",
+        "relevant": []
+      },
+      {
+        "id": "c18",
+        "kind": "no_evidence",
+        "query": "Институт Энергия Заряд-99 аккумуляторы",
+        "relevant": []
+      },
+      {
+        "id": "c19",
+        "kind": "no_evidence",
+        "query": "Terra Dynamics Echo-99 wildfire smoke",
+        "relevant": []
+      },
+      {
+        "id": "c20",
+        "kind": "no_evidence",
+        "query": "Центр Кристалл Фаза-99 материалы",
+        "relevant": []
+      }
+    ]
+  },
+  "evaluation": {
+    "cases": [
+      {
+        "id": "e01",
+        "kind": "exact_identifier",
+        "query": "axiom-9-2026",
+        "relevant": [
+          "ev-borealis-axiom9"
+        ]
+      },
+      {
+        "id": "e02",
+        "kind": "exact_identifier",
+        "query": "mayak-14-2026",
+        "relevant": [
+          "ev-sever-mayak14"
+        ]
+      },
+      {
+        "id": "e03",
+        "kind": "lexical",
+        "query": "Solace Finch-3 field imagery crop disease",
+        "relevant": [
+          "ev-solace-finch3"
+        ]
+      },
+      {
+        "id": "e04",
+        "kind": "ru_lexical",
+        "query": "Институт Волна Роса-8 влажность почвы спутниковые наблюдения",
+        "relevant": [
+          "ev-volna-rosa8"
+        ]
+      },
+      {
+        "id": "e05",
+        "kind": "cross_lingual",
+        "query": "какая модель Helix Forge оценивает варианты сворачивания белка",
+        "relevant": [
+          "ev-helix-forge5"
+        ]
+      },
+      {
+        "id": "e06",
+        "kind": "cross_lingual",
+        "query": "Which Cedar laboratory system analyzes telescope spectra and astronomical objects?",
+        "relevant": [
+          "ev-kedr-spektr6"
+        ]
+      },
+      {
+        "id": "e07",
+        "kind": "cross_lingual",
+        "query": "какая система Atlas Systems извлекает таблицы заголовки и ссылки из технических отчетов",
+        "relevant": [
+          "ev-atlas-loom2"
+        ]
+      },
+      {
+        "id": "e08",
+        "kind": "cross_lingual",
+        "query": "Which Vector Center system studies freight routing between distribution hubs?",
+        "relevant": [
+          "ev-vector-linia7"
+        ]
+      },
+      {
+        "id": "e09",
+        "kind": "cross_lingual",
+        "query": "какая Nimbus Logic система ищет формальные теоремы и доказательства в Lean",
+        "relevant": [
+          "ev-nimbus-proof4"
+        ]
+      },
+      {
+        "id": "e10",
+        "kind": "cross_lingual",
+        "query": "Which Logos laboratory system searches for formal lemmas and proofs in Lean projects?",
+        "relevant": [
+          "ev-logos-axioma5"
+        ]
+      },
+      {
+        "id": "e11",
+        "kind": "cross_lingual",
+        "query": "какая система Meridian исследует аномалии электрокардиограмм",
+        "relevant": [
+          "ev-meridian-pulse3"
+        ]
+      },
+      {
+        "id": "e12",
+        "kind": "cross_lingual",
+        "query": "Which Medica Analytics system studies electrocardiogram anomalies?",
+        "relevant": [
+          "ev-medica-ritm9"
+        ]
+      },
+      {
+        "id": "e13",
+        "kind": "cross_lingual",
+        "query": "какая Quanta Energy модель прогнозирует деградацию литиевых батарей по циклам",
+        "relevant": [
+          "ev-quanta-ember7"
+        ]
+      },
+      {
+        "id": "e14",
+        "kind": "cross_lingual",
+        "query": "Which Energy Institute system forecasts battery degradation from charge-cycle history?",
+        "relevant": [
+          "ev-energia-zaryad4"
+        ]
+      },
+      {
+        "id": "e15",
+        "kind": "cross_lingual",
+        "query": "какая система Terra Dynamics моделирует перенос дыма от лесных пожаров",
+        "relevant": [
+          "ev-terra-echo6"
+        ]
+      },
+      {
+        "id": "e16",
+        "kind": "cross_lingual",
+        "query": "Which Taiga Center system forecasts wildfire smoke spread?",
+        "relevant": [
+          "ev-taiga-dym2"
+        ]
+      },
+      {
+        "id": "e17",
+        "kind": "cross_lingual",
+        "query": "какая Cedar Ecology система классифицирует биоразнообразие и виды по изображениям",
+        "relevant": [
+          "ev-cedar-compass8"
+        ]
+      },
+      {
+        "id": "e18",
+        "kind": "cross_lingual",
+        "query": "Which Biom Institute system classifies plants for field botanical surveys?",
+        "relevant": [
+          "ev-biom-flora3"
+        ]
+      },
+      {
+        "id": "e19",
+        "kind": "cross_lingual",
+        "query": "какая Ion Materials система анализирует фазовые переходы материалов",
+        "relevant": [
+          "ev-ion-bridge5"
+        ]
+      },
+      {
+        "id": "e20",
+        "kind": "cross_lingual",
+        "query": "Which Crystal Center system analyzes phase transitions in materials?",
+        "relevant": [
+          "ev-kristall-faza8"
+        ]
+      },
+      {
+        "id": "e21",
+        "kind": "stale_revoked",
+        "query": "Borealis revoked Axiom-8 archived ocean model",
+        "relevant": [
+          "ev-borealis-axiom8-revoked"
+        ]
+      },
+      {
+        "id": "e22",
+        "kind": "stale_revoked",
+        "query": "Atlas revoked old Loom-1 document parser",
+        "relevant": [
+          "ev-atlas-loom1-revoked"
+        ]
+      },
+      {
+        "id": "e23",
+        "kind": "secondary",
+        "query": "вторичный обзор Маяк-14 геомагнитные бури",
+        "relevant": [
+          "ev-sever-mayak14-secondary"
+        ]
+      },
+      {
+        "id": "e24",
+        "kind": "secondary",
+        "query": "secondary review Nimbus Proof-4 Lean theorem search",
+        "relevant": [
+          "ev-nimbus-proof4-secondary"
+        ]
+      },
+      {
+        "id": "e25",
+        "kind": "no_evidence",
+        "query": "Borealis Institute Tidal-5 salinity forecasting",
+        "relevant": []
+      },
+      {
+        "id": "e26",
+        "kind": "no_evidence",
+        "query": "Центр Север Полюс-7 солнечный ветер магнитометры",
+        "relevant": []
+      },
+      {
+        "id": "e27",
+        "kind": "no_evidence",
+        "query": "Solace Finch-30 crop disease public model",
+        "relevant": []
+      },
+      {
+        "id": "e28",
+        "kind": "no_evidence",
+        "query": "Институт Волна Туман-8 влажность почвы",
+        "relevant": []
+      },
+      {
+        "id": "e29",
+        "kind": "no_evidence",
+        "query": "Helix Forge Fold-99 protein structure scoring",
+        "relevant": []
+      },
+      {
+        "id": "e30",
+        "kind": "no_evidence",
+        "query": "Лаборатория Кедр Галактика-4 спектры телескопов",
+        "relevant": []
+      },
+      {
+        "id": "e31",
+        "kind": "no_evidence",
+        "query": "Atlas Systems Weave-2 document table extraction",
+        "relevant": []
+      },
+      {
+        "id": "e32",
+        "kind": "no_evidence",
+        "query": "Центр Вектор Трасса-70 маршрутизация грузов",
+        "relevant": []
+      },
+      {
+        "id": "e33",
+        "kind": "no_evidence",
+        "query": "Nimbus Logic Lemma-12 Lean theorem search",
+        "relevant": []
+      },
+      {
+        "id": "e34",
+        "kind": "no_evidence",
+        "query": "Медика Аналитика Кардио-77 ЭКГ",
+        "relevant": []
+      },
+      {
+        "id": "e35",
+        "kind": "no_evidence",
+        "query": "Quanta Energy Spark-7 battery degradation",
+        "relevant": []
+      },
+      {
+        "id": "e36",
+        "kind": "no_evidence",
+        "query": "Центр Тайга Пепел-20 лесной дым",
+        "relevant": []
+      }
+    ]
+  },
+  "policy": {
+    "lexical_top_k": 5,
+    "lexical_minimum_score": 2,
+    "dense_top_k": 10,
+    "report_k": [
+      1,
+      3,
+      5,
+      10
+    ],
+    "calibration_rule": "threshold = next representable float above max(top1 cosine) across calibration no-evidence queries; no positive calibration query is used to choose the threshold",
+    "hybrid_rule": "if lexical has candidates, fuse lexical top5 with dense top10 only when dense gate passes; if lexical abstains, dense must pass gate; exact lexical matches receive deterministic dominant bonus"
+  }
+}
