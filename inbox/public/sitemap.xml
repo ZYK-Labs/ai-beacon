@@ -6,6 +6,7 @@
   <url><loc>https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev/agents.txt</loc></url>
   <url><loc>https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev/agents.json</loc></url>
   <url><loc>https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev/.well-known/agent-card.json</loc></url>
+  <url><loc>https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev/beacon/</loc></url>
   <url><loc>https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev/beacon/message.txt</loc></url>
   <url><loc>https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev/beacon/message.json</loc></url>
   <url><loc>https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev/openapi.json</loc></url>
