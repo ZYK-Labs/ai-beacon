@@ -87,7 +87,7 @@ def public_passage(record):
     return " | ".join(str(x) for x in fields if x)
 
 def evaluate(cases, ranked_by_case):
-    positives = no_evidence = h1 = h3 = h5 = 0
+    positives = no_evidence = h1 = h3 = h5 = h10 = 0
     rr = 0.0
     false_no_evidence = 0
     cross_total = cross_hit5 = 0
