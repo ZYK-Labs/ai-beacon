@@ -1,0 +1,60 @@
+name: AI Beacon E5 expanded v2
+
+on:
+  pull_request:
+    paths:
+      - "evidence/**"
+      - ".github/workflows/evidence-e5-expanded-v2.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  expanded-e5:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      HF_HUB_DISABLE_TELEMETRY: "1"
+      TOKENIZERS_PARALLELISM: "false"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: "pip"
+          cache-dependency-path: evidence/experiments/multilingual-e5-small-v1/requirements.txt
+
+      - name: Revalidate frozen no-model baseline
+        working-directory: evidence
+        run: |
+          npm run check
+          npm test
+          npm run benchmark
+
+      - name: Export expanded lexical candidates
+        working-directory: evidence/experiments/multilingual-e5-small-v2
+        run: node export_lexical_v2.mjs > lexical-v2.json
+
+      - name: Install pinned CPU runtime
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install --index-url https://download.pytorch.org/whl/cpu torch==2.0.1
+          python -m pip install -r evidence/experiments/multilingual-e5-small-v1/requirements.txt
+
+      - name: Run expanded E5 benchmark
+        working-directory: evidence/experiments/multilingual-e5-small-v2
+        run: python expanded_benchmark.py
+
+      - name: Upload expanded result
+        uses: actions/upload-artifact@v4
+        with:
+          name: multilingual-e5-small-expanded-v2-results
+          path: |
+            evidence/experiments/multilingual-e5-small-v2/results-v2.json
+            evidence/experiments/multilingual-e5-small-v2/lexical-v2.json
+          if-no-files-found: error
+          retention-days: 30
