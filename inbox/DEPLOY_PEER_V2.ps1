@@ -6,6 +6,18 @@ Set-Location $PSScriptRoot
 if (-not (Test-Path '.\wrangler.jsonc')) {
   throw 'Missing inbox\wrangler.jsonc. Use the existing production config; do not recreate the D1 database.'
 }
+if (-not (Test-Path '.\src\index.js')) {
+  throw 'Missing inbox\src\index.js.'
+}
+$source = Get-Content -LiteralPath '.\src\index.js' -Raw
+if ($source -notmatch 'version:\s*"1\.4"') {
+  throw 'Local src\index.js does not advertise Worker v1.4. Stop and git pull main before deploying.'
+}
+$gitHead = (git rev-parse --short HEAD).Trim()
+Write-Host "Local git HEAD: $gitHead"
+if (Test-Path '.\.wrangler\deploy\config.json') {
+  Write-Host 'NOTE: .wrangler/deploy/config.json exists. This script will ignore redirection by passing explicit --config and entrypoint.' -ForegroundColor Yellow
+}
 
 function Get-Json([string]$Url) {
   $curl = Get-Command curl.exe -ErrorAction Stop
@@ -24,13 +36,13 @@ function Assert-Http200([string]$Url) {
 Write-Host '== AI Beacon Peer Operations v2 deploy ==' -ForegroundColor Cyan
 Write-Host 'Applying additive D1 migrations to the existing production database...'
 
-npx.cmd wrangler d1 migrations apply ai-beacon-inbox-db --remote
+npx.cmd wrangler d1 migrations apply ai-beacon-inbox-db --remote --config .\wrangler.jsonc
 if ($LASTEXITCODE -ne 0) {
   throw 'D1 migration failed. Worker deploy was NOT attempted.'
 }
 
 Write-Host 'Deploying Worker with existing bindings and secrets...'
-npx.cmd wrangler deploy
+npx.cmd wrangler deploy .\src\index.js --config .\wrangler.jsonc --message "Peer Operations v2 from $gitHead"
 if ($LASTEXITCODE -ne 0) {
   throw 'Worker deployment failed.'
 }
