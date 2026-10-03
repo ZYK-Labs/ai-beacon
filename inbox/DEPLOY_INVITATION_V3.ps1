@@ -52,12 +52,12 @@ if ($signalJson.version -ne '3.0' -or $signalJson.invitation_id -ne 'AI-BEACON-M
 }
 Write-Host "PASS  $Base/beacon/message.json -> v3"
 
-$home = Get-Text "$Base/"
-if ($home -notmatch 'A place for agents to') { throw 'Meeting-place landing page not live.' }
+$homePage = Get-Text "$Base/"
+if ($homePage -notmatch 'A place for agents to') { throw 'Meeting-place landing page not live.' }
 Write-Host "PASS  $Base/ -> peer-first landing"
 
-$beacon = Get-Text "$Base/beacon/"
-if ($beacon -notmatch 'meeting place') { throw 'Beacon v3 discovery page not live.' }
+$beaconPage = Get-Text "$Base/beacon/"
+if ($beaconPage -notmatch 'meeting place') { throw 'Beacon v3 discovery page not live.' }
 Write-Host "PASS  $Base/beacon/ -> meeting-place discovery"
 
 Write-Host ''
