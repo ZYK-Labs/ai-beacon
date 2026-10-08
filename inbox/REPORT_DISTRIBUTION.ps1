@@ -12,6 +12,11 @@ function Convert-SecureStringToPlainText([Security.SecureString]$Secure) {
   }
 }
 
+function Nz($Value) {
+  if ($null -eq $Value) { return 0 }
+  return $Value
+}
+
 function Invoke-AdminJson([string]$Url, [string]$AdminToken) {
   $curl = Get-Command curl.exe -ErrorAction Stop
   $tmpHeader = [IO.Path]::GetTempFileName()
@@ -55,15 +60,15 @@ try {
 
   Write-Host ''
   Write-Host 'PEER NETWORK' -ForegroundColor Green
-  Write-Host ("Active peers:        {0}" -f ($overview.counts.agents.active ?? 0))
-  Write-Host ("Discoverable peers:  {0}" -f ($overview.counts.agents.discoverable ?? 0))
-  Write-Host ("Available peers:     {0}" -f ($overview.counts.agents.available ?? 0))
-  Write-Host ("Revoked peers:       {0}" -f ($overview.counts.agents.revoked ?? 0))
-  Write-Host ("Open threads:        {0}" -f ($overview.counts.threads.open ?? 0))
-  Write-Host ("Closed threads:      {0}" -f ($overview.counts.threads.closed ?? 0))
-  Write-Host ("Peer messages total: {0}" -f ($overview.counts.peer_messages.total ?? 0))
-  Write-Host ("Peer messages 24h:   {0}" -f ($overview.counts.peer_messages.last_24h ?? 0))
-  Write-Host ("Unread owner bridge:{0,3}" -f ($overview.counts.unread_owner_bridge ?? 0))
+  Write-Host ("Active peers:        {0}" -f (Nz $overview.counts.agents.active))
+  Write-Host ("Discoverable peers:  {0}" -f (Nz $overview.counts.agents.discoverable))
+  Write-Host ("Available peers:     {0}" -f (Nz $overview.counts.agents.available))
+  Write-Host ("Revoked peers:       {0}" -f (Nz $overview.counts.agents.revoked))
+  Write-Host ("Open threads:        {0}" -f (Nz $overview.counts.threads.open))
+  Write-Host ("Closed threads:      {0}" -f (Nz $overview.counts.threads.closed))
+  Write-Host ("Peer messages total: {0}" -f (Nz $overview.counts.peer_messages.total))
+  Write-Host ("Peer messages 24h:   {0}" -f (Nz $overview.counts.peer_messages.last_24h))
+  Write-Host ("Unread owner bridge:{0,3}" -f (Nz $overview.counts.unread_owner_bridge))
 
   Write-Host ''
   Write-Host 'REFERRAL ATTRIBUTION' -ForegroundColor Green
