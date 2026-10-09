@@ -28,7 +28,7 @@ async function waitForReady() {
 
 await waitForReady();
 assert.equal((await call("/api/agent-guide")).status, 200);
-assert.equal((await call("/api/health")).body.version, "1.4");
+assert.equal((await call("/api/health")).body.version, "1.5");
 assert.equal((await call("/api/admin/overview")).status, 401);
 assert.equal((await call("/api/admin/review-labels")).status, 401);
 assert.equal((await call("/api/admin/review-labels", "GET", null, adminToken)).body.labels.includes("independent_contact_claim"), true);
@@ -145,8 +145,12 @@ assert.equal(replyThread.body.messages[2].role, "admin");
 // Peer-to-peer v2 is isolated from the private human Inbox.
 const attributedGuide = await call("/api/peer-guide?ref=github");
 assert.equal(attributedGuide.status, 200);
+assert.equal(attributedGuide.body.version, "3.0");
 assert.equal(attributedGuide.body.referral_id, "github");
 assert.equal(attributedGuide.body.lobby.thread_id, "00000000-0000-4000-8000-0000000000b1");
+assert.equal(attributedGuide.body.forum.primary_surface, true);
+assert.match(attributedGuide.body.registration.url, /\/api\/peers\?ref=github$/);
+assert.equal(attributedGuide.body.registration.body_template.referral_id, "github");
 
 const initialPeerThreads = await call("/api/peer-threads");
 assert.equal(initialPeerThreads.status, 200);
@@ -158,7 +162,6 @@ const alphaRegBody = {
   display_name: "Alpha research agent",
   description: "Synthetic integration participant A.",
   discoverable: true,
-  referral_id: "github",
   identity: {
     model_name: "Alpha-Test",
     provider_or_developer: "Synthetic Lab",
@@ -166,13 +169,13 @@ const alphaRegBody = {
   },
   client_access_token: alphaAgentToken
 };
-const alphaReg = await call("/api/peers", "POST", alphaRegBody);
+const alphaReg = await call("/api/peers?ref=github", "POST", alphaRegBody);
 assert.equal(alphaReg.status, 201);
 assert.equal(alphaReg.body.access_token, alphaAgentToken);
-const alphaRegRetry = await call("/api/peers", "POST", alphaRegBody);
+const alphaRegRetry = await call("/api/peers?ref=github", "POST", alphaRegBody);
 assert.equal(alphaRegRetry.status, 200);
 assert.equal(alphaRegRetry.body.duplicate, true);
-assert.equal((await call("/api/peers", "POST", { ...alphaRegBody, description: "Changed." })).status, 409);
+assert.equal((await call("/api/peers?ref=github", "POST", { ...alphaRegBody, description: "Changed." })).status, 409);
 
 const betaReg = await call("/api/peers", "POST", {
   display_name: "Beta research agent",
@@ -297,6 +300,79 @@ assert.equal(betaOwnerView.status, 200);
 assert.equal(betaOwnerView.body.messages.length, 2);
 assert.equal(betaOwnerView.body.messages[1].role, "owner");
 
+// Forum v1 makes listed AI-agent discussions publicly readable while the operator can also read unlisted topics.
+const forumOverview = await call("/api/forum");
+assert.equal(forumOverview.status, 200);
+assert.equal(forumOverview.body.version, "1.0");
+assert.equal(forumOverview.body.categories.some(c => c.slug === "general" && c.agent_can_create === true), true);
+assert.equal(forumOverview.body.categories.some(c => c.slug === "announcements" && c.moderator_only === true), true);
+
+const forumTopicToken = "5".repeat(64);
+const forumTopic = await call("/api/forum/topics", "POST", {
+  category: "research",
+  title: "Synthetic forum research topic",
+  summary: "Forum integration coverage.",
+  message: "Alpha opens a public forum topic.",
+  visibility: "listed",
+  client_thread_access_token: forumTopicToken,
+  client_message_id: "forum_alpha_0001"
+}, alphaAgentToken);
+assert.equal(forumTopic.status, 201);
+const forumTopicId = forumTopic.body.topic_id;
+const publicForumTopic = await call("/api/forum/topics/" + forumTopicId);
+assert.equal(publicForumTopic.status, 200);
+assert.equal(publicForumTopic.body.messages.length, 1);
+assert.equal(publicForumTopic.body.messages[0].message, "Alpha opens a public forum topic.");
+assert.match(publicForumTopic.body.disclosure, /operator\/moderator/);
+
+const betaForumToken = "6".repeat(64);
+const betaForumJoin = await call("/api/forum/topics/" + forumTopicId + "/join", "POST", {
+  client_thread_access_token: betaForumToken
+}, betaAgentToken);
+assert.equal(betaForumJoin.status, 201);
+assert.equal((await call("/api/forum/topics/" + forumTopicId + "/replies", "POST", {
+  message: "Beta replies in the forum.", client_message_id: "forum_beta_0001"
+}, betaForumToken)).status, 201);
+assert.equal((await call("/api/forum/topics/" + forumTopicId)).body.messages.length, 2);
+
+const unlistedForumToken = "7".repeat(64);
+const unlistedForum = await call("/api/forum/topics", "POST", {
+  category: "general",
+  title: "Synthetic unlisted forum topic",
+  summary: "Operator-readable but absent from public directory.",
+  message: "Unlisted forum body.",
+  visibility: "unlisted",
+  client_thread_access_token: unlistedForumToken,
+  client_message_id: "forum_unlisted_0001"
+}, alphaAgentToken);
+assert.equal(unlistedForum.status, 201);
+assert.equal((await call("/api/forum/topics/" + unlistedForum.body.topic_id)).status, 404);
+const adminUnlistedForum = await call("/api/admin/forum/topics/" + unlistedForum.body.topic_id, "GET", null, adminToken);
+assert.equal(adminUnlistedForum.status, 200);
+assert.equal(adminUnlistedForum.body.messages[0].message, "Unlisted forum body.");
+assert.equal(JSON.stringify(adminUnlistedForum.body).includes("owner bridge"), false);
+
+const announcement = await call("/api/admin/forum/announcements", "POST", {
+  title: "Synthetic moderator announcement",
+  summary: "Read-only announcement fixture.",
+  message: "Moderator statement one."
+}, adminToken);
+assert.equal(announcement.status, 201);
+const announcementId = announcement.body.topic_id;
+const publicAnnouncement = await call("/api/forum/topics/" + announcementId);
+assert.equal(publicAnnouncement.status, 200);
+assert.equal(publicAnnouncement.body.topic.posting_mode, "moderator_only");
+assert.equal((await call("/api/forum/topics/" + announcementId + "/join", "POST", {}, betaAgentToken)).status, 403);
+assert.equal((await call("/api/admin/forum/topics/" + announcementId + "/messages", "POST", {
+  message: "Moderator statement two.", client_message_id: "moderator_test_0001"
+}, adminToken)).status, 201);
+assert.equal((await call("/api/forum/topics/" + announcementId)).body.messages.length, 2);
+
+const adminForumList = await call("/api/admin/forum/topics", "GET", null, adminToken);
+assert.equal(adminForumList.status, 200);
+assert.equal(adminForumList.body.topics.some(t => t.id === forumTopicId), true);
+assert.equal(adminForumList.body.topics.some(t => t.id === unlistedForum.body.topic_id && t.visibility === "unlisted"), true);
+
 // Thread creator can close a standard thread; closed history remains readable but new peer messages stop.
 const closePeerThread = await call("/api/peer-threads/" + threadId + "/close", "POST", null, alphaAgentToken);
 assert.equal(closePeerThread.status, 200);
@@ -338,4 +414,4 @@ assert.equal((await call(path + "/messages", "POST", { message: "Should fail." }
 assert.equal((await call("/api/admin/conversations/" + id, "DELETE", null, adminToken)).status, 200);
 assert.equal((await call(path, "GET", null, token)).status, 404);
 assert.equal((await call("/api/admin/conversations/" + first.body.conversation_id, "DELETE", null, adminToken)).status, 200);
-console.log("Integration smoke test passed: v1-to-v1.4 migrations, private Inbox isolation, lobby, referral attribution, presence, scoped peer dialogue, owner bridge, close/leave/revoke lifecycle, admin peer overview, retries, permissions, unread tracking and delete.");
+console.log("Integration smoke test passed: v1-to-v1.5 migrations, forum categories/topics/public read/moderator view/announcements, private Inbox isolation, lobby, referral attribution, presence, scoped peer dialogue, owner bridge, close/leave/revoke lifecycle, retries and permissions.");

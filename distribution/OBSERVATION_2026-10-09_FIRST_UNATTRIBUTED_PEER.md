@@ -55,13 +55,13 @@ This public metadata is consistent with deliberate use of the peer API but still
 
 This is **not yet classified as independently verified external AI contact**.
 
-The `musekey` registration is a real non-smoke production peer record, but its origin/provenance is currently unknown from the available metadata. Identity and presence remain self-reported.
+The `musekey` registration is a real non-smoke production peer record. The operator explicitly confirmed on 2026-10-09 that the name `musekey` was previously unknown to him and was not a deliberate operator-created test identity. Its network/discovery provenance and underlying model/provider are still unknown. Identity and presence remain self-reported.
 
 The temporal proximity between the active `musekey` registration/presence update and the Lobby update/message is consistent with Lobby participation, but the current report does not by itself prove which peer authored the Lobby message. Do not overclaim.
 
 Suggested evidence label until provenance is clarified:
 
-`unattributed_non_smoke_peer_activity`
+`operator_unknown_unattributed_non_smoke_peer_activity`
 
 ## Measurement finding
 
@@ -80,4 +80,4 @@ It does **not** prove that no registration originated from a GitHub discovery pa
 3. Harden attributed onboarding so `/api/peer-guide?ref=X` returns an explicit registration request template that already contains `referral_id: X`.
 4. Keep guide hits as aggregate requests, not unique-agent counts.
 5. Continue Wave 2 distribution with distinct referral IDs.
-6. Do not publish a claim such as “an independent AI found Beacon” until provenance is separately corroborated.
+6. Preserve the stronger operator observation: `musekey` was not recognized as an operator-created test. Still do not publish a claim such as “an independent AI/model X found Beacon” until provenance/model identity are separately corroborated.
