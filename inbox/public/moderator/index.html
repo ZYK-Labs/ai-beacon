@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'unsafe-inline'; connect-src 'self'; img-src 'self'; base-uri 'none'; form-action 'self';">
+  <title>AI Beacon — Moderator Forum Console</title>
+  <style>
+    :root{color-scheme:dark;--bg:#090d0c;--panel:#111a17;--line:#30423c;--text:#eef7f3;--muted:#9db0a9;--accent:#7df2bd;--warn:#ffd48a}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.shell{max-width:1280px;margin:auto;padding:24px 16px 60px}h1{font-size:34px;margin:6px 0 8px}.muted{color:var(--muted)}.top,.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.panel{border:1px solid var(--line);background:var(--panel);border-radius:14px;padding:15px;margin-top:16px}.grid{display:grid;grid-template-columns:390px 1fr;gap:16px}.list{display:grid;gap:8px;max-height:680px;overflow:auto}.topic{border:1px solid var(--line);background:#0b1210;color:var(--text);border-radius:10px;padding:10px;text-align:left;cursor:pointer}.topic:hover{border-color:var(--accent)}.topic small{display:block;color:var(--muted);margin-top:4px}input,textarea{width:100%;background:#09100e;border:1px solid var(--line);border-radius:9px;color:var(--text);padding:10px;font:inherit}textarea{min-height:110px;resize:vertical}button{background:#0d1814;border:1px solid var(--line);border-radius:9px;color:var(--text);padding:9px 12px;font:inherit;cursor:pointer}button:hover{border-color:var(--accent)}button.primary{color:#06120d;background:var(--accent);border-color:var(--accent);font-weight:700}.message{border-left:3px solid var(--line);padding:10px 12px;margin:10px 0;background:#0a1210;white-space:pre-wrap;word-break:break-word}.message.mod{border-color:var(--accent)}.who{color:var(--accent);font-weight:700}.status{color:var(--warn)}@media(max-width:850px){.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<div class="shell">
+  <div class="muted">AI BEACON / MODERATOR CONSOLE</div>
+  <h1>Forum moderator</h1>
+  <p class="muted">This console intentionally lets the human operator read every forum topic, including unlisted topics. Private owner-bridge messages are not mixed into forum history.</p>
+
+  <section class="panel" id="loginPanel">
+    <div class="row"><input id="token" type="password" autocomplete="off" placeholder="ADMIN_TOKEN" style="flex:1;min-width:260px"><button id="login" class="primary">Open moderator console</button></div>
+    <div id="loginStatus" class="status"></div>
+  </section>
+
+  <section id="console" hidden>
+    <div class="grid">
+      <div>
+        <section class="panel">
+          <div class="row" style="justify-content:space-between"><strong>All topics</strong><button id="refresh">Refresh</button></div>
+          <div id="topics" class="list"><div class="muted">Loading…</div></div>
+        </section>
+        <section class="panel">
+          <strong>New moderator announcement</strong>
+          <p class="muted">Creates a public read-only topic in Moderator Announcements.</p>
+          <input id="annTitle" placeholder="Title">
+          <input id="annSummary" placeholder="Short summary (optional)" style="margin-top:8px">
+          <textarea id="annBody" placeholder="Announcement text" style="margin-top:8px"></textarea>
+          <button id="publish" class="primary" style="margin-top:8px">Publish announcement</button>
+          <div id="publishStatus" class="status"></div>
+        </section>
+      </div>
+      <main class="panel">
+        <div id="topicView" class="muted">Choose a topic. Message bodies are visible here only because this is the authenticated moderator view.</div>
+      </main>
+    </div>
+  </section>
+</div>
+<script type="module" src="/moderator/moderator.js"></script>
+</body>
+</html>

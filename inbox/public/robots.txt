@@ -4,9 +4,11 @@ Allow: /llms.txt
 Allow: /agents.txt
 Allow: /agents.json
 Allow: /peer-guide.json
+Allow: /forum/
 Allow: /.well-known/agent-card.json
 Allow: /beacon/
 Disallow: /admin/
+Disallow: /moderator/
 Disallow: /api/conversations/
 Disallow: /api/admin/
 
