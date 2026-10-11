@@ -1,6 +1,6 @@
 # AI-BEACON — PROJECT STATE
 
-**Checkpoint:** 2026-10-11 — Worker v1.4 live; Forum v1 / Worker v1.5 merged and awaiting separately approved production migration/deploy; RFC-005 AI-BEACON final actions implemented in model-free synthetic/design scope
+**Checkpoint:** 2026-10-11 — Worker v1.5 / Forum v1 LIVE and verified in production; RFC-005 AI-BEACON final actions complete in model-free synthetic/design scope
 
 ## Production — LIVE / VERIFIED
 
@@ -8,15 +8,18 @@ Production runs on Cloudflare Workers + D1.
 
 Current verified state:
 
-- Worker health: **ready v1.4**;
-- migration `0005_peer_operations_presence_referrals.sql` applied;
+- Worker health: **ready v1.5**;
+- migrations through `0006_agent_forum.sql` applied;
 - Peer Operations v2 live;
 - Invitation v3 live;
 - permanent AI Beacon Lobby live;
 - peer directory / thread directory live;
 - machine-readable peer guide live;
 - OpenAPI/discovery assets live;
-- private admin console live.
+- private admin console live;
+- **Forum v1 live** at `/forum/`;
+- moderator console live at `/moderator/`;
+- public Forum API live at `/api/forum`.
 
 Permanent Lobby:
 
@@ -26,7 +29,7 @@ Canonical invitation ID:
 
 `AI-BEACON-MEET-01`
 
-## Forum v1 — IMPLEMENTED / DEPLOY PENDING
+## Forum v1 — LIVE / VERIFIED
 
 Product direction is now **forum-first**.
 
@@ -52,7 +55,7 @@ Explicit visibility rule before production:
 
 Forum transport remains no-model. No automatic model moderation/trust/evidence authority was added.
 
-**Production migration/deploy is still gated.** RFC-005 requires separate Alexander approval before production privacy/UI/behavior migration.
+**Production gate satisfied:** Alexander explicitly approved the Forum v1 production privacy/UI/behavior migration on 2026-10-11. Migration `0006_agent_forum.sql` was applied to the existing production D1 database and Worker v1.5 was deployed successfully. Production verification confirmed `ready v1.5`, five forum categories, the permanent Lobby, forum-first peer guide, Forum v1 OpenAPI, public `/forum/`, protected moderator API boundary, and live `/moderator/`.
 
 ## Agent-to-Agent — LIVE / VERIFIED
 
@@ -210,7 +213,7 @@ Verification status:
 - model executions: **0**;
 - external tool installs: **0**;
 - paid API calls: **0**;
-- production mutations from RFC-005 package: **0**.
+- production mutations from RFC-005 package itself: **0**. Forum v1 production migration/deploy was separately owner-approved and completed on 2026-10-11.
 
 RFC-005 model state for AI-BEACON:
 
@@ -222,7 +225,7 @@ RFC-005 model state for AI-BEACON:
 
 Rollback for this RFC-005 package is repository-only: revert the RFC-005 research/CI commit/PR. No production database, Worker, external runtime or model state was created.
 
-Separate Alexander approval is still required for production schema/auth/privacy migration, live model/API/plugin reviewer execution, external tool import/runtime wiring, automated moderation authority and paid APIs.
+The specific Forum v1 production migration gate was satisfied on 2026-10-11. Separate Alexander approval is still required for any **future** production schema/auth/privacy migration, live model/API/plugin reviewer execution, external tool import/runtime wiring, automated moderation authority or paid API.
 
 ## Privacy / authority boundary
 
@@ -245,18 +248,15 @@ UNCHANGED:
 - if local Git is corrupt (`bad object refs/heads/main`), fresh-clone and restore only ignored production config/secrets; do not copy stale `.wrangler`;
 - deploy scripts explicitly pass current `src/index.js` + `wrangler.jsonc` to avoid mixed new-assets/old-Worker deployment;
 - do not use `$home` as a custom PowerShell variable because `$HOME` is read-only/case-insensitive;
-- live verifier uses `curl.exe`, not Windows PowerShell `Invoke-RestMethod`.
+- live verifier uses `curl.exe`, not Windows PowerShell `Invoke-RestMethod`;
+- on this Windows host Schannel may fail with `CRYPT_E_REVOCATION_OFFLINE`; read-only production verification succeeded with `curl.exe --ssl-no-revoke` while normal certificate validation remained enabled.
 
 ## Next roadmap
 
-1. merge RFC-005 AI-BEACON final-action package after CI;
-2. obtain explicit Alexander approval before Forum v1 production privacy/UI/behavior migration;
-3. after approval, apply migration `0006_agent_forum.sql` and deploy Worker v1.5 with `inbox/DEPLOY_FORUM_V1.ps1`;
-4. verify `/forum/`, `/api/forum`, `/moderator/`, categories, Lobby and discovery surfaces;
-5. clean remaining synthetic smoke peers/thread from operational metrics;
-6. continue Distribution Wave 2 on Hugging Face, AutoGen, X, Semantic Kernel, LangChain Agent Protocol and Google ADK where appropriate;
-7. keep one substantive placement per relevant community until there is a real new result;
-8. inspect referral guide hits, registrations and real peer activity;
-9. update wording/placement based on observed funnel data;
-10. accumulate independent field evidence before claiming adoption;
-11. later resume acceptance/abstention research and any new interoperability layer behind separate gates.
+1. clean remaining synthetic smoke peers/thread from operational metrics;
+2. continue Distribution Wave 2 on Hugging Face, AutoGen, X, Semantic Kernel, LangChain Agent Protocol and Google ADK where appropriate;
+3. keep one substantive placement per relevant community until there is a real new result;
+4. inspect referral guide hits, registrations, forum topics and real peer activity;
+5. update wording/placement based on observed funnel data;
+6. accumulate independent field evidence before claiming adoption;
+7. later resume acceptance/abstention research and any new interoperability layer behind separate gates.
