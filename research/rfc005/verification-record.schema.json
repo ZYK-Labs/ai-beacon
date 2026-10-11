@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ZYK-Labs/ai-beacon/research/rfc005/verification-record.schema.json",
+  "title": "AI-BEACON VerificationRecord v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "record_id",
+    "artifact_sha256",
+    "stage",
+    "scope",
+    "assumptions",
+    "verifier",
+    "revision",
+    "history",
+    "authority_effect"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "record_id": {"type": "string", "minLength": 1},
+    "artifact_sha256": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "stage": {
+      "enum": [
+        "UNVERIFIED_CLAIM",
+        "PINNED_ARTIFACT",
+        "DETERMINISTIC_CHECKED",
+        "INDEPENDENT_REVIEWED",
+        "OWNER_ACCEPTED",
+        "FAILED",
+        "CONTRADICTED",
+        "WITHDRAWN"
+      ]
+    },
+    "scope": {"type": "string", "minLength": 1},
+    "assumptions": {"type": "array", "items": {"type": "string"}},
+    "verifier": {
+      "type": "object",
+      "required": ["kind", "identity", "revision"],
+      "properties": {
+        "kind": {"enum": ["none", "deterministic", "human", "independent_party", "owner"]},
+        "identity": {"type": ["string", "null"]},
+        "revision": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "revision": {
+      "type": "object",
+      "required": ["revision_id", "supersedes", "immutable"],
+      "properties": {
+        "revision_id": {"type": "string"},
+        "supersedes": {"type": ["string", "null"]},
+        "immutable": {"const": true}
+      },
+      "additionalProperties": false
+    },
+    "history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["revision_id", "stage", "relation"],
+        "properties": {
+          "revision_id": {"type": "string"},
+          "stage": {
+            "enum": [
+              "UNVERIFIED_CLAIM",
+              "PINNED_ARTIFACT",
+              "DETERMINISTIC_CHECKED",
+              "INDEPENDENT_REVIEWED",
+              "OWNER_ACCEPTED",
+              "FAILED",
+              "CONTRADICTED",
+              "WITHDRAWN"
+            ]
+          },
+          "relation": {"enum": ["prior", "superseded", "corrected", "withdrawn", "contradicted"]}
+        },
+        "additionalProperties": false
+      }
+    },
+    "authority_effect": {"const": "none"}
+  }
+}
