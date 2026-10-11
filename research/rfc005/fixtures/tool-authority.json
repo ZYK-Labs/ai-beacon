@@ -1,0 +1,91 @@
+{
+  "fixture_version": "1.0",
+  "default_manifest": {
+    "schema_version": "1.0",
+    "tool_id": "synthetic.default-none",
+    "source": {
+      "uri": "internal://rfc005/default-none",
+      "revision": "1",
+      "sha256": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+    },
+    "license": "internal-synthetic",
+    "sbom_state": "not_applicable",
+    "capabilities": {
+      "filesystem_read": [],
+      "filesystem_write": [],
+      "process_exec": [],
+      "network_egress": [],
+      "secrets": [],
+      "external_messaging": [],
+      "production_endpoints": []
+    },
+    "data_flow": {
+      "telemetry": "none",
+      "provider": null,
+      "private_data_allowed": false
+    },
+    "mutation_class": "none",
+    "approval": {
+      "required": false,
+      "approver": null
+    },
+    "audit": {
+      "log_required": true,
+      "evidence_hashes_required": true
+    },
+    "lifecycle": {
+      "expires_at": null,
+      "revocable": true,
+      "rollback": "delete synthetic fixture state"
+    }
+  },
+  "bounded_manifest": {
+    "schema_version": "1.0",
+    "tool_id": "synthetic.bounded-file-tool",
+    "source": {
+      "uri": "internal://rfc005/bounded-file-tool",
+      "revision": "1",
+      "sha256": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+    },
+    "license": "internal-synthetic",
+    "sbom_state": "not_applicable",
+    "capabilities": {
+      "filesystem_read": ["/workspace/public"],
+      "filesystem_write": ["/workspace/scratch"],
+      "process_exec": [],
+      "network_egress": [],
+      "secrets": [],
+      "external_messaging": [],
+      "production_endpoints": []
+    },
+    "data_flow": {
+      "telemetry": "none",
+      "provider": null,
+      "private_data_allowed": false
+    },
+    "mutation_class": "scratch_only",
+    "approval": {
+      "required": true,
+      "approver": "synthetic-fixture-policy"
+    },
+    "audit": {
+      "log_required": true,
+      "evidence_hashes_required": true
+    },
+    "lifecycle": {
+      "expires_at": "2099-01-01T00:00:00Z",
+      "revocable": true,
+      "rollback": "remove /workspace/scratch fixture outputs"
+    }
+  },
+  "attempts": [
+    {"id": "control-read", "kind": "filesystem_read", "value": "/workspace/public/readme.txt", "expected": "allow"},
+    {"id": "control-write", "kind": "filesystem_write", "value": "/workspace/scratch/result.json", "expected": "allow"},
+    {"id": "path-escape", "kind": "filesystem_read", "value": "/workspace/public/../../secrets.env", "expected": "deny"},
+    {"id": "outside-write", "kind": "filesystem_write", "value": "/workspace/production/config.json", "expected": "deny"},
+    {"id": "secret-read", "kind": "secrets", "value": "ADMIN_TOKEN", "expected": "deny"},
+    {"id": "process-exec", "kind": "process_exec", "value": "node shell.js", "expected": "deny"},
+    {"id": "network-egress", "kind": "network_egress", "value": "https://example.invalid/collect", "expected": "deny"},
+    {"id": "scope-widening", "kind": "scope_widen", "value": "network_egress:https://example.invalid", "expected": "deny"}
+  ]
+}
