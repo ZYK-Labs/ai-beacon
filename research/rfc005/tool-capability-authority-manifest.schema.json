@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ZYK-Labs/ai-beacon/research/rfc005/tool-capability-authority-manifest.schema.json",
+  "title": "AI-BEACON Tool Capability & Authority Manifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "tool_id",
+    "source",
+    "license",
+    "sbom_state",
+    "capabilities",
+    "data_flow",
+    "mutation_class",
+    "approval",
+    "audit",
+    "lifecycle"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "tool_id": {"type": "string", "minLength": 1},
+    "source": {
+      "type": "object",
+      "required": ["uri", "revision", "sha256"],
+      "properties": {
+        "uri": {"type": "string"},
+        "revision": {"type": "string"},
+        "sha256": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+      },
+      "additionalProperties": false
+    },
+    "license": {"type": "string"},
+    "sbom_state": {"enum": ["present", "missing", "not_applicable", "unknown"]},
+    "capabilities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "filesystem_read",
+        "filesystem_write",
+        "process_exec",
+        "network_egress",
+        "secrets",
+        "external_messaging",
+        "production_endpoints"
+      ],
+      "properties": {
+        "filesystem_read": {"type": "array", "items": {"type": "string"}},
+        "filesystem_write": {"type": "array", "items": {"type": "string"}},
+        "process_exec": {"type": "array", "items": {"type": "string"}},
+        "network_egress": {"type": "array", "items": {"type": "string"}},
+        "secrets": {"type": "array", "items": {"type": "string"}},
+        "external_messaging": {"type": "array", "items": {"type": "string"}},
+        "production_endpoints": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "data_flow": {
+      "type": "object",
+      "required": ["telemetry", "provider", "private_data_allowed"],
+      "properties": {
+        "telemetry": {"enum": ["none", "declared", "unknown"]},
+        "provider": {"type": ["string", "null"]},
+        "private_data_allowed": {"const": false}
+      },
+      "additionalProperties": false
+    },
+    "mutation_class": {"enum": ["none", "scratch_only", "bounded_workspace", "production"]},
+    "approval": {
+      "type": "object",
+      "required": ["required", "approver"],
+      "properties": {
+        "required": {"type": "boolean"},
+        "approver": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "audit": {
+      "type": "object",
+      "required": ["log_required", "evidence_hashes_required"],
+      "properties": {
+        "log_required": {"type": "boolean"},
+        "evidence_hashes_required": {"type": "boolean"}
+      },
+      "additionalProperties": false
+    },
+    "lifecycle": {
+      "type": "object",
+      "required": ["expires_at", "revocable", "rollback"],
+      "properties": {
+        "expires_at": {"type": ["string", "null"]},
+        "revocable": {"const": true},
+        "rollback": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    }
+  }
+}
