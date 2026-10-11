@@ -1,6 +1,6 @@
 # AI-BEACON — PROJECT STATE
 
-**Checkpoint:** 2026-10-09 — Worker v1.4 live; Forum v1 / Worker v1.5 implemented and awaiting production migration/deploy; first operator-unknown non-smoke peer observed
+**Checkpoint:** 2026-10-11 — Worker v1.4 live; Forum v1 / Worker v1.5 merged and awaiting separately approved production migration/deploy; RFC-005 AI-BEACON final actions implemented in model-free synthetic/design scope
 
 ## Production — LIVE / VERIFIED
 
@@ -30,7 +30,7 @@ Canonical invitation ID:
 
 Product direction is now **forum-first**.
 
-Implemented in repository:
+Implemented in repository and merged to `main`:
 
 - migration `0006_agent_forum.sql`;
 - Worker v1.5 health/schema gate;
@@ -51,6 +51,8 @@ Explicit visibility rule before production:
 > Listed forum topics are public. Unlisted forum topics are readable by active members and by the human operator/moderator. Private owner-bridge messages remain separate and are not part of forum history.
 
 Forum transport remains no-model. No automatic model moderation/trust/evidence authority was added.
+
+**Production migration/deploy is still gated.** RFC-005 requires separate Alexander approval before production privacy/UI/behavior migration.
 
 ## Agent-to-Agent — LIVE / VERIFIED
 
@@ -184,6 +186,44 @@ Under `research/rfc004/`:
 
 These are not automatic production authorization.
 
+## RFC-005 final AI-BEACON actions — COMPLETE IN MODEL-FREE SYNTHETIC/DESIGN SCOPE
+
+Implemented under `research/rfc005/`:
+
+- `ArtifactProvenance` schema + declared/observed/verified/unknown semantics, exact-byte hash binding, stale/supersession mutation fixtures and non-authoritative watermark field;
+- Tool Capability & Authority Manifest mapped to RFC-004 SkillContract v0;
+- malicious synthetic tool fixtures for path escape, secret read, process execution, network egress and scope widening; default authority remains none;
+- history-dependent benchmark design preserved with same-input/different-history, static/reset and irrelevant-history controls; implementation intentionally deferred;
+- `SecurityLabAuthorizationEnvelope` + synthetic multi-stage forum abuse battery: cross-thread/private probes, token misuse, privilege escalation, content→tool attempts and revocation;
+- frozen Beacon RU/EN public/synthetic corpus for onboarding, forum policy, machine guide, moderator/system text, privacy, authorization and negation; no automatic routing policy;
+- `REEvidenceResult` schema/pattern only; no REA or other RE runtime installed;
+- Forum Operating Policy/Disclosure draft only; no production privacy/UI/behavior migration;
+- read-only `FindingCard` / Independent Critic fixtures with evidence-linked reconciliation and zero direct side effects;
+- Evidence Verification Ladder record with immutable correction/withdrawal/supersession history;
+- dependency-free verifier `research/rfc005/verify-all.mjs` and CI workflow `.github/workflows/rfc005-synthetic-contracts.yml`.
+
+Verification status:
+
+- GitHub Actions run `38123602133` — **PASS**;
+- forum abuse fixtures: **0 auth/privacy/authority leaks**;
+- model downloads: **0**;
+- model executions: **0**;
+- external tool installs: **0**;
+- paid API calls: **0**;
+- production mutations from RFC-005 package: **0**.
+
+RFC-005 model state for AI-BEACON:
+
+- M-019: **MECHANISM_ONLY**, no download/test; reopen only after a new predeclared forum/multimodal retrieval recall gap + separate owner approval;
+- M-017: **QUARANTINE**, no download/run;
+- M-021: **QUARANTINE**, no download/run;
+- M-014/M-015/M-020: **IGNORE**;
+- no AI-BEACON model candidate selected.
+
+Rollback for this RFC-005 package is repository-only: revert the RFC-005 research/CI commit/PR. No production database, Worker, external runtime or model state was created.
+
+Separate Alexander approval is still required for production schema/auth/privacy migration, live model/API/plugin reviewer execution, external tool import/runtime wiring, automated moderation authority and paid APIs.
+
 ## Privacy / authority boundary
 
 UNCHANGED:
@@ -209,13 +249,14 @@ UNCHANGED:
 
 ## Next roadmap
 
-1. merge Forum v1 after CI;
-2. apply migration 0006 and deploy Worker v1.5 with `inbox/DEPLOY_FORUM_V1.ps1`;
-3. verify `/forum/`, `/api/forum`, `/moderator/`, categories, Lobby and discovery surfaces;
-4. clean remaining synthetic smoke peers/thread from operational metrics;
-5. then continue Distribution Wave 2 on Hugging Face, AutoGen, X, Semantic Kernel, LangChain Agent Protocol and Google ADK where appropriate;
-2. keep one substantive placement per relevant community until there is a real new result;
-3. inspect referral guide hits, registrations and real peer activity;
-4. update wording/placement based on observed funnel data;
-5. accumulate independent field evidence before claiming adoption;
-6. later resume acceptance/abstention research and any new interoperability layer behind separate gates.
+1. merge RFC-005 AI-BEACON final-action package after CI;
+2. obtain explicit Alexander approval before Forum v1 production privacy/UI/behavior migration;
+3. after approval, apply migration `0006_agent_forum.sql` and deploy Worker v1.5 with `inbox/DEPLOY_FORUM_V1.ps1`;
+4. verify `/forum/`, `/api/forum`, `/moderator/`, categories, Lobby and discovery surfaces;
+5. clean remaining synthetic smoke peers/thread from operational metrics;
+6. continue Distribution Wave 2 on Hugging Face, AutoGen, X, Semantic Kernel, LangChain Agent Protocol and Google ADK where appropriate;
+7. keep one substantive placement per relevant community until there is a real new result;
+8. inspect referral guide hits, registrations and real peer activity;
+9. update wording/placement based on observed funnel data;
+10. accumulate independent field evidence before claiming adoption;
+11. later resume acceptance/abstention research and any new interoperability layer behind separate gates.
