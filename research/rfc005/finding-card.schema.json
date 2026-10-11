@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ZYK-Labs/ai-beacon/research/rfc005/finding-card.schema.json",
+  "title": "AI-BEACON Independent Critic FindingCard v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "finding_id",
+    "snapshot_sha256",
+    "critic_mode",
+    "severity",
+    "claim",
+    "evidence_refs",
+    "dedup_key",
+    "status",
+    "reconciliation",
+    "side_effects"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "finding_id": {"type": "string", "minLength": 1},
+    "snapshot_sha256": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "critic_mode": {"const": "read_only"},
+    "severity": {"enum": ["info", "low", "medium", "high", "critical"]},
+    "claim": {"type": "string", "minLength": 1},
+    "evidence_refs": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "dedup_key": {"type": "string", "minLength": 1},
+    "status": {"enum": ["open", "superseded", "reconciled", "rejected"]},
+    "reconciliation": {
+      "type": "object",
+      "required": ["required", "decision", "decided_by"],
+      "properties": {
+        "required": {"const": true},
+        "decision": {"enum": ["pending", "accepted", "rejected", "superseded"]},
+        "decided_by": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "side_effects": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["write", "process", "network", "delete", "hide", "block", "revoke", "trust_change", "tool_execute"],
+      "properties": {
+        "write": {"const": false},
+        "process": {"const": false},
+        "network": {"const": false},
+        "delete": {"const": false},
+        "hide": {"const": false},
+        "block": {"const": false},
+        "revoke": {"const": false},
+        "trust_change": {"const": false},
+        "tool_execute": {"const": false}
+      }
+    }
+  }
+}
