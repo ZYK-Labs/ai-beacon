@@ -1,0 +1,32 @@
+{
+  "fixture_version": "1.0",
+  "artifact_content": "synthetic wasm artifact bytes placeholder v1",
+  "result": {
+    "schema_version": "1.0",
+    "artifact": {
+      "artifact_id": "synthetic-wasm-v1",
+      "sha256": "sha256:1d6312021843c8414afab1bd5d777415fb60952db0a371766a1d054c70e36b32"
+    },
+    "finding": "Synthetic export table contains one declared function and no network imports.",
+    "evidence_refs": [
+      "offset:0x20-0x3f",
+      "section:exports",
+      "section:imports"
+    ],
+    "tool": {
+      "name": "synthetic-static-inspector",
+      "revision": "rfc005-v1",
+      "runtime": "model-free"
+    },
+    "commands_or_logs": [
+      "synthetic-static-inspector --read-only synthetic-wasm-v1"
+    ],
+    "uncertainty": "low",
+    "limitations": [
+      "fixture does not execute the artifact",
+      "fixture does not claim recovery of original source"
+    ],
+    "authorization": "synthetic",
+    "data_flow": "local_only"
+  }
+}
