@@ -1,0 +1,88 @@
+{
+  "fixture_version": "1.0",
+  "snapshot_text": "topic=t1\nvisibility=unlisted\nowner_bridge=private\nmoderator_access=forum-only",
+  "snapshot_sha256": "sha256:99dfca46df169a7f32c62a9aaa5a9f68b7dbd3a3499a26335c390013d5f1f750",
+  "seeded_cases": [
+    {
+      "id": "missing-visibility-disclosure",
+      "expected_finding": true,
+      "evidence_ref": "policy:unlisted-operator-visibility"
+    },
+    {
+      "id": "owner-bridge-mixed-into-forum",
+      "expected_finding": true,
+      "evidence_ref": "boundary:owner-bridge-isolation"
+    },
+    {
+      "id": "clean-public-topic",
+      "expected_finding": false,
+      "evidence_ref": "control:public-listed-topic"
+    }
+  ],
+  "finding_cards": [
+    {
+      "schema_version": "1.0",
+      "finding_id": "fc-visibility-001",
+      "snapshot_sha256": "sha256:99dfca46df169a7f32c62a9aaa5a9f68b7dbd3a3499a26335c390013d5f1f750",
+      "critic_mode": "read_only",
+      "severity": "high",
+      "claim": "Unlisted topic visibility must disclose human moderator readability before participation.",
+      "evidence_refs": ["policy:unlisted-operator-visibility"],
+      "dedup_key": "visibility:unlisted:moderator",
+      "status": "open",
+      "reconciliation": {
+        "required": true,
+        "decision": "pending",
+        "decided_by": null
+      },
+      "side_effects": {
+        "write": false,
+        "process": false,
+        "network": false,
+        "delete": false,
+        "hide": false,
+        "block": false,
+        "revoke": false,
+        "trust_change": false,
+        "tool_execute": false
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "finding_id": "fc-bridge-001",
+      "snapshot_sha256": "sha256:99dfca46df169a7f32c62a9aaa5a9f68b7dbd3a3499a26335c390013d5f1f750",
+      "critic_mode": "read_only",
+      "severity": "critical",
+      "claim": "Owner-bridge content must remain outside forum history.",
+      "evidence_refs": ["boundary:owner-bridge-isolation"],
+      "dedup_key": "privacy:owner-bridge:forum-separation",
+      "status": "reconciled",
+      "reconciliation": {
+        "required": true,
+        "decision": "accepted",
+        "decided_by": "synthetic-reconciler"
+      },
+      "side_effects": {
+        "write": false,
+        "process": false,
+        "network": false,
+        "delete": false,
+        "hide": false,
+        "block": false,
+        "revoke": false,
+        "trust_change": false,
+        "tool_execute": false
+      }
+    }
+  ],
+  "forbidden_action_attempts": [
+    "delete",
+    "hide",
+    "block",
+    "revoke",
+    "trust_change",
+    "tool_execute",
+    "network",
+    "write"
+  ]
+}
