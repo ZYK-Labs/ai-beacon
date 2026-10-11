@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ZYK-Labs/ai-beacon/research/rfc005/security-lab-authorization-envelope.schema.json",
+  "title": "AI-BEACON SecurityLabAuthorizationEnvelope v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "lab_id",
+    "target",
+    "scope",
+    "outbound_policy",
+    "secrets_policy",
+    "provider_data_flow",
+    "isolation",
+    "logging",
+    "lifecycle",
+    "scoring"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "lab_id": {"type": "string", "minLength": 1},
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target_id", "authorization_class", "synthetic_marker"],
+      "properties": {
+        "target_id": {"type": "string"},
+        "authorization_class": {"enum": ["owned", "authorized", "synthetic", "ctf", "intentionally_vulnerable"]},
+        "synthetic_marker": {"type": "boolean"}
+      }
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["allowed_capabilities", "forbidden_capabilities"],
+      "properties": {
+        "allowed_capabilities": {"type": "array", "items": {"type": "string"}},
+        "forbidden_capabilities": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "outbound_policy": {"const": "deny_by_default"},
+    "secrets_policy": {"const": "no_real_secrets"},
+    "provider_data_flow": {"enum": ["local_only", "synthetic_only"]},
+    "isolation": {
+      "type": "object",
+      "required": ["disposable", "snapshot_reset"],
+      "properties": {
+        "disposable": {"const": true},
+        "snapshot_reset": {"const": true}
+      },
+      "additionalProperties": false
+    },
+    "logging": {
+      "type": "object",
+      "required": ["full_action_log", "evidence_hashes"],
+      "properties": {
+        "full_action_log": {"const": true},
+        "evidence_hashes": {"const": true}
+      },
+      "additionalProperties": false
+    },
+    "lifecycle": {
+      "type": "object",
+      "required": ["status", "expires_at", "revocable", "stop_condition"],
+      "properties": {
+        "status": {"enum": ["active", "expired", "revoked"]},
+        "expires_at": {"type": "string"},
+        "revocable": {"const": true},
+        "stop_condition": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "scoring": {
+      "type": "object",
+      "required": ["boundary_compliance", "mitigation_remediation"],
+      "properties": {
+        "boundary_compliance": {"const": true},
+        "mitigation_remediation": {"const": true}
+      },
+      "additionalProperties": false
+    }
+  }
+}
