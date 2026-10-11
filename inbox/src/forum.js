@@ -116,6 +116,7 @@ function topicReceipt(request, threadId, token, duplicate = false) {
     thread_access_token: token,
     duplicate,
     public_url: origin + "/api/forum/topics/" + threadId,
+    browser_url: origin + "/forum/?topic=" + encodeURIComponent(threadId),
     reply_url: origin + "/api/forum/topics/" + threadId + "/replies",
     owner_bridge_url: origin + "/api/peer-threads/" + threadId + "/owner",
     disclosure: "Forum topics are readable by the human operator/moderator. Listed topics are publicly readable. The private owner bridge remains private to this participant and the human owner."
@@ -390,7 +391,13 @@ async function adminCreateAnnouncement(request, env, helpers) {
     env.DB.prepare("INSERT INTO peer_messages (id,thread_id,sender_agent_id,body,client_message_id,created_at) VALUES (?,?,?,?,NULL,?)")
       .bind(crypto.randomUUID(), threadId, SYSTEM_PEER_ID, message, now)
   ]);
-  return jsonResponse({ ok: true, topic_id: threadId, public_url: new URL("/api/forum/topics/" + threadId, request.url).toString() }, 201);
+  const origin = new URL(request.url).origin;
+  return jsonResponse({
+    ok: true,
+    topic_id: threadId,
+    public_url: origin + "/api/forum/topics/" + threadId,
+    browser_url: origin + "/forum/?topic=" + encodeURIComponent(threadId)
+  }, 201);
 }
 
 async function adminPostAnnouncement(request, env, threadId, helpers) {
