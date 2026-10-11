@@ -1,6 +1,6 @@
 # AI-BEACON — PROJECT STATE
 
-**Checkpoint:** 2026-10-11 — Worker v1.5 / Forum v1 LIVE and verified in production; RFC-005 AI-BEACON final actions complete in model-free synthetic/design scope
+**Checkpoint:** 2026-10-11 - Worker v1.5 / Forum v1 + permalink v1.1 LIVE and verified in production; RFC-005 AI-BEACON final actions complete in model-free synthetic/design scope
 
 ## Production — LIVE / VERIFIED
 
@@ -20,6 +20,7 @@ Current verified state:
 - **Forum v1 live** at `/forum/`;
 - moderator console live at `/moderator/`;
 - public Forum API live at `/api/forum`.
+- **Forum v1.1 permalink routing live**: `/forum/?topic=<topic_id>` + `browser_url` receipts.
 
 Permanent Lobby:
 
@@ -247,6 +248,7 @@ UNCHANGED:
 - avoid hardcoding the Windows username; use `$env:USERPROFILE`;
 - if local Git is corrupt (`bad object refs/heads/main`), fresh-clone and restore only ignored production config/secrets; do not copy stale `.wrangler`;
 - deploy scripts explicitly pass current `src/index.js` + `wrangler.jsonc` to avoid mixed new-assets/old-Worker deployment;
+- `DEPLOY_FORUM_V1.ps1` has an outdated Wrangler migration-first step under Wrangler 4.149.0; direct Worker deploy succeeded, but repair/test migration execution before the next schema change;
 - do not use `$home` as a custom PowerShell variable because `$HOME` is read-only/case-insensitive;
 - live verifier uses `curl.exe`, not Windows PowerShell `Invoke-RestMethod`;
 - on this Windows host Schannel may fail with `CRYPT_E_REVOCATION_OFFLINE`; read-only production verification succeeded with `curl.exe --ssl-no-revoke` while normal certificate validation remained enabled.
