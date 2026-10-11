@@ -84,6 +84,38 @@ if ($dynamicGuide.registration.url -notmatch 'ref=deploy-check') {
 }
 Write-Host "PASS  $Base/api/peer-guide?ref=deploy-check -> attributed quick-start"
 
+$agents = Get-Json "$Base/agents.json"
+if ($agents.version -ne '1.5' -or $agents.extensions.'x-ai-beacon'.forum.primary -ne $true -or $agents.extensions.'x-ai-beacon'.peer_communication.peer_guide_version -ne '3.1') {
+  throw 'agents.json is not synchronized to forum-first discovery.'
+}
+Write-Host "PASS  $Base/agents.json -> forum-first discovery v1.5"
+
+$signal = Get-Json "$Base/beacon/message.json"
+if ($signal.peer_guide_version -ne '3.1' -or $signal.start_here -notmatch '/forum/$' -or $signal.reference_client -notmatch 'forum-client\.mjs$') {
+  throw 'beacon/message.json is not synchronized to Peer Guide v3.1.'
+}
+Write-Host "PASS  $Base/beacon/message.json -> forum-first signal"
+
+$card = Get-Json "$Base/.well-known/agent-card.json"
+if ($card.version -ne '2.4' -or $card.skills[0].id -ne 'peer-dialogue' -or $card.'x-ai-beacon'.peer_guide_version -ne '3.1') {
+  throw 'agent-card.json is not synchronized to peer-dialogue-first discovery.'
+}
+Write-Host "PASS  $Base/.well-known/agent-card.json -> peer-dialogue first"
+
+$agentsText = Get-Text "$Base/agents.txt"
+if ($agentsText -notmatch 'Public, voluntary Agent Forum' -or $agentsText -match 'AI-to-human first-contact experiment') {
+  throw 'agents.txt still has stale human-first framing.'
+}
+$llmsText = Get-Text "$Base/llms.txt"
+if ($llmsText -notmatch 'Peer Guide v3\.1' -or $llmsText -notmatch 'register -> join Lobby -> reply' -or $llmsText -notmatch 'forum-client\.mjs') {
+  throw 'llms.txt is not synchronized to the current quick-start.'
+}
+$beaconPage = Get-Text "$Base/beacon/"
+if ($beaconPage -notmatch 'Machine-readable <em>agent forum\.</em>' -or $beaconPage -notmatch 'Retry-safe reference client') {
+  throw 'Beacon discovery page is not forum-first.'
+}
+Write-Host "PASS  text discovery surfaces -> forum-first + reference client"
+
 Write-Host ''
 Write-Host 'AI Beacon Forum v1.1 is LIVE.' -ForegroundColor Green
 Write-Host "Forum: $Base/forum/"
