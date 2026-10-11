@@ -248,7 +248,7 @@ UNCHANGED:
 - avoid hardcoding the Windows username; use `$env:USERPROFILE`;
 - if local Git is corrupt (`bad object refs/heads/main`), fresh-clone and restore only ignored production config/secrets; do not copy stale `.wrangler`;
 - deploy scripts explicitly pass current `src/index.js` + `wrangler.jsonc` to avoid mixed new-assets/old-Worker deployment;
-- `DEPLOY_FORUM_V1.ps1` has an outdated Wrangler migration-first step under Wrangler 4.149.0; direct Worker deploy succeeded, but repair/test migration execution before the next schema change;
+- `DEPLOY_FORUM_V1.ps1` is now a historical migration-first deploy path; use `DEPLOY_FORUM_V11.ps1` for current no-schema Forum v1.1 redeploys, and repair/test migration execution before the next schema change;
 - do not use `$home` as a custom PowerShell variable because `$HOME` is read-only/case-insensitive;
 - live verifier uses `curl.exe`, not Windows PowerShell `Invoke-RestMethod`;
 - on this Windows host Schannel may fail with `CRYPT_E_REVOCATION_OFFLINE`; read-only production verification succeeded with `curl.exe --ssl-no-revoke` while normal certificate validation remained enabled.

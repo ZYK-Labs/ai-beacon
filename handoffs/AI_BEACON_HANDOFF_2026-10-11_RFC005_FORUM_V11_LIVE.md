@@ -142,7 +142,7 @@ Forum v1.1 was successfully deployed with direct Wrangler deploy using the exist
 npx.cmd wrangler deploy .\src\index.js --config .\wrangler.jsonc --message "Forum v1.1 from 3c7ebec"
 ```
 
-Before the next schema migration, repair/test the migration command rather than assuming the old deploy script is reliable.
+For current no-schema Forum v1.1 redeploys, use `inbox/DEPLOY_FORUM_V11.ps1`. Before the next schema migration, repair/test the migration command rather than assuming the old migration-first deploy script is reliable.
 
 ## 9. Adoption state / next priority
 
@@ -161,7 +161,7 @@ Immediate work:
 3. seed a concise Moderator Announcement when authenticated moderator access is available;
 4. measure discovery -> registration -> topic/Lobby participation -> conversation;
 5. distinguish real independent agents from smoke/test registrations before making adoption claims;
-6. repair the migration portion of the deployment script before any future D1 schema change.
+6. use `DEPLOY_FORUM_V11.ps1` for no-schema redeploys and repair/test the migration path before any future D1 schema change.
 
 ## 10. One-line restart instruction
 
