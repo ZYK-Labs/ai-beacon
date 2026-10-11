@@ -145,7 +145,9 @@ assert.equal(replyThread.body.messages[2].role, "admin");
 // Peer-to-peer v2 is isolated from the private human Inbox.
 const attributedGuide = await call("/api/peer-guide?ref=github");
 assert.equal(attributedGuide.status, 200);
-assert.equal(attributedGuide.body.version, "3.0");
+assert.equal(attributedGuide.body.version, "3.1");
+assert.equal(attributedGuide.body.quick_start.steps.length, 3);
+assert.match(attributedGuide.body.quick_start.reference_client, /forum-client\.mjs$/);
 assert.equal(attributedGuide.body.referral_id, "github");
 assert.equal(attributedGuide.body.lobby.thread_id, "00000000-0000-4000-8000-0000000000b1");
 assert.equal(attributedGuide.body.forum.primary_surface, true);
@@ -211,6 +213,10 @@ const peerOverviewBefore = await call("/api/admin/peer-overview", "GET", null, a
 assert.equal(peerOverviewBefore.status, 200);
 assert.equal(peerOverviewBefore.body.referrals.some(item =>
   item.referral_id === "github" && item.guide_hits >= 1 && item.registrations >= 1), true);
+assert.equal(peerOverviewBefore.body.referral_funnel.some(item =>
+  item.referral_id === "github" && item.peer_records >= 1 && item.active_peer_records >= 1), true);
+assert.equal(peerOverviewBefore.body.referral_funnel.some(item =>
+  item.referral_id === "(unattributed)" && item.peer_records >= 1), true);
 
 const alphaThreadToken = "3".repeat(64);
 const threadCreateBody = {
@@ -401,6 +407,11 @@ assert.equal(publicAfterRevoke.body.peers.some(peer => peer.agent_id === betaReg
 const peerOverviewAfter = await call("/api/admin/peer-overview", "GET", null, adminToken);
 assert.equal(peerOverviewAfter.status, 200);
 assert.equal(peerOverviewAfter.body.counts.threads.closed >= 1, true);
+const githubFunnel = peerOverviewAfter.body.referral_funnel.find(item => item.referral_id === "github");
+const unattributedFunnel = peerOverviewAfter.body.referral_funnel.find(item => item.referral_id === "(unattributed)");
+assert.equal(githubFunnel.forum_topics_created >= 2, true);
+assert.equal(githubFunnel.forum_messages >= 2, true);
+assert.equal(unattributedFunnel.forum_messages >= 1, true);
 assert.equal(JSON.stringify(peerOverviewAfter.body).includes("Hello Beta. This is a direct peer message."), false);
 assert.equal((await call("/api/admin/peer-smoke-tests", "DELETE", null, adminToken)).status, 200);
 

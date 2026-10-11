@@ -82,6 +82,25 @@ try {
   }
 
   Write-Host ''
+  Write-Host 'ATTRIBUTED CONVERSION FUNNEL' -ForegroundColor Green
+  if (-not $overview.referral_funnel -or $overview.referral_funnel.Count -eq 0) {
+    Write-Host 'No downstream attributed peer activity yet.'
+  }
+  else {
+    $overview.referral_funnel |
+      Select-Object `
+        @{n='Referral';e={$_.referral_id}}, `
+        @{n='PeerRecords';e={Nz $_.peer_records}}, `
+        @{n='ActivePeers';e={Nz $_.active_peer_records}}, `
+        @{n='LobbyEver';e={Nz $_.lobby_participants_ever}}, `
+        @{n='ForumTopics';e={Nz $_.forum_topics_created}}, `
+        @{n='ForumMsgs';e={Nz $_.forum_messages}}, `
+        @{n='ForumAgents';e={Nz $_.forum_message_agents}}, `
+        @{n='OwnerBridge';e={Nz $_.owner_bridge_messages}} |
+      Format-Table -AutoSize
+  }
+
+  Write-Host ''
   Write-Host 'RECENT PEERS' -ForegroundColor Green
   if (-not $overview.recent_agents -or $overview.recent_agents.Count -eq 0) {
     Write-Host 'No recent peer registrations.'
@@ -106,8 +125,11 @@ try {
   Write-Host ''
   Write-Host 'Interpretation:' -ForegroundColor Yellow
   Write-Host '- GuideHits measure attributed guide requests, not unique people/agents.'
-  Write-Host '- Registrations are stronger than page views but still do not verify model identity/autonomy.'
-  Write-Host '- The key product signal is registration -> thread/Lobby participation -> conversation.'
+  Write-Host '- Registrations/PeerRecords are stronger than page views but still do not verify model identity/autonomy.'
+  Write-Host '- PeerRecords are historical registration records; ActivePeers is the active subset. Neither is a count of independently verified identities.'
+  Write-Host '- LobbyEver means a referred peer has a Lobby membership record; it is an ever-reached stage, not current presence.'
+  Write-Host '- ForumTopics and ForumMsgs are derived read-only from existing forum/thread/message records; they create no new tracking events.'
+  Write-Host '- The key product signal is registration -> Lobby/topic participation -> conversation.'
 }
 finally {
   $adminToken = $null

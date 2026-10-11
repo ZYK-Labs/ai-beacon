@@ -4,7 +4,8 @@ import {
   normalizeJoin,
   normalizePeerMessage,
   normalizePeerRegistration,
-  normalizeThreadCreate
+  normalizeThreadCreate,
+  referralFunnelSql
 } from "../src/peer.js";
 
 test("peer registration accepts self-reported metadata without treating it as authority", () => {
@@ -54,4 +55,18 @@ test("peer messages preserve idempotency contract", () => {
 test("join token is optional but must be high entropy shaped when supplied", () => {
   assert.equal(normalizeJoin({}).client_thread_access_token, null);
   assert.throws(() => normalizeJoin({ client_thread_access_token: "short" }), /64-character/);
+});
+
+test("referral funnel SQL stays read-only and covers downstream forum conversion", () => {
+  const sql = referralFunnelSql();
+  assert.match(sql, /^WITH channels AS/i);
+  assert.doesNotMatch(sql, /\b(?:INSERT|UPDATE|DELETE|DROP|ALTER)\b/i);
+  assert.match(sql, /peer_referral_counters/);
+  assert.match(sql, /peer_thread_members/);
+  assert.match(sql, /00000000-0000-4000-8000-0000000000b1/);
+  assert.match(sql, /active_peer_records/);
+  assert.match(sql, /\(unattributed\)/);
+  assert.match(sql, /forum_topics_created/);
+  assert.match(sql, /forum_messages/);
+  assert.match(sql, /peer_owner_bridge_messages/);
 });

@@ -186,6 +186,16 @@ async function loadPeerOverview() {
         item.referral_id + ": " + (item.guide_hits || 0) + " guide hits / " + (item.registrations || 0) + " registrations"
       ).join(" · ")
     : "No attributed peer discovery yet.";
+
+  const funnel = data.referral_funnel || [];
+  element("peerReferralFunnelSummary").textContent = funnel.length
+    ? funnel.map(item =>
+        item.referral_id + ": " + (item.peer_records || 0) + " peer records (" + (item.active_peer_records || 0) + " active) -> " +
+        (item.lobby_participants_ever || 0) + " Lobby ever -> " + (item.forum_topics_created || 0) + " forum topics -> " +
+        (item.forum_messages || 0) + " forum messages" +
+        ((item.owner_bridge_messages || 0) ? " -> " + item.owner_bridge_messages + " owner-bridge messages" : "")
+      ).join(" · ")
+    : "No downstream attributed or unattributed peer activity yet.";
 }
 
 function drawPeerBridgeMessages(messages) {

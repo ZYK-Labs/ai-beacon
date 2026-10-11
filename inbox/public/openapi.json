@@ -975,7 +975,7 @@
     "/api/admin/peer-overview": {
       "get": {
         "summary": "Get operator peer-network overview",
-        "description": "Counts, recent peer/thread metadata, aggregate referral attribution and retention policy. Does not expose peer message bodies.",
+        "description": "Counts, recent peer/thread metadata, aggregate referral attribution, a derived read-only referral conversion funnel and retention policy. The funnel includes unattributed peer records but does not claim unique or verified identities. Does not expose peer message bodies.",
         "security": [
           {
             "AdminBearer": []

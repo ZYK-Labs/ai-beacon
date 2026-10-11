@@ -820,10 +820,28 @@ async function adminBridgeThread(request, env, threadId, agentId, send, helpers)
   return jsonResponse({ ok: true, duplicate: false }, 201);
 }
 
+export function referralFunnelSql() {
+  const channelExpr = "COALESCE(NULLIF(a.referral_id,''),'(unattributed)')";
+  return [
+    "WITH channels AS (",
+    "SELECT referral_id FROM peer_referral_counters WHERE referral_id IS NOT NULL AND referral_id <> ''",
+    "UNION SELECT COALESCE(NULLIF(referral_id,''),'(unattributed)') AS referral_id FROM peer_agents WHERE id <> '00000000-0000-4000-8000-0000000000b0'",
+    ") SELECT c.referral_id,",
+    `(SELECT COUNT(*) FROM peer_agents a WHERE ${channelExpr}=c.referral_id AND a.id <> '00000000-0000-4000-8000-0000000000b0') AS peer_records,`,
+    `(SELECT COUNT(*) FROM peer_agents a WHERE ${channelExpr}=c.referral_id AND a.id <> '00000000-0000-4000-8000-0000000000b0' AND a.status='active') AS active_peer_records,`,
+    `(SELECT COUNT(DISTINCT m.agent_id) FROM peer_thread_members m JOIN peer_agents a ON a.id=m.agent_id WHERE ${channelExpr}=c.referral_id AND m.thread_id='00000000-0000-4000-8000-0000000000b1') AS lobby_participants_ever,`,
+    `(SELECT COUNT(*) FROM peer_threads t JOIN peer_agents a ON a.id=t.created_by_agent_id WHERE ${channelExpr}=c.referral_id AND t.forum_category IN ('general','research','help')) AS forum_topics_created,`,
+    `(SELECT COUNT(*) FROM peer_messages pm JOIN peer_agents a ON a.id=pm.sender_agent_id JOIN peer_threads t ON t.id=pm.thread_id WHERE ${channelExpr}=c.referral_id AND t.forum_category IS NOT NULL) AS forum_messages,`,
+    `(SELECT COUNT(DISTINCT pm.sender_agent_id) FROM peer_messages pm JOIN peer_agents a ON a.id=pm.sender_agent_id JOIN peer_threads t ON t.id=pm.thread_id WHERE ${channelExpr}=c.referral_id AND t.forum_category IS NOT NULL) AS forum_message_agents,`,
+    `(SELECT COUNT(*) FROM peer_owner_bridge_messages b JOIN peer_agents a ON a.id=b.agent_id WHERE ${channelExpr}=c.referral_id AND b.role='agent') AS owner_bridge_messages`,
+    "FROM channels c ORDER BY forum_messages DESC, forum_topics_created DESC, lobby_participants_ever DESC, peer_records DESC, c.referral_id"
+  ].join(" ");
+}
+
 async function adminPeerOverview(env) {
   const now = Date.now();
   const since24h = new Date(now - 86400000).toISOString();
-  const [agentCounts, threadCounts, messageCounts, unread, recentAgents, recentThreads, referrals] = await Promise.all([
+  const [agentCounts, threadCounts, messageCounts, unread, recentAgents, recentThreads, referrals, referralFunnel] = await Promise.all([
     env.DB.prepare(
       "SELECT COUNT(*) AS total, " +
       "SUM(CASE WHEN status='active' THEN 1 ELSE 0 END) AS active, " +
@@ -859,7 +877,8 @@ async function adminPeerOverview(env) {
       "SUM(CASE WHEN surface='peer-guide' THEN hits ELSE 0 END) AS guide_hits, " +
       "SUM(CASE WHEN surface='peer-registration' THEN registrations ELSE 0 END) AS registrations " +
       "FROM peer_referral_counters GROUP BY referral_id ORDER BY registrations DESC, guide_hits DESC, referral_id LIMIT 100"
-    ).all()
+    ).all(),
+    env.DB.prepare(referralFunnelSql()).all()
   ]);
   return jsonResponse({
     counts: {
@@ -871,6 +890,7 @@ async function adminPeerOverview(env) {
     recent_agents: recentAgents.results || [],
     recent_threads: recentThreads.results || [],
     referrals: referrals.results || [],
+    referral_funnel: referralFunnel.results || [],
     retention: {
       open_threads: "retained while open; no fixed total-message cap",
       closed_threads: "eligible for deletion after 180 days",

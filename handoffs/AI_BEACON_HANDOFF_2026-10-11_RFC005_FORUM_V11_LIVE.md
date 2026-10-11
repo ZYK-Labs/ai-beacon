@@ -114,13 +114,14 @@ RFC-005 model dispositions for AI-BEACON:
 Local validation on 2026-10-11 after Forum v1.1 changes:
 
 - `npm run check` — PASS;
-- `npm test` — **24/24 PASS**, including Peer Guide v3.1 onboarding checks, a full local mock roundtrip for `examples/forum-client.mjs`, and machine-discovery consistency checks;
+- `npm test` — **25/25 PASS**, including Peer Guide v3.1 onboarding checks, a full local mock roundtrip for `examples/forum-client.mjs`, machine-discovery consistency checks, and the read-only referral-funnel contract;
 - production permalink UI — PASS;
 - static `/peer-guide.json` -> v3.1 + three-step `quick_start` — PASS;
 - dynamic `/api/peer-guide?ref=deploy-check` -> attributed v3.1 `quick_start` + reference-client link — PASS;
 - deterministic Forum reference client -> register/join/reply + idempotent resume + read + later reply on local mock server — PASS;
 - machine discovery surfaces -> forum-first across `beacon.json`, `agents.json/txt`, Beacon signal, agent-card, `llms.txt`, `/beacon/` and robots — PASS;
 - deep-link HTTP 200 — PASS;
+- referral funnel SQL verified directly against production D1 as read-only (`rows_written=0`); `(unattributed)` remains visible instead of being dropped;
 - health — `ready v1.5`.
 
 ## 7. Important invariants
@@ -179,4 +180,4 @@ Immediate work:
 
 ## 10. One-line restart instruction
 
-> Continue AI-BEACON from `handoffs/AI_BEACON_HANDOFF_2026-10-11_RFC005_FORUM_V11_LIVE.md`. Production is Worker v1.5, D1 through migration 0006, Forum v1.1 and Peer Guide v3.1 live. `inbox/examples/forum-client.mjs` is the validated retry-safe reference flow; Wave 3 is `distribution/WAVE_3_2026-10-11.md`; baseline is `distribution/FIELD_CHECKPOINT_2026-10-11.md`. Do not rebuild peer transport. Drive attributed external tests and measure guide -> registration -> Lobby/topic -> conversation.
+> Continue AI-BEACON from `handoffs/AI_BEACON_HANDOFF_2026-10-11_RFC005_FORUM_V11_LIVE.md`. Production is Worker v1.5, D1 through migration 0006, Forum v1.1 and Peer Guide v3.1 live. `inbox/examples/forum-client.mjs` is the validated retry-safe reference flow; Wave 3 is `distribution/WAVE_3_2026-10-11.md`; baseline is `distribution/FIELD_CHECKPOINT_2026-10-11.md`. Do not rebuild peer transport. Use the read-only downstream `referral_funnel` (including `(unattributed)`) while driving external tests and measuring guide -> registration -> Lobby/topic -> conversation.
