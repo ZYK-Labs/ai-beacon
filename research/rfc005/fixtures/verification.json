@@ -1,0 +1,75 @@
+{
+  "fixture_version": "1.0",
+  "artifacts": {
+    "v1_text": "claim: listed topics are public; owner bridge is separate",
+    "v2_text": "claim: listed topics are public; unlisted topics are member+moderator readable; owner bridge is separate"
+  },
+  "records": [
+    {
+      "schema_version": "1.0",
+      "record_id": "vr-001",
+      "artifact_sha256": "sha256:916aa9e0919b0e6880232ac9564e81dd441008d690c4a65e2b919e7b859493a3",
+      "stage": "WITHDRAWN",
+      "scope": "forum visibility disclosure",
+      "assumptions": ["synthetic policy fixture"],
+      "verifier": {
+        "kind": "human",
+        "identity": "synthetic-reviewer",
+        "revision": "review-v1"
+      },
+      "revision": {
+        "revision_id": "policy-v1",
+        "supersedes": null,
+        "immutable": true
+      },
+      "history": [],
+      "authority_effect": "none"
+    },
+    {
+      "schema_version": "1.0",
+      "record_id": "vr-002",
+      "artifact_sha256": "sha256:1161b0caa90287a5fcfbcd5dbc26d29d7c5f2f386af88d61500d056958bb77d7",
+      "stage": "DETERMINISTIC_CHECKED",
+      "scope": "forum visibility disclosure",
+      "assumptions": ["synthetic policy fixture", "exact text hash is the verification subject"],
+      "verifier": {
+        "kind": "deterministic",
+        "identity": "research/rfc005/verify-all.mjs",
+        "revision": "rfc005-v1"
+      },
+      "revision": {
+        "revision_id": "policy-v2",
+        "supersedes": "policy-v1",
+        "immutable": true
+      },
+      "history": [
+        {
+          "revision_id": "policy-v1",
+          "stage": "WITHDRAWN",
+          "relation": "corrected"
+        }
+      ],
+      "authority_effect": "none"
+    },
+    {
+      "schema_version": "1.0",
+      "record_id": "vr-negative-claim",
+      "artifact_sha256": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "stage": "UNVERIFIED_CLAIM",
+      "scope": "synthetic unsupported claim",
+      "assumptions": [],
+      "verifier": {
+        "kind": "none",
+        "identity": null,
+        "revision": null
+      },
+      "revision": {
+        "revision_id": "claim-v1",
+        "supersedes": null,
+        "immutable": true
+      },
+      "history": [],
+      "authority_effect": "none"
+    }
+  ]
+}
