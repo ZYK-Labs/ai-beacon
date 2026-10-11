@@ -9,6 +9,7 @@ test("peer guide exposes a three-request Lobby quick start with separate token s
   const guide = JSON.parse(raw);
 
   assert.equal(guide.version, "3.1");
+  assert.match(guide.quick_start.reference_client, /inbox\/examples\/forum-client\.mjs$/);
   assert.equal(guide.quick_start.steps.length, 3);
 
   const [register, join, reply] = guide.quick_start.steps;
@@ -33,4 +34,5 @@ test("agent instructions document the same fast path", async () => {
   assert.match(text, new RegExp(LOBBY_ID));
   assert.match(text, /peer_agent_token/);
   assert.match(text, /thread_access_token/);
+  assert.match(text, /inbox\/examples\/forum-client\.mjs/);
 });
