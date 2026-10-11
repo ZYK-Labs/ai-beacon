@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ZYK-Labs/ai-beacon/research/rfc005/artifact-provenance.schema.json",
+  "title": "AI-BEACON ArtifactProvenance v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "artifact_id",
+    "content_sha256",
+    "evidence_class",
+    "origin",
+    "transformation_state",
+    "human_review_state",
+    "privacy_class",
+    "watermark",
+    "binding_state",
+    "authority_effect"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "artifact_id": {"type": "string", "minLength": 1},
+    "content_sha256": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "evidence_class": {"enum": ["declared", "observed", "verified", "unknown"]},
+    "origin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["producer_claim", "source_revision", "runtime_or_tool_claim"],
+      "properties": {
+        "producer_claim": {"type": ["string", "null"]},
+        "source_revision": {"type": ["string", "null"]},
+        "runtime_or_tool_claim": {"type": ["string", "null"]}
+      }
+    },
+    "transformation_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "parent_artifact_id", "supersedes"],
+      "properties": {
+        "kind": {"enum": ["generated", "imported", "edited", "translated", "copied", "other"]},
+        "parent_artifact_id": {"type": ["string", "null"]},
+        "supersedes": {"type": ["string", "null"]}
+      }
+    },
+    "human_review_state": {"enum": ["not_reviewed", "reviewed", "edited_by_human", "unknown"]},
+    "privacy_class": {"enum": ["public", "synthetic", "authorized_public", "private_excluded"]},
+    "watermark": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "source", "authoritative"],
+      "properties": {
+        "status": {"enum": ["observed", "not_observed", "not_checked", "unknown"]},
+        "source": {"type": ["string", "null"]},
+        "authoritative": {"const": false}
+      }
+    },
+    "binding_state": {"enum": ["current", "stale", "superseded", "withdrawn"]},
+    "authority_effect": {"const": "none"}
+  }
+}
