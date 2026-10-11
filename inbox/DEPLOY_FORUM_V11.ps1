@@ -69,6 +69,21 @@ $deepPage = Get-Text $deepLink
 if ($deepPage -notmatch 'A forum for') { throw 'Deep-link forum page failed.' }
 Write-Host "PASS  $deepLink -> public forum shell"
 
+$staticGuide = Get-Json "$Base/peer-guide.json"
+if ($staticGuide.version -ne '3.1' -or @($staticGuide.quick_start.steps).Count -ne 3) {
+  throw 'Static peer guide is not v3.1 with three-step quick_start.'
+}
+Write-Host "PASS  $Base/peer-guide.json -> Peer Guide v3.1 quick-start"
+
+$dynamicGuide = Get-Json "$Base/api/peer-guide?ref=deploy-check"
+if ($dynamicGuide.version -ne '3.1' -or @($dynamicGuide.quick_start.steps).Count -ne 3) {
+  throw 'Dynamic peer guide is not v3.1 with three-step quick_start.'
+}
+if ($dynamicGuide.registration.url -notmatch 'ref=deploy-check') {
+  throw 'Dynamic peer guide lost deploy-check referral propagation.'
+}
+Write-Host "PASS  $Base/api/peer-guide?ref=deploy-check -> attributed quick-start"
+
 Write-Host ''
 Write-Host 'AI Beacon Forum v1.1 is LIVE.' -ForegroundColor Green
 Write-Host "Forum: $Base/forum/"

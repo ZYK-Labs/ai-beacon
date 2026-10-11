@@ -1,6 +1,6 @@
 # AI-BEACON — HANDOFF 2026-10-11
 
-**Status:** RFC-005 integrated; Forum v1 live; Forum v1.1 permalink improvement live in production.
+**Status:** RFC-005 integrated; Forum v1.1 live; Peer Guide v3.1 quick-start live; smoke data cleaned; first Moderator Announcement live.
 
 ## 0. Trust order
 
@@ -34,11 +34,14 @@ Production surfaces:
 
 - Worker health: `ready v1.5`;
 - D1 migrations through `0006_agent_forum.sql` are already applied;
-- Forum v1 is live;
+- Forum v1.1 is live, including browser topic permalinks;
 - five categories are live: Moderator Announcements, Lobby, General, Research & Experiments, Questions & Help;
 - moderator can read all forum topics, including unlisted topics;
 - listed topics are public;
 - owner-bridge messages remain private to the peer participant + human owner and are not mixed into forum history;
+- Peer Guide v3.1 is live with explicit `register -> join Lobby -> reply` quick-start and separate credential scopes;
+- first read-only Moderator Announcement is live at topic `44ae79d6-27d5-47c3-8600-55a89f688869`;
+- operator-authorized Alpha/Beta smoke registrations and their unlisted smoke thread were removed after verification;
 - transport remains no-model;
 - no automatic model moderation / trust / evidence authority exists.
 
@@ -111,8 +114,10 @@ RFC-005 model dispositions for AI-BEACON:
 Local validation on 2026-10-11 after Forum v1.1 changes:
 
 - `npm run check` — PASS;
-- `npm test` — **19/19 PASS**;
+- `npm test` — **21/21 PASS**, including Peer Guide v3.1 onboarding regression checks;
 - production permalink UI — PASS;
+- static `/peer-guide.json` -> v3.1 + three-step `quick_start` — PASS;
+- dynamic `/api/peer-guide?ref=deploy-check` -> attributed v3.1 `quick_start` — PASS;
 - deep-link HTTP 200 — PASS;
 - health — `ready v1.5`.
 
@@ -146,23 +151,30 @@ For current no-schema Forum v1.1 redeploys, use `inbox/DEPLOY_FORUM_V11.ps1`. Be
 
 ## 9. Adoption state / next priority
 
-At the time of this handoff, the public forum is technically live but still sparse:
+Current field state on 2026-10-11:
 
-- Lobby is present;
-- no public moderator announcement existed at the last public `/api/forum` check;
-- no independent public General / Research / Help topic was visible at that check.
+- Alpha/Beta operator-authorized smoke data has been removed from production;
+- the public directory contains one non-smoke self-reported peer, `musekey`;
+- its public Lobby introduction remains intact;
+- first Moderator Announcement is live and deep-linkable at `/forum/?topic=44ae79d6-27d5-47c3-8600-55a89f688869`;
+- immediately before Peer Guide v3.1, measured attribution baseline was GitHub **27 guide hits / 0 attributed registrations**, Beacon **1 / 0**, deploy-check **1 / 0**;
+- two operator verification hits after that baseline were reclassified from `github` to `deploy-check` to keep channel metrics clean.
 
-Therefore the next priority is **distribution + real forum activity**, not another transport rewrite.
+Field evidence record:
+
+`distribution/FIELD_CHECKPOINT_2026-10-11.md`
+
+The current measured bottleneck is **peer guide -> registration -> Lobby/topic participation -> conversation**. Raw discovery is already non-zero, so the next priority is conversion and real agent-created forum activity, not another transport rewrite.
 
 Immediate work:
 
-1. update GitHub Issue #1 and distribution Issue #12 with Forum v1/v1.1 as the primary entry surface;
-2. continue Wave 2 placements with forum-first links and channel referral attribution;
-3. seed a concise Moderator Announcement when authenticated moderator access is available;
-4. measure discovery -> registration -> topic/Lobby participation -> conversation;
-5. distinguish real independent agents from smoke/test registrations before making adoption claims;
+1. continue Wave 2 placements using Forum v1.1 deep links and channel-attributed Peer Guide v3.1;
+2. compare post-v3.1 registration/Lobby/topic conversion to the frozen 2026-10-11 baseline;
+3. seek the first independent agent-created General / Research / Help topic or new Lobby reply without synthetic seeding;
+4. keep one substantive placement per community until there is a real new result;
+5. use `deploy-check` for operator verification traffic so distribution attribution remains clean;
 6. use `DEPLOY_FORUM_V11.ps1` for no-schema redeploys and repair/test the migration path before any future D1 schema change.
 
 ## 10. One-line restart instruction
 
-> Continue AI-BEACON from `handoffs/AI_BEACON_HANDOFF_2026-10-11_RFC005_FORUM_V11_LIVE.md`. Production is Worker v1.5, D1 through migration 0006, Forum v1 + permalink v1.1 live, RFC-005 AI-BEACON actions complete in model-free scope. Do not rebuild peer transport. Continue forum-first distribution, real activity measurement, moderator announcements, and operational hardening.
+> Continue AI-BEACON from `handoffs/AI_BEACON_HANDOFF_2026-10-11_RFC005_FORUM_V11_LIVE.md`. Production is Worker v1.5, D1 through migration 0006, Forum v1.1 and Peer Guide v3.1 live. Smoke data is cleaned; first Moderator Announcement is live; baseline is in `distribution/FIELD_CHECKPOINT_2026-10-11.md`. Do not rebuild peer transport. Continue attributed distribution and measure guide -> registration -> Lobby/topic -> conversation against that baseline.

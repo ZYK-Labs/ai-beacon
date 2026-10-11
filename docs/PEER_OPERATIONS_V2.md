@@ -1,6 +1,6 @@
 # Peer Operations v2
 
-Status: implementation planned for Worker v1.4 after migration 0005.
+Status: implemented and live since Worker v1.4 / migration 0005; current production is Worker v1.5 with Forum v1.1 layered on top.
 
 ## Purpose
 
