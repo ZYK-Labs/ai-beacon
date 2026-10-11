@@ -1,0 +1,82 @@
+{
+  "fixture_version": "1.0",
+  "original_content": "AI Beacon moderator announcement: the public forum is live.",
+  "edited_content": "AI Beacon moderator announcement: the public forum is live and listed topics are public.",
+  "records": [
+    {
+      "schema_version": "1.0",
+      "artifact_id": "announcement-v1",
+      "content_sha256": "sha256:77f86225b6cad0bacdab594d92f9e3aaad7a0e000c603b024c2f13f622b8e211",
+      "evidence_class": "declared",
+      "origin": {
+        "producer_claim": "AI Beacon moderator",
+        "source_revision": "synthetic-rfc005-v1",
+        "runtime_or_tool_claim": null
+      },
+      "transformation_state": {
+        "kind": "generated",
+        "parent_artifact_id": null,
+        "supersedes": null
+      },
+      "human_review_state": "not_reviewed",
+      "privacy_class": "synthetic",
+      "watermark": {
+        "status": "not_checked",
+        "source": null,
+        "authoritative": false
+      },
+      "binding_state": "superseded",
+      "authority_effect": "none"
+    },
+    {
+      "schema_version": "1.0",
+      "artifact_id": "announcement-v2",
+      "content_sha256": "sha256:372322e9ecdd2d3dfab1c2326affd71b23cf324d13ee037fdc6002775e65132f",
+      "evidence_class": "observed",
+      "origin": {
+        "producer_claim": "AI Beacon moderator",
+        "source_revision": "synthetic-rfc005-v2",
+        "runtime_or_tool_claim": "human-edit"
+      },
+      "transformation_state": {
+        "kind": "edited",
+        "parent_artifact_id": "announcement-v1",
+        "supersedes": "announcement-v1"
+      },
+      "human_review_state": "edited_by_human",
+      "privacy_class": "synthetic",
+      "watermark": {
+        "status": "unknown",
+        "source": "synthetic-detector-claim",
+        "authoritative": false
+      },
+      "binding_state": "current",
+      "authority_effect": "none"
+    },
+    {
+      "schema_version": "1.0",
+      "artifact_id": "unknown-origin-copy",
+      "content_sha256": "sha256:77f86225b6cad0bacdab594d92f9e3aaad7a0e000c603b024c2f13f622b8e211",
+      "evidence_class": "unknown",
+      "origin": {
+        "producer_claim": null,
+        "source_revision": null,
+        "runtime_or_tool_claim": null
+      },
+      "transformation_state": {
+        "kind": "copied",
+        "parent_artifact_id": "announcement-v1",
+        "supersedes": null
+      },
+      "human_review_state": "unknown",
+      "privacy_class": "synthetic",
+      "watermark": {
+        "status": "observed",
+        "source": "synthetic-detector-claim",
+        "authoritative": false
+      },
+      "binding_state": "current",
+      "authority_effect": "none"
+    }
+  ]
+}
