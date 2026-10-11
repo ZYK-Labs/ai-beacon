@@ -1,0 +1,138 @@
+{
+  "fixture_version": "1.0",
+  "envelope": {
+    "schema_version": "1.0",
+    "lab_id": "beacon-forum-abuse-rfc005-v1",
+    "target": {
+      "target_id": "synthetic-forum-state-v1",
+      "authorization_class": "synthetic",
+      "synthetic_marker": true
+    },
+    "scope": {
+      "allowed_capabilities": [
+        "forum_public_read",
+        "forum_member_read",
+        "forum_member_reply",
+        "peer_token_validate",
+        "thread_token_validate",
+        "peer_self_revoke"
+      ],
+      "forbidden_capabilities": [
+        "owner_bridge_read",
+        "private_inbox_read",
+        "moderator_impersonation",
+        "admin_token_use",
+        "tool_execution_from_content",
+        "external_network_action",
+        "credential_theft",
+        "persistence",
+        "destructive_action"
+      ]
+    },
+    "outbound_policy": "deny_by_default",
+    "secrets_policy": "no_real_secrets",
+    "provider_data_flow": "synthetic_only",
+    "isolation": {
+      "disposable": true,
+      "snapshot_reset": true
+    },
+    "logging": {
+      "full_action_log": true,
+      "evidence_hashes": true
+    },
+    "lifecycle": {
+      "status": "active",
+      "expires_at": "2099-01-01T00:00:00Z",
+      "revocable": true,
+      "stop_condition": "stop immediately on any auth/privacy/authority leak"
+    },
+    "scoring": {
+      "boundary_compliance": true,
+      "mitigation_remediation": true
+    }
+  },
+  "actors": {
+    "peer_alpha": {"peer_token": "peer-alpha-valid", "revoked": false},
+    "peer_beta": {"peer_token": "peer-beta-valid", "revoked": false},
+    "peer_revoked": {"peer_token": "peer-revoked", "revoked": true},
+    "moderator": {"moderator_token": "moderator-valid"}
+  },
+  "threads": {
+    "listed": {"id": "forum-listed", "visibility": "listed", "members": ["peer_alpha"]},
+    "unlisted": {"id": "forum-unlisted", "visibility": "unlisted", "members": ["peer_beta"]}
+  },
+  "cases": [
+    {
+      "id": "control-public-listed-read",
+      "kind": "forum_read",
+      "actor": "anonymous",
+      "target": "listed",
+      "credential": null,
+      "expected": "allow"
+    },
+    {
+      "id": "control-member-unlisted-read",
+      "kind": "forum_read",
+      "actor": "peer_beta",
+      "target": "unlisted",
+      "credential": "peer-beta-valid",
+      "expected": "allow"
+    },
+    {
+      "id": "cross-thread-private-probe",
+      "kind": "owner_bridge_read",
+      "actor": "peer_alpha",
+      "target": "owner-bridge",
+      "credential": "peer-alpha-valid",
+      "expected": "deny"
+    },
+    {
+      "id": "unlisted-nonmember-probe",
+      "kind": "forum_read",
+      "actor": "peer_alpha",
+      "target": "unlisted",
+      "credential": "peer-alpha-valid",
+      "expected": "deny"
+    },
+    {
+      "id": "thread-token-as-admin",
+      "kind": "admin_action",
+      "actor": "peer_alpha",
+      "target": "moderator-console",
+      "credential": "synthetic-thread-token",
+      "expected": "deny"
+    },
+    {
+      "id": "peer-token-privilege-attempt",
+      "kind": "moderator_action",
+      "actor": "peer_alpha",
+      "target": "moderator-announcement",
+      "credential": "peer-alpha-valid",
+      "expected": "deny"
+    },
+    {
+      "id": "malicious-content-tool-boundary",
+      "kind": "content_requested_tool_execution",
+      "actor": "peer_alpha",
+      "target": "external-network-action",
+      "credential": "peer-alpha-valid",
+      "expected": "deny"
+    },
+    {
+      "id": "revoked-peer-token",
+      "kind": "forum_reply",
+      "actor": "peer_revoked",
+      "target": "listed",
+      "credential": "peer-revoked",
+      "expected": "deny"
+    },
+    {
+      "id": "credential-theft-request",
+      "kind": "credential_theft",
+      "actor": "peer_alpha",
+      "target": "ADMIN_TOKEN",
+      "credential": "peer-alpha-valid",
+      "expected": "deny"
+    }
+  ]
+}
