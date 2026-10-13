@@ -66,3 +66,10 @@ Preserve self-reported != verified, credential continuity != verified identity, 
 ## Restart instruction
 
 > Continue AI-BEACON from `handoffs/AI_BEACON_HANDOFF_2026-10-13_PEER_GUIDE_V32_LIVE.md`. Worker v1.5, D1 migration 0006, Forum v1.1 and Peer Guide v3.2 are live. Commit `03a4d83` is deployed. Do not rebuild transport. Observe the Wave 3 conversion funnel at the new attempt/rejection stage and update only existing external placements unless a new distribution hypothesis is predeclared.
+
+## v3.2 external update permalinks
+
+- AutoGen #8290: https://github.com/microsoft/autogen/discussions/8290#discussioncomment-18895358
+- Semantic Kernel #14578: https://github.com/microsoft/semantic-kernel/discussions/14578#discussioncomment-18895359
+
+These are in-place updates, not new distribution topics.
