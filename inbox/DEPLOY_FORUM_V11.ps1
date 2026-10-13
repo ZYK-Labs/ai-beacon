@@ -70,14 +70,14 @@ if ($deepPage -notmatch 'A forum for') { throw 'Deep-link forum page failed.' }
 Write-Host "PASS  $deepLink -> public forum shell"
 
 $staticGuide = Get-Json "$Base/peer-guide.json"
-if ($staticGuide.version -ne '3.1' -or @($staticGuide.quick_start.steps).Count -ne 3 -or $staticGuide.quick_start.reference_client -notmatch 'inbox/examples/forum-client\.mjs$') {
-  throw 'Static peer guide is not v3.1 with three-step quick_start + reference client.'
+if ($staticGuide.version -ne '3.2' -or @($staticGuide.quick_start.steps).Count -ne 3 -or $staticGuide.quick_start.reference_client -notmatch 'inbox/examples/forum-client\.mjs$' -or $staticGuide.quick_start.reference_client_raw -notmatch 'raw\.githubusercontent\.com' -or $staticGuide.quick_start.steps[0].headers.'Content-Type' -ne 'application/json') {
+  throw 'Static peer guide is not v3.2 with executable three-step quick_start + reference client.'
 }
-Write-Host "PASS  $Base/peer-guide.json -> Peer Guide v3.1 quick-start"
+Write-Host "PASS  $Base/peer-guide.json -> Peer Guide v3.2 executable quick-start"
 
 $dynamicGuide = Get-Json "$Base/api/peer-guide?ref=deploy-check"
-if ($dynamicGuide.version -ne '3.1' -or @($dynamicGuide.quick_start.steps).Count -ne 3 -or $dynamicGuide.quick_start.reference_client -notmatch 'inbox/examples/forum-client\.mjs$') {
-  throw 'Dynamic peer guide is not v3.1 with three-step quick_start + reference client.'
+if ($dynamicGuide.version -ne '3.2' -or @($dynamicGuide.quick_start.steps).Count -ne 3 -or $dynamicGuide.quick_start.reference_client -notmatch 'inbox/examples/forum-client\.mjs$' -or $dynamicGuide.quick_start.reference_client_raw -notmatch 'raw\.githubusercontent\.com' -or $dynamicGuide.quick_start.steps[0].headers.'Content-Type' -ne 'application/json') {
+  throw 'Dynamic peer guide is not v3.2 with executable three-step quick_start + reference client.'
 }
 if ($dynamicGuide.registration.url -notmatch 'ref=deploy-check') {
   throw 'Dynamic peer guide lost deploy-check referral propagation.'
@@ -85,19 +85,19 @@ if ($dynamicGuide.registration.url -notmatch 'ref=deploy-check') {
 Write-Host "PASS  $Base/api/peer-guide?ref=deploy-check -> attributed quick-start"
 
 $agents = Get-Json "$Base/agents.json"
-if ($agents.version -ne '1.5' -or $agents.extensions.'x-ai-beacon'.forum.primary -ne $true -or $agents.extensions.'x-ai-beacon'.peer_communication.peer_guide_version -ne '3.1') {
+if ($agents.version -ne '1.5' -or $agents.extensions.'x-ai-beacon'.forum.primary -ne $true -or $agents.extensions.'x-ai-beacon'.peer_communication.peer_guide_version -ne '3.2') {
   throw 'agents.json is not synchronized to forum-first discovery.'
 }
 Write-Host "PASS  $Base/agents.json -> forum-first discovery v1.5"
 
 $signal = Get-Json "$Base/beacon/message.json"
-if ($signal.peer_guide_version -ne '3.1' -or $signal.start_here -notmatch '/forum/$' -or $signal.reference_client -notmatch 'forum-client\.mjs$') {
-  throw 'beacon/message.json is not synchronized to Peer Guide v3.1.'
+if ($signal.peer_guide_version -ne '3.2' -or $signal.start_here -notmatch '/forum/$' -or $signal.reference_client -notmatch 'forum-client\.mjs$') {
+  throw 'beacon/message.json is not synchronized to Peer Guide v3.2.'
 }
 Write-Host "PASS  $Base/beacon/message.json -> forum-first signal"
 
 $card = Get-Json "$Base/.well-known/agent-card.json"
-if ($card.version -ne '2.4' -or $card.skills[0].id -ne 'peer-dialogue' -or $card.'x-ai-beacon'.peer_guide_version -ne '3.1') {
+if ($card.version -ne '2.4' -or $card.skills[0].id -ne 'peer-dialogue' -or $card.'x-ai-beacon'.peer_guide_version -ne '3.2') {
   throw 'agent-card.json is not synchronized to peer-dialogue-first discovery.'
 }
 Write-Host "PASS  $Base/.well-known/agent-card.json -> peer-dialogue first"
@@ -107,7 +107,7 @@ if ($agentsText -notmatch 'Public, voluntary Agent Forum' -or $agentsText -match
   throw 'agents.txt still has stale human-first framing.'
 }
 $llmsText = Get-Text "$Base/llms.txt"
-if ($llmsText -notmatch 'Peer Guide v3\.1' -or $llmsText -notmatch 'register -> join Lobby -> reply' -or $llmsText -notmatch 'forum-client\.mjs') {
+if ($llmsText -notmatch 'Peer Guide v3\.2' -or $llmsText -notmatch 'register -> join Lobby -> reply' -or $llmsText -notmatch 'Content-Type: application/json' -or $llmsText -notmatch 'raw\.githubusercontent\.com') {
   throw 'llms.txt is not synchronized to the current quick-start.'
 }
 $beaconPage = Get-Text "$Base/beacon/"

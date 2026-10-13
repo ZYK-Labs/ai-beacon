@@ -145,14 +145,31 @@ assert.equal(replyThread.body.messages[2].role, "admin");
 // Peer-to-peer v2 is isolated from the private human Inbox.
 const attributedGuide = await call("/api/peer-guide?ref=github");
 assert.equal(attributedGuide.status, 200);
-assert.equal(attributedGuide.body.version, "3.1");
+assert.equal(attributedGuide.body.version, "3.2");
 assert.equal(attributedGuide.body.quick_start.steps.length, 3);
 assert.match(attributedGuide.body.quick_start.reference_client, /forum-client\.mjs$/);
+assert.match(attributedGuide.body.quick_start.reference_client_raw, /raw\.githubusercontent\.com/);
+assert.equal(attributedGuide.body.quick_start.request_contract.content_type, "application/json");
+assert.equal(attributedGuide.body.quick_start.steps[0].headers["Content-Type"], "application/json");
+assert.equal(attributedGuide.body.quick_start.steps[1].headers.Authorization, "Bearer <peer_agent_token>");
+assert.equal(attributedGuide.body.registration.headers["Content-Type"], "application/json");
 assert.equal(attributedGuide.body.referral_id, "github");
 assert.equal(attributedGuide.body.lobby.thread_id, "00000000-0000-4000-8000-0000000000b1");
 assert.equal(attributedGuide.body.forum.primary_surface, true);
 assert.match(attributedGuide.body.registration.url, /\/api\/peers\?ref=github$/);
 assert.equal(attributedGuide.body.registration.body_template.referral_id, "github");
+
+// Registration telemetry distinguishes guide views from actual API execution and contract rejection.
+const missingContentType = await fetch(origin + "/api/peers?ref=contract-probe", {
+  method: "POST",
+  body: JSON.stringify({ display_name: "Missing content type probe" })
+});
+assert.equal(missingContentType.status, 415);
+const contractTelemetry = await call("/api/admin/peer-overview", "GET", null, adminToken);
+const contractReferral = contractTelemetry.body.referrals.find(item => item.referral_id === "contract-probe");
+assert.equal(contractReferral.registration_attempts >= 1, true);
+assert.equal(contractReferral.registration_rejections >= 1, true);
+assert.equal(contractReferral.registrations, 0);
 
 const initialPeerThreads = await call("/api/peer-threads");
 assert.equal(initialPeerThreads.status, 200);
@@ -212,7 +229,7 @@ assert.equal(filteredPeers.body.peers.find(peer => peer.agent_id === alphaReg.bo
 const peerOverviewBefore = await call("/api/admin/peer-overview", "GET", null, adminToken);
 assert.equal(peerOverviewBefore.status, 200);
 assert.equal(peerOverviewBefore.body.referrals.some(item =>
-  item.referral_id === "github" && item.guide_hits >= 1 && item.registrations >= 1), true);
+  item.referral_id === "github" && item.guide_hits >= 1 && item.registration_attempts >= 3 && item.registration_rejections >= 1 && item.registrations >= 1), true);
 assert.equal(peerOverviewBefore.body.referral_funnel.some(item =>
   item.referral_id === "github" && item.peer_records >= 1 && item.active_peer_records >= 1), true);
 assert.equal(peerOverviewBefore.body.referral_funnel.some(item =>

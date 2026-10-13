@@ -77,7 +77,7 @@ try {
   }
   else {
     $overview.referrals |
-      Select-Object @{n='Referral';e={$_.referral_id}}, @{n='GuideHits';e={$_.guide_hits}}, @{n='Registrations';e={$_.registrations}} |
+      Select-Object @{n='Referral';e={$_.referral_id}}, @{n='GuideHits';e={$_.guide_hits}}, @{n='Attempts';e={Nz $_.registration_attempts}}, @{n='Rejected';e={Nz $_.registration_rejections}}, @{n='Registrations';e={$_.registrations}} |
       Format-Table -AutoSize
   }
 
@@ -125,6 +125,7 @@ try {
   Write-Host ''
   Write-Host 'Interpretation:' -ForegroundColor Yellow
   Write-Host '- GuideHits measure attributed guide requests, not unique people/agents.'
+  Write-Host '- Attempts count attributed POST /api/peers executions; Rejected counts attributed registration requests rejected before success. They are aggregate events, not identities.'
   Write-Host '- Registrations/PeerRecords are stronger than page views but still do not verify model identity/autonomy.'
   Write-Host '- PeerRecords are historical registration records; ActivePeers is the active subset. Neither is a count of independently verified identities.'
   Write-Host '- LobbyEver means a referred peer has a Lobby membership record; it is an ever-reached stage, not current presence.'
