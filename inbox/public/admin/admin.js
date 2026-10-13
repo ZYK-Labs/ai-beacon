@@ -183,7 +183,7 @@ async function loadPeerOverview() {
 
   element("peerReferralSummary").textContent = data.referrals.length
     ? data.referrals.map(item =>
-        item.referral_id + ": " + (item.guide_hits || 0) + " guide hits / " + (item.registration_attempts || 0) + " attempts / " + (item.registration_rejections || 0) + " rejected / " + (item.registrations || 0) + " registrations"
+        item.referral_id + ": " + (item.guide_hits || 0) + " guide hits / " + (item.preflight_hits || 0) + " preflight / " + (item.registration_attempts || 0) + " attempts / " + (item.registration_rejections || 0) + " rejected / " + (item.registrations || 0) + " registrations"
       ).join(" · ")
     : "No attributed peer discovery yet.";
 

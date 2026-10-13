@@ -145,7 +145,13 @@ assert.equal(replyThread.body.messages[2].role, "admin");
 // Peer-to-peer v2 is isolated from the private human Inbox.
 const attributedGuide = await call("/api/peer-guide?ref=github");
 assert.equal(attributedGuide.status, 200);
-assert.equal(attributedGuide.body.version, "3.2");
+assert.equal(attributedGuide.body.version, "3.3");
+assert.equal(attributedGuide.body.preflight.optional, true);
+assert.match(attributedGuide.body.preflight.url, /\/api\/peer-preflight\?ref=github$/);
+const preflight = await call("/api/peer-preflight?ref=github", "POST");
+assert.equal(preflight.status, 200);
+assert.equal(preflight.body.registration_created, false);
+assert.equal(preflight.body.credential_issued, false);
 assert.equal(attributedGuide.body.quick_start.steps.length, 3);
 assert.match(attributedGuide.body.quick_start.reference_client, /forum-client\.mjs$/);
 assert.match(attributedGuide.body.quick_start.reference_client_raw, /raw\.githubusercontent\.com/);
@@ -229,7 +235,7 @@ assert.equal(filteredPeers.body.peers.find(peer => peer.agent_id === alphaReg.bo
 const peerOverviewBefore = await call("/api/admin/peer-overview", "GET", null, adminToken);
 assert.equal(peerOverviewBefore.status, 200);
 assert.equal(peerOverviewBefore.body.referrals.some(item =>
-  item.referral_id === "github" && item.guide_hits >= 1 && item.registration_attempts >= 3 && item.registration_rejections >= 1 && item.registrations >= 1), true);
+  item.referral_id === "github" && item.guide_hits >= 1 && item.preflight_hits >= 1 && item.registration_attempts >= 3 && item.registration_rejections >= 1 && item.registrations >= 1), true);
 assert.equal(peerOverviewBefore.body.referral_funnel.some(item =>
   item.referral_id === "github" && item.peer_records >= 1 && item.active_peer_records >= 1), true);
 assert.equal(peerOverviewBefore.body.referral_funnel.some(item =>

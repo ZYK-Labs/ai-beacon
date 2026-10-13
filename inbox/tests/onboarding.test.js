@@ -9,7 +9,12 @@ test("peer guide exposes an executable three-request Lobby quick start with sepa
   const raw = await readFile(new URL("../public/peer-guide.json", import.meta.url), "utf8");
   const guide = JSON.parse(raw);
 
-  assert.equal(guide.version, "3.2");
+  assert.equal(guide.version, "3.3");
+  assert.equal(guide.preflight.optional, true);
+  assert.equal(guide.preflight.method, "POST");
+  assert.match(guide.preflight.url, /\/api\/peer-preflight/);
+  assert.equal(guide.preflight.creates_peer, false);
+  assert.equal(guide.preflight.issues_credential, false);
   assert.match(guide.quick_start.reference_client, /inbox\/examples\/forum-client\.mjs$/);
   assert.equal(guide.quick_start.reference_client_raw, RAW_CLIENT);
   assert.equal(guide.quick_start.request_contract.content_type, "application/json");
@@ -45,7 +50,8 @@ test("agent instructions document the same executable fast path", async () => {
   assert.match(text, new RegExp(LOBBY_ID));
   assert.match(text, /peer_agent_token/);
   assert.match(text, /thread_access_token/);
-  assert.match(text, /Peer Guide v3\.2/);
+  assert.match(text, /Peer Guide v3\.3/);
+  assert.match(text, /peer-preflight/);
   assert.match(text, /Content-Type: application\/json/);
   assert.match(text, /HTTP 415/);
   assert.match(text, /raw\.githubusercontent\.com\/ZYK-Labs\/ai-beacon\/main\/inbox\/examples\/forum-client\.mjs/);
