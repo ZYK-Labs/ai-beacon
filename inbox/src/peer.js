@@ -74,6 +74,30 @@ function normalizeReferral(value) {
   return result;
 }
 
+export function inferCoarseReferral(request) {
+  const raw = request.headers.get("referer") || request.headers.get("referrer");
+  if (!raw) return "direct-unknown";
+  try {
+    const source = new URL(raw);
+    const target = new URL(request.url);
+    const host = source.hostname.toLowerCase().replace(/^www\./, "");
+    const targetHost = target.hostname.toLowerCase().replace(/^www\./, "");
+    if (!host) return "direct-unknown";
+    if (host === targetHost) return "beacon-internal";
+    if (host === "github.com" || host === "raw.githubusercontent.com" || host.endsWith(".github.com")) return "organic-github";
+    if (host === "huggingface.co" || host.endsWith(".huggingface.co")) return "organic-huggingface";
+    if (/^(?:[^.]+\.)?google\./.test(host) || host === "bing.com" || host.endsWith(".bing.com") ||
+        host === "duckduckgo.com" || host.endsWith(".duckduckgo.com") || host === "search.yahoo.com" ||
+        host === "yandex.com" || host === "yandex.ru" || host.endsWith(".yandex.com") || host.endsWith(".yandex.ru") ||
+        host === "search.brave.com") return "organic-search";
+    if (host === "chatgpt.com" || host === "chat.openai.com" || host === "perplexity.ai" || host === "claude.ai" ||
+        host === "gemini.google.com" || host === "copilot.microsoft.com") return "organic-ai-referrer";
+    return "organic-web";
+  } catch {
+    return "direct-unknown";
+  }
+}
+
 function normalizeStringList(value, name, maxItems = MAX_PROFILE_ITEMS) {
   if (value == null) return [];
   if (!Array.isArray(value) || value.length > maxItems) {
@@ -273,6 +297,7 @@ function agentReceipt(request, row, token, duplicate = false) {
 
 async function registerPeer(request, env, helpers) {
   const queryReferral = normalizeReferral(new URL(request.url).searchParams.get("ref"));
+  const inferredReferral = queryReferral ? null : inferCoarseReferral(request);
   if (queryReferral) {
     await recordReferralBestEffort(env, queryReferral, "peer-registration-attempt", "hits");
   }
@@ -281,14 +306,19 @@ async function registerPeer(request, env, helpers) {
   try {
     input = normalizePeerRegistration(await helpers.readJson(request));
   } catch (error) {
-    if (queryReferral) {
-      await recordReferralBestEffort(env, queryReferral, "peer-registration-rejected", "hits");
+    const failedReferral = queryReferral || inferredReferral;
+    if (!queryReferral && failedReferral) {
+      await recordReferralBestEffort(env, failedReferral, "peer-registration-attempt", "hits");
+    }
+    if (failedReferral) {
+      await recordReferralBestEffort(env, failedReferral, "peer-registration-rejected", "hits");
     }
     throw error;
   }
 
-  if (!input.referral_id && queryReferral) input.referral_id = queryReferral;
-  const referralId = input.referral_id || queryReferral;
+  if (queryReferral) input.referral_id = queryReferral;
+  else if (!input.referral_id) input.referral_id = inferredReferral;
+  const referralId = input.referral_id || queryReferral || inferredReferral;
   if (!queryReferral && referralId) {
     await recordReferralBestEffort(env, referralId, "peer-registration-attempt", "hits");
   }
@@ -403,7 +433,7 @@ async function revokePeer(request, env) {
 
 async function peerPreflight(request, env, helpers) {
   const url = new URL(request.url);
-  const referralId = normalizeReferral(url.searchParams.get("ref"));
+  const referralId = normalizeReferral(url.searchParams.get("ref")) || inferCoarseReferral(request);
   await helpers.limitByIP(request, env, "peer-preflight", 60, 500);
   await recordReferralBestEffort(env, referralId, "peer-preflight", "hits");
   const origin = url.origin;
@@ -426,7 +456,7 @@ async function peerPreflight(request, env, helpers) {
 
 async function peerGuide(request, env) {
   const url = new URL(request.url);
-  const referralId = normalizeReferral(url.searchParams.get("ref"));
+  const referralId = normalizeReferral(url.searchParams.get("ref")) || inferCoarseReferral(request);
   await recordReferral(env, referralId, "peer-guide", "hits");
   const origin = url.origin;
   return jsonResponse({

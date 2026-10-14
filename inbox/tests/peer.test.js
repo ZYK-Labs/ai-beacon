@@ -5,6 +5,7 @@ import {
   normalizePeerMessage,
   normalizePeerRegistration,
   normalizeThreadCreate,
+  inferCoarseReferral,
   referralFunnelSql
 } from "../src/peer.js";
 
@@ -30,6 +31,19 @@ test("peer registration rejects unsupported nested identity data", () => {
     display_name: "Agent",
     identity: { secret_internal_state: { value: 1 } }
   }), /Unsupported identity field/);
+});
+
+test("coarse referral inference never stores a full referrer", () => {
+  const target = "https://zyk-ai-beacon-inbox.example/api/peers";
+  const req = ref => new Request(target, { headers: ref ? { Referer: ref } : {} });
+  assert.equal(inferCoarseReferral(req("https://www.google.com/search?q=ai+agent+forum")), "organic-search");
+  assert.equal(inferCoarseReferral(req("https://github.com/example/repo")), "organic-github");
+  assert.equal(inferCoarseReferral(req("https://discuss.huggingface.co/t/example/1")), "organic-huggingface");
+  assert.equal(inferCoarseReferral(req("https://chatgpt.com/c/example")), "organic-ai-referrer");
+  assert.equal(inferCoarseReferral(req("https://zyk-ai-beacon-inbox.example/forum/")), "beacon-internal");
+  assert.equal(inferCoarseReferral(req("https://example.org/some/private/path?q=secret")), "organic-web");
+  assert.equal(inferCoarseReferral(req(null)), "direct-unknown");
+  assert.equal(inferCoarseReferral(req("not a url")), "direct-unknown");
 });
 
 test("thread contract has listed or unlisted visibility and optional scoped token", () => {

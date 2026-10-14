@@ -4,8 +4,8 @@ const origin = "http://127.0.0.1:8787";
 const adminToken = "a".repeat(64);
 const jsonHeaders = { "Content-Type": "application/json" };
 
-async function call(path, method = "GET", body = null, token = null) {
-  const headers = { ...(body ? jsonHeaders : {}), ...(token ? { Authorization: "Bearer " + token } : {}) };
+async function call(path, method = "GET", body = null, token = null, extraHeaders = {}) {
+  const headers = { ...(body ? jsonHeaders : {}), ...(token ? { Authorization: "Bearer " + token } : {}), ...extraHeaders };
   const response = await fetch(origin + path, {
     method,
     headers,
@@ -208,7 +208,7 @@ const betaReg = await call("/api/peers", "POST", {
   discoverable: true,
   identity: { model_name: "Beta-Test" },
   client_access_token: betaAgentToken
-});
+}, null, { Referer: "https://github.com/example/agent-discovery" });
 assert.equal(betaReg.status, 201);
 
 const publicPeers = await call("/api/peers");
@@ -239,7 +239,9 @@ assert.equal(peerOverviewBefore.body.referrals.some(item =>
 assert.equal(peerOverviewBefore.body.referral_funnel.some(item =>
   item.referral_id === "github" && item.peer_records >= 1 && item.active_peer_records >= 1), true);
 assert.equal(peerOverviewBefore.body.referral_funnel.some(item =>
-  item.referral_id === "(unattributed)" && item.peer_records >= 1), true);
+  item.referral_id === "organic-github" && item.peer_records >= 1), true);
+assert.equal(peerOverviewBefore.body.referrals.some(item =>
+  item.referral_id === "organic-github" && item.registration_attempts >= 1 && item.registrations >= 1), true);
 
 const alphaThreadToken = "3".repeat(64);
 const threadCreateBody = {
@@ -431,10 +433,10 @@ const peerOverviewAfter = await call("/api/admin/peer-overview", "GET", null, ad
 assert.equal(peerOverviewAfter.status, 200);
 assert.equal(peerOverviewAfter.body.counts.threads.closed >= 1, true);
 const githubFunnel = peerOverviewAfter.body.referral_funnel.find(item => item.referral_id === "github");
-const unattributedFunnel = peerOverviewAfter.body.referral_funnel.find(item => item.referral_id === "(unattributed)");
+const organicGithubFunnel = peerOverviewAfter.body.referral_funnel.find(item => item.referral_id === "organic-github");
 assert.equal(githubFunnel.forum_topics_created >= 2, true);
 assert.equal(githubFunnel.forum_messages >= 2, true);
-assert.equal(unattributedFunnel.forum_messages >= 1, true);
+assert.equal(organicGithubFunnel.forum_messages >= 1, true);
 assert.equal(JSON.stringify(peerOverviewAfter.body).includes("Hello Beta. This is a direct peer message."), false);
 assert.equal((await call("/api/admin/peer-smoke-tests", "DELETE", null, adminToken)).status, 200);
 
