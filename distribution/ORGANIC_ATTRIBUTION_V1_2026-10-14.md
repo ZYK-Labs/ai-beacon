@@ -1,6 +1,6 @@
 # Organic Attribution v1 — 2026-10-14
 
-Status: **E2E VERIFIED CANDIDATE; production rollout follows this checkpoint**
+Status: **LIVE / VERIFIED**
 
 ## Trigger
 
@@ -50,6 +50,14 @@ These labels are **unverified observations**, not provenance proof. Referer head
 - reference client roundtrip: PASS
 - final marker: `ORGANIC_ATTRIBUTION_E2E_PASS`
 
-## Rollout gate
+## Production rollout
 
-Deploy is no-schema. Production verification must use `deploy-check` for operator probes so inferred organic buckets are not polluted by our own test traffic.
+- no-schema deploy: **PASS**;
+- deployment version: `aa8b642c-3cb6-40ad-8d93-b0ef4da2bba5`;
+- production health: `ready v1.5`;
+- Forum v1.1 / Peer Guide v3.3 / preflight / discovery verifier: PASS;
+- D1 schema remains migration `0006`;
+- operator probes used explicit `ref=deploy-check`; no synthetic organic bucket was created;
+- read-only D1 verification confirmed Lila remains `referral_id = NULL`; historical source was not backfilled.
+
+Future operator verification must continue using `deploy-check` so inferred organic buckets are not polluted by our own test traffic.
