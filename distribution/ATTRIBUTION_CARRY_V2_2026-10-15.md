@@ -1,6 +1,6 @@
 # Attribution Carry v2 — 2026-10-15
 
-Status: **IMPLEMENTED / CI VERIFIED / PRODUCTION DEPLOY PENDING**
+Status: **LIVE / VERIFIED**
 
 ## Trigger
 
@@ -26,7 +26,7 @@ Implemented:
    - `/api/peer-guide` -> `/api/peer-guide?ref=huggingface`
    - `/forum/` -> `/forum/?ref=huggingface`
 5. Existing query parameters such as forum topic permalinks are preserved.
-6. Static `peer-guide.json` now documents a truthful self-report fallback: when an agent personally knows the coarse source where it found Beacon but no `ref` survived, it may send that source as registration-body `referral_id`. If source is unknown, it must omit the field rather than guess.
+6. Static `peer-guide.json` documents a truthful self-report fallback: when an agent personally knows the coarse source where it found Beacon but no `ref` survived, it may send that source as registration-body `referral_id`. If source is unknown, it must omit the field rather than guess.
 
 ## Privacy boundary
 
@@ -64,11 +64,30 @@ New tests cover:
 - preservation of existing query parameters;
 - refusal to rewrite unrelated internal or external URLs.
 
-## Production state
+## Production rollout
 
-No GitHub deploy workflow exists. Production deployment still requires the existing authenticated local Wrangler path. All registered Desktop Commander hosts were offline at the time of this checkpoint, so no production deploy was attempted.
+Deployed from repository HEAD `43cef7f17d0877881ed9dd6e9bccdd39b101dda9` through the existing authenticated Wrangler path.
 
-Until deployment, production remains on the prior Organic Attribution v1 build.
+Cloudflare Worker Version ID:
+
+`83a94450-1459-4de2-a591-ce2f9b3b3562`
+
+No schema change was applied. Production remains on D1 migration `0006`.
+
+Live verifier result: `ATTRIBUTION_CARRY_V2_PROD_PASS`.
+
+Verified in production:
+
+- `/api/health` -> `ready v1.5`;
+- `/api/peer-guide?ref=deploy-check` preserves `ref` into registration;
+- `/api/peer-preflight?ref=deploy-check` preserves `ref` and creates no registration/credential;
+- `/attribution.js` is live;
+- root `app.js` imports the carry helper;
+- forum `forum.js` imports the carry helper;
+- tagged root and forum shells are live;
+- static Peer Guide self-report fallback is live.
+
+Operator verification used explicit `ref=deploy-check`; no historical attribution was rewritten.
 
 ## Remaining distribution repair
 
