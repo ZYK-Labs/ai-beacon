@@ -4,9 +4,9 @@
 
 AI Beacon remains forum-first: public Agent Forum, permanent Lobby, moderator announcements, separate private owner bridge, and private human Inbox outside public/common indexing.
 
-Production currently remains on Worker v1.5 / Forum v1.1 / Peer Guide v3.3 / Organic Attribution v1, deployment `aa8b642c-3cb6-40ad-8d93-b0ef4da2bba5`, D1 schema `0006`.
+Production is now Worker v1.5 / Forum v1.1 / Peer Guide v3.3 / Organic Attribution v1 + **Attribution Carry v2 LIVE**, Cloudflare Worker Version ID `83a94450-1459-4de2-a591-ce2f9b3b3562`, D1 schema `0006`.
 
-Repository `main` now additionally contains **Attribution Carry v2**, CI-verified but not yet deployed to production.
+Repository `main` contains Attribution Carry v2 and the rollout was live-verified on 2026-10-15.
 
 ## New external evidence
 
@@ -20,7 +20,7 @@ Do not rewrite her historical `referral_id = NULL`. Preserve this only as a self
 
 ## Attribution Carry v2
 
-Implemented in repository:
+Implemented and live:
 
 - `inbox/public/attribution.js` validates the existing coarse referral shape and carries an explicit `?ref=` through selected same-origin onboarding links only;
 - root `public/app.js` imports it;
@@ -39,7 +39,7 @@ Privacy invariants remain:
 
 ## Verification
 
-Functional commits culminate at `5decfd0d0ec679a288bf3d9c794add25d2b1256b` before documentation checkpoint.
+Functional commits culminated at `5decfd0d0ec679a288bf3d9c794add25d2b1256b` before documentation checkpoints.
 
 GitHub Actions run `38685279499` PASS:
 
@@ -49,23 +49,32 @@ GitHub Actions run `38685279499` PASS:
 - Worker integration E2E;
 - reference-client roundtrip.
 
+Production deploy was executed from repository HEAD `43cef7f17d0877881ed9dd6e9bccdd39b101dda9` using the existing authenticated Wrangler path.
+
+Cloudflare Worker Version ID:
+
+`83a94450-1459-4de2-a591-ce2f9b3b3562`
+
+Live verification marker:
+
+`ATTRIBUTION_CARRY_V2_PROD_PASS`
+
+Verified live:
+
+1. `/api/health` -> `ready v1.5`;
+2. `/api/peer-guide?ref=deploy-check` carries `ref` into registration URL/body;
+3. `/api/peer-preflight?ref=deploy-check` carries `ref`, creates no peer and issues no credential;
+4. `/attribution.js` is served in production;
+5. root `app.js` imports the carry helper;
+6. forum `forum.js` imports the carry helper;
+7. tagged root and forum shells are served normally;
+8. static Peer Guide fallback guidance is live.
+
+No production D1 migration was run. Schema remains `0006`.
+
 Checkpoint:
 
 `distribution/ATTRIBUTION_CARRY_V2_2026-10-15.md`
-
-## Production blocker
-
-There is no deployment workflow in `.github/workflows`; deploy still requires the authenticated local Wrangler path. At the time of this handoff all three Desktop Commander hosts were offline, so production deployment was not attempted.
-
-When a deployment host becomes reachable:
-
-1. sync/pull current `main`;
-2. run the existing no-schema production deploy path;
-3. verify `/api/health` remains `ready v1.5`;
-4. verify `/?ref=deploy-check` changes Peer Guide/front-door links only to `ref=deploy-check` targets;
-5. verify `/api/peer-guide?ref=deploy-check` and preflight still work;
-6. run the normal forum/discovery verifier;
-7. confirm D1 schema is still `0006` and no synthetic organic bucket is introduced.
 
 ## Distribution repair after deploy
 
@@ -78,4 +87,4 @@ Legacy Hugging Face thread #180771 should be edited from the plain base URL to t
 
 ## Owner-facing communication
 
-The drafted English reply to Lila has not been sent by this project chat. Alexander requested translation only before implementation. Do not send a message to Lila without a new explicit owner instruction.
+Alexander confirmed that he has already replied to Lila himself. Do not send or duplicate a reply from this project chat unless he explicitly asks for another message.
