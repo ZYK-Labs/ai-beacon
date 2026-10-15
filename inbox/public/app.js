@@ -1,3 +1,5 @@
+import "./attribution.js";
+
 const element = id => document.getElementById(id);
 const state = { id: "", token: "" };
 
