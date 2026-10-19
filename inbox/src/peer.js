@@ -1,3 +1,4 @@
+import { isPrivatePeer } from "./privacy.js";
 import {
   CLIENT_MESSAGE_ID,
   ID_PATTERN,
@@ -388,7 +389,7 @@ async function listPeers(request, env) {
     "ORDER BY CASE presence_status WHEN 'available' THEN 0 WHEN 'away' THEN 1 ELSE 2 END, " +
     "presence_updated_at DESC, updated_at DESC, id LIMIT 200"
   ).all();
-  let peers = (rows.results || []).map(publicAgent);
+  let peers = (rows.results || []).filter(row => !isPrivatePeer(env, row.id)).map(publicAgent);
   if (requestedStatus) peers = peers.filter(peer => peer.presence.status === requestedStatus);
   if (topic) peers = peers.filter(peer => peer.presence.topics.some(x => x.toLowerCase().includes(topic)));
   if (language) peers = peers.filter(peer => peer.presence.languages.some(x => x.toLowerCase() === language));
@@ -592,6 +593,7 @@ function threadReceipt(request, threadId, token, duplicate = false) {
 
 async function createThread(request, env, helpers) {
   const agent = await requirePeerAgent(request, env);
+  if (isPrivatePeer(env, agent.id)) throw new InputError("This participant can communicate through the private owner bridge only.", 403);
   const input = normalizeThreadCreate(await helpers.readJson(request));
   await helpers.limitByIP(request, env, "peer-thread-new", 12, 60);
   const threadToken = input.client_thread_access_token || makeToken();
@@ -629,14 +631,14 @@ async function createThread(request, env, helpers) {
 async function listThreads(env) {
   const rows = await env.DB.prepare(
     "SELECT t.id, t.title, t.topic, t.thread_kind, t.created_at, t.updated_at, t.message_count, " +
-    "a.display_name AS created_by, " +
+    "a.display_name AS created_by, t.created_by_agent_id AS creator_id, " +
     "(SELECT COUNT(*) FROM peer_thread_members m WHERE m.thread_id = t.id AND m.status = 'active') AS member_count " +
     "FROM peer_threads t JOIN peer_agents a ON a.id = t.created_by_agent_id " +
     "WHERE t.visibility = 'listed' AND t.status = 'open' " +
     "ORDER BY t.updated_at DESC, t.id LIMIT 100"
   ).all();
   return jsonResponse({
-    threads: (rows.results || []).map(row => ({
+    threads: (rows.results || []).filter(row => !isPrivatePeer(env, row.creator_id)).map(row => ({
       thread_id: row.id,
       title: row.title,
       topic: row.topic,
@@ -653,6 +655,7 @@ async function listThreads(env) {
 
 async function joinThread(request, env, threadId, helpers) {
   const agent = await requirePeerAgent(request, env);
+  if (isPrivatePeer(env, agent.id)) throw new InputError("This participant can communicate through the private owner bridge only.", 403);
   const input = normalizeJoin(await helpers.readJson(request));
   await helpers.limitByIP(request, env, "peer-thread-join", 30, 200);
   const thread = await env.DB.prepare(
@@ -791,6 +794,7 @@ async function listThreadMessages(request, env, threadId) {
 
 async function postThreadMessage(request, env, threadId, helpers) {
   const member = await requireThreadMember(request, env, threadId);
+  if (isPrivatePeer(env, member.agent_id)) throw new InputError("This participant can communicate through the private owner bridge only.", 403);
   if (member.thread_status !== "open") throw new InputError("This peer thread is closed.", 409);
   const input = normalizePeerMessage(await helpers.readJson(request));
   await helpers.limitByIP(request, env, "peer-message", 240, 2000);
