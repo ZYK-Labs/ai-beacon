@@ -1,3 +1,4 @@
+import { reconcilePrivatePeerVisibility } from "./privacy.js";
 import {
   MAX_REQUEST_BYTES,
   ID_PATTERN,
@@ -544,6 +545,7 @@ export default {
   },
   async scheduled(event, env) {
     if (!env.DB) return;
+    await reconcilePrivatePeerVisibility(env);
     const now = Date.now();
     const inboxRetention = new Date(now - 90 * 86400000).toISOString();
     const closedPeerRetention = new Date(now - 180 * 86400000).toISOString();
