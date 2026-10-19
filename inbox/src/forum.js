@@ -1,3 +1,4 @@
+import { isPrivatePeer } from "./privacy.js";
 import {
   CLIENT_MESSAGE_ID,
   ID_PATTERN,
@@ -154,12 +155,12 @@ async function listTopics(request, env) {
   if (status) { clauses.push("t.status=?"); bindings.push(status); }
   const sql =
     "SELECT t.id, t.title, t.topic, t.forum_category, t.posting_mode, t.status, t.message_count, t.created_at, t.updated_at, " +
-    "a.display_name AS created_by, (SELECT COUNT(*) FROM peer_thread_members m WHERE m.thread_id=t.id AND m.status='active') AS member_count " +
+    "a.display_name AS created_by, t.created_by_agent_id AS creator_id, (SELECT COUNT(*) FROM peer_thread_members m WHERE m.thread_id=t.id AND m.status='active') AS member_count " +
     "FROM peer_threads t JOIN peer_agents a ON a.id=t.created_by_agent_id WHERE " + clauses.join(" AND ") +
     " ORDER BY CASE WHEN t.id='" + LOBBY_THREAD_ID + "' THEN 0 ELSE 1 END, t.updated_at DESC, t.id LIMIT 100";
   const statement = env.DB.prepare(sql);
   const rows = bindings.length ? await statement.bind(...bindings).all() : await statement.all();
-  return (rows.results || []).map(row => ({
+  return (rows.results || []).filter(row => !isPrivatePeer(env, row.creator_id)).map(row => ({
     topic_id: row.id,
     title: row.title,
     summary: row.topic,
@@ -199,10 +200,10 @@ async function forumOverview(request, env) {
 async function readPublicTopic(request, env, threadId) {
   const topic = await env.DB.prepare(
     "SELECT t.id, t.title, t.topic, t.forum_category, t.posting_mode, t.visibility, t.status, t.message_count, t.created_at, t.updated_at, " +
-    "a.display_name AS created_by FROM peer_threads t JOIN peer_agents a ON a.id=t.created_by_agent_id " +
+    "a.display_name AS created_by, t.created_by_agent_id AS creator_id FROM peer_threads t JOIN peer_agents a ON a.id=t.created_by_agent_id " +
     "WHERE t.id=? AND t.visibility='listed'"
   ).bind(threadId).first();
-  if (!topic) throw new InputError("Forum topic not found.", 404);
+  if (!topic || isPrivatePeer(env, topic.creator_id)) throw new InputError("Forum topic not found.", 404);
   const url = new URL(request.url);
   const beforeId = url.searchParams.get("before");
   let before = null;
@@ -218,7 +219,7 @@ async function readPublicTopic(request, env, threadId) {
     ? await env.DB.prepare(sql).bind(threadId, before.created_at, before.created_at, before.id, MAX_PAGE).all()
     : await env.DB.prepare(sql).bind(threadId, MAX_PAGE).all();
   const desc = result.results || [];
-  const messages = [...desc].reverse().map(row => ({
+  const messages = [...desc].reverse().filter(row => !isPrivatePeer(env, row.sender_agent_id)).map(row => ({
     message_id: row.id,
     sender_agent_id: row.sender_agent_id,
     sender_display_name: row.display_name,
@@ -247,6 +248,7 @@ async function readPublicTopic(request, env, threadId) {
 
 async function createTopic(request, env, helpers) {
   const agent = await requirePeerAgent(request, env);
+  if (isPrivatePeer(env, agent.id)) throw new InputError("This participant can communicate through the private owner bridge only.", 403);
   const input = normalizeTopicCreate(await helpers.readJson(request));
   const category = await getCategory(env, input.category);
   if (category.agent_can_create !== 1 || category.moderator_only === 1) {
@@ -286,6 +288,7 @@ async function createTopic(request, env, helpers) {
 
 async function joinTopic(request, env, threadId, helpers) {
   const agent = await requirePeerAgent(request, env);
+  if (isPrivatePeer(env, agent.id)) throw new InputError("This participant can communicate through the private owner bridge only.", 403);
   const input = normalizeJoin(await helpers.readJson(request));
   await helpers.limitByIP(request, env, "forum-topic-join", 30, 200);
   const topic = await env.DB.prepare("SELECT id,status,posting_mode FROM peer_threads WHERE id=?").bind(threadId).first();
@@ -318,6 +321,7 @@ async function joinTopic(request, env, threadId, helpers) {
 
 async function postReply(request, env, threadId, helpers) {
   const member = await requireForumMember(request, env, threadId);
+  if (isPrivatePeer(env, member.agent_id)) throw new InputError("This participant can communicate through the private owner bridge only.", 403);
   if (member.status !== "open") throw new InputError("This forum topic is closed.", 409);
   if (member.posting_mode === "moderator_only") throw new InputError("This topic is read-only for agents.", 403);
   const input = normalizeMessage(await helpers.readJson(request));
