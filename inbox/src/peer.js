@@ -1,4 +1,5 @@
 import { isPrivatePeer } from "./privacy.js";
+import { normalizeUnlistedInvitation, requireUnlistedInvitation, unlistedInvitationCode } from "./unlisted.js";
 import {
   CLIENT_MESSAGE_ID,
   ID_PATTERN,
@@ -125,7 +126,7 @@ export function normalizePresence(input) {
   if (!["available", "away", "offline"].includes(status)) {
     throw new InputError("status must be available, away or offline.");
   }
-  const accepts = input.accepts_new_threads == null ? true : input.accepts_new_threads;
+  const accepts = input.accepts_new_threads == null ? false : input.accepts_new_threads;
   if (typeof accepts !== "boolean") throw new InputError("accepts_new_threads must be boolean.");
   return {
     status,
@@ -221,7 +222,8 @@ export function normalizeJoin(input) {
   if (input == null) input = {};
   if (typeof input !== "object" || Array.isArray(input)) throw new InputError("Expected a JSON object.");
   return {
-    client_thread_access_token: optionalClientToken(input.client_thread_access_token, "client_thread_access_token")
+    client_thread_access_token: optionalClientToken(input.client_thread_access_token, "client_thread_access_token"),
+    invitation_code: normalizeUnlistedInvitation(input.invitation_code)
   };
 }
 
@@ -349,7 +351,7 @@ async function registerPeer(request, env, helpers) {
         "INSERT INTO peer_agents " +
         "(id, secret_hash, display_name, description, identity_json, discoverable, status, initial_request_hash, created_at, updated_at, " +
         "presence_status, topics_json, languages_json, accepts_new_threads, presence_updated_at, referral_id, revoked_at) " +
-        "VALUES (?, ?, ?, ?, ?, ?, 'active', ?, ?, ?, 'offline', '[]', '[]', 1, ?, ?, NULL)"
+        "VALUES (?, ?, ?, ?, ?, ?, 'active', ?, ?, ?, 'offline', '[]', '[]', 0, ?, ?, NULL)"
       ).bind(id, digest, input.display_name, input.description, JSON.stringify(input.identity),
         input.discoverable ? 1 : 0, requestHash, now, now, now, input.referral_id).run();
       await recordReferral(env, input.referral_id, "peer-registration", "registrations");
@@ -578,11 +580,12 @@ async function peerGuide(request, env) {
   });
 }
 
-function threadReceipt(request, threadId, token, duplicate = false) {
+function threadReceipt(request, threadId, token, duplicate = false, invitationCode = null) {
   const origin = new URL(request.url).origin;
   return jsonResponse({
     thread_id: threadId,
     thread_access_token: token,
+    ...(invitationCode ? { invitation_code: invitationCode, invitation_note: 'Share only with agents you explicitly invite; it grants a join to this unlisted thread.' } : {}),
     duplicate,
     read_url: origin + "/api/peer-threads/" + threadId,
     message_url: origin + "/api/peer-threads/" + threadId + "/messages",
@@ -609,7 +612,7 @@ async function createThread(request, env, helpers) {
       if (existing.initial_request_hash !== requestHash) {
         throw new InputError("client_thread_access_token already belongs to another peer thread.", 409);
       }
-      return threadReceipt(request, existing.id, threadToken, true);
+      return threadReceipt(request, existing.id, threadToken, true, input.visibility === 'unlisted' ? await unlistedInvitationCode(env, existing.id) : null);
     }
   }
   const threadId = crypto.randomUUID();
@@ -625,7 +628,7 @@ async function createThread(request, env, helpers) {
       "VALUES (?, ?, ?, 'active', ?, ?)"
     ).bind(threadId, agent.id, threadDigest, now, now)
   ]);
-  return threadReceipt(request, threadId, threadToken, false);
+  return threadReceipt(request, threadId, threadToken, false, input.visibility === 'unlisted' ? await unlistedInvitationCode(env, threadId) : null);
 }
 
 async function listThreads(env) {
@@ -659,7 +662,7 @@ async function joinThread(request, env, threadId, helpers) {
   const input = normalizeJoin(await helpers.readJson(request));
   await helpers.limitByIP(request, env, "peer-thread-join", 30, 200);
   const thread = await env.DB.prepare(
-    "SELECT id, status FROM peer_threads WHERE id = ?"
+    "SELECT id, status, visibility FROM peer_threads WHERE id = ?"
   ).bind(threadId).first();
   if (!thread || thread.status !== "open") throw new InputError("Peer thread not found or closed.", 404);
 
@@ -675,6 +678,7 @@ async function joinThread(request, env, threadId, helpers) {
     }
     throw new InputError("Agent is already a member of this thread. Keep the existing thread token.", 409);
   }
+  await requireUnlistedInvitation(env, threadId, thread.visibility, input.invitation_code);
   const digestOwner = await env.DB.prepare(
     "SELECT thread_id, agent_id FROM peer_thread_members WHERE secret_hash = ?"
   ).bind(digest).first();
@@ -738,6 +742,21 @@ async function closeThread(request, env, threadId) {
   return jsonResponse({ ok: true, thread_id: threadId, status: "closed", duplicate: false });
 }
 
+async function getUnlistedInvitation(request, env, threadId) {
+  const agent = await requirePeerAgent(request, env);
+  const thread = await env.DB.prepare(
+    "SELECT id, status, visibility, created_by_agent_id FROM peer_threads WHERE id = ?"
+  ).bind(threadId).first();
+  if (!thread || thread.created_by_agent_id !== agent.id || thread.visibility !== "unlisted" || thread.status !== "open") {
+    throw new InputError("Unlisted invitation not found or access denied.", 404);
+  }
+  return jsonResponse({
+    thread_id: threadId,
+    invitation_code: await unlistedInvitationCode(env, threadId),
+    note: "Share privately only with agents you approve. This credential is separate from the thread ID and from your membership token."
+  });
+}
+
 async function listThreadMessages(request, env, threadId) {
   const member = await requireThreadMember(request, env, threadId);
   const url = new URL(request.url);
@@ -765,9 +784,6 @@ async function listThreadMessages(request, env, threadId) {
   const descending = result.results || [];
   const messages = [...descending].reverse();
 
-  await env.DB.prepare(
-    "UPDATE peer_thread_members SET last_seen_at = ? WHERE thread_id = ? AND agent_id = ?"
-  ).bind(new Date().toISOString(), threadId, member.agent_id).run();
 
   return jsonResponse({
     thread: {
@@ -1092,10 +1108,11 @@ export async function handlePeerRoute(request, env, ctx, helpers) {
     if (request.method === "POST") return createThread(request, env, helpers);
   }
 
-  const peerThread = /^\/api\/peer-threads\/([^/]+)(\/join|\/messages|\/owner|\/leave|\/close)?$/.exec(path);
+  const peerThread = /^\/api\/peer-threads\/([^/]+)(\/join|\/messages|\/owner|\/leave|\/close|\/invitation)?$/.exec(path);
   if (peerThread && ID_PATTERN.test(peerThread[1])) {
     const threadId = peerThread[1];
     if (peerThread[2] === "/join" && request.method === "POST") return joinThread(request, env, threadId, helpers);
+    if (peerThread[2] === "/invitation" && request.method === "GET") return getUnlistedInvitation(request, env, threadId);
     if (!peerThread[2] && request.method === "GET") return listThreadMessages(request, env, threadId);
     if (peerThread[2] === "/messages" && request.method === "POST") return postThreadMessage(request, env, threadId, helpers);
     if (peerThread[2] === "/owner" && request.method === "GET") return peerOwnerBridge(request, env, threadId, false, helpers, ctx);
