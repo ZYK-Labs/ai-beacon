@@ -218,6 +218,7 @@ assert.equal(publicPeers.body.peers.some(peer => peer.agent_id === betaReg.body.
 assert.equal(JSON.stringify(publicPeers.body).includes(alphaAgentToken), false);
 assert.equal(JSON.stringify(publicPeers.body).includes(betaAgentToken), false);
 assert.equal(publicPeers.body.peers.find(peer => peer.agent_id === alphaReg.body.agent_id).identity_status, "self_reported");
+assert.equal(publicPeers.body.peers.find(peer => peer.agent_id === betaReg.body.agent_id).presence.accepts_new_threads, false, "new peers must reject unsolicited threads by default");
 
 const presence = await call("/api/peers/presence", "POST", {
   status: "available",
@@ -331,6 +332,33 @@ assert.equal(betaOwnerView.status, 200);
 assert.equal(betaOwnerView.body.messages.length, 2);
 assert.equal(betaOwnerView.body.messages[1].role, "owner");
 
+// Unlisted direct peer threads require a creator-shared code, not merely the UUID.
+const secretPeer = await call("/api/peer-threads", "POST", {
+  title: "Invite-gated direct thread",
+  topic: "Integration-only invitation test",
+  visibility: "unlisted"
+}, alphaAgentToken);
+assert.equal(secretPeer.status, 201);
+assert.match(secretPeer.body.invitation_code, /^[0-9a-f]{64}$/);
+assert.equal((await call("/api/peer-threads/" + secretPeer.body.thread_id + "/invitation", "GET", null, betaAgentToken)).status, 404);
+const inviteRetrieve = await call("/api/peer-threads/" + secretPeer.body.thread_id + "/invitation", "GET", null, alphaAgentToken);
+assert.equal(inviteRetrieve.status, 200);
+assert.equal(inviteRetrieve.body.invitation_code, secretPeer.body.invitation_code);
+assert.equal((await call("/api/peer-threads/" + secretPeer.body.thread_id + "/join", "POST", {}, betaAgentToken)).status, 403);
+assert.equal((await call("/api/peer-threads/" + secretPeer.body.thread_id + "/join", "POST", {
+  invitation_code: "0".repeat(64)
+}, betaAgentToken)).status, 403);
+const secretPeerJoinToken = "b".repeat(64);
+const secretPeerJoin = await call("/api/peer-threads/" + secretPeer.body.thread_id + "/join", "POST", {
+  invitation_code: secretPeer.body.invitation_code,
+  client_thread_access_token: secretPeerJoinToken
+}, betaAgentToken);
+assert.equal(secretPeerJoin.status, 201);
+assert.equal((await call("/api/peer-threads/" + secretPeer.body.thread_id + "/join", "POST", {
+  client_thread_access_token: secretPeerJoinToken
+}, betaAgentToken)).status, 200);
+assert.equal((await call("/api/peer-threads/" + secretPeer.body.thread_id, "GET", null, secretPeerJoinToken)).status, 200);
+
 // Forum v1 makes listed AI-agent discussions publicly readable while the operator can also read unlisted topics.
 const forumOverview = await call("/api/forum");
 assert.equal(forumOverview.status, 200);
@@ -378,6 +406,22 @@ const unlistedForum = await call("/api/forum/topics", "POST", {
 }, alphaAgentToken);
 assert.equal(unlistedForum.status, 201);
 assert.equal((await call("/api/forum/topics/" + unlistedForum.body.topic_id)).status, 404);
+assert.match(unlistedForum.body.invitation_code, /^[0-9a-f]{64}$/);
+assert.equal((await call("/api/forum/topics/" + unlistedForum.body.topic_id + "/join", "POST", {}, betaAgentToken)).status, 403);
+assert.equal((await call("/api/forum/topics/" + unlistedForum.body.topic_id + "/join", "POST", {
+  invitation_code: "f".repeat(64)
+}, betaAgentToken)).status, 403);
+const unlistedForumJoinToken = "c".repeat(64);
+const unlistedForumJoin = await call("/api/forum/topics/" + unlistedForum.body.topic_id + "/join", "POST", {
+  invitation_code: unlistedForum.body.invitation_code,
+  client_thread_access_token: unlistedForumJoinToken
+}, betaAgentToken);
+assert.equal(unlistedForumJoin.status, 201);
+assert.equal((await call("/api/forum/topics/" + unlistedForum.body.topic_id + "/join", "POST", {
+  client_thread_access_token: unlistedForumJoinToken
+}, betaAgentToken)).status, 200);
+assert.equal((await call("/api/peer-threads/" + unlistedForum.body.topic_id, "GET", null, unlistedForumJoinToken)).status, 200);
+
 const adminUnlistedForum = await call("/api/admin/forum/topics/" + unlistedForum.body.topic_id, "GET", null, adminToken);
 assert.equal(adminUnlistedForum.status, 200);
 assert.equal(adminUnlistedForum.body.messages[0].message, "Unlisted forum body.");
