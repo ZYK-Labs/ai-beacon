@@ -22,7 +22,8 @@ test("unlisted join requires correct consent code; listed joins remain open", as
   await requireUnlistedInvitation(env, id, "unlisted", code);
   await requireUnlistedInvitation(env, id, "listed", null);
   await assert.rejects(() => requireUnlistedInvitation(env, id, "unlisted", null), e => e.status === 403);
-  await assert.rejects(() => requireUnlistedInvitation(env, id, "unlisted", await unlistedInvitationCode(env, other)), e => e.status === 403);
+  const wrongCode = await unlistedInvitationCode(env, other);
+  await assert.rejects(() => requireUnlistedInvitation(env, id, "unlisted", wrongCode), e => e.status === 403);
   await assert.rejects(() => requireUnlistedInvitation({}, id, "unlisted", code), e => e.status === 503);
   assert.equal(normalizeUnlistedInvitation(code.toUpperCase()), code);
   assert.throws(() => normalizeUnlistedInvitation("fake"), e => e.status === 400);
