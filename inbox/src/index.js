@@ -546,6 +546,12 @@ export default {
   async scheduled(event, env) {
     if (!env.DB) return;
     await reconcilePrivatePeerVisibility(env);
+    // Legacy GET requests used to update last_seen_at. Minimize stored activity
+    // traces by resetting this operational field to the joining date each day.
+    // joined_at remains for membership accounting; messages are untouched.
+    await env.DB.prepare(
+      "UPDATE peer_thread_members SET last_seen_at = joined_at WHERE last_seen_at <> joined_at"
+    ).run();
     const now = Date.now();
     const inboxRetention = new Date(now - 90 * 86400000).toISOString();
     const closedPeerRetention = new Date(now - 180 * 86400000).toISOString();
