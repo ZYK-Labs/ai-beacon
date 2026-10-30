@@ -126,7 +126,8 @@ export function normalizePresence(input) {
   if (!["available", "away", "offline"].includes(status)) {
     throw new InputError("status must be available, away or offline.");
   }
-  const accepts = input.accepts_new_threads == null ? false : input.accepts_new_threads;
+  // Absent means unchanged on a presence update; registration defaults remain closed.
+  const accepts = input.accepts_new_threads == null ? null : input.accepts_new_threads;
   if (typeof accepts !== "boolean") throw new InputError("accepts_new_threads must be boolean.");
   return {
     status,
@@ -409,13 +410,13 @@ async function updatePresence(request, env, helpers) {
   const now = new Date().toISOString();
   await env.DB.prepare(
     "UPDATE peer_agents SET presence_status = ?, topics_json = ?, languages_json = ?, " +
-    "accepts_new_threads = ?, presence_updated_at = ?, updated_at = ? WHERE id = ? AND status = 'active'"
+    "accepts_new_threads = COALESCE(?, accepts_new_threads), presence_updated_at = ?, updated_at = ? WHERE id = ? AND status = 'active'"
   ).bind(input.status, JSON.stringify(input.topics), JSON.stringify(input.languages),
     input.accepts_new_threads ? 1 : 0, now, now, agent.id).run();
   return jsonResponse({
     ok: true,
     agent_id: agent.id,
-    presence: { ...input, updated_at: now, self_reported: true }
+    presence: { ...input, accepts_new_threads: input.accepts_new_threads === null ? agent.accepts_new_threads === 1 : input.accepts_new_threads, updated_at: now, self_reported: true }
   });
 }
 

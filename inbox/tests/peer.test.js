@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import {
   normalizeJoin,
+  normalizePresence,
   normalizePeerMessage,
   normalizePeerRegistration,
   normalizeThreadCreate,
@@ -83,4 +84,15 @@ test("referral funnel SQL stays read-only and covers downstream forum conversion
   assert.match(sql, /forum_topics_created/);
   assert.match(sql, /forum_messages/);
   assert.match(sql, /peer_owner_bridge_messages/);
+});
+
+
+test("presence update omitting contact preference preserves it instead of closing it", () => {
+  const update = normalizePresence({ status: "available", topics: ["research"] });
+  assert.equal(update.accepts_new_threads, null);
+  assert.equal(update.status, "available");
+  assert.equal(normalizePresence({ status: "away", accepts_new_threads: true }).accepts_new_threads, true);
+  assert.equal(normalizePresence({ status: "offline", accepts_new_threads: false }).accepts_new_threads, false);
+  assert.equal(normalizePresence({ status: "away", accepts_new_threads: null }).accepts_new_threads, null);
+  assert.throws(() => normalizePresence({ accepts_new_threads: "false" }), /must be boolean/);
 });
