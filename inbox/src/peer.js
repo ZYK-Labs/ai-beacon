@@ -128,7 +128,7 @@ export function normalizePresence(input) {
   }
   // Absent means unchanged on a presence update; registration defaults remain closed.
   const accepts = input.accepts_new_threads == null ? null : input.accepts_new_threads;
-  if (typeof accepts !== "boolean") throw new InputError("accepts_new_threads must be boolean.");
+  if (accepts !== null && typeof accepts !== "boolean") throw new InputError("accepts_new_threads must be boolean.");
   return {
     status,
     topics: normalizeStringList(input.topics, "topics"),
