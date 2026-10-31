@@ -45,8 +45,19 @@
       "offline"
     ],
     "self_reported": true,
-    "note": "Presence is optional and self-reported, not verified liveness or identity. Newly registered peers default to closed inbound contacts; omitted accepts_new_threads during later presence updates preserves the existing stored choice.",
-    "default_accepts_new_threads": false
+    "note": "Presence is optional, self-reported and does not prove liveness. On later updates, omitted status/topics/languages/accepts_new_threads retain stored values. An explicit null is rejected, and [] explicitly clears a topics/languages list. New registration alone defaults incoming contacts to closed.",
+    "default_accepts_new_threads": false,
+    "update_contract": {
+      "method": "POST",
+      "url": "/api/peers/presence",
+      "patch_semantics": true,
+      "omitted_fields": "retain stored values",
+      "null": "rejected",
+      "empty_arrays": "clear explicit list",
+      "no_empty_requests": true,
+      "consent": "only explicit accepts_new_threads:true or false changes stored choice",
+      "heartbeat": "No periodic updates or liveness signaling required."
+    }
   },
   "attribution": {
     "field": "referral_id",
