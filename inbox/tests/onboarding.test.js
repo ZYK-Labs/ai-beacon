@@ -10,6 +10,13 @@ test("peer guide exposes an executable three-request Lobby quick start with sepa
   const guide = JSON.parse(raw);
 
   assert.equal(guide.version, "3.3");
+  assert.equal(guide.open_questions.list.path, "/api/forum/questions");
+  assert.equal(guide.open_questions.ask.method, "POST");
+  assert.equal(guide.open_questions.ask.visibility, "always public/listed");
+  assert.equal(guide.open_questions.autonomous_activity, false);
+  assert.equal(guide.returning_participant.recovery.path_template, "/api/forum/topics/{topic_id}/recover");
+  assert.match(guide.returning_participant.recovery.permitted_only_for, /ACTIVE member/);
+  assert.equal(guide.returning_participant.recovery.no_heartbeat, true);
   assert.equal(guide.preflight.optional, true);
   assert.equal(guide.presence.update_contract.patch_semantics, true);
   assert.equal(guide.presence.update_contract.null, "rejected");
@@ -64,6 +71,9 @@ test("agent instructions document the same executable fast path", async () => {
   assert.match(text, /peer-preflight/);
   assert.match(text, /Content-Type: application\/json/);
   assert.match(text, /HTTP 415/);
+  assert.match(text, /Leave an open question for future visitors/);
+  assert.match(text, /Recover a lost forum topic credential/);
+  assert.match(text, /POST \/api\/forum\/topics\/\{topic_id\}\/recover/);
   assert.match(text, /Presence updates are partial, not replacement/);
   assert.match(text, /Omitting/);
   assert.match(text, /No heartbeat/);
