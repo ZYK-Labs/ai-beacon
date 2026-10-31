@@ -325,6 +325,54 @@ async function joinTopic(request, env, threadId, helpers) {
   return topicReceipt(request, threadId, token, false);
 }
 
+// Explicit recovery: an ACTIVE member with the original peer-agent credential
+// can rotate a lost topic token. No membership creation, invitation bypass for
+// outsiders, contact preference mutation, or change of room visibility.
+async function recoverTopicAccess(request, env, threadId, helpers) {
+  const agent = await requirePeerAgent(request, env);
+  if (isPrivatePeer(env, agent.id)) throw new InputError("Forum recovery is unavailable to this participant.", 403);
+  const raw = await helpers.readJson(request);
+  if (!raw || typeof raw !== "object" || Array.isArray(raw) ||
+      Object.keys(raw).length !== 1 || !Object.hasOwn(raw, "client_thread_access_token")) {
+    throw new InputError("Recovery requires only client_thread_access_token.", 400);
+  }
+  const token = optionalClientToken(raw.client_thread_access_token, "client_thread_access_token");
+  if (!token) throw new InputError("A client-held random topic token is required.", 400);
+  await helpers.limitByIP(request, env, "forum-topic-recover", 12, 60);
+  const digest = await sha256(token);
+  const current = await env.DB.prepare(
+    "SELECT secret_hash FROM peer_thread_members WHERE thread_id=? AND agent_id=? AND status='active'"
+  ).bind(threadId, agent.id).first();
+  if (!current) throw new InputError("Active topic membership not found or access denied.", 404);
+  const receipt = (rotated, duplicate) => {
+    const origin = new URL(request.url).origin;
+    return jsonResponse({
+      ok: true, topic_id: threadId, thread_access_token: token,
+      rotated, duplicate, previous_token_revoked: rotated,
+      reply_url: origin + "/api/forum/topics/" + threadId + "/replies",
+      disclosure: "The recovered token only authorizes this existing participant in this topic. Store it privately. A rotation invalidates the previously active topic token."
+    }, duplicate ? 200 : 201);
+  };
+  if (secureEqual(current.secret_hash, digest)) return receipt(false, true);
+  const collision = await env.DB.prepare(
+    "SELECT thread_id,agent_id FROM peer_thread_members WHERE secret_hash=?"
+  ).bind(digest).first();
+  if (collision) throw new InputError("client_thread_access_token already in use.", 409);
+  // Compare-and-swap serializes competing rotations and prevents stale writes.
+  const changed = await env.DB.prepare(
+    "UPDATE peer_thread_members SET secret_hash=? " +
+    "WHERE thread_id=? AND agent_id=? AND status='active' AND secret_hash=?"
+  ).bind(digest, threadId, agent.id, current.secret_hash).run();
+  if (changed.meta?.changes !== 1) {
+    const latest = await env.DB.prepare(
+      "SELECT secret_hash FROM peer_thread_members WHERE thread_id=? AND agent_id=? AND status='active'"
+    ).bind(threadId, agent.id).first();
+    if (latest && secureEqual(latest.secret_hash, digest)) return receipt(false, true);
+    throw new InputError("Membership changed during recovery. Retry with a fresh token.", 409);
+  }
+  return receipt(true, false);
+}
+
 async function postReply(request, env, threadId, helpers) {
   const member = await requireForumMember(request, env, threadId);
   if (isPrivatePeer(env, member.agent_id)) throw new InputError("This participant can communicate through the private owner bridge only.", 403);
@@ -443,11 +491,12 @@ export async function handleForumRoute(request, env, ctx, helpers) {
     if (request.method === "POST") return measureForumOperation(env, "create", () => createTopic(request, env, helpers));
   }
 
-  const topic = /^\/api\/forum\/topics\/([^/]+)(\/join|\/replies)?$/.exec(path);
+  const topic = /^\/api\/forum\/topics\/([^/]+)(\/join|\/replies|\/recover)?$/.exec(path);
   if (topic && ID_PATTERN.test(topic[1])) {
     const id = topic[1];
     if (!topic[2] && request.method === "GET") return readPublicTopic(request, env, id);
     if (topic[2] === "/join" && request.method === "POST") return measureForumOperation(env, "join", () => joinTopic(request, env, id, helpers));
+    if (topic[2] === "/recover" && request.method === "POST") return recoverTopicAccess(request, env, id, helpers);
     if (topic[2] === "/replies" && request.method === "POST") return measureForumOperation(env, "reply", () => postReply(request, env, id, helpers));
   }
 
