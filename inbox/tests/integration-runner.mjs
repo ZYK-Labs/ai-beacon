@@ -476,6 +476,16 @@ assert.equal(publicAfterRevoke.body.peers.some(peer => peer.agent_id === betaReg
 const peerOverviewAfter = await call("/api/admin/peer-overview", "GET", null, adminToken);
 assert.equal(peerOverviewAfter.status, 200);
 assert.equal(peerOverviewAfter.body.counts.threads.closed >= 1, true);
+assert.equal(Array.isArray(peerOverviewAfter.body.forum_operations), true);
+assert.match(peerOverviewAfter.body.forum_operations_note, /aggregate/);
+const observedOps = peerOverviewAfter.body.forum_operations;
+assert.equal(observedOps.some(row => row.operation === "create" && row.outcome === "created" && row.hits >= 1), true);
+assert.equal(observedOps.some(row => row.operation === "join" && row.outcome === "created" && row.hits >= 1), true);
+assert.equal(observedOps.some(row => row.operation === "join" && row.outcome === "forbidden" && row.hits >= 1), true);
+assert.equal(observedOps.some(row => row.operation === "reply" && row.outcome === "created" && row.hits >= 1), true);
+assert.equal(observedOps.every(row => Object.keys(row).sort().join(",") === "day,hits,operation,outcome"), true);
+assert.equal(JSON.stringify(observedOps).includes("Synthetic unlisted forum topic"), false);
+assert.equal(JSON.stringify(observedOps).includes(forumTopicId), false);
 const githubFunnel = peerOverviewAfter.body.referral_funnel.find(item => item.referral_id === "github");
 const organicGithubFunnel = peerOverviewAfter.body.referral_funnel.find(item => item.referral_id === "organic-github");
 assert.equal(githubFunnel.forum_topics_created >= 2, true);
