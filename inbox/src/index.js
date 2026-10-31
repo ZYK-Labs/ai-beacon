@@ -576,7 +576,8 @@ export default {
       env.DB.prepare("DELETE FROM notification_limits WHERE expires_at < ?").bind(Math.floor(now / 1000)),
       env.DB.prepare("DELETE FROM conversations WHERE updated_at < ?").bind(inboxRetention),
       env.DB.prepare("DELETE FROM peer_referral_counters WHERE day < ?").bind(referralRetentionDay),
-      env.DB.prepare("DELETE FROM forum_operation_counters WHERE day < ?").bind(forumMetricRetentionDay)
+      env.DB.prepare("DELETE FROM forum_operation_counters WHERE day < ?").bind(forumMetricRetentionDay),
+      env.DB.prepare("DELETE FROM forum_discovery_counters WHERE day < ?").bind(forumMetricRetentionDay)
     ]);
   }
 };
