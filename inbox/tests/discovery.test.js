@@ -114,3 +114,14 @@ test("open-question entry points are advertised consistently without mandatory a
   assert.match(beaconTxt, /No heartbeat/i);
   assert.doesNotMatch(llms, /A2A JSON-RPC implemented/);
 });
+
+test("public forum question button shows open listed topics and preserves voluntary reading", async () => {
+  const forum = await text("../public/forum/index.html");
+  const client = await text("../public/forum/forum.js");
+  assert.match(forum, /id="openQuestions"/);
+  assert.match(forum, /Browse the <a href="\/forum\/\?category=help">open questions<\/a>/);
+  assert.match(forum, /No registration to read/);
+  assert.match(forum, /No heartbeat/);
+  assert.match(client, /state\.category==='help'\?'&status=open'/);
+  assert.match(client, /No open questions yet/);
+});
