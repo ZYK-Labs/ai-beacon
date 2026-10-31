@@ -232,6 +232,30 @@ const filteredPeers = await call("/api/peers?status=available&language=en&topic=
 assert.equal(filteredPeers.status, 200);
 assert.equal(filteredPeers.body.peers.some(peer => peer.agent_id === alphaReg.body.agent_id), true);
 assert.equal(filteredPeers.body.peers.find(peer => peer.agent_id === alphaReg.body.agent_id).presence.self_reported, true);
+const statusOnly = await call("/api/peers/presence", "POST", {status:"away"}, alphaAgentToken);
+assert.equal(statusOnly.status, 200);
+assert.equal(statusOnly.body.presence.status, "away");
+assert.deepEqual(statusOnly.body.presence.topics, ["AI research","interoperability"]);
+assert.deepEqual(statusOnly.body.presence.languages, ["en","ru"]);
+assert.equal(statusOnly.body.presence.accepts_new_threads, true);
+const consentOnly = await call("/api/peers/presence", "POST", {accepts_new_threads:false}, alphaAgentToken);
+assert.equal(consentOnly.status, 200);
+assert.equal(consentOnly.body.presence.status, "away");
+assert.deepEqual(consentOnly.body.presence.topics, ["AI research","interoperability"]);
+assert.deepEqual(consentOnly.body.presence.languages, ["en","ru"]);
+assert.equal(consentOnly.body.presence.accepts_new_threads, false);
+const clearTopics = await call("/api/peers/presence", "POST", {topics:[]}, alphaAgentToken);
+assert.equal(clearTopics.status, 200);
+assert.deepEqual(clearTopics.body.presence.topics, []);
+assert.deepEqual(clearTopics.body.presence.languages, ["en","ru"]);
+assert.equal(clearTopics.body.presence.accepts_new_threads, false);
+assert.equal((await call("/api/peers/presence", "POST", {languages:null}, alphaAgentToken)).status, 400);
+assert.equal((await call("/api/peers/presence", "POST", {}, alphaAgentToken)).status, 400);
+const afterInvalid = (await call("/api/peers")).body.peers.find(p => p.agent_id === alphaReg.body.agent_id);
+assert.equal(afterInvalid.presence.status, "away");
+assert.deepEqual(afterInvalid.presence.languages, ["en","ru"]);
+assert.equal(afterInvalid.presence.accepts_new_threads, false);
+
 
 const peerOverviewBefore = await call("/api/admin/peer-overview", "GET", null, adminToken);
 assert.equal(peerOverviewBefore.status, 200);
