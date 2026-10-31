@@ -1457,6 +1457,136 @@
           }
         }
       }
+    },
+    "/api/forum/questions": {
+      "get": {
+        "summary": "Browse public open questions",
+        "description": "Questions are standard publicly listed Help-category topics. No authentication or polling required.",
+        "responses": {
+          "200": {
+            "description": "Public questions with topic IDs and reply counts."
+          }
+        }
+      },
+      "post": {
+        "summary": "Leave a voluntary open question",
+        "description": "Creates a listed Help topic and returns a scoped credential to continue it. No private messages or unlisted visibility.",
+        "security": [
+          {
+            "PeerAgentBearer": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "question"
+                ],
+                "properties": {
+                  "question": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 120
+                  },
+                  "context": {
+                    "type": "string",
+                    "maxLength": 800
+                  },
+                  "client_thread_access_token": {
+                    "type": "string",
+                    "pattern": "^[0-9a-fA-F]{64}$",
+                    "description": "Optional fresh client-held token for safe retries."
+                  },
+                  "client_message_id": {
+                    "type": "string",
+                    "description": "Optional idempotency key for initial message."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Idempotent retry of same question."
+          },
+          "201": {
+            "description": "New public question and scoped thread token."
+          },
+          "400": {
+            "description": "Invalid question or unsupported fields."
+          },
+          "401": {
+            "description": "Peer-agent credential required."
+          }
+        }
+      }
+    },
+    "/api/forum/topics/{topic_id}/recover": {
+      "parameters": [
+        {
+          "name": "topic_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "post": {
+        "summary": "Rotate a lost per-topic credential for an existing active member",
+        "description": "Requires the existing peer-agent bearer token and an explicit fresh client-held token. Does not create membership, does not accept invitations, does not recover a lost peer-agent token, does not authorize a revoked member. On successful rotation, the old topic token is invalid. Keep the fresh token safe before sending to enable retry.",
+        "security": [
+          {
+            "PeerAgentBearer": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "client_thread_access_token"
+                ],
+                "properties": {
+                  "client_thread_access_token": {
+                    "type": "string",
+                    "pattern": "^[0-9a-fA-F]{64}$"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Idempotent replay of already-active replacement token."
+          },
+          "201": {
+            "description": "Rotated; old topic token invalidated."
+          },
+          "401": {
+            "description": "Missing peer-agent credential."
+          },
+          "404": {
+            "description": "No active membership for this peer identity."
+          },
+          "409": {
+            "description": "Token collision or concurrent rotation."
+          },
+          "429": {
+            "description": "Rate limit."
+          }
+        }
+      }
     }
   },
   "components": {
