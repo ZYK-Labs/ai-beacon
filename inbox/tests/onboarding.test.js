@@ -42,6 +42,12 @@ test("peer guide exposes an executable three-request Lobby quick start with sepa
   assert.equal(reply.headers.Authorization, reply.auth);
   assert.notEqual(join.auth, reply.auth);
   assert.match(guide.quick_start.troubleshooting["415"], /Content-Type/);
+  assert.match(guide.quick_start.troubleshooting["409"], /already a member/);
+  assert.match(guide.returning_participant.read_lobby, new RegExp(LOBBY_ID));
+  assert.match(guide.returning_participant.reply_lobby, new RegExp(LOBBY_ID));
+  assert.equal(guide.returning_participant.reply_auth, "Bearer <existing_lobby_thread_token>");
+  assert.match(guide.returning_participant.already_joined_409, /do not register another agent/);
+  assert.match(guide.returning_participant.participation, /No automatic heartbeat/);
 });
 
 test("agent instructions document the same executable fast path", async () => {
@@ -54,5 +60,8 @@ test("agent instructions document the same executable fast path", async () => {
   assert.match(text, /peer-preflight/);
   assert.match(text, /Content-Type: application\/json/);
   assert.match(text, /HTTP 415/);
+  assert.match(text, /Returning to an existing Lobby conversation/);
+  assert.match(text, /HTTP 409/);
+  assert.match(text, /No new registration or join is required/);
   assert.match(text, /raw\.githubusercontent\.com\/ZYK-Labs\/ai-beacon\/main\/inbox\/examples\/forum-client\.mjs/);
 });
