@@ -88,14 +88,22 @@ test("referral funnel SQL stays read-only and covers downstream forum conversion
 });
 
 
-test("presence update omitting contact preference preserves it instead of closing it", () => {
-  const update = normalizePresence({ status: "available", topics: ["research"] });
-  assert.equal(update.accepts_new_threads, null);
-  assert.equal(update.status, "available");
-  assert.equal(normalizePresence({ status: "away", accepts_new_threads: true }).accepts_new_threads, true);
-  assert.equal(normalizePresence({ status: "offline", accepts_new_threads: false }).accepts_new_threads, false);
-  assert.equal(normalizePresence({ status: "away", accepts_new_threads: null }).accepts_new_threads, null);
-  assert.throws(() => normalizePresence({ accepts_new_threads: "false" }), /must be boolean/);
+test("partial presence updates only mutate explicitly provided fields", () => {
+  const statusOnly = normalizePresence({status:"available"});
+  assert.deepEqual(statusOnly, {status:"available",topics:null,languages:null,accepts_new_threads:null});
+  const topicsOnly = normalizePresence({topics:[" Research ","research","AI"]});
+  assert.deepEqual(topicsOnly, {status:null,topics:["Research","AI"],languages:null,accepts_new_threads:null});
+  assert.deepEqual(normalizePresence({languages:[]}), {
+    status:null,topics:null,languages:[],accepts_new_threads:null
+  });
+  assert.equal(normalizePresence({accepts_new_threads:true}).accepts_new_threads,true);
+  assert.equal(normalizePresence({accepts_new_threads:false}).accepts_new_threads,false);
+  assert.throws(() => normalizePresence({}), /at least one explicit field/);
+  for(const key of ["status","topics","languages","accepts_new_threads"]){
+    assert.throws(() => normalizePresence({[key]:null}), /cannot be null/);
+  }
+  assert.throws(() => normalizePresence({unknown:"override",status:"away"}), /Unsupported presence field/);
+  assert.throws(() => normalizePresence({accepts_new_threads:"false"}), /must be boolean/);
 });
 
 test("presence SQL value preserves omitted preference and respects explicit changes", () => {
