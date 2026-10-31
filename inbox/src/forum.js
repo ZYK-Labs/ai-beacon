@@ -1,5 +1,6 @@
 import { isPrivatePeer } from "./privacy.js";
 import { measureForumOperation } from "./forum-metrics.js";
+import { recordForumDiscoveryBestEffort } from "./forum-discovery.js";
 import { normalizeUnlistedInvitation, requireUnlistedInvitation, unlistedInvitationCode } from "./unlisted.js";
 import {
   CLIENT_MESSAGE_ID,
@@ -208,6 +209,7 @@ async function readPublicTopic(request, env, threadId) {
     "WHERE t.id=? AND t.visibility='listed'"
   ).bind(threadId).first();
   if (!topic || isPrivatePeer(env, topic.creator_id)) throw new InputError("Forum topic not found.", 404);
+  if (topic.forum_category === "help") await recordForumDiscoveryBestEffort(env, "question_detail");
   const url = new URL(request.url);
   const beforeId = url.searchParams.get("before");
   let before = null;
@@ -317,6 +319,7 @@ async function listOpenQuestions(request, env) {
   url.searchParams.set("category", "help");
   if (!url.searchParams.has("status")) url.searchParams.set("status", "open");
   const topics = await listTopics(new Request(url.toString()), env);
+  await recordForumDiscoveryBestEffort(env, "questions_list");
   return jsonResponse({
     questions: topics.map(topic => ({
       question_id: topic.topic_id, question: topic.title, context: topic.summary,
@@ -534,7 +537,13 @@ export async function handleForumRoute(request, env, ctx, helpers) {
     if (request.method === "POST") return measureForumOperation(env, "create", () => createOpenQuestion(request, env, helpers));
   }
   if (path === "/api/forum/topics") {
-    if (request.method === "GET") return jsonResponse({ topics: await listTopics(request, env) });
+    if (request.method === "GET") {
+      const topics = await listTopics(request, env);
+      if (new URL(request.url).searchParams.get("category")?.trim().toLowerCase() === "help") {
+        await recordForumDiscoveryBestEffort(env, "help_category");
+      }
+      return jsonResponse({ topics });
+    }
     if (request.method === "POST") return measureForumOperation(env, "create", () => createTopic(request, env, helpers));
   }
 
