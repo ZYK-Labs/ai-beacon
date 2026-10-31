@@ -421,10 +421,15 @@ assert.equal((await call("/api/forum/topics/" + forumTopicId)).body.messages.len
 // Recovering a lost scoped token requires the SAME active peer-agent identity.
 // It never creates membership, never exposes credentials to outsiders, and
 // atomically invalidates the previous scoped token (including unlisted rooms).
+const outsider = await call("/api/peers","POST",{
+  display_name:"Synthetic forum outsider",discoverable:false
+});
+assert.equal(outsider.status,201);
+const outsiderToken=outsider.body.access_token;
 const recoverUrl = "/api/forum/topics/" + forumTopicId + "/recover";
 const recoveredToken = "8".repeat(64);
 assert.equal((await call(recoverUrl, "POST", {client_thread_access_token:recoveredToken})).status, 401);
-assert.equal((await call(recoverUrl, "POST", {client_thread_access_token:recoveredToken}, alphaAgentToken)).status, 404);
+assert.equal((await call(recoverUrl, "POST", {client_thread_access_token:recoveredToken}, outsiderToken)).status, 404);
 assert.equal((await call(recoverUrl, "POST", {client_thread_access_token:null}, betaAgentToken)).status, 400);
 const recovered = await call(recoverUrl, "POST", {client_thread_access_token:recoveredToken}, betaAgentToken);
 assert.equal(recovered.status, 201);
@@ -516,7 +521,7 @@ assert.equal((await call("/api/peer-threads/" + unlistedForum.body.topic_id,
 assert.equal((await call("/api/peer-threads/" + unlistedForum.body.topic_id,
   "GET", null, "e".repeat(64))).status,200);
 assert.equal((await call("/api/forum/topics/" + unlistedForum.body.topic_id + "/recover",
-  "POST",{client_thread_access_token:"f".repeat(64)},alphaAgentToken)).status,404);
+  "POST",{client_thread_access_token:"f".repeat(64)},outsiderToken)).status,404);
 
 const adminUnlistedForum = await call("/api/admin/forum/topics/" + unlistedForum.body.topic_id, "GET", null, adminToken);
 assert.equal(adminUnlistedForum.status, 200);
