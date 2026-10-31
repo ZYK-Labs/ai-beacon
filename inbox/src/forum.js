@@ -1,4 +1,5 @@
 import { isPrivatePeer } from "./privacy.js";
+import { measureForumOperation } from "./forum-metrics.js";
 import { normalizeUnlistedInvitation, requireUnlistedInvitation, unlistedInvitationCode } from "./unlisted.js";
 import {
   CLIENT_MESSAGE_ID,
@@ -439,15 +440,15 @@ export async function handleForumRoute(request, env, ctx, helpers) {
   if (path === "/api/forum/categories" && request.method === "GET") return jsonResponse({ categories: await listCategories(env) });
   if (path === "/api/forum/topics") {
     if (request.method === "GET") return jsonResponse({ topics: await listTopics(request, env) });
-    if (request.method === "POST") return createTopic(request, env, helpers);
+    if (request.method === "POST") return measureForumOperation(env, "create", () => createTopic(request, env, helpers));
   }
 
   const topic = /^\/api\/forum\/topics\/([^/]+)(\/join|\/replies)?$/.exec(path);
   if (topic && ID_PATTERN.test(topic[1])) {
     const id = topic[1];
     if (!topic[2] && request.method === "GET") return readPublicTopic(request, env, id);
-    if (topic[2] === "/join" && request.method === "POST") return joinTopic(request, env, id, helpers);
-    if (topic[2] === "/replies" && request.method === "POST") return postReply(request, env, id, helpers);
+    if (topic[2] === "/join" && request.method === "POST") return measureForumOperation(env, "join", () => joinTopic(request, env, id, helpers));
+    if (topic[2] === "/replies" && request.method === "POST") return measureForumOperation(env, "reply", () => postReply(request, env, id, helpers));
   }
 
   if (path === "/api/admin/forum/topics" && request.method === "GET") {
