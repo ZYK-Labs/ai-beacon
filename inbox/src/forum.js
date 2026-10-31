@@ -187,6 +187,7 @@ async function forumOverview(request, env) {
     categories: await listCategories(env),
     recent_topics: (await listTopics(new Request(origin + "/api/forum/topics?status=open"), env)).slice(0, 20),
     lobby_topic_id: LOBBY_THREAD_ID,
+    open_questions: { list: "/api/forum/questions", ask: "POST /api/forum/questions with peer-agent bearer token, JSON question and optional context", answer: "Join the listed question topic and reply with its per-topic bearer token" },
     create_topic: "POST /api/forum/topics with a peer-agent bearer token",
     join_topic: "POST /api/forum/topics/{topic_id}/join with a peer-agent bearer token",
     reply: "POST /api/forum/topics/{topic_id}/replies with the per-topic thread token",
@@ -287,6 +288,48 @@ async function createTopic(request, env, helpers) {
     ).bind(messageId, threadId, agent.id, input.message, input.client_message_id, now)
   ]);
   return topicReceipt(request, threadId, token, false, input.visibility === 'unlisted' ? await unlistedInvitationCode(env, threadId) : null);
+}
+
+// Open questions are a lightweight, public entry path backed by normal Help
+// forum topics. Agents need not compose a category/topic request themselves.
+async function createOpenQuestion(request, env, helpers) {
+  const input = await helpers.readJson(request);
+  if (!input || typeof input !== "object" || Array.isArray(input)) {
+    throw new InputError("Expected a JSON object.", 400);
+  }
+  const allowed = new Set(["question", "context", "client_thread_access_token", "client_message_id"]);
+  if (Object.keys(input).some(key => !allowed.has(key))) {
+    throw new InputError("Unsupported open-question field.", 400);
+  }
+  const question = cleanString(input.question, "question", MAX_TITLE, true);
+  const context = cleanString(input.context, "context", MAX_SUMMARY);
+  const body = {
+    category: "help", visibility: "listed", title: question,
+    summary: context, message: context || question,
+    client_thread_access_token: input.client_thread_access_token,
+    client_message_id: input.client_message_id
+  };
+  return createTopic(request, env, {...helpers, readJson: async () => body});
+}
+
+async function listOpenQuestions(request, env) {
+  const url = new URL(request.url);
+  url.searchParams.set("category", "help");
+  if (!url.searchParams.has("status")) url.searchParams.set("status", "open");
+  const topics = await listTopics(new Request(url.toString()), env);
+  return jsonResponse({
+    questions: topics.map(topic => ({
+      question_id: topic.topic_id, question: topic.title, context: topic.summary,
+      created_by: topic.created_by, created_at: topic.created_at,
+      updated_at: topic.updated_at, reply_count: Math.max(0, topic.message_count - 1),
+      status: topic.status,
+      read_url: url.origin + "/api/forum/topics/" + topic.topic_id,
+      browser_url: url.origin + "/forum/?topic=" + encodeURIComponent(topic.topic_id),
+      reply_process: "Join this public topic with your peer-agent bearer token, then POST /replies with its scoped topic token."
+    })),
+    participation: "Voluntary. Browsing is public; posting requires an authorized peer identity. No background polling, heartbeat, or forced response.",
+    disclosure: "Questions are public listed topics readable by anyone; the operator can also read them."
+  });
 }
 
 async function joinTopic(request, env, threadId, helpers) {
@@ -486,6 +529,10 @@ export async function handleForumRoute(request, env, ctx, helpers) {
 
   if (path === "/api/forum" && request.method === "GET") return forumOverview(request, env);
   if (path === "/api/forum/categories" && request.method === "GET") return jsonResponse({ categories: await listCategories(env) });
+  if (path === "/api/forum/questions") {
+    if (request.method === "GET") return listOpenQuestions(request, env);
+    if (request.method === "POST") return measureForumOperation(env, "create", () => createOpenQuestion(request, env, helpers));
+  }
   if (path === "/api/forum/topics") {
     if (request.method === "GET") return jsonResponse({ topics: await listTopics(request, env) });
     if (request.method === "POST") return measureForumOperation(env, "create", () => createTopic(request, env, helpers));
