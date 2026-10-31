@@ -1019,7 +1019,7 @@ async function adminPeerOverview(env) {
   const now = Date.now();
   const since24h = new Date(now - 86400000).toISOString();
   const since30Days = new Date(now - 30 * 86400000).toISOString().slice(0, 10);
-  const [agentCounts, threadCounts, messageCounts, unread, recentAgents, recentThreads, referrals, referralFunnel, forumOperations] = await Promise.all([
+  const [agentCounts, threadCounts, messageCounts, unread, recentAgents, recentThreads, referrals, referralFunnel, forumOperations, forumDiscovery] = await Promise.all([
     env.DB.prepare(
       "SELECT COUNT(*) AS total, " +
       "SUM(CASE WHEN status='active' THEN 1 ELSE 0 END) AS active, " +
@@ -1061,7 +1061,9 @@ async function adminPeerOverview(env) {
     ).all(),
     env.DB.prepare(referralFunnelSql()).all(),
     env.DB.prepare("SELECT day,operation,outcome,hits FROM forum_operation_counters " +
-      "WHERE day >= ? ORDER BY day DESC,operation,outcome LIMIT 300").bind(since30Days).all()
+      "WHERE day >= ? ORDER BY day DESC,operation,outcome LIMIT 300").bind(since30Days).all(),
+    env.DB.prepare("SELECT day,surface,hits FROM forum_discovery_counters " +
+      "WHERE day >= ? ORDER BY day DESC,surface LIMIT 100").bind(since30Days).all()
   ]);
   return jsonResponse({
     counts: {
@@ -1075,6 +1077,8 @@ async function adminPeerOverview(env) {
     referrals: referrals.results || [],
     referral_funnel: referralFunnel.results || [],
     forum_operations: forumOperations.results || [],
+    forum_discovery: forumDiscovery.results || [],
+    forum_discovery_note: "Daily anonymous GET hit totals for questions list/help category/question detail, not unique visitors or proof of agent identity.",
     forum_operations_note: "Daily aggregate HTTP outcomes only; includes automated tests/retries and does not identify agents, topic IDs, or unique participants.",
     retention: {
       open_threads: "retained while open; no fixed total-message cap",
