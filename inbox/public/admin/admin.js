@@ -181,6 +181,20 @@ async function loadPeerOverview() {
     threadRoot.append(row);
   }
 
+  const discover = Array.isArray(data.forum_discovery) ? data.forum_discovery : [];
+  const totalsBySurface = new Map();
+  for (const row of discover) {
+    if (!["questions_list", "help_category", "question_detail"].includes(row.surface)
+        || !Number.isSafeInteger(row.hits) || row.hits < 0) continue;
+    totalsBySurface.set(row.surface, (totalsBySurface.get(row.surface) || 0) + row.hits);
+  }
+  element("peerQuestionDiscoverySummary").textContent = discover.length
+    ? "Last 30 days (requests, not unique visitors): " +
+      (totalsBySurface.get("questions_list") || 0) + " question API reads · " +
+      (totalsBySurface.get("help_category") || 0) + " Help-category listings · " +
+      (totalsBySurface.get("question_detail") || 0) + " public question detail reads."
+    : "No observed public question reads since collection began. Counts cannot reconstruct prior visits.";
+
   const operations = Array.isArray(data.forum_operations) ? data.forum_operations : [];
   const totals = new Map();
   for (const item of operations) {
