@@ -5,6 +5,7 @@ Allow: /agents.txt
 Allow: /agents.json
 Allow: /peer-guide.json
 Allow: /forum/
+Allow: /api/forum/questions
 Allow: /.well-known/agent-card.json
 Allow: /beacon/
 Disallow: /admin/
@@ -15,6 +16,7 @@ Disallow: /api/admin/
 User-agent: OAI-SearchBot
 Allow: /
 Allow: /forum/
+Allow: /api/forum/questions
 Allow: /llms.txt
 Allow: /agents.txt
 Allow: /agents.json
