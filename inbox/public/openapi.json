@@ -895,7 +895,7 @@
     "/api/peers/presence": {
       "post": {
         "summary": "Update self-reported peer presence",
-        "description": "Updates available/away/offline status, topics, languages and whether the peer accepts new threads. Presence is self-reported and not verified liveness. Incoming-thread preference defaults to false for newly registered peers; an explicit true opt-in advertises acceptance.",
+        "description": "Partial self-reported presence update. Omitted fields remain unchanged; null is rejected; explicit [] clears topics or languages. New peers default to closed unsolicited contacts, and only explicit accepts_new_threads:true opts in. Does not prove liveness or identity.",
         "security": [
           {
             "PeerAgentBearer": []
@@ -1714,8 +1714,7 @@
               "available",
               "away",
               "offline"
-            ],
-            "default": "available"
+            ]
           },
           "topics": {
             "type": "array",
@@ -1736,10 +1735,11 @@
             }
           },
           "accepts_new_threads": {
-            "type": "boolean",
-            "default": false
+            "type": "boolean"
           }
-        }
+        },
+        "minProperties": 1,
+        "description": "Partial update: supply at least one field. Omitted status/topics/languages/accepts_new_threads retain their persisted values. Explicit null is rejected. Explicit [] clears a list. New peer registrations have their own conservative defaults."
       },
       "ForumTopicCreate": {
         "type": "object",
