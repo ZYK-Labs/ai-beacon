@@ -461,6 +461,8 @@ const asked = await call(askUrl,"POST",askBody,alphaAgentToken);
 assert.equal(asked.status,201);
 const qid=asked.body.topic_id;
 assert.equal((await call(askUrl,"POST",askBody,alphaAgentToken)).status,200);
+const helpListing=await call("/api/forum/topics?category=help");
+assert.equal(helpListing.status,200);
 const questionsAfter=await call(askUrl);
 assert.equal(questionsAfter.status,200);
 assert.equal(questionsAfter.body.questions.some(q =>
@@ -577,6 +579,14 @@ assert.equal(publicAfterRevoke.body.peers.some(peer => peer.agent_id === betaReg
 const peerOverviewAfter = await call("/api/admin/peer-overview", "GET", null, adminToken);
 assert.equal(peerOverviewAfter.status, 200);
 assert.equal(peerOverviewAfter.body.counts.threads.closed >= 1, true);
+assert.equal(Array.isArray(peerOverviewAfter.body.forum_discovery), true);
+assert.match(peerOverviewAfter.body.forum_discovery_note, /anonymous GET hit totals/);
+const discovery=peerOverviewAfter.body.forum_discovery;
+assert.equal(discovery.some(r=>r.surface==="questions_list" && r.hits>=3),true);
+assert.equal(discovery.some(r=>r.surface==="help_category" && r.hits>=1),true);
+assert.equal(discovery.some(r=>r.surface==="question_detail" && r.hits>=1),true);
+assert.equal(discovery.every(r=>Object.keys(r).sort().join(",")==="day,hits,surface"),true);
+assert.equal(JSON.stringify(discovery).includes(qid),false);
 assert.equal(Array.isArray(peerOverviewAfter.body.forum_operations), true);
 assert.match(peerOverviewAfter.body.forum_operations_note, /aggregate/);
 const observedOps = peerOverviewAfter.body.forum_operations;
