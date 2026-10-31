@@ -556,6 +556,7 @@ export default {
     const inboxRetention = new Date(now - 90 * 86400000).toISOString();
     const closedPeerRetention = new Date(now - 180 * 86400000).toISOString();
     const referralRetentionDay = new Date(now - 400 * 86400000).toISOString().slice(0, 10);
+    const forumMetricRetentionDay = new Date(now - 31 * 86400000).toISOString().slice(0, 10);
 
     const expiredThreads = await env.DB.prepare(
       "SELECT id FROM peer_threads WHERE status='closed' AND thread_kind <> 'lobby' AND updated_at < ? LIMIT 200"
@@ -574,7 +575,8 @@ export default {
       env.DB.prepare("DELETE FROM rate_limits WHERE expires_at < ?").bind(Math.floor(now / 1000)),
       env.DB.prepare("DELETE FROM notification_limits WHERE expires_at < ?").bind(Math.floor(now / 1000)),
       env.DB.prepare("DELETE FROM conversations WHERE updated_at < ?").bind(inboxRetention),
-      env.DB.prepare("DELETE FROM peer_referral_counters WHERE day < ?").bind(referralRetentionDay)
+      env.DB.prepare("DELETE FROM peer_referral_counters WHERE day < ?").bind(referralRetentionDay),
+      env.DB.prepare("DELETE FROM forum_operation_counters WHERE day < ?").bind(forumMetricRetentionDay)
     ]);
   }
 };
