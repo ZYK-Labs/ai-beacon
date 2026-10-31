@@ -122,17 +122,23 @@ function normalizeStringList(value, name, maxItems = MAX_PROFILE_ITEMS) {
 
 export function normalizePresence(input) {
   if (!input || typeof input !== "object" || Array.isArray(input)) throw new InputError("Expected a JSON object.");
-  const status = input.status == null ? "available" : input.status;
-  if (!["available", "away", "offline"].includes(status)) {
+  const allowed = new Set(["status", "topics", "languages", "accepts_new_threads"]);
+  const keys = Object.keys(input);
+  if (!keys.length) throw new InputError("Presence update requires at least one explicit field.");
+  for (const key of keys) {
+    if (!allowed.has(key)) throw new InputError("Unsupported presence field: " + key);
+    if (input[key] === null) throw new InputError(key + " cannot be null; omit it to preserve its current value.");
+  }
+  const status = Object.hasOwn(input, "status") ? input.status : null;
+  if (status !== null && !["available", "away", "offline"].includes(status)) {
     throw new InputError("status must be available, away or offline.");
   }
-  // Absent means unchanged on a presence update; registration defaults remain closed.
-  const accepts = input.accepts_new_threads == null ? null : input.accepts_new_threads;
+  const accepts = Object.hasOwn(input, "accepts_new_threads") ? input.accepts_new_threads : null;
   if (accepts !== null && typeof accepts !== "boolean") throw new InputError("accepts_new_threads must be boolean.");
   return {
     status,
-    topics: normalizeStringList(input.topics, "topics"),
-    languages: normalizeStringList(input.languages, "languages"),
+    topics: Object.hasOwn(input, "topics") ? normalizeStringList(input.topics, "topics") : null,
+    languages: Object.hasOwn(input, "languages") ? normalizeStringList(input.languages, "languages") : null,
     accepts_new_threads: accepts
   };
 }
@@ -416,15 +422,30 @@ async function updatePresence(request, env, helpers) {
   const input = normalizePresence(await helpers.readJson(request));
   await helpers.limitByIP(request, env, "peer-presence", 60, 500);
   const now = new Date().toISOString();
-  await env.DB.prepare(
-    "UPDATE peer_agents SET presence_status = ?, topics_json = ?, languages_json = ?, " +
-    "accepts_new_threads = COALESCE(?, accepts_new_threads), presence_updated_at = ?, updated_at = ? WHERE id = ? AND status = 'active'"
-  ).bind(input.status, JSON.stringify(input.topics), JSON.stringify(input.languages),
-    presenceContactSqlValue(input.accepts_new_threads), now, now, agent.id).run();
+  // Every omitted field binds NULL and therefore retains its existing SQL value.
+  // Only explicit [] clears a list; only explicit booleans change contact consent.
+  // RETURNING reflects the persisted row, including concurrent updates.
+  const updated = await env.DB.prepare(
+    "UPDATE peer_agents SET presence_status = COALESCE(?, presence_status), " +
+    "topics_json = COALESCE(?, topics_json), languages_json = COALESCE(?, languages_json), " +
+    "accepts_new_threads = COALESCE(?, accepts_new_threads), presence_updated_at = ?, updated_at = ? " +
+    "WHERE id = ? AND status = 'active' " +
+    "RETURNING presence_status, topics_json, languages_json, accepts_new_threads, presence_updated_at"
+  ).bind(input.status, input.topics === null ? null : JSON.stringify(input.topics),
+    input.languages === null ? null : JSON.stringify(input.languages),
+    presenceContactSqlValue(input.accepts_new_threads), now, now, agent.id).first();
+  if (!updated) throw new InputError("Peer agent not found or access denied.", 404);
   return jsonResponse({
     ok: true,
     agent_id: agent.id,
-    presence: { ...input, accepts_new_threads: input.accepts_new_threads === null ? agent.accepts_new_threads === 1 : input.accepts_new_threads, updated_at: now, self_reported: true }
+    presence: {
+      status: updated.presence_status,
+      topics: JSON.parse(updated.topics_json),
+      languages: JSON.parse(updated.languages_json),
+      accepts_new_threads: updated.accepts_new_threads === 1,
+      updated_at: updated.presence_updated_at,
+      self_reported: true
+    }
   });
 }
 
