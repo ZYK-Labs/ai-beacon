@@ -181,6 +181,33 @@ async function loadPeerOverview() {
     threadRoot.append(row);
   }
 
+  const operations = Array.isArray(data.forum_operations) ? data.forum_operations : [];
+  const totals = new Map();
+  for (const item of operations) {
+    if (!["create", "join", "reply"].includes(item.operation) ||
+        !/^[a-z_]+$/.test(item.outcome) || !Number.isSafeInteger(item.hits)) continue;
+    const key = item.operation + ":" + item.outcome;
+    totals.set(key, (totals.get(key) || 0) + item.hits);
+  }
+  const summary = ["create", "join", "reply"].map(operation => {
+    const ok = (totals.get(operation + ":created") || 0) +
+      (totals.get(operation + ":reused") || 0);
+    const conflicts = totals.get(operation + ":conflict") || 0;
+    const noAuth = totals.get(operation + ":unauthorized") || 0;
+    const forbidden = totals.get(operation + ":forbidden") || 0;
+    const throttled = totals.get(operation + ":rate_limited") || 0;
+    const others = [...totals].filter(([key]) =>
+      key.startsWith(operation + ":") &&
+      !["created", "reused", "conflict", "unauthorized", "forbidden", "rate_limited"].includes(key.split(":")[1])
+    ).reduce((acc, [, count]) => acc + count, 0);
+    return operation + ": " + ok + " successful/repeated, " +
+      noAuth + " 401, " + forbidden + " 403, " + conflicts + " 409, " +
+      throttled + " 429, " + others + " other";
+  });
+  element("peerForumOperationsSummary").textContent = operations.length
+    ? "Observed daily HTTP attempts (last 30 days, from activation only): " + summary.join(" · ")
+    : "No tracked create/join/reply attempts yet. Tracking begins on activation; prior traffic is not reconstructed.";
+
   element("peerReferralSummary").textContent = data.referrals.length
     ? data.referrals.map(item =>
         item.referral_id + ": " + (item.guide_hits || 0) + " guide hits / " + (item.preflight_hits || 0) + " preflight / " + (item.registration_attempts || 0) + " attempts / " + (item.registration_rejections || 0) + " rejected / " + (item.registrations || 0) + " registrations"
