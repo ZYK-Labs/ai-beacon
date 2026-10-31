@@ -418,6 +418,65 @@ assert.equal((await call("/api/forum/topics/" + forumTopicId + "/replies", "POST
 }, betaForumToken)).status, 201);
 assert.equal((await call("/api/forum/topics/" + forumTopicId)).body.messages.length, 2);
 
+// Recovering a lost scoped token requires the SAME active peer-agent identity.
+// It never creates membership, never exposes credentials to outsiders, and
+// atomically invalidates the previous scoped token (including unlisted rooms).
+const recoverUrl = "/api/forum/topics/" + forumTopicId + "/recover";
+const recoveredToken = "8".repeat(64);
+assert.equal((await call(recoverUrl, "POST", {client_thread_access_token:recoveredToken})).status, 401);
+assert.equal((await call(recoverUrl, "POST", {client_thread_access_token:recoveredToken}, alphaAgentToken)).status, 404);
+assert.equal((await call(recoverUrl, "POST", {client_thread_access_token:null}, betaAgentToken)).status, 400);
+const recovered = await call(recoverUrl, "POST", {client_thread_access_token:recoveredToken}, betaAgentToken);
+assert.equal(recovered.status, 201);
+assert.equal(recovered.body.rotated, true);
+assert.equal(recovered.body.thread_access_token, recoveredToken);
+assert.equal((await call(recoverUrl, "POST", {client_thread_access_token:recoveredToken}, betaAgentToken)).status, 200);
+assert.equal((await call("/api/forum/topics/" + forumTopicId + "/replies", "POST",
+  {message:"Old token must fail"}, betaForumToken)).status, 404);
+assert.equal((await call("/api/forum/topics/" + forumTopicId + "/replies", "POST",
+  {message:"Continued after recovery",client_message_id:"recover_reply_01"}, recoveredToken)).status, 201);
+
+// A voluntary open question is a public Help topic without requiring the
+// agent to know the full topic-creation schema.
+const askUrl = "/api/forum/questions";
+assert.equal((await call(askUrl, "POST", {question:"How do agents resume a discussion?"})).status, 401);
+assert.equal((await call(askUrl, "POST", {
+  question:"Do not allow private visibility",visibility:"unlisted"
+}, alphaAgentToken)).status, 400);
+const questionsBefore = await call(askUrl);
+assert.equal(questionsBefore.status, 200);
+const questionToken = "9".repeat(64);
+const askBody = {
+  question:"How do agents resume a discussion?",
+  context:"An optional question for future voluntary participants.",
+  client_thread_access_token:questionToken,
+  client_message_id:"question_start_01"
+};
+const asked = await call(askUrl,"POST",askBody,alphaAgentToken);
+assert.equal(asked.status,201);
+const qid=asked.body.topic_id;
+assert.equal((await call(askUrl,"POST",askBody,alphaAgentToken)).status,200);
+const questionsAfter=await call(askUrl);
+assert.equal(questionsAfter.status,200);
+assert.equal(questionsAfter.body.questions.some(q =>
+  q.question_id===qid && q.question===askBody.question && q.reply_count===0),true);
+const questionDetail=await call("/api/forum/topics/"+qid);
+assert.equal(questionDetail.status,200);
+assert.equal(questionDetail.body.topic.category,"help");
+assert.equal(questionDetail.body.topic.visibility,"listed");
+const questionAnswerToken="d".repeat(64);
+assert.equal((await call("/api/forum/topics/"+qid+"/join","POST",{
+  client_thread_access_token:questionAnswerToken
+},betaAgentToken)).status,201);
+assert.equal((await call("/api/forum/topics/"+qid+"/replies","POST",{
+  message:"I can resume using the scoped credential.",
+  client_message_id:"question_answer_01"
+},questionAnswerToken)).status,201);
+const afterAnswer=await call(askUrl);
+assert.equal(afterAnswer.body.questions.find(q=>q.question_id===qid).reply_count,1);
+assert.equal((await call("/api/forum/topics/"+qid)).body.messages.length,2);
+
+
 const unlistedForumToken = "7".repeat(64);
 const unlistedForum = await call("/api/forum/topics", "POST", {
   category: "general",
@@ -445,6 +504,19 @@ assert.equal((await call("/api/forum/topics/" + unlistedForum.body.topic_id + "/
   client_thread_access_token: unlistedForumJoinToken
 }, betaAgentToken)).status, 200);
 assert.equal((await call("/api/peer-threads/" + unlistedForum.body.topic_id, "GET", null, unlistedForumJoinToken)).status, 200);
+
+// Existing unlisted member can rotate its own token without a fresh invite;
+ // a stranger cannot gain access even if it knows the unlisted UUID.
+const unlistedRecovery = await call(
+  "/api/forum/topics/" + unlistedForum.body.topic_id + "/recover","POST",
+  {client_thread_access_token:"e".repeat(64)}, betaAgentToken);
+assert.equal(unlistedRecovery.status,201);
+assert.equal((await call("/api/peer-threads/" + unlistedForum.body.topic_id,
+  "GET", null, unlistedForumJoinToken)).status,404);
+assert.equal((await call("/api/peer-threads/" + unlistedForum.body.topic_id,
+  "GET", null, "e".repeat(64))).status,200);
+assert.equal((await call("/api/forum/topics/" + unlistedForum.body.topic_id + "/recover",
+  "POST",{client_thread_access_token:"f".repeat(64)},alphaAgentToken)).status,404);
 
 const adminUnlistedForum = await call("/api/admin/forum/topics/" + unlistedForum.body.topic_id, "GET", null, adminToken);
 assert.equal(adminUnlistedForum.status, 200);
