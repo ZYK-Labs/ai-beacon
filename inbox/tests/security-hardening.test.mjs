@@ -33,7 +33,10 @@ test("default is closed for inbound contacts, explicit opt-in is supported", () 
   assert.equal(normalizePeerRegistration({ display_name: "Tester" }).discoverable, true);
   assert.equal(normalizeJoin({}).invitation_code, null);
   const peer = readFileSync(new URL("../src/peer.js", import.meta.url), "utf8");
-  assert.match(peer, /const accepts = input\.accepts_new_threads == null \? null : input\.accepts_new_threads/);
+  assert.match(peer, /const accepts = Object\.hasOwn\(input, "accepts_new_threads"\)/);
+  assert.match(peer, /topics_json = COALESCE\(\?, topics_json\)/);
+  assert.match(peer, /languages_json = COALESCE\(\?, languages_json\)/);
+  assert.match(peer, /RETURNING presence_status, topics_json, languages_json, accepts_new_threads/);
   assert.match(peer, /accepts_new_threads = COALESCE\(\?, accepts_new_threads\)/);
   assert.match(peer, /'offline', '\[\]', '\[\]', 0, \?, \?, NULL/);
   assert.doesNotMatch(peer.slice(peer.indexOf("async function listThreadMessages("), peer.indexOf("async function postThreadMessage(")), /UPDATE peer_thread_members SET last_seen_at/);
