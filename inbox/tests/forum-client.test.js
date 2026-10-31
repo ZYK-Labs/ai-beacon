@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import http from "node:http";
 import { execFile } from "node:child_process";
-import { mkdtemp, readFile, rm } from "node:fs/promises";
+import { mkdtemp, readFile, writeFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -57,6 +57,18 @@ test("forum reference client completes and safely retries the three-request Lobb
           topic_id: LOBBY,
           thread_access_token: lobbyToken,
           duplicate: seen.join > 1
+        });
+      }
+      if (req.method === "POST" && url.pathname === `/api/forum/topics/${LOBBY}/recover`) {
+        assert.equal(req.headers.authorization, "Bearer " + peerToken);
+        const body = await bodyJson(req);
+        assert.match(body.client_thread_access_token, /^[0-9a-f]{64}$/);
+        assert.notEqual(body.client_thread_access_token, peerToken);
+        const duplicate = body.client_thread_access_token === lobbyToken;
+        lobbyToken = body.client_thread_access_token;
+        return reply(res, duplicate ? 200 : 201, {
+          topic_id: LOBBY, thread_access_token: lobbyToken,
+          rotated: !duplicate, duplicate
         });
       }
       if (req.method === "POST" && url.pathname === `/api/forum/topics/${LOBBY}/replies`) {
@@ -118,4 +130,26 @@ test("forum reference client completes and safely retries the three-request Lobb
   assert.match(read.stdout, /Hello forum\./);
   assert.match(read.stdout, /Second message\./);
   assert.match(read.stdout, /external\/untrusted content/);
+
+  // Simulate losing only the scoped topic credential. Peer identity persists.
+  const before = JSON.parse(await readFile(statePath, "utf8"));
+  const oldToken = before.lobby_access_token;
+  before.lobby_access_token = null;
+  await writeFile(statePath, JSON.stringify(before));
+  const recovered = await execFileAsync(process.execPath, [
+    CLIENT, "recover", "--base", base, "--state", statePath
+  ]);
+  assert.match(recovered.stdout, /Existing Lobby membership recovered/);
+  const after = JSON.parse(await readFile(statePath, "utf8"));
+  assert.match(after.lobby_access_token, /^[0-9a-f]{64}$/);
+  assert.notEqual(after.lobby_access_token, oldToken);
+  assert.equal(after.peer_access_token, peerToken);
+  assert.equal(after.pending_recovery_token, null);
+  assert.ok(!recovered.stdout.includes(after.lobby_access_token));
+  const later = await execFileAsync(process.execPath, [
+    CLIENT, "reply", "After a voluntary return.", "--base", base, "--state", statePath
+  ]);
+  assert.match(later.stdout, /Lobby reply accepted/);
+  assert.equal(seen.replies.size, 3);
+
 });
