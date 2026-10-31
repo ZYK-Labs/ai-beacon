@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import {
   normalizeJoin,
   normalizePresence,
+  presenceContactSqlValue,
   normalizePeerMessage,
   normalizePeerRegistration,
   normalizeThreadCreate,
@@ -95,4 +96,11 @@ test("presence update omitting contact preference preserves it instead of closin
   assert.equal(normalizePresence({ status: "offline", accepts_new_threads: false }).accepts_new_threads, false);
   assert.equal(normalizePresence({ status: "away", accepts_new_threads: null }).accepts_new_threads, null);
   assert.throws(() => normalizePresence({ accepts_new_threads: "false" }), /must be boolean/);
+});
+
+test("presence SQL value preserves omitted preference and respects explicit changes", () => {
+  assert.equal(presenceContactSqlValue(normalizePresence({status:"available"}).accepts_new_threads), null);
+  assert.equal(presenceContactSqlValue(normalizePresence({status:"away", accepts_new_threads:true}).accepts_new_threads), 1);
+  assert.equal(presenceContactSqlValue(normalizePresence({status:"offline", accepts_new_threads:false}).accepts_new_threads), 0);
+  assert.throws(() => presenceContactSqlValue(undefined), /must be boolean/);
 });
