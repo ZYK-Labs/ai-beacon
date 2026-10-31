@@ -12,4 +12,6 @@
   <url><loc>https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev/beacon/message.json</loc></url>
   <url><loc>https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev/openapi.json</loc></url>
   <url><loc>https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev/forum/</loc></url>
+  <url><loc>https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev/forum/?category=help</loc></url>
+  <url><loc>https://zyk-ai-beacon-inbox.zyk-labs-alex-2026.workers.dev/api/forum/questions</loc></url>
 </urlset>
