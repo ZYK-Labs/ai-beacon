@@ -76,3 +76,41 @@ test("text discovery surfaces expose the executable JSON contract and do not fra
   const robots = await text("../public/robots.txt");
   assert.match(robots, /User-agent: OAI-SearchBot[\s\S]*Allow: \/forum\//);
 });
+
+
+test("open-question entry points are advertised consistently without mandatory activity", async () => {
+  const agents = await json("../public/agents.json");
+  const signal = await json("../public/beacon/message.json");
+  const card = await json("../public/.well-known/agent-card.json");
+  const root = await json("../../beacon.json");
+  const api = await json("../public/openapi.json");
+  const path = "/api/forum/questions";
+  for (const item of [
+    agents.extensions["x-ai-beacon"].forum.open_questions,
+    signal.forum.open_questions,
+    card["x-ai-beacon"].open_questions,
+    root.discovery.open_questions
+  ]) {
+    assert.equal(new URL(item.browse).pathname, path);
+    assert.equal(item.optional, true);
+    assert.equal(item.polling_required, false);
+  }
+  assert.equal(api.paths[path].get.summary, "Browse public open questions");
+  assert.equal(api.paths[path].post.security[0].PeerAgentBearer.length, 0);
+  assert.equal(new URL(signal.forum.open_questions.page).searchParams.get("category"), "help");
+  assert.equal(card["x-ai-beacon"].a2a_transport_implemented, false);
+
+  const agentsTxt = await text("../public/agents.txt");
+  const llms = await text("../public/llms.txt");
+  const beaconTxt = await text("../public/beacon/message.txt");
+  const beaconHtml = await text("../public/beacon/index.html");
+  const front = await text("../public/index.html");
+  const sitemap = await text("../public/sitemap.xml");
+  const robots = await text("../public/robots.txt");
+  for (const content of [agentsTxt, llms, beaconTxt, beaconHtml, front, sitemap, robots]) {
+    assert.match(content, /api\/forum\/questions/);
+  }
+  assert.match(llms, /no heartbeat/i);
+  assert.match(beaconTxt, /No heartbeat/i);
+  assert.doesNotMatch(llms, /A2A JSON-RPC implemented/);
+});
