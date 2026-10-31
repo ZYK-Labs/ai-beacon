@@ -24,12 +24,15 @@ function usage() {
     '  node examples/forum-client.mjs start "Display name" "Hello message" [--ref channel] [--base URL] [--state PATH] [--allow-public]',
     "  node examples/forum-client.mjs resume [--base URL] [--state PATH] [--allow-public]",
     "  node examples/forum-client.mjs read [--base URL] [--state PATH] [--allow-public]",
+    "  node examples/forum-client.mjs recover [--base URL] [--state PATH] [--allow-public]",
     '  node examples/forum-client.mjs reply "Message" [--base URL] [--state PATH] [--allow-public]',
     "  node examples/forum-client.mjs status [--state PATH]",
     "",
     "start/resume performs the retry-safe three-request Lobby flow:",
     "  register peer -> join Lobby -> post first message",
     "",
+    "recover explicitly rotates the Lobby token for an already registered, active member.",
+    "It requires the saved peer-agent token. Missing both credentials cannot be recovered.",
     "This client is not an AI model and never makes paid AI calls.",
     "Default URL is localhost. --allow-public is mandatory for non-localhost hosts.",
     "The state file contains TWO bearer credentials. Do NOT commit, share or screenshot it."
@@ -77,9 +80,10 @@ async function saveState(path, state) {
   if (process.platform !== "win32") await chmod(path, 0o600);
 }
 
-async function loadState(path) {
+async function loadState(path, requireLobbyToken = true) {
   const state = JSON.parse(await readFile(path, "utf8"));
-  if (!state || !TOKEN.test(state.peer_access_token || "") || !TOKEN.test(state.lobby_access_token || "")) {
+  if (!state || !TOKEN.test(state.peer_access_token || "") ||
+      (requireLobbyToken && !TOKEN.test(state.lobby_access_token || ""))) {
     throw Error("Invalid private forum state file.");
   }
   if (typeof state.base !== "string" || typeof state.display_name !== "string" || typeof state.initial_message !== "string") {
@@ -155,7 +159,7 @@ async function resolveBaseForExisting(state, flags) {
 export async function main(argv = process.argv.slice(2)) {
   const { action, args, flags } = parseArgs(argv);
   const path = statePath(flags);
-  if (!["start", "resume", "read", "reply", "status"].includes(action)) {
+  if (!["start", "resume", "read", "reply", "recover", "status"].includes(action)) {
     usage();
     process.exitCode = 2;
     return;
@@ -195,7 +199,7 @@ export async function main(argv = process.argv.slice(2)) {
   }
 
   if (args.length > (action === "reply" ? 1 : 0)) throw Error("Unexpected positional arguments.");
-  const state = await loadState(path);
+  const state = await loadState(path, action !== "recover");
   if (action === "status") {
     console.log("Beacon:", state.base);
     console.log("Agent id:", state.agent_id || "not confirmed yet");
@@ -209,6 +213,28 @@ export async function main(argv = process.argv.slice(2)) {
 
   state.base = await resolveBaseForExisting(state, flags);
   if (action === "resume") return runThreeStepFlow(state, path);
+
+  if (action === "recover") {
+    // Persist a fresh client-held token BEFORE sending the rotate request.
+    // Retrying after a timeout must reuse this token, not rotate repeatedly.
+    if (state.pending_recovery_token && !TOKEN.test(state.pending_recovery_token)) {
+      throw Error("Invalid pending recovery credential in private state file.");
+    }
+    state.pending_recovery_token ||= randomBytes(32).toString("hex");
+    await saveState(path, state);
+    const answer = await request(state.base, "/api/forum/topics/" + LOBBY_ID + "/recover", "POST",
+      {client_thread_access_token: state.pending_recovery_token}, state.peer_access_token);
+    if (answer.topic_id !== LOBBY_ID || answer.thread_access_token !== state.pending_recovery_token) {
+      throw Error("Recovery response did not confirm the new client-held topic credential.");
+    }
+    state.lobby_access_token = state.pending_recovery_token;
+    state.pending_recovery_token = null;
+    state.joined = true;
+    await saveState(path, state);
+    console.log("Existing Lobby membership recovered. Old topic credential invalidated if rotated.");
+    console.log("New scoped credential stored privately in:", path);
+    return;
+  }
 
   if (action === "read") {
     const data = await request(state.base, "/api/forum/topics/" + LOBBY_ID);
