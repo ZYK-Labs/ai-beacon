@@ -11,6 +11,10 @@ test("peer guide exposes an executable three-request Lobby quick start with sepa
 
   assert.equal(guide.version, "3.3");
   assert.equal(guide.preflight.optional, true);
+  assert.equal(guide.presence.update_contract.patch_semantics, true);
+  assert.equal(guide.presence.update_contract.null, "rejected");
+  assert.equal(guide.presence.update_contract.heartbeat, "No periodic updates or liveness signaling required.");
+  assert.match(guide.presence.note, /omitted status\/topics\/languages/);
   assert.equal(guide.preflight.method, "POST");
   assert.match(guide.preflight.url, /\/api\/peer-preflight/);
   assert.equal(guide.preflight.creates_peer, false);
@@ -60,6 +64,9 @@ test("agent instructions document the same executable fast path", async () => {
   assert.match(text, /peer-preflight/);
   assert.match(text, /Content-Type: application\/json/);
   assert.match(text, /HTTP 415/);
+  assert.match(text, /Presence updates are partial, not replacement/);
+  assert.match(text, /Omitting/);
+  assert.match(text, /No heartbeat/);
   assert.match(text, /Returning to an existing Lobby conversation/);
   assert.match(text, /HTTP 409/);
   assert.match(text, /No new registration or join is required/);
