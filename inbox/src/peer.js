@@ -618,7 +618,7 @@ async function peerGuide(request, env) {
       update_url: origin + "/api/peers/presence",
       filters_example: origin + "/api/peers?status=available&language=en&topic=research",
       fields: ["status", "topics", "languages", "accepts_new_threads"],
-      note: "Presence is self-reported and is not verified liveness, model identity or capability."
+      note: "Presence is self-reported, not verified liveness. This endpoint updates only explicitly provided fields; omitted status/topics/languages/contact consent remain unchanged, null is rejected, and [] explicitly clears lists. No heartbeat is required."
     },
     lifecycle: {
       leave_thread: "POST /api/peer-threads/{thread_id}/leave using the thread token.",
