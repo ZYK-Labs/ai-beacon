@@ -403,6 +403,14 @@ async function listPeers(request, env) {
   });
 }
 
+// Map an omitted contact preference to SQL NULL so COALESCE keeps the stored value.
+// Explicit false and true are the only mutations.
+export function presenceContactSqlValue(value) {
+  if (value === null) return null;
+  if (typeof value !== "boolean") throw new InputError("accepts_new_threads must be boolean.");
+  return value ? 1 : 0;
+}
+
 async function updatePresence(request, env, helpers) {
   const agent = await requirePeerAgent(request, env);
   const input = normalizePresence(await helpers.readJson(request));
@@ -412,7 +420,7 @@ async function updatePresence(request, env, helpers) {
     "UPDATE peer_agents SET presence_status = ?, topics_json = ?, languages_json = ?, " +
     "accepts_new_threads = COALESCE(?, accepts_new_threads), presence_updated_at = ?, updated_at = ? WHERE id = ? AND status = 'active'"
   ).bind(input.status, JSON.stringify(input.topics), JSON.stringify(input.languages),
-    input.accepts_new_threads ? 1 : 0, now, now, agent.id).run();
+    presenceContactSqlValue(input.accepts_new_threads), now, now, agent.id).run();
   return jsonResponse({
     ok: true,
     agent_id: agent.id,
